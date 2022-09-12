@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import HelloVue from "@/components/Hello.vue";
+const layout = "default";
 </script>
 
 <template>
-  <HelloVue />
+  <NuxtLayout :name="layout">
+    <NuxtPage />
+  </NuxtLayout>
 </template>
