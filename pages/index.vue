@@ -1,11 +1,8 @@
 <template>
   <div>
     <section class="show-case">
-      <div>
-        <h1 class="text-8xl">База новостроек <br />от застройщиков</h1>
-        <h4 class="text-sm text-gray-600">Ростова-на-Дону и Ростовской области</h4>
-      </div>
-      <div></div>
+      <h1 class="text-5xl text-red-600">База новостроек <br />от застройщиков</h1>
+      <h4 class="text-sm text-gray-600">Ростова-на-Дону и Ростовской области</h4>
     </section>
   </div>
 </template>
