@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "nuxt": "3.0.0-rc.9",
+    "nuxt-icon": "^0.1.5",
     "sass": "^1.54.9",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.4"
   }

@@ -1,18 +1,44 @@
+<script setup lang="ts"></script>
+
 <template>
   <div>
-    <section class="show-case">
-      <h1 class="text-5xl text-red-600">База новостроек <br />от застройщиков</h1>
-      <h4 class="text-sm text-gray-600">Ростова-на-Дону и Ростовской области</h4>
-    </section>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo
+    voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium
+    perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam.
+    Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+    Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta
+    accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium
+    sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur
+    adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex
+    at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error
+    laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet
+    consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos
+    quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus
+    aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor
+    sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum
+    dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut
+    necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem
+    ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas
+    est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim
+    ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore?
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo
+    voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium
+    perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam.
+    Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+    Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta
+    accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium
+    sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur
+    adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex
+    at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error
+    laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet
+    consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos
+    quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus
+    aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor
+    sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum
+    dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut
+    necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem
+    ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas
+    est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas illo voluptas est, illum dignissimos quibusdam ex at dicta accusantium perferendis enim
+    ut necessitatibus aliquam error laudantium sapiente quam. Nam, labore?
   </div>
 </template>
-
-<style lang="scss">
-.show-case {
-  background-image: url("../assets/img/background.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  min-height: 80vh;
-}
-</style>

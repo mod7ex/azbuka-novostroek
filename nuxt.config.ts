@@ -1,10 +1,16 @@
 import { defineNuxtConfig } from "nuxt";
 
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   meta: {
     title: "Азбука Новостроек",
     titleTemplate: (title: string) => `Азбука - ${title}`,
+  },
+
+  modules: ["nuxt-icon"],
+
+  components: {
+    global: true,
+    dirs: ["~/components/UI"],
   },
 
   build: {
@@ -27,8 +33,8 @@ export default defineNuxtConfig({
 });
 
 /*
-    @import "@/assets/scss/_mixins.scss";
-    @import "@/assets/scss/_functions.scss";
-    @import "@/assets/scss/_reset.scss";
-    @import "@/assets/scss/_keyframes.scss";
+  @import "@/assets/scss/_mixins.scss";
+  @import "@/assets/scss/_functions.scss";
+  @import "@/assets/scss/_reset.scss";
+  @import "@/assets/scss/_keyframes.scss";
 */
