@@ -25,7 +25,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@import "@/assets/scss/_variables.scss";`,
+          additionalData: `@import "@/assets/scss/_variables.scss"; @import "@/assets/scss/_mixins.scss";`,
         },
       },
     },
@@ -33,7 +33,6 @@ export default defineNuxtConfig({
 });
 
 /*
-  @import "@/assets/scss/_mixins.scss";
   @import "@/assets/scss/_functions.scss";
   @import "@/assets/scss/_reset.scss";
   @import "@/assets/scss/_keyframes.scss";

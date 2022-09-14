@@ -1,0 +1,7 @@
+@mixin items($columns: 10) {
+  @for $i from 1 through $columns {
+    &.hg-#{$i} {
+      height: ($i * (4rem)) + (2rem + 3rem);
+    }
+  }
+}

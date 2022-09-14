@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const searchExpanded = ref(false);
+const searchExpanded = ref(true);
 </script>
 
 <template>
@@ -36,39 +36,39 @@ const searchExpanded = ref(false);
       </ul>
     </div>
 
-    <Transition name="search-expand" aria-expanded="false">
-      <ul class="grid gap-4 grid-cols-12 py-4 rounded p-4 bg-white shadow-2xl" v-if="searchExpanded">
+    <Transition name="search-expand" :aria-expanded="searchExpanded">
+      <ul class="grid gap-4 grid-cols-12 py-4 rounded p-4 bg-white shadow-2xl overflow-hidden hg-6" v-if="searchExpanded">
         <li class="col-span-4">
-          <h4 class="mb-4 font-bold uppercase">расположение</h4>
+          <h4 class="h-12 font-bold uppercase">расположение</h4>
           <div>
-            <p class="p-3 rounded bg-gray-100 mb-4 font-light text-gray-700">Регион</p>
-            <p class="p-3 rounded bg-gray-100 mb-4 font-light text-gray-700">Город</p>
-            <p class="p-3 rounded bg-gray-100 mb-4 font-light text-gray-700">Адм. район</p>
-            <p class="p-3 rounded bg-gray-100 mb-4 font-light text-gray-700">Народный район</p>
+            <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Регион</p>
+            <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Город</p>
+            <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Адм. район</p>
+            <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Народный район</p>
           </div>
         </li>
 
         <li class="col-span-4">
-          <h4 class="mb-4 font-bold uppercase">Дом</h4>
+          <h4 class="h-12 font-bold uppercase">Дом</h4>
           <div>
-            <p class="p-3 rounded bg-gray-100 mb-4 font-light text-gray-700">Класс недвижимости</p>
-            <p class="p-3 rounded bg-gray-100 mb-4 font-light text-gray-700">Материал стен</p>
-            <p class="p-3 rounded bg-gray-100 mb-4 font-light text-gray-700">Этажей в доме</p>
-            <p class="p-3 rounded bg-gray-100 mb-4 font-light text-gray-700">Паркинг</p>
-            <p class="p-3 rounded bg-gray-100 mb-4 font-light text-gray-700">Лифт</p>
-            <p class="p-3 rounded bg-gray-100 mb-4 font-light text-gray-700">Коммерция</p>
+            <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Класс недвижимости</p>
+            <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Материал стен</p>
+            <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Этажей в доме</p>
+            <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Паркинг</p>
+            <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Лифт</p>
+            <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Коммерция</p>
           </div>
         </li>
 
         <li class="col-span-4">
-          <h4 class="mb-4 font-bold uppercase">КВАРТИРА</h4>
+          <h4 class="h-12 font-bold uppercase">КВАРТИРА</h4>
           <div>
-            <p class="p-3 rounded bg-gray-100 mb-4 font-light text-gray-700">Этаж</p>
-            <p class="p-3 rounded bg-gray-100 mb-4 font-light text-gray-700">Отделка</p>
-            <p class="p-3 rounded bg-gray-100 mb-4 font-light text-gray-700">Общая площадь</p>
-            <p class="p-3 rounded bg-gray-100 mb-4 font-light text-gray-700">Плозадь жилья</p>
-            <p class="p-3 rounded bg-gray-100 mb-4 font-light text-gray-700">Площадь кухни</p>
-            <p class="p-3 rounded bg-gray-100 mb-4 font-light text-gray-700">Санузел</p>
+            <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Этаж</p>
+            <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Отделка</p>
+            <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Общая площадь</p>
+            <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Плозадь жилья</p>
+            <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Площадь кухни</p>
+            <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Санузел</p>
           </div>
         </li>
       </ul>
@@ -80,14 +80,19 @@ const searchExpanded = ref(false);
 .search-expand-enter-active {
   transition: all 0.3s ease-out;
 }
-
 .search-expand-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
 }
-
 .search-expand-enter-from,
 .search-expand-leave-to {
-  transform: translateX(20px);
   opacity: 0;
+  height: 0;
+}
+
+.search-expand-enter-to {
+  @include items;
+}
+.search-expand-leave-from {
+  @include items;
 }
 </style>
