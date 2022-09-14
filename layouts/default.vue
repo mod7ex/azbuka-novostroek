@@ -6,13 +6,9 @@ import Search from "~/components/Partials/home/Search.vue";
 
 <template>
   <div>
-    <div class="show-case-container relative">
-      <div class="h-24"></div>
-
-      <div class="show-case-img"></div>
-
-      <div class="show-case-overlay absolute h-full top-0 w-full">
-        <app-width tag="header">
+    <div class="show-case-container">
+      <div class="show-case-overlay">
+        <app-width tag="header" class="py-1 md:py-3">
           <the-default-header />
         </app-width>
 
@@ -22,7 +18,7 @@ import Search from "~/components/Partials/home/Search.vue";
       </div>
     </div>
 
-    <app-width class="-mt-7 z-50 relative">
+    <app-width class="md:-mt-20 -mt-7">
       <Search />
     </app-width>
 
@@ -34,12 +30,10 @@ import Search from "~/components/Partials/home/Search.vue";
 
 <style lang="scss" scoped>
 .show-case-container {
-  .show-case-img {
-    background-image: url("~/assets/img/background.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    min-height: 80vh;
+  @include bg-img("background.jpg");
+
+  @media screen and (min-width: 761px) {
+    padding-bottom: 15rem;
   }
 
   .show-case-overlay {

@@ -10,7 +10,7 @@ withDefaults(
 </script>
 
 <template>
-  <component :class="['max-w-6xl mx-auto', $attrs.class]" :is="tag">
+  <component :class="['max-w-6xl mx-auto px-6 md:px-3', $attrs.class]" :is="tag">
     <slot />
   </component>
 </template>

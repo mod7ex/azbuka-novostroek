@@ -1,37 +1,45 @@
 <script setup lang="ts">
 const searchExpanded = ref(true);
+const isMatchMax = useMediaQuery("(max-width: 1034px)");
+const isMatchMin = useMediaQuery("(min-width: 768px)");
+
+const isMatch = computed(() => isMatchMax.value && isMatchMin.value);
 </script>
 
 <template>
-  <section :class="['w-11/12 mx-auto mb-16 text-sm', $attrs.class]">
+  <section :class="['mx-auto mb-16 text-sm', $attrs.class]">
     <div class="rounded p-4 bg-white shadow-2xl mb-2">
-      <ul class="flex divide-x divide-gray-300">
-        <li class="search flex items-center justify-start flex-grow">
-          <Icon name="heroicons-outline:search" class="cursor-pointer" />
-          <input type="text" placeholder="Название новостройки или застройщика" class="ml-6 inline-block flex-grow outline-none p-1" />
+      <ul :class="['flex items-center flex-wrap', isMatch ? 'justify-center' : '', isMatchMax ? '' : 'divide-x divide-gray-300']">
+        <li :class="['search flex items-center flex-grow', isMatch ? 'mb-6' : '', !isMatch ? 'justify-start' : 'justify-center']">
+          <Icon name="heroicons-outline:search" class="text-green-600 md:text-gray-900 cursor-pointer" />
+          <input type="text" placeholder="Название новостройки или застройщика" class="ml-6 flex-grow md:flex-grow-0 md:inline-block outline-none p-1" :class="{ 'w-96': isMatch }" />
         </li>
 
-        <li class="px-4 flex items-center">
-          <span class="font-bold cursor-pointer">Тип квартиры</span>
-        </li>
+        <li>
+          <ul class="hidden md:flex divide-x divide-gray-300">
+            <li class="hidden px-4 md:flex items-center">
+              <span class="font-bold cursor-pointer">Тип квартиры</span>
+            </li>
 
-        <li class="px-4 flex items-center">
-          <span class="font-bold cursor-pointer">Цена</span>
-        </li>
+            <li class="hidden px-4 md:flex items-center">
+              <span class="font-bold cursor-pointer">Цена</span>
+            </li>
 
-        <li class="px-4 flex items-center">
-          <span class="font-bold cursor-pointer">Площадь</span>
-        </li>
+            <li class="hidden px-4 md:flex items-center">
+              <span class="font-bold cursor-pointer">Площадь</span>
+            </li>
 
-        <li class="px-4 flex items-center">
-          <span class="font-bold cursor-pointer">Срок аренды</span>
-        </li>
+            <li class="hidden px-4 md:flex items-center">
+              <span class="font-bold cursor-pointer">Срок аренды</span>
+            </li>
 
-        <li class="pl-4 flex items-center">
-          <span class="flex items-center text-green-700 cursor-pointer" @click="searchExpanded = !searchExpanded" role="expand" aria-label="expand filter">
-            <Icon name="heroicons-outline:adjustments" class="mr-2 rotate-90 transform" />
-            <p class="font-bold">Все фильтры</p>
-          </span>
+            <li class="hidden pl-4 md:flex items-center">
+              <button class="flex items-center text-green-700 cursor-pointer" @click="searchExpanded = !searchExpanded" role="expand" aria-label="expand filter">
+                <Icon name="heroicons-outline:adjustments" class="mr-2 rotate-90 transform" />
+                <p class="font-bold">Все фильтры</p>
+              </button>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>

@@ -5,3 +5,10 @@
     }
   }
 }
+
+@mixin bg-img($url) {
+  background-image: url("~/assets/img/#{$url}");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
