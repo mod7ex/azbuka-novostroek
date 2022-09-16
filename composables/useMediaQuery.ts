@@ -1,30 +1,24 @@
-export default function useMediaQuery(mediaQuery: string) {
-  const isMatch = shallowRef(false);
+export default function useMediaQuery(mediaQuery: string, initial = false) {
+    const isMatch = shallowRef(initial);
 
-  if (process.client) {
-    // for SSR
-    const mediaQueryListRef = shallowRef<MediaQueryList>(window.matchMedia(mediaQuery));
+    if (process.client) {
+        // for SSR
+        watchEffect((cleanUp) => {
+            const list = window.matchMedia(mediaQuery);
 
-    watch(
-      mediaQueryListRef,
-      () => {
-        const list = window.matchMedia(mediaQuery);
+            isMatch.value = list.matches;
 
-        mediaQueryListRef.value = list;
+            const onChange = () => {
+                isMatch.value = list.matches;
+            };
 
-        isMatch.value = list.matches;
-      },
-      { immediate: true }
-    );
+            list.addEventListener("change", onChange);
 
-    useEventListener(
-      "change",
-      (e) => {
-        isMatch.value = e.matches;
-      },
-      mediaQueryListRef
-    );
-  }
+            cleanUp(() => {
+                list.removeEventListener("change", onChange);
+            });
+        });
+    }
 
-  return isMatch;
+    return isMatch;
 }

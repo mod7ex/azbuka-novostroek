@@ -5,27 +5,29 @@ import Search from "~/components/Partials/home/Search.vue";
 </script>
 
 <template>
-    <div class="show-case-container">
-        <div class="show-case-overlay">
-            <app-width tag="header" class="py-1 md:py-3">
-                <client-only>
-                    <the-default-header />
-                </client-only>
-            </app-width>
+    <div>
+        <div class="show-case-container">
+            <div class="show-case-overlay">
+                <app-width tag="header" class="py-1 md:py-3">
+                    <client-only>
+                        <the-default-header />
+                    </client-only>
+                </app-width>
 
-            <app-width>
-                <show-case />
-            </app-width>
+                <app-width>
+                    <show-case />
+                </app-width>
+            </div>
         </div>
+
+        <app-width class="md:-mt-20 -mt-7 z-50 relative">
+            <Search />
+        </app-width>
+
+        <app-width tag="main">
+            <slot />
+        </app-width>
     </div>
-
-    <app-width class="md:-mt-20 -mt-7">
-        <Search />
-    </app-width>
-
-    <app-width tag="main">
-        <slot />
-    </app-width>
 </template>
 
 <style lang="scss" scoped>

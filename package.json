@@ -1,16 +1,16 @@
 {
-  "private": true,
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "TAILWIND_MODE=watch nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
-  "devDependencies": {
-    "nuxt": "3.0.0-rc.9",
-    "nuxt-icon": "^0.1.5",
-    "sass": "^1.54.9",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.4"
-  }
+    "private": true,
+    "scripts": {
+        "build": "nuxt build",
+        "dev": "TAILWIND_MODE=watch nuxt dev",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare"
+    },
+    "devDependencies": {
+        "nuxt": "3.0.0-rc.9",
+        "nuxt-icon": "^0.1.5",
+        "sass": "^1.54.9",
+        "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.4"
+    }
 }
