@@ -3,5 +3,6 @@
   "editor.formatOnSave": true,
   "[xml]": {
     "editor.defaultFormatter": "redhat.vscode-xml"
-  }
+  },
+  "prettier.tabWidth": 4
 }

@@ -1,5 +1,8 @@
-<script setup lang="ts"></script>
+<script lang="ts" setup>
+import Suggestions from "~/components/Partials/home/Suggestions.vue";
+//
+</script>
 
 <template>
-  <div class="h-96"></div>
+  <Suggestions />
 </template>
