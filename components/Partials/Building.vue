@@ -43,7 +43,7 @@ const isMatch = useMediaQuery("(max-width: 397px)");
             </div>
         </div>
 
-        <div class="p-4 bg-blue-50 text-sm">
+        <div class="p-4 bg-blue-50 text-sm hidden md:block">
             <p class="mb-3 flex items-center justify-between flex-wrap text-blue-600">
                 <b>65 квартир</b>
                 <span>от 64 335 ₽/мес</span>
