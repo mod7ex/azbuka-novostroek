@@ -18,7 +18,7 @@ const isMatch = useMediaQuery("(max-width: 397px)");
             </span>
         </div>
 
-        <div class="p-3 text-sm">
+        <div class="p-4 text-sm">
             <div class="flex justify-between flex-wrap">
                 <h2 class="font-light uppercase text-gray-600">ТПУ «ДМИТРОВСКАЯ</h2>
                 <p class="text-green-600">Строится</p>
@@ -42,6 +42,16 @@ const isMatch = useMediaQuery("(max-width: 397px)");
                 <p class="flex items-center justify-between flex-wrap"><span class="text-gray-500">3-комн. от 63 м²</span> <span>19 233 450 ₽</span></p>
             </div>
         </div>
+
+        <div class="p-4 bg-blue-50 text-sm">
+            <p class="mb-3 flex items-center justify-between flex-wrap text-blue-600">
+                <b>65 квартир</b>
+                <span>от 64 335 ₽/мес</span>
+            </p>
+            <Button transparent color="yellow" class="w-full building-see-details transition-all duration-300">
+                <b>Подробнее</b>
+            </Button>
+        </div>
     </div>
 </template>
 
@@ -50,5 +60,13 @@ const isMatch = useMediaQuery("(max-width: 397px)");
     // .img {
     //   @include bg-img("building.png");
     // }
+
+    &:hover {
+        .building-see-details {
+            --tw-bg-opacity: 1;
+            background-color: rgba(251, 191, 36, var(--tw-bg-opacity));
+            color: white;
+        }
+    }
 }
 </style>
