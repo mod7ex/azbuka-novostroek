@@ -28,7 +28,9 @@ const show = shallowRef(false);
         </template>
 
         <div class="my-9 grid grid-cols-12 gap-3 md:gap-6">
-            <Building v-for="i in 10" :key="i" :class="['sm:col-span-4 md:col-span-3', isMatch ? 'col-span-12' : 'col-span-6']" />
+            <client-only>
+                <Building v-for="i in 10" :key="i" :class="['sm:col-span-4 md:col-span-3', isMatch ? 'col-span-12' : 'col-span-6']" />
+            </client-only>
         </div>
     </NuxtLayout>
 </template>
