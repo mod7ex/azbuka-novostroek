@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import Logo from "~/assets/svg/logo.svg";
+
 const isMatch = useMediaQuery("(min-width: 983px)");
 </script>
 
 <template>
     <div class="flex items-center mb-6" v-if="isMatch">
-        <app-img src="~/assets/svg/logo.svg" alt="" width="123" height="60" />
+        <app-img :src="Logo" alt="" width="123" height="60" />
 
         <ul class="ml-9 flex items-center">
             <li class="flex items-center justify-center w-9 h-9 relative border border-blue-50 bg-white rounded-full p-1 star cursor-pointer">
@@ -45,7 +47,7 @@ const isMatch = useMediaQuery("(min-width: 983px)");
 
     <div v-else class="head flex justify-between items-center py-3 mb-6 text-sm">
         <span class="head-left flex items-center justify-center">
-            <app-img src="~/assets/svg/logo.svg" alt="" width="57" height="28" />
+            <app-img :src="Logo" alt="" width="57" height="28" />
 
             <span class="flex items-center h-9 cursor-pointer ml-3 md:ml-6 location">
                 <app-i class="w-4 h-4 mr-2 text-blue-500" name="heroicons-outline:location-marker" />

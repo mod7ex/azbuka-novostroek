@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import Group from "~/assets/img/Group.png";
+import SVGGroup from "~/assets/svg/group.svg";
+</script>
+
 <template>
     <section :class="['mx-auto md:flex md:items-end md:justify-between md:w-11/12']">
         <div class="mb-4">
@@ -13,8 +18,8 @@
 
         <div>
             <div class="svg-container mx-auto relative h-56 md:h-80 w-full">
-                <app-img class="w-full h-full" src="~/assets/img/Group.png" alt="" />
-                <app-img class="absolute" src="~/assets/svg/group.svg" alt="" />
+                <app-img class="w-full h-full" :src="Group" alt="" />
+                <app-img class="absolute" :src="SVGGroup" alt="" />
             </div>
         </div>
     </section>

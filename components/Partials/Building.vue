@@ -1,25 +1,25 @@
 <script lang="ts" setup>
+import Building from "~/assets/img/building.png";
+
 const isMatch = useMediaQuery("(max-width: 397px)");
 </script>
 
 <template>
     <div class="building-wrapper">
         <div :class="['building md:shadow-lg hover:shadow-none transition-all duration-300 md:rounded', $attrs.class]">
-            <client-only>
-                <div class="relative img rounded-lg md:rounded-none md:rounded-t sm:h-44 md:h-48 w-full" :class="[isMatch ? 'h-52' : 'h-36']">
-                    <app-img class="rounded-lg md:rounded-none md:rounded-t h-full w-full" src="~/assets/img/building.png" alt="" />
-                    <span class="absolute top-0 bottom-0 right-0 left-0 flex justify-between p-3">
-                        <span class="relative flex items-center justify-center h-8 w-8 bg-pink-600 rounded-full">
-                            <app-i name="heroicons-solid:phone" class="text-white absolute w-4 h-4" />
-                        </span>
-                        <span>
-                            <app-i name="heroicons-outline:star" class="text-white" />
-                            <br />
-                            <app-i name="ic:round-stacked-bar-chart" class="text-white" />
-                        </span>
+            <div class="relative img rounded-lg md:rounded-none md:rounded-t sm:h-44 md:h-48 w-full" :class="[isMatch ? 'h-52' : 'h-36']">
+                <app-img class="rounded-lg md:rounded-none md:rounded-t h-full w-full" :src="Building" alt="" />
+                <span class="absolute top-0 bottom-0 right-0 left-0 flex justify-between p-3">
+                    <span class="relative flex items-center justify-center h-8 w-8 bg-pink-600 rounded-full">
+                        <app-i name="heroicons-solid:phone" class="text-white absolute w-4 h-4" />
                     </span>
-                </div>
-            </client-only>
+                    <span>
+                        <app-i name="heroicons-outline:star" class="text-white" />
+                        <br />
+                        <app-i name="ic:round-stacked-bar-chart" class="text-white" />
+                    </span>
+                </span>
+            </div>
 
             <div class="p-4 text-sm">
                 <div class="flex justify-between flex-wrap">

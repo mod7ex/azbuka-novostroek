@@ -5,10 +5,11 @@ const props = defineProps<{ src: string; alt?: string; width?: Numberish; height
 
 // const config = useRuntimeConfig();
 // const _src = `${config.public.baseURL}${props.src.replace("~/", "/")}`;
-
-const _src = `${props.src.replace("~/", "/")}`;
+/**
+ * Should be a fix
+ */
 </script>
 
 <template>
-    <img :src="_src" :alt="alt" :width="width" :height="height" :class="$attrs.class" />
+    <img :src="src" :alt="alt" :width="width" :height="height" :class="$attrs.class" />
 </template>
