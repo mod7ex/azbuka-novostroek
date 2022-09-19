@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import Building from "~/components/Partials/Building.vue";
 
-const isMatch = useMediaQuery("(max-width: 397px)");
-
 const show = shallowRef(false);
 </script>
 
@@ -27,17 +25,15 @@ const show = shallowRef(false);
             </div>
         </template>
 
-        <div class="my-9 grid grid-cols-12 gap-3 md:gap-6">
-            <client-only>
-                <Building v-for="i in 10" :key="i" :class="['sm:col-span-4 md:col-span-3', isMatch ? 'col-span-12' : 'col-span-6']" />
-            </client-only>
+        <div class="buildings my-9 grid grid-cols-12 gap-3 md:gap-6">
+            <Building v-for="i in 10" :key="i" />
         </div>
     </NuxtLayout>
 </template>
 
 <style lang="scss" scoped>
 .search-result-section {
-    @media (min-width: 640px) {
+    @include break_point(640px) {
         .filter-btn {
             max-width: 262px;
         }
