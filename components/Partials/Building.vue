@@ -3,7 +3,8 @@ const isMatch = useMediaQuery("(max-width: 397px)");
 </script>
 
 <template>
-    <div :class="['building md:shadow-lg hover:shadow-none transition-all duration-300 hover:border-yellow-400 md:border-2 md:rounded', $attrs.class]">
+    <div :class="['building md:shadow-lg hover:shadow-none transition-all duration-300 md:rounded', $attrs.class]">
+        <!-- <div :class="['building md:shadow-lg hover:shadow-none transition-all duration-300 hover:border-yellow-400 md:border-2 md:rounded', $attrs.class]"> -->
         <div class="relative img rounded-lg md:rounded-none md:rounded-t sm:h-44 md:h-48 w-full" :class="[isMatch ? 'h-52' : 'h-36']">
             <app-img class="rounded-lg md:rounded-none md:rounded-t h-full w-full" src="~/assets/img/building.png" alt="" />
             <span class="absolute top-0 bottom-0 right-0 left-0 flex justify-between p-3">
@@ -57,9 +58,13 @@ const isMatch = useMediaQuery("(max-width: 397px)");
 
 <style lang="scss">
 .building {
+    padding-left: 2px;
+
     // .img {
     //   @include bg-img("building.png");
     // }
+
+    @include border-anm;
 
     &:hover {
         .building-see-details {

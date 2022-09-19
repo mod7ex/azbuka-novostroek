@@ -8,7 +8,7 @@ export default defineNuxtConfig({
 
     runtimeConfig: {
         public: {
-            baseURL: process.env.NODE_ENV === "production" ? "WE STILL DON'T KNOW" : "http://localhost:3000/",
+            // baseURL: process.env.NODE_ENV === "production" ? "WE STILL DON'T KNOW" : "http://localhost:3000/",
         },
     },
 
@@ -33,7 +33,9 @@ export default defineNuxtConfig({
         css: {
             preprocessorOptions: {
                 scss: {
-                    additionalData: `@import "@/assets/scss/_variables.scss"; @import "@/assets/scss/_mixins.scss";`,
+                    additionalData: `@import "@/assets/scss/_variables.scss";
+                                     @import "@/assets/scss/_mixins.scss";
+                                     @import "@/assets/scss/_reset.scss";`,
                 },
             },
         },

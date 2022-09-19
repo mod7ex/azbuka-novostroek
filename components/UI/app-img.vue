@@ -3,9 +3,10 @@ type Numberish = string | number;
 
 const props = defineProps<{ src: string; alt?: string; width?: Numberish; height?: Numberish }>();
 
-const config = useRuntimeConfig();
+// const config = useRuntimeConfig();
+// const _src = `${config.public.baseURL}${props.src.replace("~/", "/")}`;
 
-const _src = `${config.public.baseURL}${props.src.replace("~/", "")}`;
+const _src = `${props.src.replace("~/", "/")}`;
 </script>
 
 <template>
