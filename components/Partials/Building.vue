@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import Building from "~/assets/img/building.png";
 
+const foo = () => {
+    console.log("hello");
+};
+
 const isMatch = useMediaQuery("(max-width: 397px)");
 </script>
 
@@ -51,7 +55,7 @@ const isMatch = useMediaQuery("(max-width: 397px)");
                     <b>65 квартир</b>
                     <span>от 64 335 ₽/мес</span>
                 </p>
-                <Button transparent color="yellow" class="w-full building-see-details transition-all duration-300">
+                <Button @click="() => foo()" transparent color="yellow" class="w-full building-see-details transition-all duration-300 z-50 relative">
                     <b>Подробнее</b>
                 </Button>
             </div>

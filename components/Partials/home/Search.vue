@@ -1,41 +1,41 @@
 <script setup lang="ts">
-const searchExpanded = shallowRef(false);
+const [isCollaped, toggle] = useToggle(true);
 
-const isMatchMax = useMediaQuery("(max-width: 1034px)");
-const isMatchMin = useMediaQuery("(min-width: 768px)");
-
-const isMatch = computed(() => isMatchMax.value && isMatchMin.value);
+const searchRef = ref<HTMLInputElement>();
+onMounted(() => {
+    searchRef.value.setAttribute("size", searchRef.value.getAttribute("placeholder").length.toString());
+});
 </script>
 
 <template>
     <section :class="['mx-auto mb-16 text-sm', $attrs.class]">
         <div class="border-2 md:border-0 border-gray-200 rounded p-4 bg-white shadow-2xl mb-2">
-            <ul :class="['flex items-center flex-wrap', isMatch ? 'justify-center' : '', isMatchMax ? '' : 'divide-x divide-gray-300']">
-                <li :class="['search flex items-center flex-grow', isMatch ? 'mb-6' : '', !isMatch ? 'justify-start' : 'justify-center']">
+            <ul :class="['search-area flex items-center justify-center flex-wrap']">
+                <li :class="['search-input flex items-center flex-grow md:flex-grow-0']">
                     <app-i name="heroicons-outline:search" class="text-green-600 md:text-gray-900 cursor-pointer" />
-                    <input type="text" placeholder="Название новостройки или застройщика" class="ml-6 w-full sm:flex-grow md:flex-grow-0 md:inline-block outline-none p-1" :class="{ 'w-96': isMatch }" />
+                    <input ref="searchRef" type="text" placeholder="Название новостройки или застройщика" class="bg-gray-100 ml-3 w-full sm:flex-grow md:flex-grow-0 md:inline-block outline-none p-2" />
                 </li>
 
-                <li>
-                    <ul class="hidden md:flex divide-x divide-gray-300">
-                        <li class="hidden px-4 md:flex items-center">
+                <li class="search-options hidden md:block md:mt-4">
+                    <ul class="flex divide-x divide-gray-300">
+                        <li class="px-4 flex items-center">
                             <span class="font-bold cursor-pointer">Тип квартиры</span>
                         </li>
 
-                        <li class="hidden px-4 md:flex items-center">
+                        <li class="px-4 flex items-center">
                             <span class="font-bold cursor-pointer">Цена</span>
                         </li>
 
-                        <li class="hidden px-4 md:flex items-center">
+                        <li class="px-4 flex items-center">
                             <span class="font-bold cursor-pointer">Площадь</span>
                         </li>
 
-                        <li class="hidden px-4 md:flex items-center">
+                        <li class="px-4 flex items-center">
                             <span class="font-bold cursor-pointer">Срок аренды</span>
                         </li>
 
-                        <li class="hidden pl-4 md:flex items-center">
-                            <button class="flex items-center text-green-700 cursor-pointer" @click="searchExpanded = !searchExpanded" role="expand" aria-label="expand filter">
+                        <li class="pl-4 flex items-center">
+                            <button class="flex items-center text-green-700 cursor-pointer" @click="() => toggle()" role="expand" aria-label="expand filter">
                                 <app-i name="heroicons-outline:adjustments" class="mr-2 rotate-90 transform" />
                                 <p class="font-bold">Все фильтры</p>
                             </button>
@@ -45,8 +45,8 @@ const isMatch = computed(() => isMatchMax.value && isMatchMin.value);
             </ul>
         </div>
 
-        <Transition name="search-expand" :aria-expanded="searchExpanded">
-            <ul class="grid gap-4 grid-cols-12 py-4 rounded p-4 bg-white shadow-2xl overflow-hidden hg-6" v-if="searchExpanded">
+        <Transition name="search-expand" :aria-expanded="isCollaped">
+            <ul class="grid gap-4 grid-cols-12 py-4 rounded p-4 bg-white shadow-2xl overflow-hidden hg-6" v-if="!isCollaped">
                 <li class="col-span-4">
                     <h4 class="h-12 font-bold uppercase">расположение</h4>
                     <div>
@@ -86,6 +86,22 @@ const isMatch = computed(() => isMatchMax.value && isMatchMin.value);
 </template>
 
 <style lang="scss" scoped>
+.search-area {
+    @include break_point(1015px) {
+        flex-wrap: nowrap;
+
+        .search-input {
+            flex-grow: 1;
+            input {
+                width: 100%;
+            }
+        }
+        .search-options {
+            margin-top: 0;
+        }
+    }
+}
+
 .search-expand-enter-active {
     transition: all 0.3s ease-out;
 }

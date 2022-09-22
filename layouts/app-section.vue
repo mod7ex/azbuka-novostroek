@@ -1,15 +1,17 @@
 <script setup lang="ts">
-defineProps<{ id?: string }>();
+withDefaults(defineProps<{ id?: string; push_next?: boolean }>(), {
+    push_next: true,
+});
 </script>
 
 <template>
-  <section :id="id" :class="[$attrs.class, 'app-section']">
-    <slot name="head" />
+    <section :id="id" :class="[$attrs.class, 'app-section', push_next ? 'mb-6' : '']">
+        <slot name="head" />
 
-    <div>
-      <slot />
-    </div>
+        <div>
+            <slot />
+        </div>
 
-    <slot name="foot" />
-  </section>
+        <slot name="foot" />
+    </section>
 </template>
