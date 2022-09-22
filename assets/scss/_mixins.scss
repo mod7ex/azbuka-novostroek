@@ -6,8 +6,8 @@
     }
 }
 
-@mixin bg-img($url) {
-    background-image: url("~/assets/img/#{$url}");
+@mixin bg-img($name) {
+    background-image: url("~/assets/img/#{$name}");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -65,6 +65,12 @@
 }
 
 // ********************************************************************************************
+@mixin break_point($bp: 0) {
+    @media (min-width: $bp) {
+        @content;
+    }
+}
+
 /*
 $break_points: (
     "xs": "0",
@@ -104,8 +110,3 @@ $break_points: (
     }
 }
 */
-@mixin break_point($bp: 0) {
-    @media (min-width: $bp) {
-        @content;
-    }
-}

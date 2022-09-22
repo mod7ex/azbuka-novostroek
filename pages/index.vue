@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import Suggestions from "~/components/Partials/home/Suggestions.vue";
 import Locations from "~/components/Partials/home/Locations.vue";
+import About from "~/components/Partials/home/About.vue";
+import Advantages from "~/components/Partials/home/Advantages.vue";
 </script>
 
 <template>
-    <div class="mb-96">
+    <div>
         <Suggestions />
         <Locations />
+        <About />
+        <Advantages />
     </div>
 </template>

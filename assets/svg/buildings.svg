@@ -1,0 +1,165 @@
+<svg width="242" height="174" viewBox="0 0 242 174" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <path d="M17.0161 77.9505C17.637 70.9011 18.0251 63.8518 18.0251 56.8025C18.4908 56.8025 19.0341 56.8025 19.4998 56.8025C19.8879 63.542 20.276 71.211 20.6641 77.9505" fill="#454849" />
+    <path d="M17.0161 117.535C17.637 110.486 18.0251 103.436 18.0251 96.387C18.4908 96.387 19.0341 96.387 19.4998 96.387C19.8879 103.126 20.276 110.795 20.6641 117.535" fill="#454849" />
+    <path d="M17.8697 109.479C15.4635 105.064 13.8336 101.191 13.2126 98.2468C16.3173 102.43 18.6458 106.148 20.043 109.014" fill="#454849" />
+    <path d="M19.9652 107C21.7504 103.514 23.6132 99.9508 25.3984 96.4648C23.5356 98.5564 21.7504 100.648 19.8876 102.74" fill="#454849" />
+    <path d="M19.2668 100.028C17.8697 100.803 16.4726 101.655 14.9202 101.733C13.3679 101.81 11.5826 100.958 11.1946 99.4861C7.15842 100.028 2.81181 97.7044 1.02659 94.0636C-0.758625 90.3453 0.0175552 85.6199 2.96704 82.6762C3.43275 82.2114 3.89846 81.8241 4.20893 81.2819C4.59702 80.5847 4.51941 79.7325 4.67465 78.9579C5.06274 75.6269 8.08983 72.8382 11.4274 72.6832C12.126 72.6832 12.8245 72.6832 13.4455 72.5283C14.2993 72.2959 15.0755 71.6762 15.8516 71.2114C18.5683 69.5846 22.2163 69.7396 24.7777 71.6762C27.2615 73.5353 28.5034 77.0987 27.6496 80.1199C30.4438 79.81 33.2381 81.979 34.0142 84.7678C34.7904 87.4791 33.7814 90.5002 31.9962 92.7467C33.2381 94.3735 32.85 96.9298 31.4529 98.4016C29.9781 99.8735 27.7272 100.338 25.7091 99.8735C25.0882 99.7185 24.4672 99.5636 23.8463 99.796C23.5358 99.9509 23.2253 100.261 22.9925 100.493C21.9058 101.345 20.043 101.113 19.1892 99.9509" fill="#1DA958" />
+    <rect width="19.1872" height="29.3748" transform="matrix(-1 0 0 1 19.1875 72.4351)" fill="url(#pattern0)" />
+    <path d="M19.6553 61.9926C18.8015 62.4574 17.8701 62.9997 16.9387 63.0771C15.9296 63.1546 14.843 62.6124 14.6101 61.6828C12.0487 61.9926 9.40971 60.5983 8.24543 58.2743C7.15878 55.9504 7.62449 53.0067 9.48733 51.1475C9.7978 50.8377 10.1083 50.6053 10.2635 50.2954C10.4964 49.8306 10.4964 49.2884 10.574 48.8236C10.8068 46.732 12.6697 45.0278 14.7654 44.8729C15.1535 44.8729 15.6192 44.8729 16.0073 44.7954C16.5506 44.6405 17.0163 44.2531 17.482 43.9433C19.1896 42.9362 21.4405 43.0137 23.0705 44.1757C24.6229 45.3377 25.3991 47.5067 24.8557 49.4433C26.641 49.2109 28.3485 50.6053 28.8143 52.3095C29.28 54.0137 28.659 55.8729 27.5724 57.2673C28.3486 58.2743 28.1157 59.9011 27.1843 60.8307C26.2529 61.7602 24.8557 62.0701 23.6139 61.7602C23.2258 61.6828 22.8377 61.5278 22.4496 61.6828C22.2167 61.7602 22.0615 61.9926 21.9062 62.0701C21.2077 62.6124 20.0434 62.4574 19.5777 61.7602" fill="#1DA958" />
+    <rect width="11.9222" height="18.4057" transform="matrix(-1 0 0 1 19.5601 44.7334)" fill="url(#pattern1)" />
+    <path d="M20.276 117.535H83.6123V5.67529L20.276 14.119V117.535Z" fill="#E71F61" />
+    <path d="M58.5991 40.8905V22.2214L74.8989 22.2214V40.8905H58.5991Z" fill="white" />
+    <path d="M59.8408 39.5739V23.4612L73.7344 23.4612V39.5739H59.8408Z" fill="#E71F61" />
+    <rect width="37.0704" height="28.817" transform="matrix(-1 0 0 1 83.0825 16.1025)" fill="url(#pattern2)" />
+    <path d="M67.261 39.6714H66.1743V23.4037H67.261V39.6714Z" fill="white" />
+    <path d="M29.687 40.9308L29.687 22.2617L45.9868 22.2617V40.9308H29.687Z" fill="white" />
+    <path d="M30.9292 39.6137L30.9292 23.501L44.8228 23.501V39.6137H30.9292Z" fill="#E71F61" />
+    <rect width="36.8841" height="28.817" transform="matrix(-1 0 0 1 54.0225 16.1025)" fill="url(#pattern3)" />
+    <path d="M38.3884 39.6714H37.3018V23.4037H38.3884V39.6714Z" fill="white" />
+    <path d="M58.5781 69.5739V50.9048H74.8779V69.5739H58.5781Z" fill="white" />
+    <path d="M59.8203 68.2568V52.144H73.714V68.2568H59.8203Z" fill="#E71F61" />
+    <rect width="37.0704" height="29.0029" transform="matrix(-1 0 0 1 83.0825 44.7334)" fill="url(#pattern4)" />
+    <path d="M67.261 68.3752H66.1743V52.1076H67.261V68.3752Z" fill="white" />
+    <path d="M29.666 69.6134L29.666 50.9443H45.9658V69.6134H29.666Z" fill="white" />
+    <path d="M30.9082 68.2966L30.9082 52.1838H44.8019V68.2966H30.9082Z" fill="#E71F61" />
+    <rect width="36.8841" height="29.0029" transform="matrix(-1 0 0 1 54.0225 44.7334)" fill="url(#pattern5)" />
+    <path d="M38.3884 68.3752H37.3018V52.1076H38.3884V68.3752Z" fill="white" />
+    <path d="M58.5791 97.7694V79.1003H74.8789V97.7694H58.5791Z" fill="white" />
+    <path d="M59.8213 96.4528V80.3401H73.7149V96.4528H59.8213Z" fill="#E71F61" />
+    <path d="M76.3921 97.6774V99.8464H57.1428V97.6774H76.3921Z" fill="white" />
+    <rect width="37.0704" height="28.817" transform="matrix(-1 0 0 1 83.0825 72.9929)" fill="url(#pattern6)" />
+    <path d="M67.261 96.5703H66.1743V80.3026H67.261V96.5703Z" fill="white" />
+    <path d="M29.6675 97.8097L29.6675 79.1406H45.9673V97.8097H29.6675Z" fill="white" />
+    <path d="M30.9092 96.4928L30.9092 80.3801H44.8028V96.4928H30.9092Z" fill="#E71F61" />
+    <path d="M47.4805 97.7153V99.8843H28.2312V97.7153H47.4805Z" fill="white" />
+    <rect width="36.8841" height="28.817" transform="matrix(-1 0 0 1 54.0225 72.9929)" fill="url(#pattern7)" />
+    <path d="M38.3884 96.5703H37.3018V80.3026H38.3884V96.5703Z" fill="white" />
+    <rect width="63.7089" height="13.7578" transform="matrix(-1 0 0 1 83.8276 4.76147)" fill="url(#pattern8)" />
+    <path d="M16.6275 16.2107L87.8032 6.14028L87.8809 0.25293L16.7827 10.1685L16.6275 16.2107Z" fill="#A6DCE6" />
+    <path d="M90.2918 173.253H168.531V35.0554L90.2918 45.5132V173.253Z" fill="#1DA958" />
+    <path d="M137.607 78.5064V55.4993L157.788 55.4993V78.5064H137.607Z" fill="white" />
+    <path d="M139.082 76.9578V57.0493H156.236V76.9578H139.082Z" fill="#1DA958" />
+    <rect width="45.6394" height="35.51" transform="matrix(-1 0 0 1 167.69 48.0383)" fill="url(#pattern9)" />
+    <path d="M148.312 77.0667H146.993V56.9257H148.312V77.0667Z" fill="white" />
+    <path d="M101.246 78.5476V55.5405L121.426 55.5405V78.5476H101.246Z" fill="white" />
+    <path d="M102.721 76.9988V57.0903H119.874V76.9988H102.721Z" fill="#1DA958" />
+    <rect width="45.6394" height="35.51" transform="matrix(-1 0 0 1 131.365 48.0383)" fill="url(#pattern10)" />
+    <path d="M111.992 77.0667H110.673V56.9257H111.992V77.0667Z" fill="white" />
+    <path d="M137.582 113.934V90.9265H157.763V113.934H137.582Z" fill="white" />
+    <path d="M139.134 112.384V92.4756H156.288V112.384H139.134Z" fill="#1DA958" />
+    <rect width="45.6394" height="35.6959" transform="matrix(-1 0 0 1 167.69 83.3628)" fill="url(#pattern11)" />
+    <path d="M148.312 112.518H146.993V92.3774H148.312V112.518Z" fill="white" />
+    <path d="M101.22 113.975V90.9678H121.401V113.975H101.22Z" fill="white" />
+    <path d="M102.773 112.426V92.5171H119.927V112.426H102.773Z" fill="#1DA958" />
+    <rect width="45.6394" height="35.6959" transform="matrix(-1 0 0 1 131.365 83.3628)" fill="url(#pattern12)" />
+    <path d="M111.992 112.518H110.673V92.3774H111.992V112.518Z" fill="white" />
+    <path d="M144.857 135.683H146.332V171.937H144.857V135.683Z" fill="white" />
+    <path d="M111.791 135.683H113.421V171.937H111.791V135.683Z" fill="white" />
+    <path d="M155.413 137.464L129.333 116.394C129.023 116.161 128.635 116.161 128.324 116.394L102.4 137.077C101.779 137.542 102.167 138.549 102.866 138.549L154.87 139.014C155.724 138.936 156.034 137.929 155.413 137.464Z" fill="#A6DCE6" />
+    <rect width="15.6478" height="29.0029" transform="matrix(-1 0 0 1 136.954 143.6)" fill="url(#pattern13)" />
+    <path d="M123.745 155.591H125.297V159.929H123.745V155.591Z" fill="white" />
+    <path d="M121.353 172.601V143.706H136.799V172.601H121.353Z" stroke="white" stroke-miterlimit="10" />
+    <rect width="78.4252" height="3.34647" transform="matrix(-1 0 0 1 168.622 46.1792)" fill="url(#pattern14)" />
+    <path d="M87.8082 47.372H172.955C174.352 47.372 175.517 46.21 175.517 44.8157H85.1692C85.2468 46.21 86.4111 47.372 87.8082 47.372Z" fill="#2EA8BC" />
+    <path d="M85.2468 44.9709H175.517L167.444 16.5413H93.3191L85.2468 44.9709Z" fill="#A6DCE6" />
+    <path d="M178.073 61.7469H217.735V17.5918L178.073 20.9228V61.7469Z" fill="#3478F6" />
+    <path d="M172.95 23.9443L221.616 17.1273L221.694 11.24L173.105 17.902L172.95 23.9443Z" fill="#A6DCE6" />
+    <path d="M237.605 127.825H174.269V52.2964L237.605 57.9513V127.825Z" fill="#3478F6" />
+    <path d="M182.991 86.0432V68.8459H199.291V86.0432H182.991Z" fill="white" />
+    <path d="M184.233 84.8818V70.0085H198.127V84.8818H184.233Z" fill="#3478F6" />
+    <rect width="37.0704" height="26.586" transform="matrix(-1 0 0 1 211.928 63.312)" fill="url(#pattern15)" />
+    <path d="M190.569 69.9585H191.656V84.9867H190.569V69.9585Z" fill="white" />
+    <path d="M211.902 86.0813V68.884H228.202V86.0813H211.902Z" fill="white" />
+    <path d="M213.145 84.9194V70.0461H227.038V84.9194H213.145Z" fill="#3478F6" />
+    <rect width="37.0704" height="26.586" transform="matrix(-1 0 0 1 240.801 63.312)" fill="url(#pattern16)" />
+    <path d="M219.52 69.9585H220.606V84.9867H219.52V69.9585Z" fill="white" />
+    <path d="M190.074 44.2412V27.5862L206.374 27.5862V44.2412H190.074Z" fill="white" />
+    <path d="M191.239 43.0796V28.7485L205.132 28.7485V43.0796H191.239Z" fill="#3478F6" />
+    <path d="M197.632 28.6697H198.719V43.1556H197.632V28.6697Z" fill="white" />
+    <path d="M182.982 112.081V94.8835H199.282V112.081H182.982Z" fill="white" />
+    <path d="M184.224 110.918V96.0452H198.118V110.918H184.224Z" fill="#3478F6" />
+    <path d="M200.791 112.075V114.089H181.542V112.075H200.791Z" fill="white" />
+    <rect width="37.0704" height="26.586" transform="matrix(-1 0 0 1 211.928 89.3401)" fill="url(#pattern17)" />
+    <path d="M190.569 95.9866H191.656V111.015H190.569V95.9866Z" fill="white" />
+    <path d="M211.893 112.119V94.9216H228.193V112.119H211.893Z" fill="white" />
+    <path d="M213.135 110.957V96.0837H227.029V110.957H213.135Z" fill="#3478F6" />
+    <path d="M229.703 112.115V114.129H210.453V112.115H229.703Z" fill="white" />
+    <rect width="37.0704" height="26.586" transform="matrix(-1 0 0 1 240.801 89.3401)" fill="url(#pattern18)" />
+    <path d="M219.52 95.9866H220.606V111.015H219.52V95.9866Z" fill="white" />
+    <path d="M241.253 62.8314L170.078 52.7609L170 46.8735L241.098 56.7891L241.253 62.8314Z" fill="#A6DCE6" />
+    <defs>
+        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image0_1156_4637" />
+        </pattern>
+        <pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image1_1156_4637" />
+        </pattern>
+        <pattern id="pattern2" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image2_1156_4637" />
+        </pattern>
+        <pattern id="pattern3" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image2_1156_4637" />
+        </pattern>
+        <pattern id="pattern4" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image3_1156_4637" />
+        </pattern>
+        <pattern id="pattern5" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image3_1156_4637" />
+        </pattern>
+        <pattern id="pattern6" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image2_1156_4637" />
+        </pattern>
+        <pattern id="pattern7" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image2_1156_4637" />
+        </pattern>
+        <pattern id="pattern8" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image4_1156_4637" />
+        </pattern>
+        <pattern id="pattern9" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image5_1156_4637" />
+        </pattern>
+        <pattern id="pattern10" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image6_1156_4637" />
+        </pattern>
+        <pattern id="pattern11" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image7_1156_4637" />
+        </pattern>
+        <pattern id="pattern12" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image8_1156_4637" />
+        </pattern>
+        <pattern id="pattern13" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image9_1156_4637" />
+        </pattern>
+        <pattern id="pattern14" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image10_1156_4637" />
+        </pattern>
+        <pattern id="pattern15" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image11_1156_4637" />
+        </pattern>
+        <pattern id="pattern16" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image12_1156_4637" />
+        </pattern>
+        <pattern id="pattern17" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image13_1156_4637" />
+        </pattern>
+        <pattern id="pattern18" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image14_1156_4637" />
+        </pattern>
+        <image id="image0_1156_4637" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGwAAACjCAYAAABv2PusAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA" />
+        <image id="image1_1156_4637" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEMAAABoCAYAAACqoU2GAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA" />
+        <image id="image2_1156_4637" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAACeCAYAAAB+ZOUOAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA" />
+        <image id="image3_1156_4637" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAACjCAYAAADGgPF9AAAACXBIWXMAAC4jAAAuIwF4pT92AAAA" />
+        <image id="image4_1156_4637" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVoAAABLCAYAAAAxrE/8AAAACXBIWXMAAC4jAAAuIwF4pT92AAAA" />
+        <image id="image5_1156_4637" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAADECAYAAAC2nDzgAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA" />
+        <image id="image6_1156_4637" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAADECAYAAACsoNxuAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA" />
+        <image id="image7_1156_4637" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAADICAYAAADBXvybAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA" />
+        <image id="image8_1156_4637" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAADICAYAAADbYhwVAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA" />
+        <image id="image9_1156_4637" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAACjCAYAAAAOwNnuAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA" />
+        <image id="image10_1156_4637" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAakAAAAZCAYAAACLkdGaAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA" />
+        <image id="image11_1156_4637" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAACSCAYAAAAJpiV1AAAACXBIWXMAAC4jAAAuIwF4pT92AAAA" />
+        <image id="image12_1156_4637" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAACSCAYAAAAATYUPAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA" />
+        <image id="image13_1156_4637" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAACWCAYAAACSN2djAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA" />
+        <image id="image14_1156_4637" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAACWCAYAAACb3McZAAAACXBIWXMAAC4jAAAuIwF4pT92AAAA" />
+    </defs>
+</svg>
+    

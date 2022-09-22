@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import TheDefaultFooter from "~/components/TheDefaultFooter.vue";
 import TheDefaultHeader from "~/components/TheDefaultHeader.vue";
 import ShowCase from "~/components/Partials/home/ShowCase.vue";
 import Search from "~/components/Partials/home/Search.vue";
@@ -69,6 +70,8 @@ const [isCollaped, toggle] = useToggle();
         <app-width tag="main">
             <slot />
         </app-width>
+
+        <the-default-footer />
     </div>
 </template>
 
