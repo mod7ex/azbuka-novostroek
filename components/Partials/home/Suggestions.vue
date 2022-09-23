@@ -26,7 +26,7 @@ const [isCollapsed, toggle] = useToggle();
         </template>
 
         <div class="buildings my-9 grid grid-cols-12 gap-3 md:gap-6">
-            <Building v-for="i in 10" :key="i" />
+            <Building v-for="i in 8" :key="i" />
         </div>
 
         <template #foot>

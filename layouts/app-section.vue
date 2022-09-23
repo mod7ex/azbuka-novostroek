@@ -8,7 +8,7 @@ withDefaults(defineProps<{ id?: string; push_next?: boolean }>(), {
     <section :id="id" :class="[$attrs.class, 'app-section', push_next ? 'mb-9' : '']">
         <slot name="head" />
 
-        <div>
+        <div :class="$attrs.body_class">
             <slot />
         </div>
 
