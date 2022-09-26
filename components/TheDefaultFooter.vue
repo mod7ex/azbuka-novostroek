@@ -16,7 +16,7 @@ import Logo from "~/assets/svg/logo.svg";
             </app-width>
 
             <app-width class="flex flex-col items-center md:block" :padding="false">
-                <div class="pb-4 md:flex md:justify-between md:items-center text-gray-500 bg-green-600">
+                <div class="pb-4 md:flex md:justify-between md:items-center text-gray-500">
                     <div class="md:w-1/2">
                         <p class="mb-3 text-sm text-center md:text-left">Информация</p>
                         <p class="mb-3 text-sm text-center md:text-left">О проекте</p>
