@@ -15,21 +15,21 @@ defineEmits(["toggle"]);
 
         <ul class="ml-9 flex items-center">
             <li>
-                <button class="flex items-center justify-center w-9 h-9 relative border border-blue-50 bg-white rounded-full p-1 star cursor-pointer">
+                <button class="flex items-center justify-center w-10 h-10 relative border border-blue-50 bg-white rounded-full p-1 star cursor-pointer">
                     <app-i class="absolute text-blue-500 md:w-4 md:h-4 w-3 h-3" name="heroicons-outline:star" />
                 </button>
             </li>
 
             <li>
-                <button class="flex items-center justify-center w-9 h-9 relative border border-blue-50 bg-white rounded-full p-1 mx-2 chart cursor-pointer">
+                <button class="flex items-center justify-center w-10 h-10 relative border border-blue-50 bg-white rounded-full p-1 mx-2 chart cursor-pointer">
                     <app-i class="absolute text-blue-500 md:w-4 md:h-4 w-3 h-3" name="ri:bar-chart-line" />
                 </button>
             </li>
 
             <li>
-                <button class="flex items-center h-9 px-3 relative border border-blue-50 bg-white rounded-full p-1 location cursor-pointer">
+                <button class="flex items-center h-10 px-3 relative border border-blue-50 bg-white rounded-full p-1 location cursor-pointer">
                     <app-i class="text-blue-500 md:w-4 md:h-4 w-3 h-3 mr-2" name="heroicons-outline:location-marker" />
-                    <span>Ростов-на-Дону</span>
+                    <span class="text-sm">Ростов-на-Дону</span>
                 </button>
             </li>
         </ul>
@@ -49,7 +49,7 @@ defineEmits(["toggle"]);
             </li>
         </ul>
 
-        <span class="ml-9 flex items-center justify-center w-9 h-9 relative border border-blue-50 bg-white rounded-full p-1 cursor-pointer">
+        <span class="ml-9 flex items-center justify-center w-10 h-10 relative border border-blue-50 bg-white rounded-full p-1 cursor-pointer">
             <app-i class="absolute text-blue-500 md:w-4 md:h-4 w-3 h-3" name="heroicons-outline:phone-incoming" />
         </span>
     </div>
@@ -62,8 +62,8 @@ defineEmits(["toggle"]);
             </NuxtLink>
 
             <button class="flex items-center h-9 cursor-pointer ml-3 md:ml-6 location">
-                <app-i class="w-4 h-4 mr-2 text-blue-500" name="heroicons-outline:location-marker" />
-                <p>Ростов-на-Дону</p>
+                <app-i class="w-3 h-4 mr-2 text-blue-500" name="heroicons-outline:location-marker" />
+                <p class="text-xs">Ростов-на-Дону</p>
             </button>
         </span>
 

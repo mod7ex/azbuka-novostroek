@@ -9,11 +9,11 @@ onMounted(() => {
 
 <template>
     <section :class="['mx-auto mb-16 text-sm', $attrs.class]">
-        <div class="border-2 md:border-0 border-gray-200 rounded p-4 bg-white shadow-2xl mb-2">
+        <div class="border-2 md:border-0 border-gray-200 rounded p-3 md:px-5 bg-white shadow-2xl mb-2">
             <ul :class="['search-area flex items-center justify-center flex-wrap']">
                 <li :class="['search-input flex items-center flex-grow md:flex-grow-0']">
-                    <app-i name="heroicons-outline:search" class="text-green-600 md:text-gray-900 cursor-pointer" />
-                    <input ref="searchRef" type="text" placeholder="Название новостройки или застройщика" class="bg-gray-100 ml-3 w-full sm:flex-grow md:flex-grow-0 md:inline-block outline-none p-2" />
+                    <app-i name="heroicons-outline:search" class="text-green-600 md:text-gray-500 cursor-pointer" />
+                    <input ref="searchRef" type="text" placeholder="Название новостройки или застройщика" class="ml-3 w-full sm:flex-grow md:flex-grow-0 md:inline-block outline-none py-2" />
                 </li>
 
                 <li class="search-options hidden md:block md:mt-4">
@@ -46,9 +46,9 @@ onMounted(() => {
         </div>
 
         <Transition name="search-expand" :aria-expanded="isCollaped">
-            <ul class="grid gap-4 grid-cols-12 py-4 rounded p-4 bg-white shadow-2xl overflow-hidden hg-6" v-if="!isCollaped">
+            <ul class="grid gap-4 grid-cols-12 py-4 pb-8 rounded px-4 bg-white shadow-2xl overflow-hidden hg-6" v-if="!isCollaped">
                 <li class="col-span-4">
-                    <h4 class="h-12 font-bold uppercase">расположение</h4>
+                    <h4 class="h-12 font-bold uppercase flex items-center">расположение</h4>
                     <div>
                         <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Регион</p>
                         <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Город</p>
@@ -58,7 +58,7 @@ onMounted(() => {
                 </li>
 
                 <li class="col-span-4">
-                    <h4 class="h-12 font-bold uppercase">Дом</h4>
+                    <h4 class="h-12 font-bold uppercase flex items-center">Дом</h4>
                     <div>
                         <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Класс недвижимости</p>
                         <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Материал стен</p>
@@ -70,7 +70,7 @@ onMounted(() => {
                 </li>
 
                 <li class="col-span-4">
-                    <h4 class="h-12 font-bold uppercase">КВАРТИРА</h4>
+                    <h4 class="h-12 font-bold uppercase flex items-center">КВАРТИРА</h4>
                     <div>
                         <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Этаж</p>
                         <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Отделка</p>
@@ -87,6 +87,11 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .search-area {
+    input::placeholder {
+        font-size: 13px;
+        font-style: italic;
+    }
+
     @include break_point(1015px) {
         flex-wrap: nowrap;
 

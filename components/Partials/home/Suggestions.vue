@@ -8,11 +8,11 @@ const [isCollapsed, toggle] = useToggle();
     <NuxtLayout name="app-section" class="search-result-section">
         <template #head>
             <div class="sm:flex sm:items-center sm:justify-between flex-wrap relative z-10">
-                <p class="text-center text-4xl font-black mb-2 whitespace-nowrap">Вам подойдет</p>
+                <p class="text-center text-4xl font-black mb-6 sm:mb-0 whitespace-nowrap">Вам подойдет</p>
 
                 <div class="relative filter-btn w-full" onclick="() => toggle()">
-                    <button class="flex w-full items-center justify-between text-gray-900 border-2 border-gray-200 py-2 px-3 rounded">
-                        <p class="whitespace-nowrap lowercase">Сортировать по:</p>
+                    <button class="flex w-full items-center justify-between text-gray-900 border-2 border-gray-100 py-2 px-3 rounded">
+                        <p class="whitespace-nowrap text-sm">Сортировать по:</p>
                         <span class="rounded-full bg-green-600 p-3 relative ml-2 flex items-center justify-center">
                             <app-i name="zondicons:cheveron-down" class="absolute text-white w-6 h-6" />
                         </span>
@@ -39,8 +39,11 @@ const [isCollapsed, toggle] = useToggle();
 
 <style lang="scss" scoped>
 .search-result-section {
-    @include break_point(640px) {
-        .filter-btn {
+    .filter-btn {
+        p {
+            font-style: italic;
+        }
+        @include break_point(640px) {
             max-width: 262px;
         }
     }

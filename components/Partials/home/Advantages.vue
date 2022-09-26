@@ -7,22 +7,22 @@ import SVGDecision from "~/assets/svg/adv-decision.svg";
 const advantages = [
     {
         icon: SVGDocs,
-        title: "Тщательная работа с документами",
+        title: "Тщательная работа<br /> с документами",
         body: "Стоит заметить, что в таких агентствах документ составляются не только по всем требованиям законодательства, но самое главное – честно.",
     },
     {
         icon: SVGTime,
-        title: "Экономия времени",
+        title: "Экономия<br />времени",
         body: "Стоит заметить, что в таких агентствах документ составляются не только по всем требованиям законодательства, но самое главное – честно.",
     },
     {
         icon: SVGDecision,
-        title: "Грамотное решение",
+        title: "Грамотное<br />решение",
         body: "Стоит заметить, что в таких агентствах документ составляются не только по всем требованиям законодательства, но самое главное – честно.",
     },
     {
         icon: SVGChoice,
-        title: "Большой выбор",
+        title: "Большой<br />выбор",
         body: "Стоит заметить, что в таких агентствах документ составляются не только по всем требованиям законодательства, но самое главное – честно.",
     },
 ];
@@ -31,22 +31,28 @@ const advantages = [
 <template>
     <NuxtLayout name="app-section" class="advantages-section" body_class="md:flex md:justify-center md:items-stretch">
         <template #head>
-            <h1 class="text-center md:text-left text-2xl font-bold mb-3">Наши преимущества</h1>
+            <h1 class="text-left text-2xl font-bold mb-3">Наши преимущества</h1>
         </template>
 
         <Card v-for="(adv, i) in advantages" :key="i" class="p-6 md:w-3/12 md:shadow-none md:m-2 md:pl-0 md:pr-12">
             <template #header>
                 <div class="flex items-center justify-start md:block">
-                    <app-img :src="adv.icon" class="svg mr-6" />
-                    <h1 class="text-xl font-bold mb-3 md:mt-9">{{ adv.title }}</h1>
+                    <app-img :src="adv.icon" class="svg mr-6 h-14 w-12" />
+                    <h1 :class="['text-sm font-bold md:mt-6', $style.head]" v-html="adv.title"></h1>
                 </div>
             </template>
 
-            <div class="border border-dashed my-4 md:my-2 border-blue-700 border-opacity-5"></div>
+            <div class="border border-dashed md:border-none my-4 md:my-3 border-blue-700 border-opacity-5"></div>
 
-            <p class="text-gray-500 text-sm">
+            <p class="text-gray-600 text-sm">
                 {{ adv.body }}
             </p>
         </Card>
     </NuxtLayout>
 </template>
+
+<style module lang="scss">
+.head {
+    width: 17ch;
+}
+</style>

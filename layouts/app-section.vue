@@ -5,7 +5,7 @@ withDefaults(defineProps<{ id?: string; push_next?: boolean }>(), {
 </script>
 
 <template>
-    <section :id="id" :class="[$attrs.class, 'app-section', push_next ? 'mb-9' : '']">
+    <section :id="id" :class="[$attrs.class, 'app-section', push_next ? 'mb-16' : '']">
         <slot name="head" />
 
         <div :class="$attrs.body_class">

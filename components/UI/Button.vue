@@ -20,3 +20,10 @@ withDefaults(
         <slot>{{ label }}</slot>
     </button>
 </template>
+
+<style scoped>
+button {
+    font-size: 13px;
+    padding: 1.2em 3em;
+}
+</style>

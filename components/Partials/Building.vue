@@ -9,31 +9,34 @@ const isMatch = useMediaQuery("(max-width: 397px)");
 </script>
 
 <template>
-    <div class="building-wrapper">
+    <div :class="$style.wrapper">
         <div :class="['building md:shadow-lg hover:shadow-none transition-all duration-300 md:rounded', $attrs.class]">
             <div class="relative img rounded-lg md:rounded-none md:rounded-t sm:h-44 md:h-48 w-full" :class="[isMatch ? 'h-52' : 'h-36']">
                 <app-img class="rounded-lg md:rounded-none md:rounded-t h-full w-full" :src="Building" alt="" />
                 <span class="absolute top-0 bottom-0 right-0 left-0 flex justify-between p-3">
-                    <span class="relative flex items-center justify-center h-8 w-8 bg-pink-600 rounded-full">
+                    <span class="relative flex items-center justify-center h-8 w-8 md:h-10 md:w-10 bg-pink-600 rounded-full">
                         <app-i name="heroicons-solid:phone" class="text-white absolute w-4 h-4" />
                     </span>
-                    <span>
-                        <app-i name="heroicons-outline:star" class="text-white" />
-                        <br />
-                        <app-i name="ic:round-stacked-bar-chart" class="text-white" />
+                    <span class="flex flex-col md:flex-row">
+                        <span class="md:relative md:flex md:items-center md:justify-center md:h-10 md:w-10 md:bg-white rounded-full">
+                            <app-i name="heroicons-outline:star" class="text-white md:absolute md:text-blue-600" />
+                        </span>
+                        <span class="md:relative md:flex md:items-center md:justify-center md:h-10 md:w-10 md:bg-white rounded-full md:ml-2">
+                            <app-i name="ic:round-stacked-bar-chart" class="text-white md:absolute md:text-blue-600" />
+                        </span>
                     </span>
                 </span>
             </div>
 
-            <div class="p-4 text-sm">
-                <div class="flex justify-between flex-wrap">
+            <div class="p-3 text-sm">
+                <div class="flex justify-between flex-wrap text-xs">
                     <h2 class="font-light uppercase text-gray-600">ТПУ «ДМИТРОВСКАЯ</h2>
-                    <p class="text-green-600 hidden md:inline">Строится</p>
+                    <p class="text-green-800 italic hidden md:inline">Строится</p>
                 </div>
 
-                <h1 class="font-semibold my-2">Жилой квартал «D1»</h1>
+                <h1 class="font-semibold my-2 text-xs sm:text-base">Жилой квартал «D1»</h1>
                 <!-- mobile -->
-                <p class="text-blue-600 md:hidden">от 10 335 млн ₽</p>
+                <p class="text-blue-800 font-medium text-sm md:hidden">от 10 335 млн ₽</p>
                 <!-- desktop -->
                 <p class="items-center justify-start hidden md:flex">
                     <app-i class="text-green-600 h-5 w-5 mr-2" name="heroicons-solid:location-marker" />
@@ -44,9 +47,21 @@ const isMatch = useMediaQuery("(max-width: 397px)");
                 <div class="my-3 hidden md:block"><hr /></div>
 
                 <div class="hidden md:block">
-                    <p class="flex items-center justify-between flex-wrap"><span class="text-gray-500">1-комн. от 27 м²</span> <span>10 233 450 ₽</span></p>
-                    <p class="flex items-center justify-between flex-wrap my-2"><span class="text-gray-500">2-комн. от 55 м²</span> <span>14 233 450 ₽</span></p>
-                    <p class="flex items-center justify-between flex-wrap"><span class="text-gray-500">3-комн. от 63 м²</span> <span>19 233 450 ₽</span></p>
+                    <p class="flex items-center justify-between flex-wrap">
+                        <span class="text-gray-500">1-комн. от 27 м²</span>
+                        <span class="flex-grow mx-1 border-b border-dashed self-stretch"></span>
+                        <span>10 233 450 ₽</span>
+                    </p>
+                    <p class="flex items-center justify-between flex-wrap my-2">
+                        <span class="text-gray-500">2-комн. от 55 м²</span>
+                        <span class="flex-grow mx-1 border-b border-dashed self-stretch"></span>
+                        <span>14 233 450 ₽</span>
+                    </p>
+                    <p class="flex items-center justify-between flex-wrap">
+                        <span class="text-gray-500">3-комн. от 63 м²</span>
+                        <span class="flex-grow mx-1 border-b border-dashed self-stretch"></span>
+                        <span>19 233 450 ₽</span>
+                    </p>
                 </div>
             </div>
 
@@ -63,8 +78,8 @@ const isMatch = useMediaQuery("(max-width: 397px)");
     </div>
 </template>
 
-<style lang="scss">
-.building-wrapper {
+<style lang="scss" module>
+.wrapper {
     padding-left: 2px;
 
     // .img {
@@ -79,11 +94,15 @@ const isMatch = useMediaQuery("(max-width: 397px)");
             background-color: rgba(251, 191, 36, var(--tw-bg-opacity));
             color: white;
         }
+
+        .building {
+            box-shadow: none !important;
+        }
     }
 
     grid-column: span 12 / span 12;
 
-    @include break_point(397px) {
+    @include break_point(350px) {
         grid-column: span 6 / span 6;
     }
 

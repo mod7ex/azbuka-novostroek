@@ -7,11 +7,11 @@ import SVGGroup from "~/assets/svg/group.svg";
     <section :class="['mx-auto md:flex md:items-end md:justify-between md:w-11/12']">
         <div class="mb-4">
             <div class="mb-6 text-center md:text-left">
-                <h1 class="text-4xl font-black mb-2">
+                <h1 class="text-3xl md:text-4xl font-black mb-2">
                     <p>База новостроек</p>
                     <p class="hidden md:block whitespace-nowrap">от застройщиков</p>
                 </h1>
-                <h4 class="text-xl font-light text-gray-600">Ростова-на-Дону и Ростовской области</h4>
+                <h4 class="text-xl font-normal text-gray-500">Ростова-на-Дону и Ростовской области</h4>
             </div>
             <Button label="Подробнее" class="mx-auto block md:inline" />
         </div>
@@ -27,10 +27,6 @@ import SVGGroup from "~/assets/svg/group.svg";
 
 <style lang="scss" scoped>
 .svg-container {
-    // @include bg-img("Group.png");
-    // background-size: 100%;
-    // background-position: center bottom;
-
     max-width: 20rem;
 
     img:last-of-type {
@@ -44,14 +40,9 @@ import SVGGroup from "~/assets/svg/group.svg";
         max-width: 30rem;
 
         img:last-of-type {
-            // top: -5rem;
-            // left: 0;
-            // height: 200%;
-            // width: 90%;
-
-            top: 5rem;
+            top: 3.5rem;
             left: 0;
-            height: 100%;
+            height: 120%;
             width: 90%;
         }
     }
