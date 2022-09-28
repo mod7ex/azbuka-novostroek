@@ -8,12 +8,12 @@ onMounted(() => {
 </script>
 
 <template>
-    <section :class="['mx-auto mb-16 text-sm', $attrs.class]">
-        <div class="border-2 md:border-0 border-gray-200 rounded p-3 md:px-5 bg-white shadow-2xl mb-2">
-            <ul :class="['search-area flex items-center justify-center flex-wrap']">
+    <section :class="[$attrs.class]">
+        <div class="search-container border-2 md:border-0 flex items-center border-gray-200 rounded h-[50px] px-[18px] md:px-5 bg-white mb-9">
+            <ul :class="['search-area flex items-center justify-center flex-wrap border border-black']">
                 <li :class="['search-input flex items-center flex-grow md:flex-grow-0']">
-                    <app-i name="heroicons-outline:search" class="text-green-600 md:text-gray-500 cursor-pointer" />
-                    <input ref="searchRef" type="text" placeholder="Название новостройки или застройщика" class="ml-3 w-full sm:flex-grow md:flex-grow-0 md:inline-block outline-none py-2" />
+                    <app-i name="heroicons-outline:search" class="text-[#1DA958] mr-4 w-[17px] h-[17px] md:text-gray-500 cursor-pointer" />
+                    <input ref="searchRef" type="text" placeholder="Название новостройки или застройщика" class="w-full sm:flex-grow md:flex-grow-0 md:inline-block outline-none py-2" />
                 </li>
 
                 <li class="search-options hidden md:block md:mt-4">
@@ -86,10 +86,20 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
+.seach-container {
+    box-shadow: $box-shadow;
+}
+
 .search-area {
     input::placeholder {
+        font-family: Raleway;
         font-size: 13px;
         font-style: italic;
+        font-weight: 300;
+        line-height: 15px;
+        letter-spacing: 0em;
+        text-align: left;
+        color: #4f4f4f;
     }
 
     @include break_point(1015px) {

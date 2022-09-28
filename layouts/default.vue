@@ -12,7 +12,7 @@ const [isCollaped, toggle] = useToggle();
     <div>
         <div class="show-case-container">
             <div class="show-case-overlay relative">
-                <app-width tag="header" class="py-1 md:py-3">
+                <app-width tag="header">
                     <client-only>
                         <the-default-header @toggle="() => toggle()" />
                     </client-only>
@@ -57,13 +57,11 @@ const [isCollaped, toggle] = useToggle();
                     </nav>
                 </Transition>
 
-                <app-width>
-                    <show-case />
-                </app-width>
+                <show-case />
             </div>
         </div>
 
-        <app-width class="md:-mt-20 -mt-7 z-50 relative">
+        <app-width class="md:-mt-20 search z-50 relative mb-[31px]">
             <Search />
         </app-width>
 
@@ -76,13 +74,17 @@ const [isCollaped, toggle] = useToggle();
 </template>
 
 <style lang="scss" scoped>
+.search {
+    margin-top: -25px;
+}
+
 .show-case-container {
     max-width: 1500px;
     margin: 0 auto;
 
     @include bg-img("background.jpg");
 
-    @media screen and (min-width: 761px) {
+    @include break_point(761px) {
         padding-bottom: 15rem;
     }
 

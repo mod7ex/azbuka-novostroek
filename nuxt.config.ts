@@ -44,6 +44,5 @@ export default defineNuxtConfig({
 
 /*
   @import "@/assets/scss/_functions.scss";
-  @import "@/assets/scss/_reset.scss";
   @import "@/assets/scss/_keyframes.scss";
 */

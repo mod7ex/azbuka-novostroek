@@ -1,9 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
+    mode: "jit",
+
     purge: {
-        enabled: process.env.NODE_ENV === "production",
-        // content: ["./App.vue", "components/**/*.vue", "layouts/**/*.vue", "pages/**/*.vue"],
+        // enabled: process.env.NODE_ENV === "production",
         content: ["./App.vue", "./{components,pages,layouts}/**/*.vue"],
 
         options: {

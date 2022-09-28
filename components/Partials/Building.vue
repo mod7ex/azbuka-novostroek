@@ -9,34 +9,37 @@ const isMatch = useMediaQuery("(max-width: 397px)");
 </script>
 
 <template>
-    <div :class="$style.wrapper">
+    <div :class="[$style.wrapper, 'border-2 border-black']">
         <div :class="['building md:shadow-lg hover:shadow-none transition-all duration-300 md:rounded', $attrs.class]">
-            <div class="relative img rounded-lg md:rounded-none md:rounded-t sm:h-44 md:h-48 w-full" :class="[isMatch ? 'h-52' : 'h-36']">
-                <app-img class="rounded-lg md:rounded-none md:rounded-t h-full w-full" :src="Building" alt="" />
-                <span class="absolute top-0 bottom-0 right-0 left-0 flex justify-between p-3">
-                    <span class="relative flex items-center justify-center h-8 w-8 md:h-10 md:w-10 bg-pink-600 rounded-full">
-                        <app-i name="heroicons-solid:phone" class="text-white absolute w-4 h-4" />
+            <div class="relative img rounded-[5px] md:rounded-none md:rounded-t h-[120px] sm:h-44 md:h-48 w-full mb-3">
+                <app-img class="rounded-[5px] md:rounded-[5px] h-full w-full" :src="Building" alt="" />
+
+                <span class="absolute top-0 right-0 left-0 flex justify-between p-[9px] border border-green-500">
+                    <span class="relative flex items-center justify-center h-6 w-6 bg-pink-600 rounded-full">
+                        <app-i name="heroicons-solid:phone" class="text-white absolute w-3 h-3" />
                     </span>
-                    <span class="flex flex-col md:flex-row">
-                        <span class="md:relative md:flex md:items-center md:justify-center md:h-10 md:w-10 md:bg-white rounded-full">
-                            <app-i name="heroicons-outline:star" class="text-white md:absolute md:text-blue-600" />
+
+                    <span>
+                        <span class="mb-[10px] md:mb-0 relative flex items-center justify-center md:bg-white md:rounded-full">
+                            <app-i name="heroicons-outline:star" class="bg-blue-600 text-white md:absolute md:text-blue-600 w-4 h-4" />
                         </span>
-                        <span class="md:relative md:flex md:items-center md:justify-center md:h-10 md:w-10 md:bg-white rounded-full md:ml-2">
-                            <app-i name="ic:round-stacked-bar-chart" class="text-white md:absolute md:text-blue-600" />
+                        <span class="relative flex items-center justify-center md:bg-white md:rounded-full md:ml-2">
+                            <app-i name="ic:round-stacked-bar-chart" class="bg-blue-600 text-white md:absolute md:text-blue-600 w-4 h-4" />
                         </span>
                     </span>
                 </span>
             </div>
 
-            <div class="p-3 text-sm">
-                <div class="flex justify-between flex-wrap text-xs">
-                    <h2 class="font-light uppercase text-gray-600">ТПУ «ДМИТРОВСКАЯ</h2>
+            <div class="px-[10px] text-sm">
+                <div class="flex justify-between flex-wrap mb-[5px]">
+                    <h2 class="font-normal uppercase leading-[11.74px] font-[Raleway] text-[10px] text-[#828282]">ТПУ «ДМИТРОВСКАЯ</h2>
                     <p class="text-green-800 italic hidden md:inline">Строится</p>
                 </div>
 
-                <h1 class="font-semibold my-2 text-xs sm:text-base">Жилой квартал «D1»</h1>
+                <h1 class="font-semibold text-[13px] text-[#131313] leading-[17px] font-[Inter]">Жилой квартал «D1»</h1>
+
                 <!-- mobile -->
-                <p class="text-blue-800 font-medium text-sm md:hidden">от 10 335 млн ₽</p>
+                <p class="mt-[7px] text-[#3478F6] font-medium text-[12px] leading-[14.52px] md:hidden">от 10 335 млн ₽</p>
                 <!-- desktop -->
                 <p class="items-center justify-start hidden md:flex">
                     <app-i class="text-green-600 h-5 w-5 mr-2" name="heroicons-solid:location-marker" />
@@ -80,11 +83,7 @@ const isMatch = useMediaQuery("(max-width: 397px)");
 
 <style lang="scss" module>
 .wrapper {
-    padding-left: 2px;
-
-    // .img {
-    //   @include bg-img("building.png");
-    // }
+    margin-bottom: 26px;
 
     @include border-anm;
 
@@ -107,6 +106,7 @@ const isMatch = useMediaQuery("(max-width: 397px)");
     }
 
     @include break_point(637px) {
+        padding-left: 2px;
         grid-column: span 4 / span 4;
     }
 
