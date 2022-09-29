@@ -1,6 +1,7 @@
 <script setup lang="ts">
 withDefaults(
     defineProps<{
+        id?: string;
         tag?: string;
         padding?: boolean;
     }>(),
@@ -12,7 +13,9 @@ withDefaults(
 </script>
 
 <template>
-    <component :class="['max-w-6xl w-full mx-auto', $attrs.class, padding ? 'px-5 md:px-3' : '']" :is="tag">
-        <slot />
+    <component :id="id" :is="tag" :class="$attrs.class">
+        <div :class="['max-w-6xl w-full mx-auto', padding ? 'px-5 md:px-3' : '']">
+            <slot />
+        </div>
     </component>
 </template>

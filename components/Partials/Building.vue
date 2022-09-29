@@ -9,22 +9,22 @@ const isMatch = useMediaQuery("(max-width: 397px)");
 </script>
 
 <template>
-    <div :class="[$style.wrapper, 'border-2 border-black']">
+    <div :class="[$style.wrapper]">
         <div :class="['building md:shadow-lg hover:shadow-none transition-all duration-300 md:rounded', $attrs.class]">
             <div class="relative img rounded-[5px] md:rounded-none md:rounded-t h-[120px] sm:h-44 md:h-48 w-full mb-3">
                 <app-img class="rounded-[5px] md:rounded-[5px] h-full w-full" :src="Building" alt="" />
 
-                <span class="absolute top-0 right-0 left-0 flex justify-between p-[9px] border border-green-500">
+                <span class="absolute top-0 right-0 left-0 flex justify-between p-[9px]">
                     <span class="relative flex items-center justify-center h-6 w-6 bg-pink-600 rounded-full">
                         <app-i name="heroicons-solid:phone" class="text-white absolute w-3 h-3" />
                     </span>
 
                     <span>
                         <span class="mb-[10px] md:mb-0 relative flex items-center justify-center md:bg-white md:rounded-full">
-                            <app-i name="heroicons-outline:star" class="bg-blue-600 text-white md:absolute md:text-blue-600 w-4 h-4" />
+                            <app-i name="heroicons-outline:star" class="text-white md:absolute md:text-blue-600 w-4 h-4" />
                         </span>
                         <span class="relative flex items-center justify-center md:bg-white md:rounded-full md:ml-2">
-                            <app-i name="ic:round-stacked-bar-chart" class="bg-blue-600 text-white md:absolute md:text-blue-600 w-4 h-4" />
+                            <app-i name="ic:round-stacked-bar-chart" class="text-white md:absolute md:text-blue-600 w-4 h-4" />
                         </span>
                     </span>
                 </span>

@@ -4,8 +4,8 @@ import Couple from "~/assets/svg/couple.svg";
 </script>
 
 <template>
-    <NuxtLayout name="app-section" class="locations-section border-2 border-black rounded-[5px] md:p-0 lg:w-10/12 md:mx-auto" body_class="md:flex md:flex-row-reverse md:items-stretch md:justify-center">
-        <div class="questions-score md:w-1/2 md:px-16 md:p-9 border-2 border-yellow-300 px-[23px] pt-[26px]">
+    <NuxtLayout name="app-section" class="locations-section overflow-hidden rounded-[5px] md:p-0 lg:w-10/12 md:mx-auto mb-[42px]" body_class="md:flex md:flex-row-reverse md:items-stretch md:justify-center">
+        <div class="questions-score md:w-1/2 md:px-16 md:p-9 px-[23px] pt-[26px]">
             <div>
                 <h1 class="text-left text-[26px] leading-9 font-bold text-[#131313] font-[Raleway] mb-5">Где присматриваете квартиру?</h1>
 
@@ -41,7 +41,7 @@ import Couple from "~/assets/svg/couple.svg";
                 </div>
             </div>
 
-            <div class="mb-16 md:mb-0 flex justify-between items-center">
+            <div class="md:mb-0 flex justify-between items-center">
                 <Button label="Далее" class="px-9 bg-[#FCBD00]" />
 
                 <span class="hidden md:flex items-end">
@@ -52,7 +52,7 @@ import Couple from "~/assets/svg/couple.svg";
             </div>
         </div>
 
-        <div class="images overflow-hidden flex items-end justify-start md:w-1/2 md:p-9 pb-[15px]">
+        <div class="images flex items-end justify-start md:w-1/2 md:p-9 pb-[15px]">
             <!-- <app-img :src="Couple" /> -->
             <!-- <app-img :src="Buildings" /> -->
         </div>
@@ -69,6 +69,9 @@ import Couple from "~/assets/svg/couple.svg";
     box-shadow: $box-shadow;
 
     .images {
+        overflow: hidden;
+        z-index: 1;
+
         &::before {
             content: " ";
             width: 74.5px;
@@ -77,8 +80,8 @@ import Couple from "~/assets/svg/couple.svg";
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
-            position: absolute;
             margin-left: 15px;
+            // border: 2px solid green;
         }
 
         &::after {
@@ -89,78 +92,9 @@ import Couple from "~/assets/svg/couple.svg";
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
-            position: absolute;
-        }
-
-        // img {
-        //     // position: absolute;
-
-        //     &:first-of-type {
-        //     }
-
-        //     &:last-of-type {
-        //         position: relative;
-
-        //         margin-right: -200px;
-        //     }
-        // }
-    }
-
-    // stopped here
-
-    // @include break_point(400px) {
-    //     background-size: 90% 62%;
-    // }
-
-    // @include break_point(768px) {
-    //     background-image: none;
-
-    //     .images {
-    //         background-image: url("~/assets/svg/cloud.svg");
-    //         // background-image: url("~/assets/img/Group.png");
-    //         background-repeat: no-repeat;
-
-    //         background-position: left bottom;
-    //         background-size: 100% 100%;
-
-    //         position: relative;
-
-    //         img {
-    //             position: absolute;
-
-    //             &:first-of-type {
-    //                 width: 74.5px;
-    //                 height: 131px;
-    //             }
-
-    //             &:last-of-type {
-    //                 height: 173px;
-    //                 width: 241px;
-    //             }
-    //         }
-    //     }
-    // }
-}
-
-span.steps {
-    padding: 2px 0;
-}
-
-.images {
-    img {
-        &:first-of-type {
-            width: 25%;
-        }
-
-        &:last-of-type {
-            width: 75%;
-        }
-    }
-
-    @include break_point(400px) {
-        justify-content: center;
-        img {
-            transform: none;
+            margin-top: 55px;
+            margin-right: -200px !important;
+            // border: 2px solid green;
         }
     }
 }

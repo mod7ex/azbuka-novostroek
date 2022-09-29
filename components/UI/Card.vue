@@ -5,7 +5,7 @@ withDefaults(defineProps<{ shadow?: boolean }>(), {
 </script>
 
 <template>
-    <div :class="['rounded p-3', shadow ? 'shadow-lg' : '', $attrs.class]">
+    <div :class="['card']">
         <slot name="header"></slot>
 
         <slot></slot>

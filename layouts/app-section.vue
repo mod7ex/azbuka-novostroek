@@ -3,7 +3,7 @@ defineProps<{ id?: string }>();
 </script>
 
 <template>
-    <section :id="id" :class="[$attrs.class, 'app-section']">
+    <app-width tag="section" :id="id" :class="[$attrs.class, 'app-section']">
         <slot name="head" />
 
         <div :class="$attrs.body_class">
@@ -11,5 +11,5 @@ defineProps<{ id?: string }>();
         </div>
 
         <slot name="foot" />
-    </section>
+    </app-width>
 </template>

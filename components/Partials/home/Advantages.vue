@@ -7,22 +7,22 @@ import SVGDecision from "~/assets/svg/adv-decision.svg";
 const advantages = [
     {
         icon: SVGDocs,
-        title: "Тщательная работа<br /> с документами",
+        title: "Тщательная работа с документами",
         body: "Стоит заметить, что в таких агентствах документ составляются не только по всем требованиям законодательства, но самое главное – честно.",
     },
     {
         icon: SVGTime,
-        title: "Экономия<br />времени",
+        title: "Экономия времени",
         body: "Стоит заметить, что в таких агентствах документ составляются не только по всем требованиям законодательства, но самое главное – честно.",
     },
     {
         icon: SVGDecision,
-        title: "Грамотное<br />решение",
+        title: "Грамотное решение",
         body: "Стоит заметить, что в таких агентствах документ составляются не только по всем требованиям законодательства, но самое главное – честно.",
     },
     {
         icon: SVGChoice,
-        title: "Большой<br />выбор",
+        title: "Большой выбор",
         body: "Стоит заметить, что в таких агентствах документ составляются не только по всем требованиям законодательства, но самое главное – честно.",
     },
 ];
@@ -31,20 +31,20 @@ const advantages = [
 <template>
     <NuxtLayout name="app-section" class="advantages-section" body_class="md:flex md:justify-center md:items-stretch">
         <template #head>
-            <h1 class="text-left text-2xl font-bold mb-3">Наши преимущества</h1>
+            <h1 class="text-left text-[26px] leading-9 font-bold text-[#131313] font-[Raleway]">Наши преимущества</h1>
         </template>
 
-        <Card v-for="(adv, i) in advantages" :key="i" class="p-6 md:w-3/12 md:shadow-none md:m-2 md:pl-0 md:pr-12">
+        <Card v-for="(adv, i) in advantages" :key="i" :class="['p-[23px] rounded-[5px] mb-[10px]', $style.card]">
             <template #header>
                 <div class="flex items-center justify-start md:block">
-                    <app-img :src="adv.icon" class="svg mr-6 h-14 w-12" />
-                    <h1 :class="['text-sm font-bold md:mt-6', $style.head]" v-html="adv.title"></h1>
+                    <app-img :src="adv.icon" class="svg mr-[22px] h-[50px] w-[52px]" />
+                    <h1 :class="['text-[13px] font-extrabold leading-5 font-[Raleway]', $style.head]" v-html="adv.title"></h1>
                 </div>
             </template>
 
-            <div class="border border-dashed md:border-none my-4 md:my-3 border-blue-700 border-opacity-5"></div>
+            <div class="border border-dashed md:border-none my-3 border-[#3478F6] border-opacity-5"></div>
 
-            <p class="text-gray-600 text-sm">
+            <p class="text-[13px] leading-6 font-normal text-[#828282]">
                 {{ adv.body }}
             </p>
         </Card>
@@ -53,6 +53,10 @@ const advantages = [
 
 <style module lang="scss">
 .head {
-    width: 17ch;
+    width: 18ch;
+}
+
+.card {
+    box-shadow: $box-shadow;
 }
 </style>

@@ -65,9 +65,9 @@ const [isCollaped, toggle] = useToggle();
             <Search />
         </app-width>
 
-        <app-width tag="main">
+        <main>
             <slot />
-        </app-width>
+        </main>
 
         <the-default-footer />
     </div>
