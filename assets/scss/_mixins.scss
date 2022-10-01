@@ -6,6 +6,16 @@
     }
 }
 
+@mixin flex($flex-wrap: wrap, $flex-direction: row, $align-items: center, $justify-content: center, $gap: 0) {
+    display: flex;
+    flex-wrap: $flex-wrap;
+    flex-direction: $flex-direction;
+    align-items: $align-items;
+    justify-content: $justify-content;
+    gap: $gap;
+    @content;
+}
+
 @mixin bg-img($name) {
     background-image: url("~/assets/img/#{$name}");
     background-repeat: no-repeat;

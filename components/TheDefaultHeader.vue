@@ -1,57 +1,57 @@
 <script setup lang="ts">
 import Logo from "~/assets/svg/logo.svg";
 
-const isMatch = useMediaQuery("(min-width: 983px)");
+const isMatch = useMediaQuery("(min-width: 1247px)");
 
 defineEmits(["toggle"]);
 </script>
 
 <template>
     <!-- Desktop header -->
-    <div class="flex items-center mb-6" v-if="isMatch">
-        <NuxtLink :to="{ name: 'index' }" class="uppercase text-sm font-bold">
+    <div class="flex items-center pt-4 mb-[42px]" v-if="isMatch">
+        <NuxtLink :to="{ name: 'index' }">
             <app-img :src="Logo" alt="" width="123" height="60" />
         </NuxtLink>
 
-        <ul class="ml-9 flex items-center">
+        <ul class="ml-[71px] flex items-center">
             <li>
-                <button class="flex items-center justify-center w-10 h-10 relative border border-[#1da95814] bg-white rounded-full p-1 star cursor-pointer">
+                <button class="flex items-center justify-center w-10 h-10 relative border-[1.6px] border-[#1da95814] bg-[#FAFCFE] rounded-full star cursor-pointer">
                     <app-i class="absolute text-blue-500 md:w-4 md:h-4 w-3 h-3" name="heroicons-outline:star" />
                 </button>
             </li>
 
-            <li>
-                <button class="flex items-center justify-center w-10 h-10 relative border border-[#1da95814] bg-white rounded-full p-1 mx-2 chart cursor-pointer">
+            <li class="px-[9px]">
+                <button class="flex items-center justify-center w-10 h-10 relative border-[1.6px] border-[#1da95814] bg-[#FAFCFE] rounded-full chart cursor-pointer">
                     <app-i class="absolute text-blue-500 md:w-4 md:h-4 w-3 h-3" name="ri:bar-chart-line" />
                 </button>
             </li>
 
             <li>
-                <button class="flex items-center h-10 px-3 relative border border-[#1da95814] bg-white rounded-full p-1 location cursor-pointer">
+                <button class="flex items-center h-10 px-3 relative border-[1.6px] border-[#1da95814] bg-[#FAFCFE] rounded-full location cursor-pointer">
                     <app-i class="text-blue-500 md:w-4 md:h-4 w-3 h-3 mr-2" name="heroicons-outline:location-marker" />
-                    <span class="text-sm">Ростов-на-Дону</span>
+                    <span class="text-sm leading-5 font-normal font-[Inter] text-[#131313]">Ростов-на-Дону</span>
                 </button>
             </li>
         </ul>
 
         <ul class="ml-auto flex items-center">
-            <li class="mx-2">
-                <NuxtLink :to="{ name: 'index' }" class="uppercase text-sm font-bold">Жилые комплексы</NuxtLink>
+            <li class="mx-[30px]">
+                <NuxtLink :to="{ name: 'index' }" class="uppercase text-sm font-extrabold leading-4 font-[Raleway]">Жилые комплексы</NuxtLink>
             </li>
-            <li class="mx-2">
-                <NuxtLink :to="{ name: 'index' }" class="uppercase text-sm font-bold">Квартиры</NuxtLink>
+            <li class="mx-[30px]">
+                <NuxtLink :to="{ name: 'index' }" class="uppercase text-sm font-extrabold leading-4 font-[Raleway]">Квартиры</NuxtLink>
             </li>
-            <li class="mx-2">
-                <NuxtLink :to="{ name: 'index' }" class="uppercase text-sm font-bold">о нас</NuxtLink>
+            <li class="mx-[30px]">
+                <NuxtLink :to="{ name: 'index' }" class="uppercase text-sm font-extrabold leading-4 font-[Raleway]">о нас</NuxtLink>
             </li>
-            <li class="mx-2">
-                <NuxtLink :to="{ name: 'index' }" class="uppercase text-sm font-bold">Контакты</NuxtLink>
+            <li class="mx-[30px]">
+                <NuxtLink :to="{ name: 'index' }" class="uppercase text-sm font-extrabold leading-4 font-[Raleway]">Контакты</NuxtLink>
             </li>
         </ul>
 
-        <span class="ml-9 flex items-center justify-center w-10 h-10 relative border border-[#1da95814] bg-white rounded-full p-1 cursor-pointer">
+        <button class="ml-[41px] flex items-center justify-center w-10 h-10 relative border-[1.6px] border-[#1da95814] bg-[#FAFCFE] rounded-full cursor-pointer">
             <app-i class="absolute text-blue-500 md:w-4 md:h-4 w-3 h-3" name="heroicons-outline:phone-incoming" />
-        </span>
+        </button>
     </div>
 
     <!-- Mobile + Tablet header -->

@@ -1,43 +1,38 @@
 <script setup lang="ts">
 const [isCollaped, toggle] = useToggle(true);
-
-const searchRef = ref<HTMLInputElement>();
-onMounted(() => {
-    searchRef.value.setAttribute("size", searchRef.value.getAttribute("placeholder").length.toString());
-});
 </script>
 
 <template>
     <section :class="[$attrs.class]">
-        <div class="search-container border-2 md:border-0 flex items-center border-gray-200 rounded h-[50px] px-[18px] md:px-5 bg-white mb-9">
-            <ul :class="['search-area flex items-center justify-center flex-wrap']">
-                <li :class="['search-input flex items-center flex-grow md:flex-grow-0']">
-                    <app-i name="heroicons-outline:search" class="text-[#1DA958] mr-4 w-[17px] h-[17px] md:text-gray-500 cursor-pointer" />
-                    <input ref="searchRef" type="text" placeholder="Название новостройки или застройщика" class="w-full sm:flex-grow md:flex-grow-0 md:inline-block outline-none py-2" />
+        <div class="search-container border md:border-none flex items-center border-[#3478f624] rounded h-[50px] px-[18px] md:px-5 bg-white mb-[6px]">
+            <ul :class="['search-area flex items-center justify-between w-full flex-wrap']">
+                <li :class="['search-input flex items-center flex-grow']">
+                    <app-i name="heroicons-outline:search" class="text-[#1DA958] mr-4 w-[17px] h-[17px] md:text-[#5F5F5F] cursor-pointer" />
+                    <input type="text" placeholder="Название новостройки или застройщика" class="w-full sm:flex-grow md:flex-grow-0 md:inline-block outline-none py-2" />
                 </li>
 
-                <li class="search-options hidden md:block md:mt-4">
-                    <ul class="flex divide-x divide-gray-300">
-                        <li class="px-4 flex items-center">
-                            <span class="font-bold cursor-pointer">Тип квартиры</span>
+                <li class="search-options py-2">
+                    <ul class="flex items-center divide-x divide-gray-300">
+                        <li class="px-[27px] flex items-center">
+                            <span class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Тип квартиры</span>
                         </li>
 
-                        <li class="px-4 flex items-center">
-                            <span class="font-bold cursor-pointer">Цена</span>
+                        <li class="px-[27px] flex items-center">
+                            <span class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Цена</span>
                         </li>
 
-                        <li class="px-4 flex items-center">
-                            <span class="font-bold cursor-pointer">Площадь</span>
+                        <li class="px-[27px] flex items-center">
+                            <span class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Площадь</span>
                         </li>
 
-                        <li class="px-4 flex items-center">
-                            <span class="font-bold cursor-pointer">Срок аренды</span>
+                        <li class="px-[27px] flex items-center">
+                            <span class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Срок аренды</span>
                         </li>
 
-                        <li class="pl-4 flex items-center">
-                            <button class="flex items-center text-green-700 cursor-pointer" @click="() => toggle()" role="expand" aria-label="expand filter">
+                        <li class="pl-[27px] flex items-center">
+                            <button class="flex items-center text-[#1DA958] cursor-pointer" @click="() => toggle()" role="expand" aria-label="expand filter">
                                 <app-i name="heroicons-outline:adjustments" class="mr-2 rotate-90 transform" />
-                                <p class="font-bold">Все фильтры</p>
+                                <p class="whitespace-nowrap font-bold text-[14px] leading-5">Все фильтры</p>
                             </button>
                         </li>
                     </ul>
@@ -46,38 +41,38 @@ onMounted(() => {
         </div>
 
         <Transition name="search-expand" :aria-expanded="isCollaped">
-            <ul class="grid gap-4 grid-cols-12 py-4 pb-8 rounded px-4 bg-white shadow-2xl overflow-hidden hg-6" v-if="!isCollaped">
+            <ul class="filter grid gap-4 grid-cols-12 py-4 pb-8 rounded-[5px] px-5 bg-white overflow-hidden hg-6" v-if="!isCollaped">
                 <li class="col-span-4">
-                    <h4 class="h-12 font-bold uppercase flex items-center">расположение</h4>
+                    <h4 class="text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">расположение</h4>
                     <div>
-                        <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Регион</p>
-                        <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Город</p>
-                        <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Адм. район</p>
-                        <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Народный район</p>
+                        <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Регион</p>
+                        <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Город</p>
+                        <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Адм. район</p>
+                        <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Народный район</p>
                     </div>
                 </li>
 
                 <li class="col-span-4">
-                    <h4 class="h-12 font-bold uppercase flex items-center">Дом</h4>
+                    <h4 class="text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">Дом</h4>
                     <div>
-                        <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Класс недвижимости</p>
-                        <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Материал стен</p>
-                        <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Этажей в доме</p>
-                        <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Паркинг</p>
-                        <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Лифт</p>
-                        <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Коммерция</p>
+                        <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Класс недвижимости</p>
+                        <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Материал стен</p>
+                        <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Этажей в доме</p>
+                        <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Паркинг</p>
+                        <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Лифт</p>
+                        <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Коммерция</p>
                     </div>
                 </li>
 
                 <li class="col-span-4">
-                    <h4 class="h-12 font-bold uppercase flex items-center">КВАРТИРА</h4>
+                    <h4 class="text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">КВАРТИРА</h4>
                     <div>
-                        <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Этаж</p>
-                        <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Отделка</p>
-                        <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Общая площадь</p>
-                        <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Плозадь жилья</p>
-                        <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Площадь кухни</p>
-                        <p class="px-3 h-12 flex items-center rounded bg-gray-100 mb-4 font-light text-gray-700">Санузел</p>
+                        <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Этаж</p>
+                        <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Отделка</p>
+                        <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Общая площадь</p>
+                        <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Плозадь жилья</p>
+                        <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Площадь кухни</p>
+                        <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Санузел</p>
                     </div>
                 </li>
             </ul>
@@ -86,8 +81,71 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-.seach-container {
+.filter {
+    box-shadow: $md-box-shadow;
+}
+
+.search-container {
     box-shadow: $box-shadow;
+
+    .search-area {
+        justify-content: center;
+    }
+
+    .search-options {
+        display: none;
+    }
+
+    @include break_point(828px) {
+        box-shadow: $md-box-shadow;
+        height: auto;
+
+        .search-input {
+            flex-grow: 0;
+            width: 37ch;
+        }
+
+        .search-options {
+            display: block;
+        }
+    }
+
+    @include break_point(1154px) {
+        padding-left: 32px;
+        padding-right: 32px;
+
+        padding-top: 12px;
+        padding-bottom: 12px;
+        .search-options,
+        .search-input {
+            padding: 0;
+        }
+
+        .search-area {
+            & > :not([hidden]) ~ :not([hidden]) {
+                --tw-divide-x-reverse: 0;
+                border-right-width: calc(1px * var(--tw-divide-x-reverse));
+                border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
+            }
+
+            flex-wrap: nowrap;
+            justify-content: space-between;
+
+            // .search-options {
+            //     padding: 24px 0;
+            // }
+
+            .search-input {
+                flex-grow: 1;
+            }
+        }
+    }
+}
+
+.search-input {
+    input {
+        // border: 2px solid black;
+    }
 }
 
 .search-area {
@@ -99,20 +157,10 @@ onMounted(() => {
         line-height: 15px;
         letter-spacing: 0em;
         text-align: left;
-        color: #4f4f4f;
-    }
+        color: #878787;
 
-    @include break_point(1015px) {
-        flex-wrap: nowrap;
-
-        .search-input {
-            flex-grow: 1;
-            input {
-                width: 100%;
-            }
-        }
-        .search-options {
-            margin-top: 0;
+        @include break_point(768px) {
+            font-size: 15px;
         }
     }
 }

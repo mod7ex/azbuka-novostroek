@@ -61,7 +61,7 @@ const [isCollaped, toggle] = useToggle();
             </div>
         </div>
 
-        <app-width class="md:-mt-20 search z-50 relative mb-[31px]">
+        <app-width class="search z-50 relative mb-[31px]">
             <Search />
         </app-width>
 
@@ -69,23 +69,27 @@ const [isCollaped, toggle] = useToggle();
             <slot />
         </main>
 
-        <the-default-footer />
+        <!-- <the-default-footer /> -->
     </div>
 </template>
 
 <style lang="scss" scoped>
 .search {
     margin-top: -25px;
+
+    @include break_point(768px) {
+        margin-top: -95px;
+    }
 }
 
 .show-case-container {
-    max-width: 1500px;
+    max-width: $app-width-max;
     margin: 0 auto;
 
     @include bg-img("background.jpg");
 
     @include break_point(761px) {
-        padding-bottom: 15rem;
+        padding-bottom: 311.5px;
     }
 
     .show-case-overlay {
