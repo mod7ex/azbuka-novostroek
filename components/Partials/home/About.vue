@@ -34,5 +34,9 @@ import Video from "~/assets/img/video.png";
     background-repeat: no-repeat;
     background-position: 100% 67%;
     background-size: 70% 75%;
+
+    @include break_point(965px) {
+        background-image: none;
+    }
 }
 </style>

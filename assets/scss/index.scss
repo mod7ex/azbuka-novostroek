@@ -4,3 +4,10 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+.app-shadow {
+    box-shadow: $box-shadow;
+    @include break_point(768px) {
+        box-shadow: $md-box-shadow;
+    }
+}
