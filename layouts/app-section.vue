@@ -6,7 +6,7 @@ defineProps<{ id?: string }>();
     <app-width tag="section" :id="id" :class="[$attrs.class, 'app-section']">
         <slot name="head" />
 
-        <div :class="$attrs.body_class">
+        <div :class="['body', $attrs.body_class]">
             <slot />
         </div>
 

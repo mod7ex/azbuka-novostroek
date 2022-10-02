@@ -69,7 +69,7 @@ const [isCollaped, toggle] = useToggle();
             <slot />
         </main>
 
-        <!-- <the-default-footer /> -->
+        <the-default-footer />
     </div>
 </template>
 

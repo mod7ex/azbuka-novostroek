@@ -13,17 +13,15 @@ withDefaults(
 </script>
 
 <template>
-    <div id="foo" :class="[$attrs.class, '']">
-        <!-- <component :id="id" :is="tag" :class="$attrs.class"> -->
-        <div :class="['max-w-[1441px] w-full mx-auto', padding ? 'px-5 md:px-[60px]' : '']">
+    <component :id="id" :is="tag" :class="[$attrs.class, 'some-random']">
+        <div :class="['body max-w-[1441px] w-full mx-auto', padding ? 'px-5 md:px-[60px]' : '']">
             <slot />
         </div>
-        <!-- </component> -->
-    </div>
+    </component>
 </template>
 
 <style lang="scss">
-#foo {
-    border: 4px solid black;
+.some-random {
+    // border: 4px solid black;
 }
 </style>
