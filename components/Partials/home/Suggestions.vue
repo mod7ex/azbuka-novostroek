@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Building from "~/components/Partials/Building.vue";
 
-const [isCollapsed, toggle] = useToggle(false);
+const [isCollapsed, toggle] = useToggle();
 </script>
 
 <template>

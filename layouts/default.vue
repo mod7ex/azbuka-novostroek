@@ -5,7 +5,7 @@ import ShowCase from "~/components/Partials/home/ShowCase.vue";
 import Search from "~/components/Partials/home/Search.vue";
 import Logo from "~/assets/svg/logo.svg";
 
-const [isCollaped, toggle] = useToggle(false);
+const [isCollaped, toggle] = useToggle();
 </script>
 
 <template>
