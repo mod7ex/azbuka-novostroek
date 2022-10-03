@@ -8,8 +8,8 @@ import Advantages from "~/components/Partials/home/Advantages.vue";
 <template>
     <div>
         <Suggestions />
-        <!-- <Locations /> -->
-        <!-- <About /> -->
-        <!-- <Advantages /> -->
+        <Locations />
+        <About />
+        <Advantages />
     </div>
 </template>

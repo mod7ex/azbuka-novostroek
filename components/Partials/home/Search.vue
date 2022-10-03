@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const [isCollaped, toggle] = useToggle(true);
+const [isCollaped, toggle] = useToggle();
 </script>
 
 <template>
@@ -142,12 +142,6 @@ const [isCollaped, toggle] = useToggle(true);
     }
 }
 
-.search-input {
-    input {
-        // border: 2px solid black;
-    }
-}
-
 .search-area {
     input::placeholder {
         font-family: Raleway;
@@ -161,6 +155,7 @@ const [isCollaped, toggle] = useToggle(true);
 
         @include break_point(768px) {
             font-size: 15px;
+            line-height: 17px;
         }
     }
 }

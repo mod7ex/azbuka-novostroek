@@ -64,7 +64,7 @@ const [isCollaped, toggle] = useToggle();
             </div>
         </div>
 
-        <app-width class="search z-50 relative mb-[31px]">
+        <app-width class="max-w-[1200px] search z-50 relative mb-[31px]">
             <Search />
         </app-width>
 
@@ -95,7 +95,6 @@ main {
 }
 
 .show-case-container {
-    max-width: $app-width-max;
     margin: 0 auto;
 
     @include bg-img("background.jpg");
@@ -115,6 +114,7 @@ nav.mobile-nav {
     background-size: 80% 75%;
 }
 
+/* Transition */
 .slide-fade-enter-active {
     transition: all 0.3s ease-out;
 }
