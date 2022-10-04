@@ -4,6 +4,9 @@ export default defineNuxtConfig({
     meta: {
         title: "Азбука Новостроек",
         titleTemplate: (title: string) => `Азбука - ${title}`,
+        meta: [
+            { name: "author", content: "Mourad EL CADI" }, // To be removed at Prod
+        ],
     },
 
     runtimeConfig: {

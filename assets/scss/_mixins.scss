@@ -81,6 +81,16 @@
     }
 }
 
+@mixin shadow($x: 0, $y: 0, $blur: 17px, $spread: 1px, $inset: false, $color: rgba(0, 0, 0, 0.3)) {
+    @if $inset {
+        box-shadow: $x $y $blur $spread inset $color;
+    } @else {
+        box-shadow: $x $y $blur $spread $color;
+    }
+
+    @content;
+}
+
 /*
 $break_points: (
     "xs": "0",

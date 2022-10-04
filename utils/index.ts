@@ -13,3 +13,12 @@ export const debounce = <T extends (...args: any[]) => any>(fn: T, duration: num
 };
 
 export const isFunction = (v: unknown): v is TFunc => typeof v === "function";
+
+export const uuidGen = (payload = "some-random-string") => {
+    let state = 0;
+
+    return () => {
+        state++;
+        return `uid-${state}-${payload}`;
+    };
+};
