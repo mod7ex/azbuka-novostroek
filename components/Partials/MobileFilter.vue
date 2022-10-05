@@ -15,6 +15,14 @@ const uuid = uuidGen("mobile-filter");
 const apartmentTypes = ["1 комн.", "2 комн.", "3 комн.", "4 комн.", "5 комн.", "6 комн.", "Студия"];
 
 const IDS = Array.from(Array(apartmentTypes.length).keys()).map(() => uuid());
+
+const selectedTypesIndexes = reactive({});
+
+const selectedTypesLables = computed(() => {
+    return Object.entries(selectedTypesIndexes)
+        .filter(([i, v]) => v)
+        .map(([i, v]) => apartmentTypes[Number(i)]);
+});
 </script>
 
 <template>
@@ -42,25 +50,32 @@ const IDS = Array.from(Array(apartmentTypes.length).keys()).map(() => uuid());
                 </div>
             </div>
 
-            <div class="mb-6 relative">
+            <div class="mb-6">
                 <p class="mb-[13px] text-[12px] leading-[14px] qnt-normal font-[Raleway] text-[#4F4F4F]">Выберите тип квартиры</p>
 
-                <button @click="() => toggleApartmentTypeRef()" class="bg-green-500 flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 border border-[#f8f8f8] rounded-[5px] w-full" :class="[apartmentTypeRef ? 'border-b-0 rounded-b-none' : '']">
+                <button @click="() => toggleApartmentTypeRef()" class="flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 border border-[#f8f8f8] rounded-[5px] w-full" :class="[`hg-${apartmentTypes.length}`, apartmentTypeRef ? 'border-b-0 rounded-b-none' : '']">
                     <p class="text-[16px] leading-[14px] font-medium text-[#4F4F4F]">Тип квартиры</p>
                     <app-i name="ic:baseline-keyboard-arrow-down" :class="['text-[#3478F6] h-5 w-5 transition-transform duration-300', apartmentTypeRef ? 'rotate-180' : '']" />
                 </button>
 
-                <Transition name="fade">
-                    <ul v-if="apartmentTypeRef" class="absolute overflow-hidden z-10 w-full bg-white pb-6 pt-[6px] px-3 border border-t-0 border-[#f8f8f8] rounded-b-[5px]">
+                <Transition name="shrink">
+                    <ul v-if="apartmentTypeRef" class="overflow-hidden pb-[10px] pt-[6px] px-3 border border-t-0 border-[#f8f8f8] rounded-b-[5px]">
                         <li v-for="(tp, i) in apartmentTypes" :key="i" class="flex items-center gap-x-3 mb-[14px]">
-                            <input :id="IDS[i]" type="checkbox" class="w-[18px] h-[18px] border border-[#0000001f] rounded-[2px]" />
+                            <input v-model="selectedTypesIndexes[i]" :id="IDS[i]" type="checkbox" class="w-[18px] h-[18px] border border-[#0000001f] rounded-[2px]" />
                             <label :for="IDS[i]" class="font-normal text-[13px] leading-[14px] font-[Inter] text-[#141414]">{{ tp }}</label>
                         </li>
                     </ul>
                 </Transition>
+
+                <ul class="flex items-center flex-wrap">
+                    <li v-for="v in selectedTypesLables" :key="v" class="bg-[#3478F6] mt-3 rounded mr-[5px] py-[3px] px-2">
+                        <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ v }}</span>
+                        <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
+                    </li>
+                </ul>
             </div>
 
-            <div class="mb-6 relative">
+            <div class="mb-6 relative" v-if="!apartmentTypeRef">
                 <p class="mb-[13px] text-[12px] leading-[14px] font-normal font-[Raleway] text-[#4F4F4F]">Задайте стоимость</p>
                 <button class="flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 border border-[#f8f8f8] rounded-[5px] w-full">
                     <ol class="text-[#4F4F4F] text-[14px] font-medium leading-4 font-[Inter] flex items-center justify-between w-full">
@@ -75,7 +90,7 @@ const IDS = Array.from(Array(apartmentTypes.length).keys()).map(() => uuid());
                 <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto" />
             </div>
 
-            <div class="mb-6 relative">
+            <div class="mb-6 relative" v-if="!apartmentTypeRef">
                 <p class="mb-[13px] text-[12px] leading-[14px] font-normal font-[Raleway] text-[#4F4F4F]">Задайте площадь</p>
                 <button class="flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 border border-[#f8f8f8] rounded-[5px] w-full">
                     <ol class="text-[#4F4F4F] text-[14px] font-medium leading-4 font-[Inter] flex items-center justify-between w-full">
@@ -120,5 +135,36 @@ const IDS = Array.from(Array(apartmentTypes.length).keys()).map(() => uuid());
 .mobile-filter-enter-from,
 .mobile-filter-leave-to {
     transform: translateX(375px);
+}
+
+/* ************************************* Shrink ************************************* */
+@mixin apartment_types_count($rows: 10) {
+    @for $i from 1 through $rows {
+        &.hg-#{$i} {
+            height: ($i * 14px) + (6px + 10px);
+        }
+    }
+}
+
+.shrink-enter-active {
+    transition: all 0.3s ease-out;
+}
+.shrink-leave-active {
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.shrink-enter-from,
+.shrink-leave-to {
+    opacity: 0;
+    height: 0;
+}
+
+.shrink-enter-to {
+    height: 241px;
+    @include apartment_types_count;
+}
+.shrink-leave-from {
+    height: 241px;
+    @include apartment_types_count;
 }
 </style>
