@@ -9,7 +9,7 @@ const [isCollaped, toggle] = useToggle();
 </script>
 
 <template>
-    <div>
+    <div class="z-0">
         <div class="show-case-container">
             <div class="show-case-overlay relative">
                 <app-width tag="header">
@@ -64,7 +64,7 @@ const [isCollaped, toggle] = useToggle();
             </div>
         </div>
 
-        <app-width class="max-w-[1200px] search z-50 relative mb-[31px]">
+        <app-width class="max-w-[1200px] search z-1 relative mb-[31px]">
             <Search />
         </app-width>
 

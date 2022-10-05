@@ -35,7 +35,7 @@ const advantages = [
         </template>
 
         <div :class="$style.advantages">
-            <Card v-for="(adv, i) in advantages" :key="i" :class="['p-[23px] md:p-0 rounded-[5px] mb-[10px]', $style.card]">
+            <Card v-for="(adv, i) in advantages" :key="i" :class="['p-[23px] md:p-0 rounded-[5px] mb-[10px] app-shadow', $style.card]">
                 <template #header>
                     <div class="flex items-center justify-start md:block md:mb-[17px]">
                         <app-img :src="adv.icon" class="svg mr-[22px] md:mb-[37px] h-[50px] w-[52px] md:h-[68px] md:w-[73px]" />
@@ -78,7 +78,6 @@ const advantages = [
 }
 
 .card {
-    box-shadow: $box-shadow;
     width: 100%;
     padding: 23px;
 

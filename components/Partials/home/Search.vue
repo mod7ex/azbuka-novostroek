@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import MobileFilter from "~/components/Partials/MobileFilter.vue";
+
 const [isCollaped, toggle] = useToggle();
+
+const [isVisible, toggleVisibility] = useToggle(false);
 </script>
 
 <template>
@@ -77,6 +81,19 @@ const [isCollaped, toggle] = useToggle();
                 </li>
             </ul>
         </Transition>
+
+        <!-- Filter Mobile -->
+
+        <button @click="() => toggleVisibility()" class="mb-10 flex justify-center font-[Raleway] items-center gap-x-[14px] py-[15px] border-2 border-[#f8f8f8] rounded-[5px] w-full">
+            <app-i name="carbon:settings-adjust" class="text-[#1DA958] h-5 w-5" />
+            <p class="text-[13px] leading-[13px] font-bold text-[#131313]">Показать фильтры</p>
+        </button>
+
+        <Teleport to="body">
+            <mobile-filter :open="isVisible" @close="toggleVisibility" />
+        </Teleport>
+
+        <!-- ****** -->
     </section>
 </template>
 
@@ -131,31 +148,9 @@ const [isCollaped, toggle] = useToggle();
             flex-wrap: nowrap;
             justify-content: space-between;
 
-            // .search-options {
-            //     padding: 24px 0;
-            // }
-
             .search-input {
                 flex-grow: 1;
             }
-        }
-    }
-}
-
-.search-area {
-    input::placeholder {
-        font-family: Raleway;
-        font-size: 13px;
-        font-style: italic;
-        font-weight: 300;
-        line-height: 15px;
-        letter-spacing: 0em;
-        text-align: left;
-        color: #878787;
-
-        @include break_point(768px) {
-            font-size: 15px;
-            line-height: 17px;
         }
     }
 }
