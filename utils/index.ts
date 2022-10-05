@@ -19,6 +19,6 @@ export const uuidGen = (payload = "some-random-string") => {
 
     return () => {
         state++;
-        return `uid-${state}-${payload}`;
+        return `uid-${Date.now()}-${state}-${payload}`;
     };
 };

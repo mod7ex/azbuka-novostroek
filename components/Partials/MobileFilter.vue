@@ -1,11 +1,20 @@
 <script setup lang="ts">
 import RangeInput from "~/components/UI/TowThumbsRangeInput.vue";
+import { uuidGen } from "~/utils";
 
 withDefaults(defineProps<{ open: boolean }>(), {
     open: false,
 });
 
 defineEmits(["close"]);
+
+const [apartmentTypeRef, toggleApartmentTypeRef] = useToggle(false);
+
+const uuid = uuidGen("mobile-filter");
+
+const apartmentTypes = ["1 комн.", "2 комн.", "3 комн.", "4 комн.", "5 комн.", "6 комн.", "Студия"];
+
+const IDS = Array.from(Array(apartmentTypes.length).keys()).map(() => uuid());
 </script>
 
 <template>
@@ -27,23 +36,33 @@ defineEmits(["close"]);
                     </button>
                 </header>
 
-                <div class="flex items-center justify-center gap-x-4 border-2 border-[#f8f8f8] rounded-[5px] py-4 px-3">
+                <div class="flex items-center justify-center gap-x-4 border border-[#f8f8f8] rounded-[5px] py-4 px-3">
                     <app-i name="heroicons-outline:search" class="text-[#1DA958] w-[17px] h-[17px] cursor-pointer" />
                     <input autofocus type="text" placeholder="Название новостройки или застройщика" class="flex-grow" />
                 </div>
             </div>
 
-            <div class="mb-6">
+            <div class="mb-6 relative">
                 <p class="mb-[13px] text-[12px] leading-[14px] qnt-normal font-[Raleway] text-[#4F4F4F]">Выберите тип квартиры</p>
-                <button class="flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 border-2 border-[#f8f8f8] rounded-[5px] w-full">
+
+                <button @click="() => toggleApartmentTypeRef()" class="bg-green-500 flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 border border-[#f8f8f8] rounded-[5px] w-full" :class="[apartmentTypeRef ? 'border-b-0 rounded-b-none' : '']">
                     <p class="text-[16px] leading-[14px] font-medium text-[#4F4F4F]">Тип квартиры</p>
-                    <app-i name="ic:baseline-keyboard-arrow-down" class="text-[#3478F6] h-5 w-5" />
+                    <app-i name="ic:baseline-keyboard-arrow-down" :class="['text-[#3478F6] h-5 w-5 transition-transform duration-300', apartmentTypeRef ? 'rotate-180' : '']" />
                 </button>
+
+                <Transition name="fade">
+                    <ul v-if="apartmentTypeRef" class="absolute overflow-hidden z-10 w-full bg-white pb-6 pt-[6px] px-3 border border-t-0 border-[#f8f8f8] rounded-b-[5px]">
+                        <li v-for="(tp, i) in apartmentTypes" :key="i" class="flex items-center gap-x-3 mb-[14px]">
+                            <input :id="IDS[i]" type="checkbox" class="w-[18px] h-[18px] border border-[#0000001f] rounded-[2px]" />
+                            <label :for="IDS[i]" class="font-normal text-[13px] leading-[14px] font-[Inter] text-[#141414]">{{ tp }}</label>
+                        </li>
+                    </ul>
+                </Transition>
             </div>
 
             <div class="mb-6 relative">
                 <p class="mb-[13px] text-[12px] leading-[14px] font-normal font-[Raleway] text-[#4F4F4F]">Задайте стоимость</p>
-                <button class="flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 border-2 border-[#f8f8f8] rounded-[5px] w-full">
+                <button class="flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 border border-[#f8f8f8] rounded-[5px] w-full">
                     <ol class="text-[#4F4F4F] text-[14px] font-medium leading-4 font-[Inter] flex items-center justify-between w-full">
                         <li>
                             <p>от <span class="text-[#3478F6]">3.9 млн ₽</span></p>
@@ -58,7 +77,7 @@ defineEmits(["close"]);
 
             <div class="mb-6 relative">
                 <p class="mb-[13px] text-[12px] leading-[14px] font-normal font-[Raleway] text-[#4F4F4F]">Задайте площадь</p>
-                <button class="flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 border-2 border-[#f8f8f8] rounded-[5px] w-full">
+                <button class="flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 border border-[#f8f8f8] rounded-[5px] w-full">
                     <ol class="text-[#4F4F4F] text-[14px] font-medium leading-4 font-[Inter] flex items-center justify-between w-full">
                         <li>
                             <p>от <span class="text-[#3478F6]">58 м²</span></p>
@@ -73,7 +92,7 @@ defineEmits(["close"]);
 
             <div class="mb-6">
                 <p class="mb-[13px] text-[12px] leading-[14px] font-normal font-[Raleway] text-[#4F4F4F]">Выберите срок аренды</p>
-                <button class="flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 border-2 border-[#f8f8f8] rounded-[5px] w-full">
+                <button class="flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 border border-[#f8f8f8] rounded-[5px] w-full">
                     <p class="text-[16px] leading-[14px] font-medium text-[#4F4F4F]">12 месяцев</p>
                     <app-i name="ic:baseline-keyboard-arrow-down" class="text-[#3478F6] h-5 w-5" />
                 </button>

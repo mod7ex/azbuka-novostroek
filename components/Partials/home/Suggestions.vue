@@ -18,7 +18,7 @@ const [isCollapsed, toggle] = useToggle();
                         </span>
                     </button>
 
-                    <Transition name="filter">
+                    <Transition name="fade">
                         <div v-if="!isCollapsed" class="absolute shadow p-4 md:p-[17px] bg-red-600 left-0 right-0 rounded-b-[5px]">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, architecto nemo, corrupti eveniet fugiat officia dignissimos eaque id minima ab eum exercitationem quo. Quisquam at architecto, fuga ullam ipsa omnis.
                         </div>
@@ -45,16 +45,6 @@ const [isCollapsed, toggle] = useToggle();
     .filter-btn {
         @include break_point(640px) {
             max-width: 262px;
-        }
-
-        .filter-enter-active,
-        .filter-leave-active {
-            transition: opacity 0.5s ease;
-        }
-
-        .filter-enter-from,
-        .filter-leave-to {
-            opacity: 0;
         }
     }
 }
