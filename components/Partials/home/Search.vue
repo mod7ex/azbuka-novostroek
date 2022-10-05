@@ -84,7 +84,7 @@ const [isVisible, toggleVisibility] = useToggle(false);
 
         <!-- Filter Mobile -->
 
-        <button @click="() => toggleVisibility()" class="mb-10 flex justify-center font-[Raleway] items-center gap-x-[14px] py-[15px] border-2 border-[#f8f8f8] rounded-[5px] w-full">
+        <button @click="() => toggleVisibility()" class="md:hidden mb-10 flex justify-center font-[Raleway] items-center gap-x-[14px] py-[15px] border-2 border-[#f8f8f8] rounded-[5px] w-full">
             <app-i name="carbon:settings-adjust" class="text-[#1DA958] h-5 w-5" />
             <p class="text-[13px] leading-[13px] font-bold text-[#131313]">Показать фильтры</p>
         </button>
