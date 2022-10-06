@@ -18,10 +18,14 @@ const IDS = Array.from(Array(apartmentTypes.length).keys()).map(() => uuid());
 
 const selectedTypesIndexes = reactive({});
 
+const unpick = (v: number) => {
+    delete selectedTypesIndexes[v];
+};
+
 const selectedTypesLables = computed(() => {
     return Object.entries(selectedTypesIndexes)
         .filter(([i, v]) => v)
-        .map(([i, v]) => apartmentTypes[Number(i)]);
+        .map(([i, v]) => Number(i));
 });
 </script>
 
@@ -68,9 +72,11 @@ const selectedTypesLables = computed(() => {
                 </Transition>
 
                 <ul class="flex items-center flex-wrap">
-                    <li v-for="v in selectedTypesLables" :key="v" class="bg-[#3478F6] mt-3 rounded mr-[5px] py-[3px] px-2">
-                        <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ v }}</span>
-                        <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
+                    <li v-for="v in selectedTypesLables" :key="v" class="bg-[#3478F6] mt-3 rounded-md mr-[5px] py-[3px] px-2">
+                        <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ apartmentTypes[v] }}</span>
+                        <button @click="() => unpick(v)">
+                            <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -166,5 +172,18 @@ const selectedTypesLables = computed(() => {
 .shrink-leave-from {
     height: 241px;
     @include apartment_types_count;
+}
+
+// ********************
+
+input[type="checkbox"]:checked {
+    position: relative;
+
+    &::after {
+        content: " ";
+        @include abs-expand;
+        border-radius: 2px;
+        background-color: #3478f6;
+    }
 }
 </style>
