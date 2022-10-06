@@ -1,7 +1,7 @@
 {
     "private": true,
     "scripts": {
-        "build": "rm -Rf .output && nuxt build",
+        "build": "rm -Rf .output && rm -Rf .nuxt/dist && nuxt build",
         "dev": "TAILWIND_MODE=watch nuxt dev",
         "generate": "nuxt generate",
         "preview": "nuxt preview",
