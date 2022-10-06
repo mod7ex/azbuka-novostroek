@@ -3,7 +3,7 @@ import MobileFilter from "~/components/Partials/MobileFilter.vue";
 
 const [isCollaped, toggle] = useToggle();
 
-const [isVisible, toggleVisibility] = useToggle(true);
+const [isVisible, toggleVisibility] = useToggle(false);
 </script>
 
 <template>
