@@ -119,7 +119,7 @@ const selectedTypesLables = computed(() => {
                 </button>
             </div>
 
-            <button @click="() => $emit('close')" class="mx-auto flex items-center justify-center gap-x-[14px] mb-6">
+            <button class="mx-auto flex items-center justify-center gap-x-[14px] mb-6">
                 <app-i class="w-5 h-5 text-[#1DA958]" name="material-symbols:close" />
                 <p class="text-[13px] leading-[13px] font-bold font-[Inter] text-[#131313]">Сбросить фильтры</p>
             </button>
