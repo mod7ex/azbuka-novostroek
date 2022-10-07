@@ -13,7 +13,7 @@
 
 ---
 
-# Deployment
+# Deployment (Nginx)
 
 -   update the files `/etc/nginx/sites-available/your_domain_name /etc/nginx/sites-enabled/your_domain_name` with the following content
 
@@ -71,3 +71,26 @@ server {
 -   reload the server `sudo nginx -s reload`
 
 ---
+
+# now the app should run in background otherwise it shows `502 Bad Gateway` once we disconnect the ssh connection we do this using https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/ (node apps production manager)
+
+> install
+
+```
+npm install pm2@latest -g
+```
+
+> start the app in background
+
+```
+pm2 start node .output/server/index.mjs
+```
+
+> few commands
+
+```
+$ pm2 restart app_name
+$ pm2 reload app_name
+$ pm2 stop app_name
+$ pm2 delete app_name
+```
