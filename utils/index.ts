@@ -22,3 +22,7 @@ export const uuidGen = (payload = "some-random-string") => {
         return `uid-${Date.now()}-${state}-${payload}`;
     };
 };
+
+export const queuedLast = (fn: TFunc, timeout: number = 0) => {
+    setTimeout(fn, timeout);
+};

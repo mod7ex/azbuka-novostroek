@@ -19,9 +19,11 @@ const [isCollapsed, toggle] = useToggle();
                     </button>
 
                     <Transition name="fade">
-                        <div v-if="!isCollapsed" class="absolute shadow p-4 md:p-[17px] bg-red-600 left-0 right-0 rounded-b-[5px]">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, architecto nemo, corrupti eveniet fugiat officia dignissimos eaque id minima ab eum exercitationem quo. Quisquam at architecto, fuga ullam ipsa omnis.
-                        </div>
+                        <Blurable v-if="!isCollapsed" @blured="() => toggle(true)" class="absolute shadow bg-white left-0 right-0 rounded-b-[5px] text-[#131313] text-[13px] md:text-[14px] font-[Raleway] font-extralight md:font-light leading-4">
+                            <button class="block w-full text-left p-4 md:px-[17px] hover:bg-gray-100">по возрастанию цены</button>
+                            <button class="block w-full text-left p-4 md:px-[17px] hover:bg-gray-100">по убыванию цены</button>
+                            <button class="block w-full text-left p-4 md:px-[17px] hover:bg-gray-100">ближайшему сроку сдачи</button>
+                        </Blurable>
                     </Transition>
                 </div>
             </div>

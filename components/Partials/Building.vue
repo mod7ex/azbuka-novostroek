@@ -9,8 +9,8 @@ const isMatch = useMediaQuery("(max-width: 397px)");
 </script>
 
 <template>
-    <div :class="[$style.wrapper]">
-        <div :class="['building md:shadow-lg hover:shadow-none transition-all duration-300 md:rounded-[3px]', $attrs.class]">
+    <div :class="['wrapper', $attrs.class]">
+        <div :class="['building md:shadow-lg hover:shadow-none transition-all duration-300 md:rounded-[3px]']">
             <div class="relative img rounded-[5px] md:rounded-none md:rounded-t h-[120px] sm:h-44 md:h-[200px] w-full mb-3 md:mb-[18px]">
                 <app-img class="rounded-[5px] md:rounded-[5px] h-full w-full" :src="Building" alt="" />
 
@@ -77,10 +77,7 @@ const isMatch = useMediaQuery("(max-width: 397px)");
                     <span class="text-[14PX] font-normal leading-4">от 64 335 ₽/мес</span>
                 </p>
 
-                <button
-                    @click="() => foo()"
-                    :class="['py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[13px] font-bold cursor-pointer bg-transparent border-[#FCBD00] hover:bg-[#FCBD00] text-[#131313] hover:text-white w-full building-see-details transition-all duration-300 z-50 relative']"
-                >
+                <button @click="() => foo()" :class="['py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[13px] font-bold cursor-pointer bg-transparent border-[#FCBD00] hover:bg-[#FCBD00] text-[#131313] hover:text-white w-full transition-all duration-300 z-50 relative']">
                     <b>Подробнее</b>
                 </button>
             </div>
@@ -88,19 +85,13 @@ const isMatch = useMediaQuery("(max-width: 397px)");
     </div>
 </template>
 
-<style lang="scss" module>
+<style lang="scss">
 .wrapper {
     margin-bottom: 26px;
 
     @include border-anm;
 
     &:hover {
-        .building-see-details {
-            --tw-bg-opacity: 1;
-            background-color: rgba(251, 191, 36, var(--tw-bg-opacity));
-            color: white;
-        }
-
         .building {
             box-shadow: none !important;
         }

@@ -45,7 +45,7 @@ const [isVisible, toggleVisibility] = useToggle(false);
         </div>
 
         <Transition name="search-expand" :aria-expanded="isCollaped">
-            <ul class="filter grid gap-4 grid-cols-12 py-4 pb-8 rounded-[5px] px-5 bg-white overflow-hidden hg-6" v-if="!isCollaped">
+            <Blurable tag="ul" @blured="() => toggle(true)" class="filter grid gap-4 grid-cols-12 py-4 pb-8 rounded-[5px] px-5 bg-white overflow-hidden hg-6" v-if="!isCollaped">
                 <li class="col-span-4">
                     <h4 class="text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">расположение</h4>
                     <div>
@@ -79,7 +79,7 @@ const [isVisible, toggleVisibility] = useToggle(false);
                         <p class="px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]">Санузел</p>
                     </div>
                 </li>
-            </ul>
+            </Blurable>
         </Transition>
 
         <!-- Filter Mobile -->

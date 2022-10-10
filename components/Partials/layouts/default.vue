@@ -2,21 +2,17 @@
 import TheDefaultFooter from "~/components/TheDefaultFooter.vue";
 import TheDefaultHeader from "~/components/TheDefaultHeader.vue";
 import ShowCase from "~/components/Partials/home/ShowCase.vue";
-// import Search from "~/components/Partials/home/Search.vue";
+import Search from "~/components/Partials/home/Search.vue";
 import Logo from "~/assets/svg/logo.svg";
-
-const LazySearch = defineAsyncComponent(() => import("~/components/Partials/home/Search.vue"));
 
 const props = defineProps<{ inner?: true }>();
 
 const [isCollaped, toggle] = useToggle();
-
-const isMatch = useMediaQuery("(min-width: 768px)");
 </script>
 
 <template>
-    <div :class="['z-0', inner ? 'inner' : '']">
-        <div class="show-case-container">
+    <div :class="['z-0']">
+        <div :class="['show-case-container', inner ? 'inner' : '']">
             <div class="show-case-overlay relative">
                 <app-width tag="header">
                     <client-only>
@@ -70,8 +66,8 @@ const isMatch = useMediaQuery("(min-width: 768px)");
             </div>
         </div>
 
-        <app-width class="max-w-[1200px] search z-1 relative mb-[31px]" v-if="!inner || isMatch">
-            <LazySearch />
+        <app-width class="max-w-[1200px] search z-1 relative mb-[31px]">
+            <Search />
         </app-width>
 
         <main>
@@ -112,33 +108,13 @@ main {
     .show-case-overlay {
         background: linear-gradient(179.92deg, rgba(#edf5fe, 0.1) 14.39%, rgba(255, 255, 255, 0) 99.93%), rgba(#edf5fe, 0.3);
     }
-}
 
-.inner {
-    background-color: #e5e5e5;
-
-    .show-case-container {
-        background: transparent;
-        // background: linear-gradient(179.92deg, rgba(229, 240, 252, 0.1) 14.39%, rgba(255, 255, 255, 0) 99.93%), rgba(229, 240, 252, 0.3);
+    &.inner {
+        background: linear-gradient(179.92deg, rgba(229, 240, 252, 0.1) 14.39%, rgba(255, 255, 255, 0) 99.93%), rgba(229, 240, 252, 0.3);
 
         @include break_point(761px) {
-            padding-bottom: 183px;
+            padding-bottom: 100px;
         }
-
-        .show-case-overlay {
-            background: transparent;
-        }
-    }
-
-    .search {
-        @include break_point(768px) {
-            margin-top: -192px;
-        }
-    }
-
-    main {
-        background: none;
-        border: 2px solid black;
     }
 }
 

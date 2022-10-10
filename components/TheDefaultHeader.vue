@@ -36,7 +36,7 @@ defineEmits(["toggle"]);
 
         <ul class="ml-auto flex items-center">
             <li class="mx-[30px]">
-                <NuxtLink :to="{ name: 'index' }" class="uppercase text-sm font-extrabold leading-4 font-[Raleway]">Жилые комплексы</NuxtLink>
+                <NuxtLink :to="{ name: 'catalog' }" class="uppercase text-sm font-extrabold leading-4 font-[Raleway]">Жилые комплексы</NuxtLink>
             </li>
             <li class="mx-[30px]">
                 <NuxtLink :to="{ name: 'index' }" class="uppercase text-sm font-extrabold leading-4 font-[Raleway]">Квартиры</NuxtLink>
@@ -110,6 +110,12 @@ defineEmits(["toggle"]);
         .head-left {
             margin-bottom: 0;
         }
+    }
+}
+
+.inner {
+    .head {
+        margin-bottom: 0;
     }
 }
 </style>
