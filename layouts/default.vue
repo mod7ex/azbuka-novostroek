@@ -41,7 +41,7 @@ const isMatch = useMediaQuery("(min-width: 768px)");
                         <div class="pl-[29px]">
                             <ul class="mb-[59px]">
                                 <li class="mb-3">
-                                    <NuxtLink :to="{ name: 'index' }" class="text-[#131313] uppercase text-base leading-[18px] font-extrabold font-[Raleway]"> Жилые комплексы </NuxtLink>
+                                    <NuxtLink :to="{ name: 'catalog' }" class="text-[#131313] uppercase text-base leading-[18px] font-extrabold font-[Raleway]"> Жилые комплексы </NuxtLink>
                                 </li>
                                 <li class="mb-3">
                                     <NuxtLink :to="{ name: 'index' }" class="text-[#131313] uppercase text-base leading-[18px] font-extrabold font-[Raleway]"> Квартиры </NuxtLink>
