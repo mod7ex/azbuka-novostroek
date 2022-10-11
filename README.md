@@ -72,7 +72,7 @@ server {
 
 ---
 
-# now the app should run in background otherwise it shows `502 Bad Gateway` once we disconnect the ssh connection we do this using https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/ (node apps production manager)
+# now the app should run in background but it shows `502 Bad Gateway` once we disconnect the ssh connection we do this using https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/ (node apps production manager)
 
 > install
 
@@ -94,3 +94,9 @@ $ pm2 reload app_name
 $ pm2 stop app_name
 $ pm2 delete app_name
 ```
+
+---
+
+# Issues
+
+-   https://github.com/tailwindlabs/tailwindcss/issues/4962
