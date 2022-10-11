@@ -138,7 +138,6 @@ main {
 
     main {
         background: none;
-        border: 2px solid black;
     }
 }
 
