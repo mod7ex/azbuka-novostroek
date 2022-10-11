@@ -3,7 +3,7 @@
 <template>
     <div>
         <NuxtLayout name="inner">
-            <app-width>
+            <app-width class="mt-7">
                 <div class="breadcrumb flex items-center justify-center text-[#8C8C8C] font-[Inter] leading-[13px] font-light">
                     <app-i name="fa6-solid:house" class="h-3 w-[14px]" />
                     <span>&#62;</span>

@@ -55,7 +55,7 @@ defineEmits(["toggle"]);
     </div>
 
     <!-- Mobile + Tablet header -->
-    <div v-else class="head flex justify-between items-center mb-16 pt-3">
+    <div v-else class="head flex justify-between items-center mb-16 pt-3 bg-red-600">
         <span class="head-left flex items-center justify-center">
             <NuxtLink :to="{ name: 'index' }" class="uppercase font-bold">
                 <app-img :src="Logo" alt="" width="57" height="28" />
