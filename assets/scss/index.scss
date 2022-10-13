@@ -30,3 +30,9 @@
 .overlay {
     @include abs-expand;
 }
+
+.no-scroll-thum {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
