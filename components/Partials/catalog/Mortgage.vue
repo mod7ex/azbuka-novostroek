@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import RangeInput from "~/components/UI/TowThumbsRangeInput.vue";
-import ApartmentPlan from "~/components/Partials/catalog/ApartmentPlan.vue";
+import VTB from "~/assets/svg/vtb-bank.svg";
+import SBER from "~/assets/svg/sber-bank.svg";
+import RAIFFEISEN from "~/assets/svg/raiffeisen-bank.svg";
+
+const banks = [VTB, SBER, RAIFFEISEN];
 
 const current = shallowRef(0);
 </script>
@@ -128,7 +132,48 @@ const current = shallowRef(0);
             </form>
 
             <template #foot>
-                <dashed-devider />
+                <Card v-for="(logo, i) in banks" :key="i" class="bg-[#F9F9F9] py-[14px] px-[18px] rounded-[5px] mb-[10px]">
+                    <template #header>
+                        <div class="flex items-center justify-between mb-[13px]">
+                            <app-img :src="logo" class="w-[67px] h-[24px]" />
+
+                            <button class="bg-white rounded-full border-[1.6px] border-[#1da95814] relative flex items-center justify-center w-[30px] h-[30px]">
+                                <app-i name="ic:round-arrow-drop-down" class="text-[#878787] absolute" />
+                            </button>
+                        </div>
+                    </template>
+
+                    <dashed-devider class="border-[#00000014]" />
+
+                    <div class="mt-[15px] mb-[18px]">
+                        <p class="mb-1 text-[14px] font-normal leading-5 text-[#8C8C8C]">Программа</p>
+                        <h1 class="text-[15px] font-semibold leading-[18px] mb-[14px]">Ипотека 0,1 % на весь период</h1>
+
+                        <ul class="grid grid-cols-3">
+                            <li class="col-span-1">
+                                <p class="text-[14px] font-normal leading-5 text-[#8C8C8C] mb-2">Ставка</p>
+                                <p class="text-[14px] font-semibold leading-4">4 %</p>
+                            </li>
+                            <li class="col-span-1">
+                                <p class="text-[14px] font-normal leading-5 text-[#8C8C8C] mb-2">Нач. взнос</p>
+                                <p class="text-[14px] font-semibold leading-4">до 30 лет</p>
+                            </li>
+                            <li class="col-span-1">
+                                <p class="text-[14px] font-normal leading-5 text-[#8C8C8C] mb-2">Срок кредита</p>
+                                <p class="text-[14px] font-semibold leading-4">до 30 лет</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <dashed-devider class="border-[#00000014]" />
+
+                    <template #footer>
+                        <div class="mt-4 text-[14px] font-[Inter] flex justify-between items-center">
+                            <p class="font-normal leading-5">Платеж в месяц</p>
+                            <b class="text-[#1DA958] font-semibold leading-4">до 30 лет</b>
+                        </div>
+                    </template>
+                </Card>
             </template>
         </NuxtLayout>
     </div>
