@@ -21,8 +21,9 @@ import BuildingPromotion from "~/components/Partials/catalog/Promotion.vue";
                 <building-plan class="mb-[25px]" />
                 <building-mortgage class="mb-[25px]" />
                 <building-promotion class="mb-[25px]" />
-                <!--  -->
             </app-width>
         </NuxtLayout>
     </div>
+
+    <!-- <Counter /> -->
 </template>
