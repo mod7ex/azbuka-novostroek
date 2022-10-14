@@ -16,7 +16,11 @@ export default (fn: TFunc, step: number) => {
 
     set();
 
-    onScopeDispose(clear);
+    const scope = getCurrentScope();
+
+    if (scope) {
+        onScopeDispose(clear);
+    }
 
     return { clear, reset };
 };
