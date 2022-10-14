@@ -6,6 +6,7 @@ import BuildingLocation from "~/components/Partials/catalog/Location.vue";
 import BuildingChoices from "~/components/Partials/catalog/Choices.vue";
 import BuildingPlan from "~/components/Partials/catalog/Plan.vue";
 import BuildingMortgage from "~/components/Partials/catalog/Mortgage.vue";
+import BuildingPromotion from "~/components/Partials/catalog/Promotion.vue";
 </script>
 
 <template>
@@ -19,6 +20,7 @@ import BuildingMortgage from "~/components/Partials/catalog/Mortgage.vue";
                 <building-choices class="mb-[25px]" />
                 <building-plan class="mb-[25px]" />
                 <building-mortgage class="mb-[25px]" />
+                <building-promotion class="mb-[25px]" />
                 <!--  -->
             </app-width>
         </NuxtLayout>
