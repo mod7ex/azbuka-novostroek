@@ -1,21 +1,27 @@
-<template>
-    <div :class="['container w-[53px] h-[53px]', $attrs.class]">
-        <!-- <div class="up up-59 gradient-white-gray">59</div> -->
-        <!-- <div class="down down-59">59</div> -->
+<script lang="ts" setup>
+defineProps<{ count: number }>();
+</script>
 
-        <template v-for="i in 60" :key="i">
-            <div :class="`up up-${i - 1} gradient-white-gray`">{{ i - 1 }}</div>
-            <div :class="`down down-${i - 1}`">{{ i - 1 }}</div>
+<template>
+    <div :style="`--count: ${count}%`" :class="['container w-[53px] h-[53px]', $attrs.class]">
+        <template v-for="i in count + 1" :key="i">
+            <div :class="`up up-${i - 1} gradient-white-gray`">
+                {{ count + 1 - i }}
+            </div>
+            <div :class="`down down-${i - 1}`">
+                {{ count + 1 - i }}
+            </div>
         </template>
     </div>
 </template>
 
 <style lang="scss" scoped>
 $clockCountPadding: 10px;
-$clockCountTotal: 59;
+$clockCountTotal: 200;
 $clockCountHeight: 53px;
+$radius: 3px;
 
-$color: black;
+$color: white;
 
 @keyframes flip-up {
     from {
@@ -35,31 +41,24 @@ $color: black;
     }
 }
 
-@keyframes fade {
-    0% {
-        opacity: 0;
-    }
-    25% {
-        opacity: 1;
-    }
-    75% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-
 .gradient-white-gray {
-    background: linear-gradient(to bottom, #000000 0%, #111 100%);
+    background: linear-gradient(to bottom, $color 0%, rgb(240, 240, 240) 100%);
 }
 
 .container {
-    color: #e74c3c;
+    * {
+        box-sizing: border-box;
+    }
+
     position: relative;
-    background: $color;
     padding: $clockCountPadding;
     perspective: 1000px;
+
+    width: $clockCountHeight;
+    height: $clockCountHeight;
+
+    background-color: $color;
+    border-radius: $radius;
 
     .up,
     .down {
@@ -70,22 +69,29 @@ $color: black;
         overflow: hidden;
         backface-visibility: hidden;
         animation-fill-mode: forwards;
-        font-size: 53px - $clockCountPadding;
+
+        background-color: $color;
     }
 
     .up {
         top: 0;
         bottom: 50%;
+        line-height: $clockCountHeight;
         transform-origin: 50% 100%;
-        line-height: $clockCountHeight + 1px;
+
+        border-top-left-radius: $radius;
+        border-top-right-radius: $radius;
     }
 
     .down {
         top: 50%;
         bottom: 0;
-        background: $color;
+        line-height: 0;
+        background-color: $color;
         transform-origin: 50% 0%;
-        line-height: 0px;
+
+        border-bottom-left-radius: $radius;
+        border-bottom-right-radius: $radius;
     }
 
     @for $i from 1 through $clockCountTotal {
@@ -98,7 +104,7 @@ $color: black;
         }
     }
 
-    @for $i from 0 through $clockCountTotal - 1 {
+    @for $i from 0 through $clockCountTotal {
         .down-#{$i} {
             animation: flip-up 1s 1;
             animation-delay: #{$i + 1}s;

@@ -24,6 +24,4 @@ import BuildingPromotion from "~/components/Partials/catalog/Promotion.vue";
             </app-width>
         </NuxtLayout>
     </div>
-
-    <!-- <Counter /> -->
 </template>

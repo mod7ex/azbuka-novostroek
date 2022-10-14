@@ -27,7 +27,10 @@ import Promotion from "~/assets/svg/promotion.svg";
                             <p class="text-[#878787] text-[14px] font-medium leading-4">часов</p>
                         </li>
                         <li>
-                            <span class="text-[#FCBD00] bg-white text-[22px] font-black leading-[26px] w-[53px] h-[53px] flex items-center justify-center rounded-[3px] mb-[7px]">55</span>
+                            <client-only>
+                                <Counter :count="200" class="text-[#FCBD00] text-[22px] font-black leading-[26px] mb-[7px]" />
+                            </client-only>
+                            <!-- <span class="text-[#FCBD00] bg-white text-[22px] font-black leading-[26px] w-[53px] h-[53px] flex items-center justify-center rounded-[3px] mb-[7px]">55</span> -->
                             <p class="text-[#878787] text-[14px] font-medium leading-4">минут</p>
                         </li>
                     </ul>
