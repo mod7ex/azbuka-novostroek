@@ -7,6 +7,8 @@ import RAIFFEISEN from "~/assets/svg/raiffeisen-bank.svg";
 const banks = [VTB, SBER, RAIFFEISEN];
 
 const current = shallowRef(0);
+
+const options = ["Все программы", "Оптимальные условия"];
 </script>
 
 <template>
@@ -15,12 +17,7 @@ const current = shallowRef(0);
             <template #head>
                 <h1 class="text-[26px] font-bold leading-9 font-[Raleway] text-[#131313] mb-4">Ипотека</h1>
 
-                <div class="choices no-scroll-thum mb-[21px] overflow-x-scroll">
-                    <header class="flex gap-y-[30px] border-b-[2px] border-dotted">
-                        <button @click="current = 0" :class="[current === 0 ? 'selected' : '', 'pb-[13px] whitespace-nowrap text-[15px] font-normal leading-[18px] font-[Inter]']">Все программы</button>
-                        <button @click="current = 1" :class="[current === 1 ? 'selected' : '', 'pb-[13px] text-[#878787] whitespace-nowrap text-[15px] font-normal leading-[18px] font-[Inter] mx-[30px]']">Оптимальные условия</button>
-                    </header>
-                </div>
+                <x-scroll-header :choices="options" v-model="current" class="mb-[21px]" />
             </template>
 
             <form>

@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 import Building from "~/assets/img/building.png";
 
+withDefaults(defineProps<{ img?: string; actions?: boolean }>(), {
+    img: Building,
+    actions: true,
+});
+
 const foo = () => {
     console.log("hello");
 };
@@ -12,9 +17,9 @@ const isMatch = useMediaQuery("(max-width: 397px)");
     <div :class="['wrapper', $attrs.class]">
         <div :class="['building md:shadow-lg hover:shadow-none transition-all duration-300 md:rounded-[3px]']">
             <div class="relative img rounded-[5px] md:rounded-none md:rounded-t h-[120px] sm:h-44 md:h-[200px] w-full mb-3 md:mb-[18px]">
-                <app-img class="rounded-[5px] md:rounded-[5px] h-full w-full" :src="Building" alt="" />
+                <app-img class="rounded-[5px] md:rounded-[5px] h-full w-full" :src="img" alt="" />
 
-                <span class="absolute top-0 right-0 left-0 flex justify-between p-[9px] md:p-[13px]">
+                <span class="absolute top-0 right-0 left-0 flex justify-between p-[9px] md:p-[13px]" v-if="actions">
                     <span class="relative flex items-center justify-center h-6 w-6 md:w-10 md:h-10 bg-[#E71F61] rounded-full">
                         <app-i name="heroicons-solid:phone" class="text-white absolute w-3 h-3 md:h-5 md:w-5" />
                     </span>
@@ -32,14 +37,21 @@ const isMatch = useMediaQuery("(max-width: 397px)");
 
             <div class="px-[10px] md:px-[21px] text-sm">
                 <div class="flex justify-between flex-wrap mb-[5px] md:mb-[8px]">
-                    <h2 class="font-normal uppercase leading-[11.74px] md:leading-[14px] font-[Raleway] text-[10px] text-xs text-[#4D4D4D]">ТПУ «ДМИТРОВСКАЯ</h2>
+                    <h2 class="font-normal uppercase leading-[11.74px] md:leading-[14px] font-[Raleway] text-[10px] text-xs text-[#4D4D4D]">
+                        <slot name="description-up">ТПУ «ДМИТРОВСКАЯ</slot>
+                    </h2>
+                    <!-- desktop -->
                     <p class="text-[#1DA958] italic font-medium text-xs leading-[14px] hidden md:inline">Строится</p>
                 </div>
 
-                <h1 class="font-semibold md:font-bold text-[13px] md:text-[16px] text-[#131313] leading-[17px] md:leading-[19px] font-[Inter] md:mb-[13px]">Жилой квартал «D1»</h1>
+                <h1 class="font-semibold md:font-bold text-[13px] md:text-[16px] text-[#131313] leading-[17px] md:leading-[19px] font-[Inter] md:mb-[13px]">
+                    <slot name="description-middle">Жилой квартал «D1»</slot>
+                </h1>
 
                 <!-- mobile -->
-                <p class="mt-[7px] text-[#3478F6] font-medium text-[12px] leading-[14.52px] md:hidden">от 10 335 млн ₽</p>
+                <p class="mt-[7px] text-[#3478F6] font-medium text-[12px] leading-[14.52px] md:hidden">
+                    <slot name="price">от 10 335 млн ₽</slot>
+                </p>
 
                 <!-- desktop -->
                 <p class="items-center justify-start hidden md:flex">
@@ -71,6 +83,7 @@ const isMatch = useMediaQuery("(max-width: 397px)");
                 </div>
             </div>
 
+            <!-- desktop -->
             <div class="p-[21px] bg-[#F4FAFF] text-sm hidden md:block mt-4">
                 <p class="mb-[22px] flex items-center justify-between flex-wrap text-[#3478F6] font-[Inter]">
                     <span class="text-[13px] font-semibold leading-[15px]">65 квартир</span>

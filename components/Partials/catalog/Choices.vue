@@ -2,6 +2,8 @@
 const choices = ["1 - Дом  (1 кв. 2022)", "2 - Дом  (2 кв. 2022)", "3 - Дом  (2 кв. 2022)", "4 - Дом  (2 кв. 2022)", "5 - Дом  (2 кв. 2022)", "6 - Дом  (2 кв. 2022)"];
 
 const current = shallowRef(0);
+
+const options = ["Характеристики", "Документы", "Ход строительства"];
 </script>
 
 <template>
@@ -17,40 +19,7 @@ const current = shallowRef(0);
                 </li>
             </ul>
 
-            <div class="choices no-scroll-thum mb-[21px] overflow-x-scroll">
-                <header class="flex gap-y-[30px] border-b-[2px] border-dotted">
-                    <button
-                        @click="
-                            () => {
-                                current = 0;
-                            }
-                        "
-                        :class="[current === 0 ? 'selected' : '', 'pb-[13px] whitespace-nowrap text-[15px] font-normal leading-[18px] font-[Inter]']"
-                    >
-                        Характеристики
-                    </button>
-                    <button
-                        @click="
-                            () => {
-                                current = 1;
-                            }
-                        "
-                        :class="[current === 1 ? 'selected' : '', 'pb-[13px] text-[#878787] whitespace-nowrap text-[15px] font-normal leading-[18px] font-[Inter] mx-[30px]']"
-                    >
-                        Документы
-                    </button>
-                    <button
-                        @click="
-                            () => {
-                                current = 2;
-                            }
-                        "
-                        :class="[current === 2 ? 'selected' : '', 'pb-[13px] text-[#878787] whitespace-nowrap text-[15px] font-normal leading-[18px] font-[Inter]']"
-                    >
-                        Ход строительства
-                    </button>
-                </header>
-            </div>
+            <x-scroll-header :choices="options" v-model="current" class="mb-[21px]" />
 
             <div class="mb-[28px]">
                 <ul>
@@ -131,26 +100,3 @@ const current = shallowRef(0);
         </NuxtLayout>
     </div>
 </template>
-
-<style lang="scss" scoped>
-.choices {
-    header {
-        width: fit-content;
-    }
-
-    button.selected {
-        position: relative;
-        &::after {
-            content: " ";
-            z-index: 1;
-            background-color: #1da958;
-            padding: 1px;
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -2px;
-            border-radius: 3px;
-        }
-    }
-}
-</style>
