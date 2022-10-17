@@ -7,6 +7,6 @@ withDefaults(defineProps<{ count?: number; rating?: number }>(), {
 
 <template>
     <div :class="['star-rating', $attrs.class]">
-        <app-i v-for="i in count" :key="i" :name="`ic:outline-star${i > rating ? '-border' : ''}`" class="text-[#FCBD00] w-4 h-4" />
+        <app-i v-for="i in count" :key="i" :name="`ic:outline-star${i > rating ? '-border' : ''}`" class="text-[#FCBD00] w-5 h-5" />
     </div>
 </template>

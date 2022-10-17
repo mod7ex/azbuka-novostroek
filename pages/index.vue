@@ -8,7 +8,7 @@ import Advantages from "~/components/Partials/home/Advantages.vue";
 <template>
     <div>
         <NuxtLayout>
-            <Suggestions />
+            <Suggestions sort />
             <Locations />
             <About />
             <Advantages />

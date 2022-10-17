@@ -9,13 +9,14 @@ import BuildingMortgage from "~/components/Partials/catalog/Mortgage.vue";
 import BuildingPromotion from "~/components/Partials/catalog/Promotion.vue";
 import BuildingDiscounts from "~/components/Partials/catalog/Discounts.vue";
 import BuildingReviews from "~/components/Partials/catalog/Reviews.vue";
+import BuildingSuggestions from "~/components/Partials/home/Suggestions.vue";
 </script>
 
 <template>
     <div>
         <NuxtLayout name="inner">
             <app-width class="mt-7 mb-[44px]">
-                <TheBreadCrumb class="mb-[19px]" />
+                <the-bread-crumb class="mb-[19px]" />
                 <building-card class="mb-[33px]" />
                 <building-description class="mb-[25px]" />
                 <building-location class="mb-[25px]" />
@@ -26,9 +27,11 @@ import BuildingReviews from "~/components/Partials/catalog/Reviews.vue";
                 <building-discounts />
             </app-width>
 
-            <app-width class="bg-[#F9F9F9] pt-[25px] pb-[41px]">
+            <app-width class="bg-[#F9F9F9] pt-[25px] pb-[41px] mb-[37px]">
                 <building-reviews />
             </app-width>
+
+            <building-suggestions :count="4" />
         </NuxtLayout>
     </div>
 </template>

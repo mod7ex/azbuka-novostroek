@@ -54,6 +54,7 @@ const selectedTypesLables = computed(() => {
                 </div>
             </div>
 
+            <!-- stand alone component selectComponent -->
             <div class="mb-6">
                 <p class="mb-[13px] text-[12px] leading-[14px] qnt-normal font-[Raleway] text-[#4F4F4F]">Выберите тип квартиры</p>
 
@@ -79,7 +80,7 @@ const selectedTypesLables = computed(() => {
                         </button>
                     </li>
                 </ul>
-            </div>
+            </div><!-- -->
 
             <div class="mb-6 relative" v-if="!apartmentTypeRef">
                 <p class="mb-[13px] text-[12px] leading-[14px] font-normal font-[Raleway] text-[#4F4F4F]">Задайте стоимость</p>
