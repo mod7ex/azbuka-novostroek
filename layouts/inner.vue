@@ -10,7 +10,7 @@ import Default from "~/layouts/default.vue";
 
 <style scoped lang="scss">
 .inner-bg {
-    background: rgb(#e5e5e5);
-    background: linear-gradient(180deg, rgba(#e5e5e5, 1) 4.5%, rgba(255, 255, 255, 1) 4.5%, rgba(255, 255, 255, 1) 100%);
+    background: #e5e5e5;
+    background: linear-gradient(180deg, #e5e5e5 4.5%, rgba(255, 255, 255, 1) 4.5%, rgba(255, 255, 255, 1) 100%);
 }
 </style>
