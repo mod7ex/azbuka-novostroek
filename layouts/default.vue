@@ -15,7 +15,7 @@ const isMatch = useMediaQuery("(min-width: 768px)");
 </script>
 
 <template>
-    <div :class="['z-0', inner ? 'inner' : '']">
+    <div :class="['z-0', inner ? 'inner' : '', $attrs.class]">
         <div class="show-case-container">
             <div class="show-case-overlay relative">
                 <app-width tag="header">

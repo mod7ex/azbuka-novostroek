@@ -49,12 +49,12 @@ import Building from "~/assets/img/catalog-building.png";
             <ul class="text-[15px] font-medium leading-[18px]">
                 <li class="mb-[17px]">Описание</li>
                 <li class="mb-[17px]">Характеристики</li>
-                <li class="mb-[17px]">Квартиры (69)</li>
-                <li class="mb-[17px]">Ход строительства (30.03.2021)</li>
+                <li class="mb-[17px]">Квартиры <b>(69)</b></li>
+                <li class="mb-[17px]">Ход строительства <b>(30.03.2021)</b></li>
                 <li class="mb-[17px]">Ипотека</li>
                 <li class="mb-[17px]">Акции</li>
-                <li class="mb-[17px]">Отзывы (31)</li>
-                <li class="mb-[17px]">Вопрос-ответ (26)</li>
+                <li class="mb-[17px]">Отзывы <b>(31)</b></li>
+                <li class="mb-[17px]">Вопрос-ответ <b>(26)</b></li>
             </ul>
         </div>
     </article>

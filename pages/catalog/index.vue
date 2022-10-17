@@ -15,7 +15,7 @@ import BuildingSuggestions from "~/components/Partials/home/Suggestions.vue";
 <template>
     <div>
         <NuxtLayout name="inner">
-            <app-width class="mt-7 mb-[44px]">
+            <app-width class="mt-7 mb-[44px]" tag="section">
                 <the-bread-crumb class="mb-[19px]" />
                 <building-card class="mb-[33px]" />
                 <building-description class="mb-[25px]" />
@@ -27,7 +27,7 @@ import BuildingSuggestions from "~/components/Partials/home/Suggestions.vue";
                 <building-discounts />
             </app-width>
 
-            <app-width class="bg-[#F9F9F9] pt-[25px] pb-[41px] mb-[37px]">
+            <app-width class="bg-[#F9F9F9] pt-[25px] pb-[41px] mb-[37px]" tag="section">
                 <building-reviews />
             </app-width>
 

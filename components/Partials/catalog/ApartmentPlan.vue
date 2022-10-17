@@ -27,31 +27,31 @@ import PlanA from "~/assets/img/plan_1.png";
                 </div>
             </header>
 
-            <ul class="text-[14px] leading-4 font-medium font-[Raleway]">
+            <ul class="text-[14px] leading-4 font-medium">
                 <li class="flex items-end justify-between mb-4">
-                    <p class="text-[#878787]">Расчетная площадь</p>
+                    <p class="text-[#878787] font-[Raleway]">Расчетная площадь</p>
                     <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                    <p>77.08 м2</p>
+                    <p class="font-[Inter]">77.08 м2</p>
                 </li>
                 <li class="flex items-end justify-between mb-4">
-                    <p class="text-[#878787]">Жилая площадь</p>
+                    <p class="text-[#878787] font-[Raleway]">Жилая площадь</p>
                     <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                    <p>41.20 м2</p>
+                    <p class="font-[Inter]">41.20 м2</p>
                 </li>
                 <li class="flex items-end justify-between mb-4">
-                    <p class="text-[#878787]">Площадь кухни</p>
+                    <p class="text-[#878787] font-[Raleway]">Площадь кухни</p>
                     <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                    <p>13.69 м2</p>
+                    <p class="font-[Inter]">13.69 м2</p>
                 </li>
                 <li class="flex items-end justify-between mb-4">
-                    <p class="text-[#878787]">Количество лоджий</p>
+                    <p class="text-[#878787] font-[Raleway]">Количество лоджий</p>
                     <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                    <p>2</p>
+                    <p class="font-[Inter]">2</p>
                 </li>
                 <li class="flex items-end justify-between mb-4">
-                    <p class="text-[#878787]">Площадь лоджий</p>
+                    <p class="text-[#878787] font-[Raleway]">Площадь лоджий</p>
                     <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                    <p>7.00 м2</p>
+                    <p class="font-[Inter]">7.00 м2</p>
                 </li>
             </ul>
         </div>
