@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Building from "~/components/Partials/Building.vue";
 
-withDefaults(defineProps<{ sort?: true; count: number }>(), {
+withDefaults(defineProps<{ sort?: true; count?: number }>(), {
     count: 8,
 });
 

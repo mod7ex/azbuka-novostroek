@@ -13,11 +13,13 @@ const options = ["Все программы", "Оптимальные услов
 
 <template>
     <div>
-        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0']">
+        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-[46px] md:pb-[53px] md:pt-[90px]']">
             <template #head>
-                <h1 class="text-[26px] font-bold leading-9 font-[Raleway] text-[#131313] mb-4">Ипотека</h1>
+                <div class="md:flex md:justify-between md:items-center md:mb-12">
+                    <h1 class="text-[26px] md:text-[24px] font-bold md:font-extrabold leading-9 md:leading-[28px] font-[Raleway] text-[#131313]">Ипотека</h1>
 
-                <x-scroll-header :choices="options" v-model="current" class="mb-[21px]" />
+                    <x-scroll-header :choices="options" v-model="current" :padding="false" :b-border="false" class="mb-[21px] md:mb-0" />
+                </div>
             </template>
 
             <form>

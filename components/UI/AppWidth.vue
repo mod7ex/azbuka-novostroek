@@ -17,9 +17,3 @@ withDefaults(
         <slot />
     </component>
 </template>
-
-<style lang="scss">
-.some-random {
-    // border: 4px solid black;
-}
-</style>

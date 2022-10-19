@@ -8,21 +8,21 @@ const options = ["Характеристики", "Документы", "Ход �
 
 <template>
     <div>
-        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0']">
+        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-[46px]']">
             <template #head>
-                <h1 class="text-[26px] font-bold leading-9 font-[Raleway] text-[#131313]">Выбор дома</h1>
+                <h1 class="text-[26px] md:text-[24px] font-bold md:font-extrabold leading-9 md:leading-[28px] font-[Raleway] text-[#131313]">Выбор дома</h1>
             </template>
 
-            <ul class="mt-[22px] mb-8 grid grid-cols-2 gap-[10px]">
-                <li v-for="(choice, i) in choices" :key="i" class="col-span-1 w-full">
-                    <button :class="['py-2 w-full rounded-[3px] px-[18px] font-medium text-[13px] leading-[15px]', i == 0 ? 'bg-[#1DA958] text-white' : 'bg-[#D2EEDE]']">{{ choice }}</button>
+            <ul class="mt-[22px] mb-8 md:mb-[50px] grid grid-cols-2 md:flex md:flex-wrap gap-[10px]">
+                <li v-for="(choice, i) in choices" :key="i" class="col-span-1 w-full md:w-fit">
+                    <button :class="['py-2 w-full rounded-[3px] px-[18px] font-medium text-[13px] md:text-base md:leading-[19px] leading-[15px]', i == 0 ? 'bg-[#1DA958] text-white' : 'bg-[#D2EEDE]']">{{ choice }}</button>
                 </li>
             </ul>
 
             <x-scroll-header :choices="options" v-model="current" class="mb-[21px]" />
 
-            <div class="mb-[28px]">
-                <ul>
+            <div class="mb-[28px] md:mb-0 md:grid md:grid-cols-2 md:gap-[55px]">
+                <ul class="md:col-span-1">
                     <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between mb-4">
                         <p class="font-normal text-[#878787]">Застройщик</p>
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
@@ -58,6 +58,8 @@ const options = ["Характеристики", "Документы", "Ход �
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
                         <p class="font-medium text-[#131313]">Комфорт</p>
                     </li>
+                </ul>
+                <ul class="md:col-span-1">
                     <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between mb-4">
                         <p class="font-normal text-[#878787]">Технология строительства</p>
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
@@ -88,7 +90,7 @@ const options = ["Характеристики", "Документы", "Ход �
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
                         <p class="font-medium text-[#131313]">4.5</p>
                     </li>
-                    <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between mb-4">
+                    <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between">
                         <p class="font-normal text-[#878787]">Наземный паркинг</p>
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
                         <p class="font-medium text-[#131313]">4.5</p>
@@ -96,7 +98,7 @@ const options = ["Характеристики", "Документы", "Ход �
                 </ul>
             </div>
 
-            <template #foot> <dashed-devider /> </template>
+            <template #foot> <dashed-devider class="md:hidden" /> </template>
         </NuxtLayout>
     </div>
 </template>

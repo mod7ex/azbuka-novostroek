@@ -17,7 +17,7 @@ const isMatch = useMediaQuery("(max-width: 397px)");
     <div :class="['wrapper', $attrs.class]">
         <div :class="['building md:shadow-lg hover:shadow-none transition-all duration-300 md:rounded-[3px]']">
             <div class="relative img rounded-[5px] md:rounded-none md:rounded-t h-[120px] sm:h-44 md:h-[200px] w-full mb-3 md:mb-[18px]">
-                <app-img class="rounded-[5px] md:rounded-[5px] h-full w-full" :src="img" alt="" />
+                <app-img class="rounded-[5px] md:rounded-b-none h-full w-full" :src="img" alt="" />
 
                 <span class="absolute top-0 right-0 left-0 flex justify-between p-[9px] md:p-[13px]" v-if="actions">
                     <span class="relative flex items-center justify-center h-6 w-6 md:w-10 md:h-10 bg-[#E71F61] rounded-full">

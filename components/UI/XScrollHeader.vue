@@ -1,5 +1,16 @@
 <script setup lang="ts">
-const props = defineProps<{ choices: string[] | { label: string; value: Numberish }[]; modelValue: Numberish; buttons?: true }>();
+interface Props {
+    choices: string[] | { label: string; value: Numberish }[];
+    modelValue: Numberish;
+    buttons?: true;
+    padding?: boolean;
+    "b-border": boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    padding: true,
+    "b-border": true,
+});
 
 const emit = defineEmits(["update:modelValue"]);
 
@@ -17,15 +28,15 @@ const handle = (e: MouseEvent) => {
 </script>
 
 <template>
-    <div @click="handle" v-if="buttons" :class="['overflow-x-scroll flex gap-2 no-scroll-thum font-medium text-[13px] leading-[15px] font-[Inter]', $attrs.class]">
+    <div @click="handle" v-if="buttons" :class="['overflow-x-scroll flex gap-2 no-scroll-thum font-medium text-[13px] md:text-base md:leading-[19px] leading-[15px] font-[Inter]', $attrs.class]">
         <button v-for="(choice, i) in choices" :key="i" :data-index="i" :class="['whitespace-nowrap py-2 px-[10px] rounded-[3px]', modelValue == i ? 'bg-[#1DA958] text-white' : 'bg-[#D2EEDE]']">
             {{ typeof choice === "object" ? choice.label : choice }}
         </button>
     </div>
 
     <div v-else :class="['choices no-scroll-thum overflow-x-scroll', $attrs.class]">
-        <header class="flex gap-[30px] border-b-[2px] border-dotted text-[15px] leading-[18px] font-[Inter]" @click="handle">
-            <button v-for="(choice, i) in choices" :key="i" :data-index="i" :class="[modelValue == i ? 'selected font-medium text-[#131313]' : 'font-normal text-[#878787]', 'pb-[13px] whitespace-nowrap']">
+        <header :class="['flex gap-[30px]text-[15px] leading-[18px] font-[Inter]', props['b-border'] ? 'border-b-[2px] border-dotted' : '']" @click="handle">
+            <button v-for="(choice, i) in choices" :key="i" :data-index="i" :class="[modelValue == i ? 'selected font-medium text-[#131313]' : 'font-normal text-[#878787]', padding ? 'md:pb-[28px] md:px-6' : 'pb-0', 'pb-[13px] whitespace-nowrap']">
                 {{ typeof choice === "object" ? choice.label : choice }}
             </button>
         </header>

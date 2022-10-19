@@ -7,6 +7,7 @@ export default defineNuxtConfig({
         meta: [
             { name: "author", content: "Mourad EL CADI" }, // To be removed at Prod
         ],
+        link: [{ rel: "icon", type: "image/x-icon", href: "./assets/favicon.ico" }],
     },
 
     runtimeConfig: {

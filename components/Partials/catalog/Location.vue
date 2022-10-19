@@ -19,24 +19,24 @@ const locationDetails = [
 
 <template>
     <div>
-        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0']">
+        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-[46px] md:pt-[40px]']">
             <template #head>
                 <h1 class="text-[26px] font-bold leading-9 font-[Raleway] text-[#131313]">Расположение</h1>
             </template>
 
-            <div class="my-4">
-                <iframe src="https://maps.google.com/maps?q=McDonald's%20Corniche&t=&z=13&ie=UTF8&iwloc=&output=embed" height="513" style="border: 0" allowfullscreen loading="lazy" class="w-full rounded-[5px]" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="my-4 md:mt-[34px] md:mb-[28px]">
+                <iframe src="https://maps.google.com/maps?q=McDonald's%20Corniche&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" class="border-none w-full rounded-[5px] md:rounded-none h-[513px] md:h-[296px]" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
 
             <template #foot>
-                <div class="grid grid-cols-2 mb-8 gap-y-[18px]">
+                <div class="grid grid-cols-2 md:grid-cols-4 mb-8 md:pb-[59px] gap-y-[18px]">
                     <label v-for="item in locationDetails" :key="item.key" :for="item.key" class="pl-2 col-span-1 flex">
                         <input :id="item.key" type="checkbox" />
                         <span class="ml-[22px] font-[Inter] text-[14px] leading-5 font-normal">{{ item.label }}</span>
                     </label>
                 </div>
 
-                <dashed-devider />
+                <dashed-devider class="md:hidden" />
             </template>
         </NuxtLayout>
     </div>

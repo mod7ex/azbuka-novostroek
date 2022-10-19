@@ -36,3 +36,27 @@
         display: none;
     }
 }
+
+.shadow-inner-md {
+    @include break_point(768px) {
+        box-shadow: $md-box-shadow;
+    }
+}
+
+/* *************************************************** */
+
+.br-noir {
+    border: 1px solid black;
+}
+
+.br-bleu {
+    border: 1px solid blue;
+}
+
+.br-rouge {
+    border: 1px solid red;
+}
+
+.br-vert {
+    border: 1px solid green;
+}

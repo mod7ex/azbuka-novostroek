@@ -8,9 +8,9 @@ const options = ["Все", "1а комнатные", "2х комнатные", "
 
 <template>
     <div>
-        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0']">
+        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-[46px] md:pb-[53px]']">
             <template #head>
-                <h1 class="text-[26px] font-bold leading-9 font-[Raleway] text-[#131313] mb-4">Планировки</h1>
+                <h1 class="text-[26px] md:text-[18px] font-bold md:font-extrabold leading-9 md:leading-[21px] font-[Raleway] text-[#131313] mb-4 md:mb-[17px]">Планировки</h1>
                 <x-scroll-header :choices="options" v-model="current" class="mb-[28px]" buttons />
             </template>
 
@@ -19,9 +19,9 @@ const options = ["Все", "1а комнатные", "2х комнатные", "
 
             <template #foot>
                 <div class="text-center">
-                    <Button label="Загрузить еще" class="bg-[#E71F61] mb-[29px]" />
+                    <Button label="Загрузить еще" class="bg-[#E71F61] mb-[29px] md:mb-0" />
                 </div>
-                <dashed-devider />
+                <dashed-devider class="md:hidden" />
             </template>
         </NuxtLayout>
     </div>

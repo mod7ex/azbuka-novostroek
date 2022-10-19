@@ -15,23 +15,36 @@ import BuildingSuggestions from "~/components/Partials/home/Suggestions.vue";
 <template>
     <div>
         <NuxtLayout name="inner">
-            <app-width class="mt-7 mb-[44px]" tag="section">
-                <the-bread-crumb class="mb-[19px]" />
-                <building-card class="mb-[33px]" />
-                <building-description class="mb-[25px]" />
-                <building-location class="mb-[25px]" />
-                <building-choices class="mb-[25px]" />
-                <building-plan class="mb-[25px]" />
-                <building-mortgage class="mb-[25px]" />
-                <building-promotion class="mb-[34px]" />
-                <building-discounts />
+            <!-- 59 + 31 = 90 -->
+            <app-width class="mt-7 md:mt-[59px] mb-[33px] md:mb-[100px]" tag="section">
+                <the-bread-crumb class="mb-[19px] md:mb-[40px]" />
+                <building-card />
             </app-width>
 
-            <app-width class="bg-[#F9F9F9] pt-[25px] pb-[41px] mb-[37px]" tag="section">
+            <app-width class="mb-[44px]" tag="section">
+                <div class="max-w-[870px]">
+                    <!-- flex later -->
+                    <building-description class="mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                    <building-location class="mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+
+                    <div class="mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
+                        <building-choices class="mb-[25px] md:mb-[63px]" />
+                        <building-plan class="mb-[25px]" />
+                    </div>
+
+                    <building-mortgage class="mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                    <!-- 
+                        <building-promotion class="mb-[34px]" />
+                        <building-discounts />
+                    -->
+                </div>
+            </app-width>
+
+            <!-- <app-width class="bg-[#F9F9F9] pt-[25px] pb-[41px] mb-[37px]" tag="section">
                 <building-reviews />
             </app-width>
 
-            <building-suggestions :count="4" />
+            <building-suggestions :count="4" /> -->
         </NuxtLayout>
     </div>
 </template>
