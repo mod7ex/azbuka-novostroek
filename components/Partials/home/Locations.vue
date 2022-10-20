@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Buildings from "~/assets/svg/buildings.svg";
-import Couple from "~/assets/svg/couple.svg";
+// import Buildings from "~/assets/svg/buildings.svg";
+// import Couple from "~/assets/svg/couple.svg";
 </script>
 
 <template>
@@ -10,28 +10,7 @@ import Couple from "~/assets/svg/couple.svg";
                 <div>
                     <h1 class="text-left text-[26px] md:text-[32px] leading-9 md:leading-[37px] font-bold md:font-extrabold text-[#131313] font-[Raleway] mb-5 md:mb-[43px]">Где присматриваете квартиру?</h1>
 
-                    <ul>
-                        <li class="flex items-center mb-4">
-                            <span class="relative mr-[15px] h-6 w-6 border-2 rounded-full flex items-center justify-center border-[#1DA958]">
-                                <app-i name="ic:round-circle" class="absolute text-[#1DA958] h-[10px] w-[10px]" />
-                            </span>
-                            <p class="text-sm font-normal leading-5 font-[Inter]">В Ростове-на-Дону</p>
-                        </li>
-
-                        <li class="flex items-center mb-4">
-                            <span class="relative mr-[15px] h-6 w-6 bg-[#fafcfe] border-2 border-[#e8e8e8] rounded-full flex items-center justify-center">
-                                <app-i name="ic:round-circle" class="absolute h-[10px] w-[10px] text-[#e8e8e8]" />
-                            </span>
-                            <p class="text-sm font-normal leading-5 font-[Inter]">В Ростовской области</p>
-                        </li>
-
-                        <li class="flex items-center mb-[2px] md:mb-[6px]">
-                            <span class="relative mr-[15px] h-6 w-6 bg-[#fafcfe] border-2 border-[#e8e8e8] rounded-full flex items-center justify-center">
-                                <app-i name="ic:round-circle" class="absolute h-[10px] w-[10px] text-[#e8e8e8]" />
-                            </span>
-                            <p class="text-sm font-normal leading-5 font-[Inter]">В Центре</p>
-                        </li>
-                    </ul>
+                    <app-radio :options="['В Ростове-на-Дону', 'В Ростовской области', 'В Центре']" />
                 </div>
 
                 <div class="flex flex-col mb-[22px] md:mb-[45px]">

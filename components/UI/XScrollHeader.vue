@@ -4,12 +4,12 @@ interface Props {
     modelValue: Numberish;
     buttons?: true;
     padding?: boolean;
-    "b-border": boolean;
+    dottedBorder?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
     padding: true,
-    "b-border": true,
+    dottedBorder: true,
 });
 
 const emit = defineEmits(["update:modelValue"]);
@@ -35,8 +35,8 @@ const handle = (e: MouseEvent) => {
     </div>
 
     <div v-else :class="['choices no-scroll-thum overflow-x-scroll', $attrs.class]">
-        <header :class="['flex gap-[30px]text-[15px] leading-[18px] font-[Inter]', props['b-border'] ? 'border-b-[2px] border-dotted' : '']" @click="handle">
-            <button v-for="(choice, i) in choices" :key="i" :data-index="i" :class="[modelValue == i ? 'selected font-medium text-[#131313]' : 'font-normal text-[#878787]', padding ? 'md:pb-[28px] md:px-6' : 'pb-0', 'pb-[13px] whitespace-nowrap']">
+        <header :class="['flex gap-[30px] text-[15px] leading-[18px] font-[Inter] border-b-[2px]', dottedBorder ? 'border-dotted' : 'border-transparent']" @click="handle">
+            <button v-for="(choice, i) in choices" :key="i" :data-index="i" :class="[modelValue == i ? 'selected font-medium text-[#131313]' : 'font-normal text-[#878787]', padding ? 'md:pb-[28px] md:px-6' : 'md:pb-[3px]', 'pb-[13px] whitespace-nowrap']">
                 {{ typeof choice === "object" ? choice.label : choice }}
             </button>
         </header>

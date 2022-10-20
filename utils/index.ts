@@ -17,9 +17,9 @@ export const isFunction = (v: unknown): v is TFunc => typeof v === "function";
 export const uuidGen = (payload = "some-random-string") => {
     let state = 0;
 
-    return () => {
+    return (inner_payload?: string) => {
         state++;
-        return `uid-${Date.now()}-${state}-${payload}`;
+        return `uid-${Date.now()}-${state}-${inner_payload ?? payload}`;
     };
 };
 

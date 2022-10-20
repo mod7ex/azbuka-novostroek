@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { uuidGen } from "~/utils";
 
+defineProps<{ uni?: true }>();
+
 const uuid = uuidGen("range-selector");
 
 const uuids = [uuid(), uuid()];
@@ -17,8 +19,8 @@ const width = computed(() => {
 </script>
 
 <template>
-    <div :class="['ranger', $attrs.class]">
-        <input :id="uuids[0]" v-model="first_range" type="range" :min="min" :max="max" />
+    <div :class="['ranger', $attrs.class, uni ? 'one-range' : '']">
+        <input :id="uuids[0]" v-model="first_range" type="range" :min="min" :max="max" v-if="!uni" />
         <input :id="uuids[1]" :style="`--width: ${width}%`" v-model="last_range" type="range" :min="min" :max="max" />
     </div>
 </template>
@@ -26,6 +28,7 @@ const width = computed(() => {
 <style lang="scss">
 $h: 6px;
 $height: 1.4px;
+$height-md: 1.6px;
 
 @mixin track() {
     background: none; /* get rid of Firefox track background */
@@ -49,16 +52,21 @@ $height: 1.4px;
 .ranger {
     display: grid;
     grid-template-rows: max-content $h;
-    height: $height;
     background-color: black;
+
+    height: $height;
+    @include break_point(768px) {
+        height: $height-md;
+    }
 
     input[type="range"] {
         grid-column: 1;
         grid-row: 2;
-
-        // border: 1px solid red;
-
         height: $height;
+
+        @include break_point(768px) {
+            height: $height-md;
+        }
         display: flex;
         align-items: center;
 
@@ -93,10 +101,17 @@ $height: 1.4px;
         //********** project specific
 
         position: relative;
+        &::after,
         &::before {
             content: " ";
             position: absolute;
             height: $height;
+            @include break_point(768px) {
+                height: $height-md;
+            }
+        }
+
+        &::before {
             background-color: #3478f6;
             right: 0;
         }
@@ -120,10 +135,51 @@ $height: 1.4px;
         }
     }
 }
+
+@mixin thumb-md() {
+    background-color: #1da958 !important;
+    border: $height-md solid white;
+    border-radius: 50%;
+    width: calc(17px + $height-md);
+    height: calc(17px + $height-md);
+    position: relative;
+    z-index: 1;
+
+    @include shadow($blur: 0, $spread: $height-md, $color: #1da958, $force: true);
+}
+
+.one-range {
+    @include break_point(768px) {
+        background-color: transparent !important;
+
+        input[type="range"] {
+            &::before {
+                background-color: transparent !important;
+            }
+
+            &::after {
+                background-color: #1da958;
+                left: 0;
+            }
+
+            &::-webkit-slider-thumb {
+                @include thumb-md;
+            }
+
+            &::-moz-range-thumb {
+                @include thumb-md;
+            }
+        }
+    }
+}
 </style>
 
 <style>
 .ranger input[type="range"]::before {
     width: var(--width);
+}
+
+.one-range input[type="range"]::after {
+    width: calc(100% - var(--width));
 }
 </style>
