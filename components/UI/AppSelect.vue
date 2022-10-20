@@ -6,11 +6,12 @@ const props = defineProps<{
     label?: string;
     innerLabel?: string;
     bg?: true;
+    shrink?: true;
 }>();
 
 const len = computed(() => props.options.length);
 
-const [isCollaped, toggle] = useToggle(false);
+const [isCollaped, toggle] = useToggle(true);
 
 const uuid = uuidGen("mobile-filter");
 
@@ -30,7 +31,7 @@ const selectedTypesLables = computed(() => {
 </script>
 
 <template>
-    <div :class="[$attrs.class, 'br-noir']">
+    <div :class="[$attrs.class, shrink ? '' : 'relative', !isCollaped && !shrink ? 'shadow-select' : '']">
         <slot name="label">
             <p class="mb-[13px] text-[12px] leading-[14px] font-normal font-[Raleway] text-[#4F4F4F] md:font-extrabold md:text-black md:mb-[17px]">
                 {{ label }}
@@ -40,7 +41,7 @@ const selectedTypesLables = computed(() => {
         <button
             @click="() => toggle()"
             class="flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 border-[1.6px] rounded-[5px] w-full"
-            :class="[`hg-${len}`, isCollaped ? 'border-b-0 rounded-b-none' : '', bg ? 'md:rounded-none border-[#3478f624] md:border-[#1da95814] bg-[#1da95814] md:bg-[#FAFCFE]' : 'border-[#f8f8f8]']"
+            :class="[`hg-${len}`, !isCollaped ? 'border-b-0 rounded-b-none' : '', bg ? 'md:rounded-none border-[#3478f624] md:border-[#1da95814] bg-[#1da95814] md:bg-[#FAFCFE]' : 'border-[#f8f8f8]']"
         >
             <slot name="inner-label">
                 <p class="text-[16px] leading-[14px] font-medium" :class="[bg ? 'text-[#828282]' : 'text-[#4F4F4F]']">{{ innerLabel }}</p>
@@ -48,15 +49,17 @@ const selectedTypesLables = computed(() => {
             <app-i name="ic:baseline-keyboard-arrow-down" :class="[bg ? 'text-[#1DA958]' : 'text-[#3478F6]', ' h-5 w-5 transition-transform duration-300', isCollaped ? 'rotate-180' : '']" />
         </button>
 
-        <Transition name="shrink">
-            <ul v-if="isCollaped" :class="[bg ? 'bg-[#1da95814] border-[#3478f624] md:md:bg-[#FAFCFE] md:border-[#1da95814]' : 'border-[#f8f8f8]']" class="overflow-hidden pb-[10px] pt-[6px] px-3 border border-t-0 rounded-b-[5px]">
-                <li v-for="(tp, i) in options" :key="i" class="mb-[14px]">
-                    <label :for="IDS[i]" class="flex items-center gap-x-3">
-                        <input v-model="selectedTypesIndexes[i]" :id="IDS[i]" type="checkbox" class="w-[18px] h-[18px] border border-[#0000001f] rounded-[2px]" />
-                        <span class="font-normal text-[13px] leading-[14px] font-[Inter] text-[#141414]">{{ tp }}</span>
-                    </label>
-                </li>
-            </ul>
+        <Transition :name="shrink ? 'shrink' : 'fade'">
+            <Blurable @blured="() => toggle(true)" v-if="!isCollaped" :class="[shrink ? '' : 'absolute left-0 right-0 top-auto', bg ? 'border-[#3478f636] md:border-[#1da95814]' : 'border-[#f8f8f8]', 'bg-white overflow-hidden border-[1.6px] rounded-b-[5px] z-10 border-t-0 shadow-select-target']">
+                <ul :class="[bg ? 'bg-[#1da95814] md:bg-[#FAFCFE]' : '', 'rounded-b-[5px] pb-[10px] pt-[6px] px-3']">
+                    <li v-for="(tp, i) in options" :key="i" class="mb-[14px]">
+                        <label :for="IDS[i]" class="flex items-center gap-x-3">
+                            <input v-model="selectedTypesIndexes[i]" :id="IDS[i]" type="checkbox" class="w-[18px] h-[18px] border border-[#0000001f] rounded-[2px]" />
+                            <span class="font-normal text-[13px] leading-[14px] font-[Inter] text-[#141414]">{{ tp }}</span>
+                        </label>
+                    </li>
+                </ul>
+            </Blurable>
         </Transition>
 
         <ul class="flex items-center flex-wrap">
@@ -111,6 +114,16 @@ input[type="checkbox"]:checked {
         @include abs-expand;
         border-radius: 2px;
         background-color: #3478f6;
+    }
+}
+
+.shadow-select {
+    button {
+        @include shadow($x: 0, $y: 8px, $blur: 6px, $spread: 1px, $color: rgba(0, 0, 0, 0.18), $force: true);
+    }
+
+    .shadow-select-target {
+        @include shadow($x: 0, $y: 8px, $blur: 6px, $spread: 1px, $color: rgba(0, 0, 0, 0.18), $force: true);
     }
 }
 </style>
