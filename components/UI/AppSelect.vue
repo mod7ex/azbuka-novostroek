@@ -119,11 +119,11 @@ input[type="checkbox"]:checked {
 
 .shadow-select {
     button {
-        @include shadow($x: 0, $y: 8px, $blur: 6px, $spread: 1px, $color: rgba(0, 0, 0, 0.18), $force: true);
+        @include shadow($x: 0, $y: 8px, $blur: 6px, $spread: 1px, $color: rgba(0, 0, 0, 0.18));
     }
 
     .shadow-select-target {
-        @include shadow($x: 0, $y: 8px, $blur: 6px, $spread: 1px, $color: rgba(0, 0, 0, 0.18), $force: true);
+        @include shadow($x: 0, $y: 8px, $blur: 6px, $spread: 1px, $color: rgba(0, 0, 0, 0.18));
     }
 }
 </style>

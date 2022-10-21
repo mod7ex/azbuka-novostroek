@@ -145,7 +145,7 @@ $height-md: 1.6px;
     position: relative;
     z-index: 1;
 
-    @include shadow($blur: 0, $spread: $height-md, $color: #1da958, $force: true);
+    @include shadow($blur: 0, $spread: $height-md, $color: #1da958);
 }
 
 .one-range {

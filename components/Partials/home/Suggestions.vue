@@ -34,9 +34,9 @@ const [isCollapsed, toggle] = useToggle();
                 </div>
             </template>
 
-            <div class="buildings grid grid-cols-12 gap-3 md:gap-[30px] mb-[28px] md:mb-[61px]">
+            <div class="grid grid-cols-12 gap-3 md:gap-[30px] mb-[28px] md:mb-[61px]">
                 <!-- 26 + 2 = 28 -->
-                <Building v-for="i in count" :key="i" />
+                <Building v-for="i in count" :key="i" under-construction shadow />
             </div>
 
             <template #foot>

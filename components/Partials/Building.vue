@@ -1,22 +1,20 @@
 <script lang="ts" setup>
 import Building from "~/assets/img/building.png";
 
-withDefaults(defineProps<{ img?: string; actions?: boolean }>(), {
+withDefaults(defineProps<{ img?: string; actions?: boolean; underConstruction?: true; shadow?: true; whiteCta?: true }>(), {
     img: Building,
     actions: true,
 });
 
-const foo = () => {
-    console.log("hello");
-};
+const foo = () => {};
 
 const isMatch = useMediaQuery("(max-width: 397px)");
 </script>
 
 <template>
     <div :class="['wrapper', $attrs.class]">
-        <div :class="['building md:shadow-lg hover:shadow-none transition-all duration-300 md:rounded-[3px]']">
-            <div class="relative img rounded-[5px] md:rounded-none md:rounded-t h-[120px] sm:h-44 md:h-[200px] w-full mb-3 md:mb-[18px]">
+        <div :class="['building transition-all duration-300 md:rounded-[3px]', shadow ? 'building-shadow' : '']">
+            <div class="relative img rounded-[5px] md:rounded-none md:rounded-t h-[120px] sm:h-44 md:h-[200px] w-full">
                 <app-img class="rounded-[5px] md:rounded-b-none h-full w-full" :src="img" alt="" />
 
                 <span class="absolute top-0 right-0 left-0 flex justify-between p-[9px] md:p-[13px]" v-if="actions">
@@ -35,13 +33,13 @@ const isMatch = useMediaQuery("(max-width: 397px)");
                 </span>
             </div>
 
-            <div class="px-[10px] md:px-[21px] text-sm">
+            <div :class="['px-[10px] md:px-[21px] text-sm pt-3 md:pt-[18px] pb-4', shadow ? '' : 'md:border-l-[1.6px] md:border-r-[1.6px] md:border-[#1da95826]']">
                 <div class="flex justify-between flex-wrap mb-[5px] md:mb-[8px]">
                     <h2 class="font-normal uppercase leading-[11.74px] md:leading-[14px] font-[Raleway] text-[10px] text-xs text-[#4D4D4D]">
                         <slot name="description-up">ТПУ «ДМИТРОВСКАЯ</slot>
                     </h2>
                     <!-- desktop -->
-                    <p class="text-[#1DA958] italic font-medium text-xs leading-[14px] hidden md:inline">Строится</p>
+                    <p v-if="underConstruction" class="text-[#1DA958] italic font-medium text-xs leading-[14px] hidden md:inline">Строится</p>
                 </div>
 
                 <h1 class="font-semibold md:font-bold text-[13px] md:text-[16px] text-[#131313] leading-[17px] md:leading-[19px] font-[Inter] md:mb-[13px]">
@@ -56,7 +54,9 @@ const isMatch = useMediaQuery("(max-width: 397px)");
                 <!-- desktop -->
                 <p class="items-center justify-start hidden md:flex">
                     <app-i class="text-[#1DA958] h-5 w-5 mr-[9px]" name="heroicons-solid:location-marker" />
-                    <span class="tex-[#131313] font-normal leading-5 text-[14px]">Ростов-на-Дону</span>
+                    <span class="tex-[#131313] font-normal leading-5 text-[14px]">
+                        <slot name="location">Ростов-на-Дону</slot>
+                    </span>
                 </p>
 
                 <!-- devider -->
@@ -65,32 +65,36 @@ const isMatch = useMediaQuery("(max-width: 397px)");
 
                 <!-- desktop -->
                 <div class="hidden md:block">
-                    <p class="flex items-center justify-between flex-wrap">
-                        <span class="text-[#8C8C8C] text-[14px] leading-4 font-normal">1-комн. от 27 м²</span>
-                        <span class="flex-grow mx-1 border-b border-dashed self-stretch"></span>
-                        <span class="text-[14px] font-medium leading-4 text-[#131313]">10 233 450 ₽</span>
-                    </p>
-                    <p class="flex items-center justify-between flex-wrap my-3">
-                        <span class="text-[#8C8C8C] text-[14px] leading-4 font-normal">2-комн. от 55 м²</span>
-                        <span class="flex-grow mx-1 border-b border-dashed self-stretch"></span>
-                        <span class="text-[14px] font-medium leading-4 text-[#131313]">14 233 450 ₽</span>
-                    </p>
-                    <p class="flex items-center justify-between flex-wrap">
-                        <span class="text-[#8C8C8C] text-[14px] leading-4 font-normal">3-комн. от 63 м²</span>
-                        <span class="flex-grow mx-1 border-b border-dashed self-stretch"></span>
-                        <span class="text-[14px] font-medium leading-4 text-[#131313]">19 233 450 ₽</span>
-                    </p>
+                    <slot name="body">
+                        <p class="flex items-center justify-between flex-wrap">
+                            <span class="text-[#8C8C8C] text-[14px] leading-4 font-normal">1-комн. от 27 м²</span>
+                            <span class="flex-grow mx-1 border-b border-dashed self-stretch"></span>
+                            <span class="text-[14px] font-medium leading-4 text-[#131313]">10 233 450 ₽</span>
+                        </p>
+                        <p class="flex items-center justify-between flex-wrap my-3">
+                            <span class="text-[#8C8C8C] text-[14px] leading-4 font-normal">2-комн. от 55 м²</span>
+                            <span class="flex-grow mx-1 border-b border-dashed self-stretch"></span>
+                            <span class="text-[14px] font-medium leading-4 text-[#131313]">14 233 450 ₽</span>
+                        </p>
+                        <p class="flex items-center justify-between flex-wrap">
+                            <span class="text-[#8C8C8C] text-[14px] leading-4 font-normal">3-комн. от 63 м²</span>
+                            <span class="flex-grow mx-1 border-b border-dashed self-stretch"></span>
+                            <span class="text-[14px] font-medium leading-4 text-[#131313]">19 233 450 ₽</span>
+                        </p>
+                    </slot>
                 </div>
             </div>
 
             <!-- desktop -->
-            <div class="p-[21px] bg-[#F4FAFF] text-sm hidden md:block mt-4">
+            <div class="p-[21px] bg-[#F4FAFF] text-sm hidden md:block">
                 <p class="mb-[22px] flex items-center justify-between flex-wrap text-[#3478F6] font-[Inter]">
-                    <span class="text-[13px] font-semibold leading-[15px]">65 квартир</span>
-                    <span class="text-[14PX] font-normal leading-4">от 64 335 ₽/мес</span>
+                    <slot name="foot-ad">
+                        <span class="text-[13px] font-semibold leading-[15px]">65 квартир</span>
+                        <span class="text-[14px] font-normal leading-4">от 64 335 ₽/мес</span>
+                    </slot>
                 </p>
 
-                <button @click="() => foo()" :class="['py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[13px] font-bold cursor-pointer bg-transparent border-[#FCBD00] hover:bg-[#FCBD00] text-[#131313] hover:text-white w-full transition-all duration-300 z-50 relative']">
+                <button @click="() => foo()" :class="['py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[13px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full transition-all duration-300 z-50 relative hover-bg', whiteCta ? 'bg-white' : 'bg-transparent ']">
                     <b>Подробнее</b>
                 </button>
             </div>
@@ -100,13 +104,22 @@ const isMatch = useMediaQuery("(max-width: 397px)");
 
 <style lang="scss">
 .wrapper {
-    margin-bottom: 26px;
-
     @include border-anm;
 
-    &:hover {
-        .building {
-            box-shadow: none !important;
+    @include break_point(768px) {
+        .building-shadow {
+            box-shadow: $md-box-shadow;
+        }
+
+        &:hover {
+            .building-shadow {
+                box-shadow: none !important;
+            }
+
+            .hover-bg {
+                background-color: #fcbd00;
+                color: white;
+            }
         }
     }
 
@@ -123,6 +136,10 @@ const isMatch = useMediaQuery("(max-width: 397px)");
 
     @include break_point(1050px) {
         grid-column: span 3 / span 3;
+
+        &.col-span-4-md-force {
+            grid-column: span 4 / span 4;
+        }
     }
 }
 </style>
