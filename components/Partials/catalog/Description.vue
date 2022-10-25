@@ -5,13 +5,14 @@ import BuildingB from "~/assets/img/gallery-building_b.png";
 
 import Document from "~/assets/svg/description/document.svg";
 import Buildings from "~/assets/svg/description/buildings.svg";
-import Etage from "~/assets/svg/description/etage.svg";
+import Etage from "~/assets/img/etages.png";
 import Apartments from "~/assets/svg/description/apartments.svg";
 import Height from "~/assets/svg/description/height.svg";
 import Type from "~/assets/svg/description/type.svg";
 import Paint from "~/assets/svg/description/paint.svg";
 import Parking from "~/assets/svg/description/parking.svg";
 import Elevator from "~/assets/svg/description/elevator.svg";
+import BuildingSvg from "~/assets/svg/description/building.svg";
 
 const descriptionItems = [
     {
@@ -25,7 +26,7 @@ const descriptionItems = [
         bold: "Комфорт",
     },
     {
-        img: Etage,
+        img: BuildingSvg,
         light: "Число корпусов",
         bold: "12",
     },
@@ -79,9 +80,11 @@ const descriptionItems = [
 
                 <ul class="flex items-stretch justify-center md:justify-between gap-1 mt-3 md:mt-0 md:flex-col">
                     <li class="flex items-center justify-center">
-                        <button>
-                            <app-i name="tabler:chevron-right" class="md:hidden" />
-                            <app-i name="bx:chevron-up" class="hidden md:block" />
+                        <button class="md:hidden">
+                            <app-i name="tabler:chevron-left" />
+                        </button>
+                        <button class="hidden md:block">
+                            <app-i name="bx:chevron-up" />
                         </button>
                     </li>
                     <li class="img items-stretch justify-center hidden md:flex">
@@ -97,9 +100,11 @@ const descriptionItems = [
                         <button><app-img :src="BuildingB" class="h-full rounded-[5px]" /></button>
                     </li>
                     <li class="flex items-center justify-center">
-                        <button>
-                            <app-i name="tabler:chevron-left" class="md:hidden" />
-                            <app-i name="bx:chevron-down" class="hidden md:block" />
+                        <button class="md:hidden">
+                            <app-i name="tabler:chevron-right" />
+                        </button>
+                        <button class="hidden md:block">
+                            <app-i name="bx:chevron-down" />
                         </button>
                     </li>
                 </ul>
@@ -111,9 +116,11 @@ const descriptionItems = [
                     :key="i"
                     :class="['flex items-center flex-col md:flex-row pb-[17px] md:pb-0 col-span-1 border-b md:border-b-0 border-[#00000014]', i & 1 ? '' : 'border-r md:border-r-0', i > 2 ? 'py-[10px] md:py-0' : '', i + 1 == descriptionItems.length ? 'justify-start' : 'md:justify-start justify-end']"
                 >
-                    <app-img :src="item.img" class="mb-3 md:mb-0 border border-black md:mr-[26px] w-[34pxw] h-[34pxw]" />
+                    <div class="mb-3 md:mb-0 md:mr-[26px] w-[44px] h-[44px]">
+                        <app-img :src="item.img" class="w-full h-full" />
+                    </div>
 
-                    <div class="text-center md:text-left font-[Inter] leading-[17px] md:leading-5 border border-black">
+                    <div class="text-center md:text-left font-[Inter] leading-[17px] md:leading-5">
                         <p class="text-xs md:text-[14px] font-normal text-[#878787] mb-[5px]" v-html="item.light"></p>
                         <p class="text-[13px] font-semibold md:text-base md:font-bold" v-html="item.bold"></p>
                     </div>

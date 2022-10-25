@@ -15,15 +15,15 @@ import Building from "~/components/Partials/Building.vue";
 </script>
 
 <template>
-    <div>
+    <div class="relative">
         <NuxtLayout name="inner">
             <!-- 59 + 31 = 90 -->
-            <app-width class="mt-7 md:mt-[59px] mb-[33px] md:mb-[100px]" tag="section">
+            <app-width class="mt-7 md:mt-[59px] mb-[33px] md:mb-[100px] br-rouge" tag="section">
                 <the-bread-crumb class="mb-[19px] md:mb-[40px]" />
                 <building-card />
             </app-width>
 
-            <app-width class="mb-[44px] md:mb-[30px]" tag="section">
+            <app-width class="mb-[44px] md:mb-[30px] br-rouge" tag="section">
                 <div class="max-w-[870px]">
                     <!-- flex later -->
                     <building-description class="mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
@@ -42,13 +42,13 @@ import Building from "~/components/Partials/Building.vue";
                 </div>
             </app-width>
 
-            <app-width class="bg-[#F9F9F9] md:bg-transparent pt-[25px] pb-[41px] mb-[37px] md:mb-[30px]" tag="section">
+            <app-width class="bg-[#F9F9F9] md:bg-transparent mb-[37px] md:mb-[30px] br-rouge" tag="section">
                 <div class="bg-[#F9F9F9] shadow-inner-md md:pt-[38px] md:pb-[50px] w-fit">
                     <building-reviews class="bg-[#F9F9F9] md:rounded-[3px] max-w-[870px]" />
                 </div>
             </app-width>
 
-            <app-width class="md:px-0">
+            <app-width class="md:px-0 br-rouge" tag="section">
                 <building-suggestions :count="4" class="md:hidden" />
 
                 <div class="hidden md:flex suggestions-outer">
@@ -66,6 +66,8 @@ import Building from "~/components/Partials/Building.vue";
                     <div class="bridge-shadow relative flex-grow z-50 climp"></div>
                 </div>
             </app-width>
+
+            <div class="bg-green-600 sticky top-0">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius inventore itaque corporis aut consequuntur porro quaerat, sed libero vitae laudantium nisi voluptatem quo, perferendis blanditiis quis aspernatur natus ea voluptatum?</div>
         </NuxtLayout>
     </div>
 </template>

@@ -25,7 +25,7 @@ const width = computed(() => {
     </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $h: 6px;
 $height: 1.4px;
 $height-md: 1.6px;
@@ -138,14 +138,15 @@ $height-md: 1.6px;
 
 @mixin thumb-md() {
     background-color: #1da958 !important;
-    border: $height-md solid white;
+    border: 2 * $height-md solid white;
     border-radius: 50%;
     width: calc(17px + $height-md);
     height: calc(17px + $height-md);
     position: relative;
     z-index: 1;
 
-    @include shadow($blur: 0, $spread: $height-md, $color: #1da958);
+    // @include shadow($blur: 0, $spread: $height-md, $color: #000000);
+    box-shadow: 0 0 0 $height-md #1da958 !important;
 }
 
 .one-range {
