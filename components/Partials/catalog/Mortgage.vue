@@ -11,6 +11,8 @@ const current = shallowRef(0);
 const options = ["Все программы", "Оптимальные условия"];
 
 const selection = ["some randome select option a", "some randome selection b"];
+
+const isMatch = useMediaQuery("(min-width: 768px)");
 </script>
 
 <template>
@@ -20,7 +22,9 @@ const selection = ["some randome select option a", "some randome selection b"];
                 <div class="md:flex md:justify-between md:items-center md:mb-12">
                     <h1 class="mb-[19px] md:mb-0 text-[26px] md:text-[24px] font-bold md:font-extrabold leading-9 md:leading-[28px] font-[Raleway] text-[#131313]">Ипотека</h1>
 
-                    <x-scroll-header :choices="options" v-model="current" :dotted-border="false" :padding="false" class="mb-[21px] md:mb-0" />
+                    <client-only>
+                        <x-scroll-header :choices="options" v-model="current" :dotted-border="!isMatch" :padding="false" class="mb-[21px] md:mb-0" />
+                    </client-only>
                 </div>
             </template>
 
