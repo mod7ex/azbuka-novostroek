@@ -11,6 +11,8 @@ import BuildingDiscounts from "~/components/Partials/catalog/Discounts.vue";
 import BuildingReviews from "~/components/Partials/catalog/Reviews.vue";
 import BuildingSuggestions from "~/components/Partials/catalog/Suggestions.vue";
 import CTA from "~/components/Partials/catalog/CTA.vue";
+
+useMountAnimation();
 </script>
 
 <template>
@@ -19,27 +21,27 @@ import CTA from "~/components/Partials/catalog/CTA.vue";
             <!-- 59 + 31 = 90 -->
             <app-width class="mt-7 md:mt-[59px] mb-[33px] md:mb-[100px]" tag="section">
                 <the-bread-crumb class="mb-[19px] md:mb-[40px]" />
-                <building-card />
+                <building-card class="mount-animation anm-hidden" />
             </app-width>
 
-            <app-width class="tow-cols-md">
+            <app-width class="tow-cols-md" id="anm-root">
                 <div class="left">
-                    <building-description class="catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                    <building-description class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
-                    <building-location class="catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                    <building-location class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
-                    <div class="catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
+                    <div class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
                         <building-choices class="mb-[25px] md:mb-[63px]" />
                         <building-plan class="mb-[25px]" />
                     </div>
 
-                    <building-mortgage class="catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                    <building-mortgage class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
-                    <building-promotion class="catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                    <building-promotion class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
-                    <building-discounts class="catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                    <building-discounts class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
-                    <div class="bg-[#F9F9F9] md:bg-transparent mb-[37px] md:mb-[25px]">
+                    <div class="mount-animation anm-hidden bg-[#F9F9F9] md:bg-transparent mb-[37px] md:mb-[25px]">
                         <div class="bg-[#F9F9F9] shadow-inner-md pt-[25px] px-5 pb-[41px] md:pt-[38px] md:pb-[50px] w-fit">
                             <building-reviews class="bg-[#F9F9F9] md:rounded-[3px]" />
                         </div>
@@ -48,8 +50,8 @@ import CTA from "~/components/Partials/catalog/CTA.vue";
                     <building-suggestions />
                 </div>
 
-                <div class="right">
-                    <CTA class="h-full" />
+                <div class="right pb-14">
+                    <CTA class="mount-animation anm-hidden h-full" />
                 </div>
             </app-width>
         </NuxtLayout>

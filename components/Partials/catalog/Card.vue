@@ -15,19 +15,21 @@
             <div class="flex items-center justify-between md:flex-row-reverse">
                 <button class="bg-[#FCBD00] text-white py-[7px] px-3 rounded-[60px] md:rounded-[3px] md:py-5 md:px-[30px] text-xs md:text-[15px] leading-[13px] md:leading-[17px] font-bold font-[Raleway]">Узнать об акциях</button>
                 <ul class="flex items-center justify-center gap-[6px] md:gap-[10px]">
+                    <ul class="flex items-center justify-center gap-[6px] md:gap-[10px] md:flex-row-reverse">
+                        <ol>
+                            <button class="flex items-center justify-center w-[28px] h-[28px] md:w-[40px] md:h-[40px] relative bg-[#FAFCFE] border-[1.5px] border-[#1da95814] rounded-full cursor-pointer">
+                                <app-i class="absolute text-[#3478F6] w-3 h-3 md:w-5 md:h-5" name="heroicons-outline:star" />
+                            </button>
+                        </ol>
+                        <ol>
+                            <button class="flex items-center justify-center w-[28px] h-[28px] md:w-[40px] md:h-[40px] relative bg-[#FAFCFE] border-[1.5px] border-[#1da95814] rounded-full cursor-pointer">
+                                <app-i class="absolute text-[#3478F6] w-3 h-3 md:w-5 md:h-5" name="ri:bar-chart-line" />
+                            </button>
+                        </ol>
+                    </ul>
                     <ol>
                         <button class="flex items-center justify-center w-[28px] h-[28px] md:w-[40px] md:h-[40px] relative bg-[#FAFCFE] border-[1.5px] border-[#1da95814] rounded-full cursor-pointer">
-                            <app-i class="absolute text-[#3478F6] w-3 h-3 md:w-5 md:h-5" name="heroicons-outline:star" />
-                        </button>
-                    </ol>
-                    <ol>
-                        <button class="flex items-center justify-center w-[28px] h-[28px] md:w-[40px] md:h-[40px] relative bg-[#FAFCFE] border-[1.5px] border-[#1da95814] rounded-full cursor-pointer">
-                            <app-i class="absolute text-[#3478F6] w-3 h-3 md:w-5 md:h-5" name="ri:bar-chart-line" />
-                        </button>
-                    </ol>
-                    <ol>
-                        <button class="flex items-center justify-center w-[28px] h-[28px] md:w-[40px] md:h-[40px] relative bg-[#FAFCFE] border-[1.5px] border-[#1da95814] rounded-full cursor-pointer">
-                            <app-i class="absolute text-[#3478F6] w-4 h-4" name="heroicons-outline:photograph" />
+                            <app-i class="absolute text-[#3478F6] w-6 h-6" name="heroicons-outline:photograph" />
                         </button>
                     </ol>
                 </ul>

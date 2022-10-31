@@ -24,5 +24,5 @@ export const uuidGen = (payload = "some-random-string") => {
 };
 
 export const queuedLast = (fn: TFunc, timeout: number = 0) => {
-    setTimeout(fn, timeout);
+    return setTimeout(fn, timeout);
 };

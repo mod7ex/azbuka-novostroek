@@ -94,7 +94,7 @@ const isMatch = useMediaQuery("(max-width: 397px)");
                     </slot>
                 </p>
 
-                <button @click="() => foo()" :class="['py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[13px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full transition-all duration-300 z-50 relative hover-bg', whiteCta ? 'bg-white' : 'bg-transparent ']">
+                <button @click="() => foo()" :class="['py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[13px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full z-50 relative hover-bg', whiteCta ? 'bg-white' : 'bg-transparent ']">
                     <b>Подробнее</b>
                 </button>
             </div>
@@ -104,6 +104,10 @@ const isMatch = useMediaQuery("(max-width: 397px)");
 
 <style lang="scss">
 .wrapper {
+    * {
+        transition: all 200ms ease-out;
+    }
+
     @include border-anm;
 
     @include break_point(768px) {

@@ -1,8 +1,10 @@
-export default (fn: TFunc, step: number) => {
+import { queuedLast } from "~/utils";
+
+export default (fn: TFunc, step: number, auto = true) => {
     const timerRef = shallowRef<NodeJS.Timeout>();
 
     const set = () => {
-        timerRef.value = setTimeout(fn, step);
+        timerRef.value = queuedLast(fn, step);
     };
 
     const clear = () => {
@@ -14,13 +16,11 @@ export default (fn: TFunc, step: number) => {
         set();
     };
 
-    set();
+    if (auto) set();
 
     const scope = getCurrentScope();
 
-    if (scope) {
-        onScopeDispose(clear);
-    }
+    if (scope) onScopeDispose(clear);
 
     return { clear, reset };
 };

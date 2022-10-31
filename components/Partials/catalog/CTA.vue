@@ -56,5 +56,8 @@ $pad: calc(10px + (56 - 10) * (100vw - 1100px) / (1441 - 1100));
 
 .flexible-pt {
     padding-top: $pad;
+    @include break_point(1441px) {
+        padding-top: 56px;
+    }
 }
 </style>
