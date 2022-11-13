@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import Promotion from "~/assets/svg/promotion.svg";
 
-const count = shallowRef(0);
+const count = shallowRef(19);
 
-useInterval(() => {
-    count.value++;
-}, 1000);
+// useInterval(() => {
+//     count.value++;
+// }, 1000);
 </script>
 
 <template>
