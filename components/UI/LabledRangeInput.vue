@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<Props>(), {
         </slot>
 
         <div class="relative">
-            <button :class="[$attrs.class, bg ? 'border-[#3478f624] bg-[#1da95814] md:md:bg-[#FAFCFE] md:border-[#1da95814] md:rounded-none' : 'border-[#f8f8f8] bg-white']" class="border flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 rounded-[5px] w-full">
+            <button :class="[$attrs.class, 'border-[#3478f624]', bg ? 'bg-[#1da95814] md:md:bg-[#FAFCFE] md:border-[#1da95814] md:rounded-none' : 'bg-white']" class="border flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 rounded-[5px] w-full">
                 <ul :class="['text-[14px] font-medium leading-4 font-[Inter] flex items-center justify-between w-full', bg ? 'text-[#4F4F4F]' : '']">
                     <li>
                         <slot name="min-label">

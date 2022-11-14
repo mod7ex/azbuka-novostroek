@@ -41,7 +41,7 @@ const selectedTypesLables = computed(() => {
         <button
             @click="() => toggle()"
             class="flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 border-[1.6px] rounded-[5px] w-full"
-            :class="[`hg-${len}`, !isCollaped ? 'border-b-0 rounded-b-none' : '', bg ? 'md:rounded-none border-[#3478f624] md:border-[#1da95814] bg-[#1da95814] md:bg-[#FAFCFE]' : 'border-[#f8f8f8]']"
+            :class="[`hg-${len} border-[#3478f624]`, !isCollaped ? 'border-b-0 rounded-b-none' : '', bg ? 'md:rounded-none md:border-[#1da95814] bg-[#1da95814] md:bg-[#FAFCFE]' : '']"
         >
             <slot name="inner-label">
                 <p class="text-[16px] leading-[14px] font-medium" :class="[bg ? 'text-[#828282]' : 'text-[#4F4F4F]']">{{ innerLabel }}</p>
@@ -50,7 +50,7 @@ const selectedTypesLables = computed(() => {
         </button>
 
         <Transition :name="shrink ? 'shrink' : 'fade'">
-            <Blurable @blured="() => toggle(true)" v-if="!isCollaped" :class="[shrink ? '' : 'absolute left-0 right-0 top-auto', bg ? 'border-[#3478f636] md:border-[#1da95814]' : 'border-[#f8f8f8]', 'bg-white overflow-hidden border-[1.6px] rounded-b-[5px] z-10 border-t-0 shadow-select-target']">
+            <Blurable @blured="() => toggle(true)" v-if="!isCollaped" :class="[shrink ? '' : 'absolute left-0 right-0 top-auto', bg ? 'md:border-[#1da95814]' : '', 'border-[#3478f624] bg-white overflow-hidden border-[1.6px] rounded-b-[5px] z-10 border-t-0 shadow-select-target']">
                 <ul :class="[bg ? 'bg-[#1da95814] md:bg-[#FAFCFE]' : '', 'rounded-b-[5px] pb-[10px] pt-[6px] px-3']">
                     <li v-for="(tp, i) in options" :key="i" class="mb-[14px]">
                         <label :for="IDS[i]" class="flex items-center gap-x-3">
@@ -120,6 +120,7 @@ input[type="checkbox"]:checked {
 .shadow-select {
     button {
         @include shadow($x: 0, $y: 8px, $blur: 6px, $spread: 1px, $color: rgba(0, 0, 0, 0.18));
+        // border: 1px solid #0000001f;
     }
 
     .shadow-select-target {

@@ -27,7 +27,13 @@ const isMatch = useMediaQuery("(max-width: 397px)");
                             <app-i name="heroicons-outline:star" class="text-white md:absolute md:text-[#3478F6] w-4 h-4 md:h-5 md:w-5" />
                         </span>
                         <span class="md:w-10 md:h-10 relative flex items-center justify-center md:bg-[#FAFCFE] md:rounded-full md:ml-[9px]">
-                            <app-i name="ic:round-stacked-bar-chart" class="text-white md:absolute md:text-[#3478F6] w-4 h-4 md:h-5 md:w-5" />
+                            <!-- <app-i name="ic:round-stacked-bar-chart" class="text-white md:absolute md:text-[#3478F6] w-4 h-4 md:h-5 md:w-5" /> -->
+                            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="0.8" y="12.5234" width="1.84578" height="3.92941" rx="0.922892" fill="white" stroke="white" stroke-width="0.4" />
+                                <rect x="5.31807" y="5.46431" width="1.84578" height="10.9882" rx="0.922892" fill="white" stroke="white" stroke-width="0.4" />
+                                <rect x="9.83613" y="1.05269" width="1.84578" height="15.4" rx="0.922892" fill="white" stroke="white" stroke-width="0.4" />
+                                <rect x="14.3542" y="8.99409" width="1.84578" height="7.45882" rx="0.922892" fill="white" stroke="white" stroke-width="0.4" />
+                            </svg>
                         </span>
                     </span>
                 </span>
