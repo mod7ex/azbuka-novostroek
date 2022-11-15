@@ -48,7 +48,9 @@ const isMatch = useMediaQuery("(min-width: 768px)");
                 </client-only>
             </div>
 
-            <template #foot> <Button label="Посмотреть все предложения" class="bg-[#FCBD00] w-full md:w-fit" /> </template>
+            <template #foot>
+                <Button label="Посмотреть все предложения" class="bg-[#FCBD00] w-full md:w-fit font-bold text-[15px] leading-[17px] px-[30px] py-5" />
+            </template>
         </NuxtLayout>
     </div>
 </template>

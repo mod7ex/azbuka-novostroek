@@ -26,26 +26,28 @@ const count = shallowRef(19);
 
                         <ul class="flex items-center justify-center gap-[11px] mb-[28px]">
                             <li>
-                                <span class="text-[#FCBD00] bg-white text-[22px] font-black leading-[26px] w-[53px] h-[53px] flex items-center justify-center rounded-[3px] mb-[7px]">17</span>
+                                <span class="text-[#FCBD00] bg-white text-[22px] font-black leading-[26px] w-[54px] h-[54px] flex items-center justify-center rounded-[3px] mb-[7px]">17</span>
                                 <p class="text-[#878787] text-[14px] font-medium leading-4">дней</p>
                             </li>
                             <li>
-                                <span class="text-[#FCBD00] bg-white text-[22px] font-black leading-[26px] w-[53px] h-[53px] flex items-center justify-center rounded-[3px] mb-[7px]">12</span>
+                                <span class="text-[#FCBD00] bg-white text-[22px] font-black leading-[26px] w-[54px] h-[54px] flex items-center justify-center rounded-[3px] mb-[7px]">12</span>
                                 <p class="text-[#878787] text-[14px] font-medium leading-4">часов</p>
                             </li>
                             <li>
                                 <client-only>
                                     <Counter :count="count" :duration="800" class="text-[#FCBD00] text-[22px] font-black leading-[26px] mb-[7px]" />
                                 </client-only>
-                                <!-- <span class="text-[#FCBD00] bg-white text-[22px] font-black leading-[26px] w-[53px] h-[53px] flex items-center justify-center rounded-[3px] mb-[7px]">55</span> -->
+                                <!-- <span class="text-[#FCBD00] bg-white text-[22px] font-black leading-[26px] w-[54px] h-[54px] flex items-center justify-center rounded-[3px] mb-[7px]">55</span> -->
                                 <p class="text-[#878787] text-[14px] font-medium leading-4">минут</p>
                             </li>
                         </ul>
 
-                        <Button class="mb-4 mx-auto flex items-center justify-center gap-[13px] bg-[#E71F61] rounded-[3px]">
-                            <app-i class="" name="ic:round-local-phone" />
-                            <p>Позвонить</p>
-                        </Button>
+                        <button class="mb-4 mx-auto block bg-[#E71F61] rounded-[3px] py-[21px] w-[181px]">
+                            <span class="flex items-center justify-center gap-[13px] text-white">
+                                <app-i name="ic:round-local-phone" />
+                                <p class="text-[15px] font-bold leading-[17px] font-[Raleway]">Позвонить</p>
+                            </span>
+                        </button>
 
                         <a class="text-[#3478F6] font-semibold text-[15px] leading-[17px] font-[Raleway]" href="javascript(void(0))">Все акции застройщика</a>
                     </div>

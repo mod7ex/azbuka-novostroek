@@ -21,7 +21,7 @@ const locationDetails = [
     <div>
         <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-[46px] md:pt-[40px]']">
             <template #head>
-                <h1 class="text-[26px] font-bold leading-9 font-[Raleway] text-[#131313]">Расположение</h1>
+                <h1 class="text-[24px] font-black leading-[28px] font-[Raleway] text-[#131313]">Расположение</h1>
             </template>
 
             <div class="my-4 md:mt-[34px] md:mb-[28px]">

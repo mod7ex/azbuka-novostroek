@@ -114,21 +114,30 @@ const descriptionItems = [
                 <li
                     v-for="(item, i) in descriptionItems"
                     :key="i"
-                    :class="['flex items-center flex-col md:flex-row pb-[17px] md:pb-0 col-span-1 border-b md:border-b-0 border-[#00000014]', i & 1 ? '' : 'border-r md:border-r-0', i > 2 ? 'py-[10px] md:py-0' : '', i + 1 == descriptionItems.length ? 'justify-start' : 'md:justify-start justify-end']"
+                    :class="[
+                        'pb-[17px] md:pb-0 col-span-1',
+                        // 'border-b md:border-b-0 border-[#00000014]'
+                        i & 1 ? '' : 'border-r md:border-r-0',
+                        i > 2 ? 'py-[10px] md:py-0' : '',
+                        i + 1 == descriptionItems.length ? 'justify-start' : 'md:justify-start justify-end',
+                    ]"
                 >
-                    <div class="mb-3 md:mb-0 md:mr-[26px] w-[44px] h-[44px]">
-                        <app-img :src="item.img" class="w-full h-full" />
-                    </div>
+                    <div class="flex items-center flex-col md:flex-row">
+                        <div class="mb-3 md:mb-0 md:mr-[26px] w-[44px] h-[44px]">
+                            <app-img :src="item.img" class="w-full h-full" />
+                        </div>
 
-                    <div class="text-center md:text-left font-[Inter] leading-[17px] md:leading-5">
-                        <p class="text-xs md:text-[14px] font-normal text-[#878787] mb-[5px]" v-html="item.light"></p>
-                        <p class="text-[13px] font-semibold md:text-base md:font-bold" v-html="item.bold"></p>
+                        <div class="text-center md:text-left font-[Inter] leading-[17px] md:leading-5">
+                            <p class="text-xs md:text-[14px] font-normal text-[#878787] mb-[5px]" v-html="item.light"></p>
+                            <p class="text-[13px] font-semibold md:text-base md:font-bold" v-html="item.bold"></p>
+                        </div>
                     </div>
                 </li>
             </ul>
 
             <template #foot>
-                <dashed-devider class="border-[#00000014] mb-8 hidden md:block" />
+                <!-- <dashed-devider class="border-[#00000014] mb-8 hidden md:block" /> -->
+                <hr class="border-[#00000014] mb-8 hidden md:block" />
 
                 <div class="text-[13px] md:text-[14px] mb-[34px]">
                     <p class="leading-6 font-normal font-[Inter] text-[#666666] mb-[17px] md:mb-[42px]">

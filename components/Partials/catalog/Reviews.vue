@@ -6,7 +6,7 @@ const options = ["Отзывы", "Вопрос - ответ"];
 
 <template>
     <div class="md:bg-[#F9F9F9]">
-        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 pb-[30px]']">
+        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 pb-[30px] md:px-[48px]']">
             <template #head>
                 <x-scroll-header :choices="options" v-model="current" class="mb-[26px]" />
             </template>
@@ -25,7 +25,7 @@ const options = ["Отзывы", "Вопрос - ответ"];
 
                 <template #footer>
                     <div class="flex items-center justify-between">
-                        <p class="font[Raleway] text-[13px] font-bold leading-3 text-[#E71F61]">Ответить</p>
+                        <p class="font[Raleway] text-[13px] font-bold leading-3 text-[#E71F61] underline">Ответить</p>
                         <p class="flex items-center gap-4">
                             <span class="text-xs font-normal font-[Inter] leading-6 text-[#878787]">Полезный отзыв?</span>
                             <client-only>
@@ -43,7 +43,7 @@ const options = ["Отзывы", "Вопрос - ответ"];
             </template>
         </NuxtLayout>
 
-        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0']">
+        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-[48px]']">
             <template #head>
                 <h1 class="text-[26px] font-bold leading-9 font-[Raleway] text-[#131313] mb-[22px] text-center md:text-left">Добавить отзыв</h1>
             </template>

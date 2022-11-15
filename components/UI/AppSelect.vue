@@ -33,7 +33,7 @@ const selectedTypesLables = computed(() => {
 <template>
     <div :class="[$attrs.class, shrink ? '' : 'relative', !isCollaped && !shrink ? 'shadow-select' : '']">
         <slot name="label">
-            <p class="mb-[13px] text-[12px] leading-[14px] font-normal font-[Raleway] text-[#4F4F4F] md:font-extrabold md:text-black md:mb-[17px]">
+            <p :class="['mb-[13px] text-[12px] leading-[14px] font-normal font-[Raleway] text-[#4F4F4F] md:font-extrabold md:text-black md:mb-[17px]', bg ? 'uppercase' : '']">
                 {{ label }}
             </p>
         </slot>

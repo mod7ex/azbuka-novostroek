@@ -75,9 +75,9 @@ import PlanA from "~/assets/img/plan_1.png";
                 </div>
             </div>
 
-            <div class="text-white text-[13px] font-bold leading-[13px] font-[Raleway] flex items-center justify-center md:justify-start gap-1 md:gap-[10px]">
-                <Button label="Забронировать" class="bg-[#1DA958] py-[13px] px-[15px]" />
-                <Button label="Рассчитать ипотеку" class="bg-[#FCBD00] py-[13px] px-[15px] whitespace-nowrap" />
+            <div class="text-white flex items-center justify-center md:justify-start gap-1 md:gap-[10px]">
+                <Button label="Забронировать" class="bg-[#1DA958] py-[13px] px-[20px] text-[15px] font-bold leading-[17px] font-[Raleway]" />
+                <Button label="Рассчитать ипотеку" class="bg-[#FCBD00] py-[13px] px-[20px] whitespace-nowrap text-[15px] font-bold leading-[17px] font-[Raleway]" />
             </div>
         </div>
     </article>

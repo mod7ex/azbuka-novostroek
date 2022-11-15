@@ -8,7 +8,7 @@ const [isVisible, toggleVisibility] = useToggle(false);
 
 <template>
     <section :class="[$attrs.class]">
-        <div class="search-container border md:border-none flex items-center border-[#3478f624] rounded h-[50px] px-[18px] md:px-5 bg-white mb-[6px]">
+        <div class="search-container mx-auto border md:border-none flex items-center border-[#3478f624] rounded h-[50px] px-[18px] md:px-5 bg-white mb-[6px]">
             <ul :class="['search-area flex items-center justify-between w-full flex-wrap']">
                 <li :class="['search-input flex items-center flex-grow']">
                     <app-i name="heroicons-outline:search" class="text-[#1DA958] mr-4 w-[17px] h-[17px] md:text-[#5F5F5F] cursor-pointer" />
@@ -45,9 +45,9 @@ const [isVisible, toggleVisibility] = useToggle(false);
         </div>
 
         <Transition name="search-expand" :aria-expanded="isCollaped">
-            <Blurable tag="ul" @blured="() => toggle(true)" class="filter grid gap-4 grid-cols-12 py-4 pb-8 rounded-[5px] px-5 bg-white overflow-hidden hg-6" v-if="!isCollaped">
+            <Blurable tag="ul" @blured="() => toggle(true)" class="filter mx-auto grid gap-4 grid-cols-12 py-4 pb-8 rounded-[5px] px-5 bg-white overflow-hidden hg-6" v-if="!isCollaped">
                 <li class="col-span-4">
-                    <h4 class="text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">расположение</h4>
+                    <h4 class="mb-4 text-[#50535A] text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">расположение</h4>
                     <div>
                         <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Регион</button>
                         <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Город</button>
@@ -57,7 +57,7 @@ const [isVisible, toggleVisibility] = useToggle(false);
                 </li>
 
                 <li class="col-span-4">
-                    <h4 class="text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">Дом</h4>
+                    <h4 class="mb-4 text-[#50535A] text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">Дом</h4>
                     <div>
                         <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Класс недвижимости</button>
                         <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Материал стен</button>
@@ -69,7 +69,7 @@ const [isVisible, toggleVisibility] = useToggle(false);
                 </li>
 
                 <li class="col-span-4">
-                    <h4 class="text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">КВАРТИРА</h4>
+                    <h4 class="mb-4 text-[#50535A] text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">КВАРТИРА</h4>
                     <div>
                         <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Этаж</button>
                         <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Отделка</button>
@@ -98,11 +98,15 @@ const [isVisible, toggleVisibility] = useToggle(false);
 </template>
 
 <style lang="scss" scoped>
+$w: 1160px;
+
 .filter {
+    max-width: $w;
     box-shadow: $md-box-shadow;
 }
 
 .search-container {
+    max-width: $w;
     box-shadow: $box-shadow;
 
     .search-area {
@@ -151,6 +155,15 @@ const [isVisible, toggleVisibility] = useToggle(false);
             .search-input {
                 flex-grow: 1;
             }
+        }
+    }
+}
+
+// ************************************************
+@mixin items($columns: 10) {
+    @for $i from 1 through $columns {
+        &.hg-#{$i} {
+            height: ($i * (4rem)) + (2rem + 3rem + 1rem);
         }
     }
 }

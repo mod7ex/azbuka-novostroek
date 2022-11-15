@@ -14,8 +14,10 @@ const isMatch = useMediaQuery("(max-width: 397px)");
 <template>
     <div :class="['wrapper', $attrs.class]">
         <div :class="['building transition-all duration-300 md:rounded-[3px]', shadow ? 'building-shadow' : '']">
-            <div class="relative img rounded-[5px] md:rounded-none md:rounded-t h-[120px] sm:h-44 md:h-[200px] w-full">
-                <app-img class="rounded-[5px] md:rounded-b-none h-full w-full" :src="img" alt="" />
+            <div class="relative img rounded-[5px] md:rounded-none md:rounded-t w-full">
+                <div :class="['h-[120px] sm:h-44', whiteCta ? 'md:h-[163px]' : 'md:h-[200px]']">
+                    <app-img class="rounded-[5px] md:rounded-b-none" fill :src="img" alt="" />
+                </div>
 
                 <span class="absolute top-0 right-0 left-0 flex justify-between p-[9px] md:p-[13px]" v-if="actions">
                     <span class="relative flex items-center justify-center h-6 w-6 md:w-10 md:h-10 bg-[#E71F61] rounded-full">
@@ -27,13 +29,7 @@ const isMatch = useMediaQuery("(max-width: 397px)");
                             <app-i name="heroicons-outline:star" class="text-white md:absolute md:text-[#3478F6] w-4 h-4 md:h-5 md:w-5" />
                         </span>
                         <span class="md:w-10 md:h-10 relative flex items-center justify-center md:bg-[#FAFCFE] md:rounded-full md:ml-[9px]">
-                            <!-- <app-i name="ic:round-stacked-bar-chart" class="text-white md:absolute md:text-[#3478F6] w-4 h-4 md:h-5 md:w-5" /> -->
-                            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="0.8" y="12.5234" width="1.84578" height="3.92941" rx="0.922892" fill="white" stroke="white" stroke-width="0.4" />
-                                <rect x="5.31807" y="5.46431" width="1.84578" height="10.9882" rx="0.922892" fill="white" stroke="white" stroke-width="0.4" />
-                                <rect x="9.83613" y="1.05269" width="1.84578" height="15.4" rx="0.922892" fill="white" stroke="white" stroke-width="0.4" />
-                                <rect x="14.3542" y="8.99409" width="1.84578" height="7.45882" rx="0.922892" fill="white" stroke="white" stroke-width="0.4" />
-                            </svg>
+                            <bars-svg class="w-4 h-4" />
                         </span>
                     </span>
                 </span>
@@ -45,7 +41,7 @@ const isMatch = useMediaQuery("(max-width: 397px)");
                         <slot name="description-up">ТПУ «ДМИТРОВСКАЯ</slot>
                     </h2>
                     <!-- desktop -->
-                    <p v-if="underConstruction" class="text-[#1DA958] italic font-medium text-xs leading-[14px] hidden md:inline">Строится</p>
+                    <p v-if="underConstruction" class="text-[#1DA958] italic font-medium text-xs leading-[14px] hidden md:inline font-[Inter]">Строится</p>
                 </div>
 
                 <h1 class="font-semibold md:font-bold text-[13px] md:text-[16px] text-[#131313] leading-[17px] md:leading-[19px] font-[Inter] md:mb-[13px]">
@@ -100,8 +96,8 @@ const isMatch = useMediaQuery("(max-width: 397px)");
                     </slot>
                 </p>
 
-                <button @click="() => foo()" :class="['py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[13px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full z-50 relative hover-bg', whiteCta ? 'bg-white' : 'bg-transparent ']">
-                    <b>Подробнее</b>
+                <button @click="() => foo()" :class="['py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[15px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full z-50 relative hover-bg', whiteCta ? 'bg-white' : 'bg-transparent ']">
+                    <p>{{ whiteCta ? "Узнать больше" : "Подробнее" }}</p>
                 </button>
             </div>
         </div>

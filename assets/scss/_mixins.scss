@@ -1,11 +1,3 @@
-@mixin items($columns: 10) {
-    @for $i from 1 through $columns {
-        &.hg-#{$i} {
-            height: ($i * (4rem)) + (2rem + 3rem);
-        }
-    }
-}
-
 @mixin flex($flex-wrap: wrap, $flex-direction: row, $align-items: center, $justify-content: center, $gap: 0) {
     display: flex;
     flex-wrap: $flex-wrap;

@@ -41,8 +41,8 @@ useMountAnimation();
 
                     <building-discounts class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
-                    <div class="mount-animation anm-hidden bg-[#F9F9F9] md:bg-transparent mb-[37px] md:mb-[25px]">
-                        <div class="bg-[#F9F9F9] shadow-inner-md pt-[25px] px-5 pb-[41px] md:pt-[38px] md:pb-[50px] w-fit">
+                    <div class="mount-animation anm-hidden bg-[#F9F9F9] md:bg-transparent mb-[37px] md:mb-[93px]">
+                        <div class="bg-[#F9F9F9] shadow-inner-md pt-[25px] px-5 md:px-0 pb-[41px] md:pt-[38px] md:pb-[50px] w-fit">
                             <building-reviews class="bg-[#F9F9F9] md:rounded-[3px]" />
                         </div>
                     </div>

@@ -14,19 +14,19 @@ import CTASVG from "~/assets/svg/cta.svg";
                 </div>
 
                 <div class="mb-[23px]">
-                    <p class="mb-[14px]">
+                    <p class="mb-[14px] hover:text-[#3478F6] hover:underline cursor-pointer">
                         <app-i name="ic:round-phone" class="mr-[13px] text-[#E71F61]" />
                         <span>Заказать звонок</span>
                     </p>
-                    <p class="mb-[14px] text-[#3478F6]">
-                        <app-i name="mdi:eye" class="mr-[13px]" />
-                        <span class="underline">Записаться на просмотр</span>
+                    <p class="mb-[14px] hover:text-[#3478F6] hover:underline cursor-pointer">
+                        <app-i name="mdi:eye" class="mr-[13px] text-[#3478F6]" />
+                        <span>Записаться на просмотр</span>
                     </p>
-                    <p class="mb-[14px]">
+                    <p class="mb-[14px] hover:text-[#3478F6] hover:underline cursor-pointer">
                         <app-i name="mingcute:whatsapp-fill" class="mr-[13px] text-[#4CAF50]" />
                         <span>Написать в WhatsApp</span>
                     </p>
-                    <p>
+                    <p class="hover:text-[#3478F6] hover:underline cursor-pointer">
                         <app-i name="mingcute:telegram-fill" class="mr-[13px] text-[#039BE5]" />
                         <span>Написать в Telegram</span>
                     </p>
