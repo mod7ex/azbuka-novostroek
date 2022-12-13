@@ -1,3 +1,5 @@
+> https://github.com/azbuka-novostroek/azbuka.site
+
 #### used Nuxt-icons https://github.com/nuxt-modules/icon You can use any name from the https://icones.js.org collection:
 
 ```vue
@@ -72,7 +74,7 @@ server {
 
 ---
 
-# now the app should run in background but it shows `502 Bad Gateway` once we disconnect the ssh connection we do this using https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/ (node apps production manager)
+### now the app should run in background, because it shows `502 Bad Gateway` once we disconnect the ssh connection, we do this using https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/ (node apps production manager)
 
 > install
 
@@ -102,3 +104,7 @@ $ pm2 delete app_name
 # Issues
 
 -   https://github.com/tailwindlabs/tailwindcss/issues/4962
+
+---
+
+> `https://apollo.nuxtjs.org/` GraphQL

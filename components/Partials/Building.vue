@@ -7,8 +7,6 @@ withDefaults(defineProps<{ img?: string; actions?: boolean; underConstruction?: 
 });
 
 const foo = () => {};
-
-const isMatch = useMediaQuery("(max-width: 397px)");
 </script>
 
 <template>

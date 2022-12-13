@@ -18,7 +18,7 @@ export default defineNuxtConfig({
 
     // ssr: false,
 
-    modules: ["nuxt-icon"],
+    modules: ["nuxt-icon", "@nuxtjs/apollo"],
 
     components: {
         global: true,
@@ -41,6 +41,15 @@ export default defineNuxtConfig({
                                      @import "@/assets/scss/_mixins.scss";
                                      @import "@/assets/scss/_reset.scss";`,
                 },
+            },
+        },
+    },
+
+    apollo: {
+        autoImports: true,
+        clients: {
+            default: {
+                httpEndpoint: process.env.GRAPHQL_URL,
             },
         },
     },

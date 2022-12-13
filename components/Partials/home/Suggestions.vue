@@ -1,11 +1,18 @@
 <script setup lang="ts">
 import Building from "~/components/Partials/Building.vue";
+import { apartmentsData } from "~/services/gql";
 
 withDefaults(defineProps<{ sort?: true; count?: number }>(), {
     count: 8,
 });
 
 const [isCollapsed, toggle] = useToggle();
+
+// const { data } = apartmentsData();
+
+// const { result, loading, error } = apartmentsData();
+
+// console.log(result.value);
 </script>
 
 <template>

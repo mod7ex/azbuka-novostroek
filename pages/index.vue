@@ -4,7 +4,7 @@ import Locations from "~/components/Partials/home/Locations.vue";
 import About from "~/components/Partials/home/About.vue";
 import Advantages from "~/components/Partials/home/Advantages.vue";
 
-useMountAnimation();
+// useMountAnimation();
 </script>
 
 <template>
