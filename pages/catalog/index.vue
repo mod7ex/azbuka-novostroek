@@ -12,7 +12,7 @@ import BuildingReviews from "~/components/Partials/catalog/Reviews.vue";
 import BuildingSuggestions from "~/components/Partials/catalog/Suggestions.vue";
 import CTA from "~/components/Partials/catalog/CTA.vue";
 
-useMountAnimation();
+// useMountAnimation();
 </script>
 
 <template>
