@@ -116,29 +116,25 @@ export const GQL_PAGINATION_PART = `
     }
 `;
 
-export function complexes(
-    data = "name",
-    filter = { page: 1, first: 12 },
-    options = { notifyOnNetworkStatusChange: true }
-) {
+export function complexes(data = "name", filter = { page: 1, first: 12 }, options = { notifyOnNetworkStatusChange: true }) {
     return useQuery(
         gql`
-      query complexes(
-        $page: Int
-        $first: Int
-        ${FILTER_AS_ARGUMENT}
+    query complexes(
+      $page: Int
+      $first: Int
+      ${FILTER_AS_ARGUMENT}
+    ) {
+      complexes(
+        page: $page
+        first: $first
+        ${FILTER_AS_QUERY}
       ) {
-        complexes(
-          page: $page
-          first: $first
-          ${FILTER_AS_QUERY}
-        ) {
-          data {
-            ${data}
-          }
-         ${GQL_PAGINATION_PART}
+        data {
+          ${data}
         }
-      }`,
+       ${GQL_PAGINATION_PART}
+      }
+    }`,
         () => filter,
         options
     );

@@ -26,3 +26,27 @@ export const uuidGen = (payload = "some-random-string") => {
 export const queuedLast = (fn: TFunc, timeout: number = 0) => {
     return setTimeout(fn, timeout);
 };
+
+function separateEach3BY(x: number, separator: string) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator);
+}
+
+export const format_thousands = (n: number) => {
+    return separateEach3BY(n, " ");
+
+    /*
+    let _n = "";
+
+    let ch = n.toString();
+
+    let len = ch.length;
+
+    for (let i = 0; i < len; i++) {
+        const j = len - 1 - i;
+
+        _n = `${ch[j]}${i % 3 === 0 ? " " : ""}` + _n;
+    }
+
+    return _n.trim();
+*/
+};
