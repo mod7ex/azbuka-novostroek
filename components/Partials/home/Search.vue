@@ -1,9 +1,23 @@
 <script setup lang="ts">
 import MobileFilter from "~/components/Partials/MobileFilter.vue";
+import { apartmentsData } from "~/services/gql/apartments";
 
 const [isCollaped, toggle] = useToggle();
 
 const [isVisible, toggleVisibility] = useToggle(false);
+
+const [isTypeCollaped, toggleType] = useToggle();
+const [isPriceCollaped, togglePrice] = useToggle(false);
+const [isSquareCollaped, toggleSquare] = useToggle();
+const [isDeadlineCollaped, toggleDeadline] = useToggle();
+
+const { filter, reset, clear } = useFilter();
+
+// ApartmentsData
+const { result } = apartmentsData();
+const apartments = computed(() => result.value?.apartmentsData ?? null);
+
+onScopeDispose(clear);
 </script>
 
 <template>
@@ -17,20 +31,136 @@ const [isVisible, toggleVisibility] = useToggle(false);
 
                 <li class="search-options py-2">
                     <ul class="flex items-center divide-x divide-gray-300">
-                        <li class="px-[27px] flex items-center">
-                            <span class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Тип квартиры</span>
+                        <li class="px-[27px] flex items-center relative">
+                            <button @click="() => toggleType()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Тип квартиры</button>
+                            <Transition name="slide-up-fade-out" :aria-expanded="isTypeCollaped">
+                                <Blurable class="absolute top-7 z-50 bg-white app-shadow rounded py-[6px] min-w-[200px]" tag="div" @blured="() => toggleType(true)" v-if="!isTypeCollaped">
+                                    <label for="" class="flex gap-3 px-3 py-[6px]">
+                                        <input type="checkbox" id="" />
+                                        <p class="text-sm">lorem</p>
+                                    </label>
+                                    <hr />
+                                    <label for="" class="flex gap-3 px-3 py-[6px]">
+                                        <input type="checkbox" id="" />
+                                        <p class="text-sm">lorem</p>
+                                    </label>
+                                    <label for="" class="flex gap-3 px-3 py-[6px]">
+                                        <input type="checkbox" id="" />
+                                        <p class="text-sm">lorem</p>
+                                    </label>
+                                    <label for="" class="flex gap-3 px-3 py-[6px]">
+                                        <input type="checkbox" id="" />
+                                        <p class="text-sm">lorem</p>
+                                    </label>
+                                    <label for="" class="flex gap-3 px-3 py-[6px]">
+                                        <input type="checkbox" id="" />
+                                        <p class="text-sm">lorem</p>
+                                    </label>
+                                    <label for="" class="flex gap-3 px-3 py-[6px]">
+                                        <input type="checkbox" id="" />
+                                        <p class="text-sm">lorem</p>
+                                    </label>
+                                </Blurable>
+                            </Transition>
                         </li>
 
-                        <li class="px-[27px] flex items-center">
-                            <span class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Цена</span>
+                        <li class="px-[27px] flex items-center relative">
+                            <button @click="() => togglePrice()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Цена</button>
+                            <Transition name="slide-up-fade-out" :aria-expanded="isPriceCollaped">
+                                <Blurable class="divide-x absolute top-7 -left-16 z-50 bg-white app-shadow rounded py-[6px] min-w-[300px] flex" tag="div" @blured="() => togglePrice(true)" v-if="!isPriceCollaped">
+                                    <div class="px-3 py-[6px]">
+                                        <input type="text" class="border border-[#00000014] p-1 rounded mb-2 w-full" />
+                                        <ul>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
+                                        </ul>
+                                    </div>
+                                    <div class="px-3 py-[6px]">
+                                        <input type="text" class="border border-[#00000014] p-1 rounded mb-2 w-full" />
+                                        <ul>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
+                                        </ul>
+                                    </div>
+                                </Blurable>
+                            </Transition>
                         </li>
 
-                        <li class="px-[27px] flex items-center">
-                            <span class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Площадь</span>
+                        <li class="px-[27px] flex items-center relative">
+                            <button @click="() => toggleSquare()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Площадь</button>
+                            <Transition name="slide-up-fade-out" :aria-expanded="isSquareCollaped">
+                                <Blurable class="absolute top-7 -left-16 z-50 bg-white app-shadow rounded py-[6px] min-w-[200px] flex" tag="div" @blured="() => toggleSquare(true)" v-if="!isSquareCollaped">
+                                    <div class="px-3 py-[6px]">
+                                        <input type="text" class="border border-[#00000014] p-1 rounded mb-2 w-full" />
+                                        <ul>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
+                                        </ul>
+                                    </div>
+                                    <div class="px-3 py-[6px]">
+                                        <input type="text" class="border border-[#00000014] p-1 rounded mb-2 w-full" />
+                                        <ul>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
+                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
+                                        </ul>
+                                    </div>
+                                </Blurable>
+                            </Transition>
                         </li>
 
-                        <li class="px-[27px] flex items-center">
-                            <span class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Срок аренды</span>
+                        <li class="px-[27px] flex items-center relative">
+                            <button @click="() => toggleDeadline()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Срок аренды</button>
+                            <Transition name="slide-up-fade-out" :aria-expanded="isDeadlineCollaped">
+                                <Blurable class="absolute top-7 z-50 bg-white app-shadow rounded py-[6px] min-w-[200px]" tag="div" @blured="() => toggleDeadline(true)" v-if="!isDeadlineCollaped">
+                                    <button class="px-4 py-2 w-full text-left hover:bg-gray-100 rounded">Done</button>
+                                    <hr />
+                                    <ul>
+                                        <li>
+                                            <button class="px-4 py-2 w-full text-left hover:bg-gray-100 rounded">til 23 Oc 2036</button>
+                                        </li>
+
+                                        <li>
+                                            <button class="px-4 py-2 w-full text-left hover:bg-gray-100 rounded">til 23 Oc 2036</button>
+                                        </li>
+
+                                        <li>
+                                            <button class="px-4 py-2 w-full text-left hover:bg-gray-100 rounded">til 23 Oc 2036</button>
+                                        </li>
+
+                                        <li>
+                                            <button class="px-4 py-2 w-full text-left hover:bg-gray-100 rounded">til 23 Oc 2036</button>
+                                        </li>
+
+                                        <li>
+                                            <button class="px-4 py-2 w-full text-left hover:bg-gray-100 rounded">til 23 Oc 2036</button>
+                                        </li>
+
+                                        <li>
+                                            <button class="px-4 py-2 w-full text-left hover:bg-gray-100 rounded">til 23 Oc 2036</button>
+                                        </li>
+                                    </ul>
+                                </Blurable>
+                            </Transition>
                         </li>
 
                         <li class="pl-[27px] flex items-center">

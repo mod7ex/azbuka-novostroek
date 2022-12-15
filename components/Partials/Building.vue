@@ -16,8 +16,6 @@ withDefaults(
     }
 );
 
-const foo = () => {};
-
 const isAllBuilt = (payload) => payload?.count_homes?.total === payload?.count_homes?.finished;
 
 const onlyFewBuilt = (payload) => payload?.count_homes?.finished > 0 && payload?.count_homes?.finished < payload?.count_homes?.total;
@@ -121,9 +119,11 @@ const startingPrice = (payload) => {
                     </slot>
                 </p>
 
-                <button @click="() => foo()" :class="['py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[15px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full z-50 relative hover-bg', whiteCta ? 'bg-white' : 'bg-transparent ']">
+                <!-- <NuxtLink :to="`/catalog/${complex?.id}`" :class="['block text-center py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[15px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full z-50 relative hover-bg', whiteCta ? 'bg-white' : 'bg-transparent ']"> -->
+                <button :class="['py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[15px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full z-50 relative hover-bg', whiteCta ? 'bg-white' : 'bg-transparent ']">
                     <p>{{ whiteCta ? "Узнать больше" : "Подробнее" }}</p>
                 </button>
+                <!-- </NuxtLink> -->
             </div>
         </div>
     </div>

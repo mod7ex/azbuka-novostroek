@@ -8,9 +8,27 @@ const props = withDefaults(defineProps<{ sort?: true; count?: number }>(), {
 
 const [isCollapsed, toggle] = useToggle();
 
-const { result, loading, error, refetch } = getComplexes(GQL_FOR_LIST, { page: 1, first: props.count });
+const { result, loading, error, fetchMore } = getComplexes(GQL_FOR_LIST, { page: 1, first: props.count });
 
 const complexes = computed(() => result.value?.complexes?.data ?? []);
+
+const loadMore = () => {
+    const page = (result.value?.complexes?.paginatorInfo?.currentPage ?? 0) + 1;
+
+    return fetchMore({
+        variables: { page },
+        updateQuery: (previousResult, { fetchMoreResult }) => {
+            if (!fetchMoreResult) return previousResult;
+
+            return {
+                complexes: {
+                    ...previousResult?.complexes,
+                    data: [...previousResult?.complexes?.data, ...fetchMoreResult?.complexes?.data],
+                },
+            };
+        },
+    });
+};
 </script>
 
 <template>
@@ -39,19 +57,22 @@ const complexes = computed(() => result.value?.complexes?.data ?? []);
                 </div>
             </template>
 
-            <div class="grid grid-cols-12 gap-3 md:gap-[30px] mb-[28px] md:mb-[61px]">
-                <!-- 26 + 2 = 28 -->
-                <Building v-for="complex in complexes" :key="complex.id" :complex="complex" under-construction shadow />
+            <div>
+                <div class="grid grid-cols-12 gap-3 md:gap-[30px] mb-[28px] md:mb-[61px]">
+                    <!-- 26 + 2 = 28 -->
+                    <Building v-for="complex in complexes" :key="complex.id" :complex="complex" under-construction shadow />
 
-                <pre>
-                    <!-- {{ JSON.stringify(result?.complexes?.data[0], null, 2) }} -->
+                    <pre>
+                    <!-- {{ JSON.stringify(result?.complexes?.data?.length, null, 2) }} -->
                     <!-- {{ JSON.stringify(result?.complexes?.paginatorInfo, null, 2) }} -->
-                </pre>
+                    </pre>
+                </div>
             </div>
 
             <template #foot>
-                <div class="flex justify-center">
-                    <Button label="Загрузить еще" class="mx-auto block md:inline bg-[#E71F61]" />
+                <div class="flex justify-center" v-if="result?.complexes.paginatorInfo.hasMorePages">
+                    <loader v-if="loading" />
+                    <Button v-else @click="loadMore" label="Загрузить еще" class="mx-auto block md:inline bg-[#E71F61]" :disabled="loading" />
                 </div>
             </template>
         </NuxtLayout>
