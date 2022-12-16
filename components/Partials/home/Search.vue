@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import MobileFilter from "~/components/Partials/MobileFilter.vue";
 import { apartmentsData } from "~/services/gql/apartments";
+import { homesData } from "~/services/gql/homes";
 
 const [isCollaped, toggle] = useToggle();
 
 const [isVisible, toggleVisibility] = useToggle(false);
 
 const [isTypeCollaped, toggleType] = useToggle();
-const [isPriceCollaped, togglePrice] = useToggle(false);
+const [isPriceCollaped, togglePrice] = useToggle();
 const [isSquareCollaped, toggleSquare] = useToggle();
 const [isDeadlineCollaped, toggleDeadline] = useToggle();
 
@@ -17,11 +18,29 @@ const { filter, reset, clear } = useFilter();
 const { result } = apartmentsData();
 const apartments = computed(() => result.value?.apartmentsData ?? null);
 
-onScopeDispose(clear);
+// Type [Rooms count]
+const countRooms = computed<{ label: `${number} комн.`; value: number }[]>(() => apartments.value?.count_rooms?.filter((e) => e > 0)?.map((e) => ({ label: `${e} комн.`, value: e })) ?? null);
+
+// Price
+const PRICE_MIN = 500000;
+const PRICE_MAX = 10000000;
+
+// ------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Deadlines
+const { result: homesResult } = homesData();
+
+const deadlines = computed(() => homesResult.value?.homesData?.deadlines ?? []);
+
+const deadline = shallowRef({});
+
+// onScopeDispose(clear);
 </script>
 
 <template>
     <section :class="[$attrs.class]">
+        <pre><!-- {{ result }} --><!-- {{ filter }} --></pre>
+
         <div class="search-container mx-auto border md:border-none flex items-center border-[#3478f624] rounded h-[50px] px-[18px] md:px-5 bg-white mb-[6px]">
             <ul :class="['search-area flex items-center justify-between w-full flex-wrap']">
                 <li :class="['search-input flex items-center flex-grow']">
@@ -33,134 +52,30 @@ onScopeDispose(clear);
                     <ul class="flex items-center divide-x divide-gray-300">
                         <li class="px-[27px] flex items-center relative">
                             <button @click="() => toggleType()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Тип квартиры</button>
-                            <Transition name="slide-up-fade-out" :aria-expanded="isTypeCollaped">
-                                <Blurable class="absolute top-7 z-50 bg-white app-shadow rounded py-[6px] min-w-[200px]" tag="div" @blured="() => toggleType(true)" v-if="!isTypeCollaped">
-                                    <label for="" class="flex gap-3 px-3 py-[6px]">
-                                        <input type="checkbox" id="" />
-                                        <p class="text-sm">lorem</p>
+                            <filter-by-rooms :is-collapsed="isTypeCollaped" :handel-blur="() => toggleType(true)" :options="countRooms" v-model="filter.count_rooms">
+                                <template #before>
+                                    <label :for="`room-count_studio-0`" class="flex gap-3 px-3 py-[6px] cursor-pointer hover:bg-gray-100">
+                                        <input type="checkbox" :id="`room-count_studio-0`" v-model="filter.is_studio" />
+                                        <p class="text-xs">Студии</p>
                                     </label>
                                     <hr />
-                                    <label for="" class="flex gap-3 px-3 py-[6px]">
-                                        <input type="checkbox" id="" />
-                                        <p class="text-sm">lorem</p>
-                                    </label>
-                                    <label for="" class="flex gap-3 px-3 py-[6px]">
-                                        <input type="checkbox" id="" />
-                                        <p class="text-sm">lorem</p>
-                                    </label>
-                                    <label for="" class="flex gap-3 px-3 py-[6px]">
-                                        <input type="checkbox" id="" />
-                                        <p class="text-sm">lorem</p>
-                                    </label>
-                                    <label for="" class="flex gap-3 px-3 py-[6px]">
-                                        <input type="checkbox" id="" />
-                                        <p class="text-sm">lorem</p>
-                                    </label>
-                                    <label for="" class="flex gap-3 px-3 py-[6px]">
-                                        <input type="checkbox" id="" />
-                                        <p class="text-sm">lorem</p>
-                                    </label>
-                                </Blurable>
-                            </Transition>
+                                </template>
+                            </filter-by-rooms>
                         </li>
 
                         <li class="px-[27px] flex items-center relative">
                             <button @click="() => togglePrice()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Цена</button>
-                            <Transition name="slide-up-fade-out" :aria-expanded="isPriceCollaped">
-                                <Blurable class="divide-x absolute top-7 -left-16 z-50 bg-white app-shadow rounded py-[6px] min-w-[300px] flex" tag="div" @blured="() => togglePrice(true)" v-if="!isPriceCollaped">
-                                    <div class="px-3 py-[6px]">
-                                        <input type="text" class="border border-[#00000014] p-1 rounded mb-2 w-full" />
-                                        <ul>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
-                                        </ul>
-                                    </div>
-                                    <div class="px-3 py-[6px]">
-                                        <input type="text" class="border border-[#00000014] p-1 rounded mb-2 w-full" />
-                                        <ul>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">1 000 000</button></li>
-                                        </ul>
-                                    </div>
-                                </Blurable>
-                            </Transition>
+                            <filter-from-to v-model:from="filter.price_from" v-model:to="filter.price_to" :is-collapsed="isPriceCollaped" :handel-blur="() => togglePrice(true)" :min="PRICE_MIN" :max="PRICE_MAX" :step="PRICE_MIN" />
                         </li>
 
                         <li class="px-[27px] flex items-center relative">
                             <button @click="() => toggleSquare()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Площадь</button>
-                            <Transition name="slide-up-fade-out" :aria-expanded="isSquareCollaped">
-                                <Blurable class="absolute top-7 -left-16 z-50 bg-white app-shadow rounded py-[6px] min-w-[200px] flex" tag="div" @blured="() => toggleSquare(true)" v-if="!isSquareCollaped">
-                                    <div class="px-3 py-[6px]">
-                                        <input type="text" class="border border-[#00000014] p-1 rounded mb-2 w-full" />
-                                        <ul>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
-                                        </ul>
-                                    </div>
-                                    <div class="px-3 py-[6px]">
-                                        <input type="text" class="border border-[#00000014] p-1 rounded mb-2 w-full" />
-                                        <ul>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
-                                            <li><button class="hover:bg-gray-100 rounded w-full text-left p-2">10</button></li>
-                                        </ul>
-                                    </div>
-                                </Blurable>
-                            </Transition>
+                            <filter-from-to v-model:from="filter.area_total_from" v-model:to="filter.area_total_to" :is-collapsed="isSquareCollaped" :handel-blur="() => toggleSquare(true)" :min="10" :step="20" :max="apartments?.max_area_total" />
                         </li>
 
                         <li class="px-[27px] flex items-center relative">
                             <button @click="() => toggleDeadline()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Срок аренды</button>
-                            <Transition name="slide-up-fade-out" :aria-expanded="isDeadlineCollaped">
-                                <Blurable class="absolute top-7 z-50 bg-white app-shadow rounded py-[6px] min-w-[200px]" tag="div" @blured="() => toggleDeadline(true)" v-if="!isDeadlineCollaped">
-                                    <button class="px-4 py-2 w-full text-left hover:bg-gray-100 rounded">Done</button>
-                                    <hr />
-                                    <ul>
-                                        <li>
-                                            <button class="px-4 py-2 w-full text-left hover:bg-gray-100 rounded">til 23 Oc 2036</button>
-                                        </li>
-
-                                        <li>
-                                            <button class="px-4 py-2 w-full text-left hover:bg-gray-100 rounded">til 23 Oc 2036</button>
-                                        </li>
-
-                                        <li>
-                                            <button class="px-4 py-2 w-full text-left hover:bg-gray-100 rounded">til 23 Oc 2036</button>
-                                        </li>
-
-                                        <li>
-                                            <button class="px-4 py-2 w-full text-left hover:bg-gray-100 rounded">til 23 Oc 2036</button>
-                                        </li>
-
-                                        <li>
-                                            <button class="px-4 py-2 w-full text-left hover:bg-gray-100 rounded">til 23 Oc 2036</button>
-                                        </li>
-
-                                        <li>
-                                            <button class="px-4 py-2 w-full text-left hover:bg-gray-100 rounded">til 23 Oc 2036</button>
-                                        </li>
-                                    </ul>
-                                </Blurable>
-                            </Transition>
+                            <filter-by-deadline v-model="deadline" :options="deadlines" :is-collapsed="isDeadlineCollaped" :handel-blur="() => toggleDeadline(true)" />
                         </li>
 
                         <li class="pl-[27px] flex items-center">
