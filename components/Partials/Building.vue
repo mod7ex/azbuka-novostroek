@@ -119,11 +119,11 @@ const startingPrice = (payload) => {
                     </slot>
                 </p>
 
-                <!-- <NuxtLink :to="`/catalog/${complex?.id}`" :class="['block text-center py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[15px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full z-50 relative hover-bg', whiteCta ? 'bg-white' : 'bg-transparent ']"> -->
-                <button :class="['py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[15px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full z-50 relative hover-bg', whiteCta ? 'bg-white' : 'bg-transparent ']">
+                <NuxtLink :to="`/catalog/${complex?.id}`" :class="['block text-center py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[15px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full z-50 relative hover-bg', whiteCta ? 'bg-white' : 'bg-transparent ']">
+                    <!-- <button :class="['py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[15px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full z-50 relative hover-bg', whiteCta ? 'bg-white' : 'bg-transparent ']"> -->
                     <p>{{ whiteCta ? "Узнать больше" : "Подробнее" }}</p>
-                </button>
-                <!-- </NuxtLink> -->
+                    <!-- </button> -->
+                </NuxtLink>
             </div>
         </div>
     </div>

@@ -6,9 +6,19 @@ const props = withDefaults(defineProps<{ sort?: true; count?: number }>(), {
     count: 8,
 });
 
+const { filter } = useFilter();
+
 const [isCollapsed, toggle] = useToggle();
 
-const { result, loading, error, fetchMore } = getComplexes(GQL_FOR_LIST, { page: 1, first: props.count });
+const { result, loading, error, fetchMore, refetch } = getComplexes(GQL_FOR_LIST, { page: 1, first: props.count, ...filter });
+
+watch(
+    filter,
+    async (_filter) => {
+        await refetch({ page: 1, first: props.count, ..._filter });
+    },
+    { deep: true }
+);
 
 const complexes = computed(() => result.value?.complexes?.data ?? []);
 
@@ -62,10 +72,12 @@ const loadMore = () => {
                     <!-- 26 + 2 = 28 -->
                     <Building v-for="complex in complexes" :key="complex.id" :complex="complex" under-construction shadow />
 
-                    <pre>
-                    <!-- {{ JSON.stringify(result?.complexes?.data?.length, null, 2) }} -->
-                    <!-- {{ JSON.stringify(result?.complexes?.paginatorInfo, null, 2) }} -->
-                    </pre>
+                    <!-- 
+                        <pre>
+                            {{ JSON.stringify(result?.complexes?.data?.length, null, 2) }}
+                            {{ JSON.stringify(result?.complexes?.paginatorInfo, null, 2) }}
+                        </pre>
+                    -->
                 </div>
             </div>
 

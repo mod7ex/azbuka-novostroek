@@ -45,7 +45,7 @@ const deadline = shallowRef({});
             <ul :class="['search-area flex items-center justify-between w-full flex-wrap']">
                 <li :class="['search-input flex items-center flex-grow']">
                     <app-i name="heroicons-outline:search" class="text-[#1DA958] mr-4 w-[17px] h-[17px] md:text-[#5F5F5F] cursor-pointer" />
-                    <input type="text" placeholder="Название новостройки или застройщика" class="w-full sm:flex-grow md:flex-grow-0 md:inline-block outline-none py-2" />
+                    <input type="text" v-model="filter.name" placeholder="Название новостройки или застройщика" class="w-full sm:flex-grow md:flex-grow-0 md:inline-block outline-none py-2" />
                 </li>
 
                 <li class="search-options py-2">
