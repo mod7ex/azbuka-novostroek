@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { uuidGen } from "~/utils";
+import MapMarker from "~/components/MapMarker.vue";
+
+defineProps<{ complex?: any }>();
 
 const uuid = uuidGen("location");
 
@@ -24,8 +27,8 @@ const locationDetails = [
                 <h1 class="text-[24px] font-black leading-[28px] font-[Raleway] text-[#131313]">Расположение</h1>
             </template>
 
-            <div class="my-4 md:mt-[34px] md:mb-[28px]">
-                <iframe src="https://maps.google.com/maps?q=McDonald's%20Corniche&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" class="border-none w-full rounded-[5px] md:rounded-none h-[513px] md:h-[296px]" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="my-4 md:mt-[34px] md:mb-[28px] h-[513px] md:h-[296px] w-full">
+                <map-marker :coordinates="complex?.coordinates" />
             </div>
 
             <template #foot>

@@ -1,9 +1,26 @@
 <script setup lang="ts">
 import ApartmentPlan from "~/components/Partials/catalog/ApartmentPlan.vue";
 
-const current = shallowRef(0);
+const props = defineProps<{ complex?: any; home?: any }>();
 
-const options = ["Все", "1а комнатные", "2х комнатные", "3х комнатные"];
+// const options = ["Все", "1а комнатные", "2х комнатные", "3х комнатные"];
+
+const options = computed(() => {
+    let _options =
+        props?.home?.summary?.map(({ rooms: value }) => {
+            let label = "";
+
+            if (value === 0) label = "Студия";
+            else if (value === 1) label = `1а комнатные `;
+            else label = `${value}x комнатные`;
+
+            return { label, value };
+        }) ?? [];
+
+    return [{ label: "Все", value: -1 }, ..._options];
+});
+
+const current = shallowRef(-1);
 </script>
 
 <template>

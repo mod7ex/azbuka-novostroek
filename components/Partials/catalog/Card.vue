@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { SECTIONS } from "~/constants";
+
+defineProps<{ complex?: any }>();
+</script>
 
 <template>
     <article :class="['bg-[#3478F6] rounded-[5px] card-container', $attrs.class]">
@@ -37,14 +41,14 @@
         </div>
 
         <div class="text-white p-[29px] pt-5 font-[Inter] md:pt-[41px] md:pl-[45px] md:pb-[35px] md:pr-[87px]">
-            <h1 class="mb-[2px] md:mb-[7px] text-xl font-bold leading-[30px] md:text-[22px] md:leading-[26px]">Квартал “Любимов 23”</h1>
+            <h1 class="mb-[2px] md:mb-[7px] text-xl font-bold leading-[30px] md:text-[22px] md:leading-[26px]">{{ complex?.name }}</h1>
             <p class="flex items-center mb-[22px]">
                 <app-i class="w-5 h-4 mr-[13px]" name="zondicons:location" />
-                <span class="text-base leading-6 font-normal md:leading-[19px]">Ростов-на-Дону, Западный</span>
+                <span class="text-base leading-6 font-normal md:leading-[19px]">{{ complex?.city?.name }} {{ complex?.address }}</span>
             </p>
 
             <ul class="text-[15px] md:text-base md:leading-[19px] font-medium leading-[18px]">
-                <li class="mb-[17px]">Описание</li>
+                <li class="mb-[17px]"><a :href="`#${SECTIONS.DESCRIPTION}`">Описание</a></li>
                 <li class="mb-[17px]">Характеристики</li>
                 <li class="mb-[17px]">
                     Квартиры

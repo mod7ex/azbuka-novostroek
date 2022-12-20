@@ -1,4 +1,4 @@
-export const debounce = <T extends (...args: any[]) => any>(fn: T, duration: number) => {
+export const debounce = <T extends (...args: any[]) => any>(fn: T, duration: number = 1000) => {
     let timer: NodeJS.Timeout | undefined;
 
     return function (...args: Parameters<T>) {
@@ -49,4 +49,12 @@ export const format_thousands = (n: number) => {
 
     return _n.trim();
 */
+};
+
+export const stripHTMLPTag = (payload: string) => {
+    return payload?.replace(/(<p>)/gi, "")?.replace(/(<\/p>)/gi, "");
+};
+
+export const firstFewWords = (payload: string, count = 13) => {
+    return payload?.split(" ").slice(0, count).join(" ");
 };

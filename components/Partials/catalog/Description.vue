@@ -14,63 +14,74 @@ import Parking from "~/assets/svg/description/parking.svg";
 import Elevator from "~/assets/svg/description/elevator.svg";
 import BuildingSvg from "~/assets/svg/description/building.svg";
 
+import { stripHTMLPTag, firstFewWords } from "~/utils";
+
+const props = defineProps<{ id?: string; complex?: any }>();
+
+const [isExpanded, toggle] = useToggle(false);
+
+const descriptionText = computed(() => {
+    const _description = props?.complex?.description;
+    return isExpanded.value ? _description : firstFewWords(stripHTMLPTag(_description));
+});
+
 const descriptionItems = [
     {
         img: Document,
         light: "Тип договора",
-        bold: "ДДУ, 214 ФЗ",
+        bold: (v?: any) => v?.some_key ?? "Не заполнено" /*"ДДУ, 214 ФЗ"*/,
     },
     {
         img: Buildings,
         light: "Класс недвижимости",
-        bold: "Комфорт",
+        bold: (v?: any) => v?.some_key ?? "Не заполнено" /*"Комфорт"*/,
     },
     {
         img: BuildingSvg,
         light: "Число корпусов",
-        bold: "12",
+        bold: (v?: any) => v?.count_homes?.total ?? "Не заполнено",
     },
     {
         img: Etage,
         light: "Этажность",
-        bold: "от 7 до 16",
+        bold: (v?: any) => v?.some_key ?? "Не заполнено" /*"от 7 до 16"*/,
     },
     {
         img: Apartments,
         light: "Число квартир",
-        bold: "5 967",
+        bold: (v?: any) => v?.count_apartments ?? "Не заполнено",
     },
     {
         img: Height,
         light: "Высота потолков",
-        bold: "2.8 м",
+        bold: (v?: any) => v?.some_key ?? "Не заполнено" /*"2.8 м"*/,
     },
     {
         img: Type,
         light: "Тип дома",
-        bold: "Кирпично монолитный",
+        bold: (v?: any) => v?.some_key ?? "Не заполнено" /*"Кирпично монолитный"*/,
     },
     {
         img: Paint,
         light: "Отделка",
-        bold: "Черновая, под ключ",
+        bold: (v?: any) => v?.some_key ?? "Не заполнено" /*"Черновая, под ключ"*/,
     },
     {
         img: Parking,
         light: "Паркинг, машиноместа",
-        bold: "48 – открытый,<br />есть подземный",
+        bold: (v?: any) => v?.some_key ?? "Не заполнено" /*"48 – открытый,<br />есть подземный"*/,
     },
     {
         img: Elevator,
         light: "Лифты",
-        bold: "5 пассажирских",
+        bold: (v?: any) => v?.some_key ?? "Не заполнено" /*"5 пассажирских"*/,
     },
 ];
 </script>
 
 <template>
-    <div>
-        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-[46px] md:pt-[40px] md:pb-[60px] ']">
+    <div :id="id">
+        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-[46px] md:pt-[40px] md:pb-[60px]']">
             <template #head>
                 <h1 class="text-[26px] font-bold leading-9 font-[Raleway] text-[#131313]">Описание жилого комплекса</h1>
             </template>
@@ -129,7 +140,7 @@ const descriptionItems = [
 
                         <div class="text-center md:text-left font-[Inter] leading-[17px] md:leading-5">
                             <p class="text-xs md:text-[14px] font-normal text-[#878787] mb-[5px]" v-html="item.light"></p>
-                            <p class="text-[13px] font-semibold md:text-base md:font-bold" v-html="item.bold"></p>
+                            <p class="text-[13px] font-semibold md:text-base md:font-bold" v-html="item.bold(complex)"></p>
                         </div>
                     </div>
                 </li>
@@ -140,13 +151,11 @@ const descriptionItems = [
                 <hr class="border-[#00000014] mb-8 hidden md:block" />
 
                 <div class="text-[13px] md:text-[14px] mb-[34px]">
-                    <p class="leading-6 font-normal font-[Inter] text-[#666666] mb-[17px] md:mb-[42px]">
-                        ЖК West Garden возводится в пойме реки Раменки на территории района Западного округа Москвы. Район застройки жилого комплекса отличает высокая транспортная доступность. Застройщиком выступает компания «Интеко».
-                    </p>
-                    <a href="" class="text-[#3478F6] leading-3 flex items-center justify-start">
-                        <span class="mr-[10px]">Читать подробнее </span>
-                        <app-i name="bx:chevron-down" class="" />
-                        <!-- <span class="text-[30px] -mt-[7px]">&#8964;</span> -->
+                    <div :class="['description-content leading-6 font-normal font-[Inter] text-[#666666] mb-[17px] md:mb-[42px]']" v-html="descriptionText"></div>
+
+                    <a @click="() => toggle()" href="javascript:void(0)" class="text-[#3478F6] leading-3 flex items-center justify-start">
+                        <span class="mr-[10px]">{{ isExpanded ? "Cкрыть" : "Читать подробнее" }} </span>
+                        <app-i :name="`bx:chevron-${isExpanded ? 'up' : 'down'}`" class="" />
                     </a>
                 </div>
 

@@ -1,37 +1,138 @@
 <script setup lang="ts">
 import TheBreadCrumb from "~/components/TheBreadCrumb.vue";
 import BuildingCard from "~/components/Partials/catalog/Card.vue";
+// import BuildingSuggestions from "~/components/Partials/catalog/Suggestions.vue";
 import BuildingDescription from "~/components/Partials/catalog/Description.vue";
 import BuildingLocation from "~/components/Partials/catalog/Location.vue";
 import BuildingChoices from "~/components/Partials/catalog/Choices.vue";
-import BuildingPlan from "~/components/Partials/catalog/Plan.vue";
 import BuildingMortgage from "~/components/Partials/catalog/Mortgage.vue";
 import BuildingPromotion from "~/components/Partials/catalog/Promotion.vue";
 import BuildingDiscounts from "~/components/Partials/catalog/Discounts.vue";
+import BuildingPlan from "~/components/Partials/catalog/Plan.vue";
 import BuildingReviews from "~/components/Partials/catalog/Reviews.vue";
-import BuildingSuggestions from "~/components/Partials/home/Suggestions.vue";
+import CTA from "~/components/Partials/catalog/CTA.vue";
+import { SECTIONS } from "~/constants";
+import { home as getHome, GQL_FOR_DETAIL as GQL_HOME_FOR_DETAIL } from "~/services/gql/homes";
+
+import { complex as getComplex, similarComplexes as getSimilarComplexes, GQL_FOR_LIST, GQL_FOR_DETAIL } from "~/services/gql/complexes";
+import { debounce } from "~/utils";
+
+const route = useRoute();
+
+// complex
+const { result, loading, error } = getComplex(route.params.id as string, GQL_FOR_DETAIL);
+const complex = computed(() => result.value?.complex ?? null);
+
+// Home
+// const currentHome = shallowRef<Numberish>();
+const currentHome = useCurrentHome();
+const { result: homeResult, loading: homeLoading, error: homeError, refetch: homeRefetch } = getHome(currentHome.value, GQL_HOME_FOR_DETAIL);
+const home = computed(() => homeResult.value?.home ?? null);
+
+watch(
+    () => complex.value?.homes[0]?.id,
+    (v) => {
+        currentHome.value = v;
+    }
+);
+
+watch(
+    currentHome,
+    debounce((id) => {
+        homeRefetch({ id });
+    })
+);
+
+// useMountAnimation();
 </script>
 
 <template>
-    <div>
+    <div class="relative">
         <NuxtLayout name="inner">
-            <app-width class="mt-7 mb-[44px]">
-                <the-bread-crumb class="mb-[19px]" />
-                <building-card class="mb-[33px]" />
-                <building-description class="mb-[25px]" />
-                <building-location class="mb-[25px]" />
-                <building-choices class="mb-[25px]" />
-                <building-plan class="mb-[25px]" />
-                <building-mortgage class="mb-[25px]" />
-                <building-promotion class="mb-[34px]" />
-                <building-discounts />
+            <!-- 59 + 31 = 90 -->
+            <app-width class="mt-7 md:mt-[59px] mb-[33px] md:mb-[100px]" tag="section">
+                <the-bread-crumb class="mb-[19px] md:mb-[40px]" />
+                <building-card :complex="complex" class="mount-animation anm-hidden" />
             </app-width>
 
-            <app-width class="bg-[#F9F9F9] pt-[25px] pb-[41px] mb-[37px]">
-                <building-reviews />
-            </app-width>
+            <app-width class="tow-cols-md" id="anm-root">
+                <div class="left">
+                    <building-description v-if="complex" :complex="complex" :id="SECTIONS.DESCRIPTION" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
-            <building-suggestions :count="4" />
+                    <building-location v-if="complex" :complex="complex" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+
+                    <div class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
+                        <pre> {{ home }} </pre>
+                        <pre> {{ currentHome }} </pre>
+                        <!-- <pre> {{ complex }} </pre> -->
+                        <building-choices v-if="complex" :complex="complex" :home="home" class="mb-[25px] md:mb-[63px]" />
+                        <building-plan v-if="complex" :complex="complex" :home="home" class="mb-[25px]" />
+                    </div>
+
+                    <building-mortgage class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+
+                    <building-promotion class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+
+                    <building-discounts class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+
+                    <div class="mount-animation anm-hidden bg-[#F9F9F9] md:bg-transparent mb-[37px] md:mb-[93px]">
+                        <div class="bg-[#F9F9F9] shadow-inner-md pt-[25px] px-5 md:px-0 pb-[41px] md:pt-[38px] md:pb-[50px] w-fit">
+                            <building-reviews class="bg-[#F9F9F9] md:rounded-[3px]" />
+                        </div>
+                    </div>
+
+                    <!-- <building-suggestions /> -->
+                </div>
+
+                <div class="right pb-14">
+                    <CTA class="mount-animation anm-hidden h-full" />
+                </div>
+            </app-width>
         </NuxtLayout>
     </div>
 </template>
+
+<style lang="scss" scoped>
+.tow-cols-md {
+    .right {
+        display: none;
+    }
+
+    padding-left: 0;
+    padding-right: 0;
+
+    .left {
+        .catalog-section-p {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    }
+
+    @include break_point(768px) {
+        padding-left: 60px;
+        padding-right: 60px;
+
+        .left {
+            .catalog-section-p {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    }
+
+    @include break_point(1100px) {
+        display: grid;
+        gap: 30px;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+
+        .left {
+            grid-column: span 8 / span 8;
+        }
+
+        .right {
+            display: block;
+            grid-column: span 4 / span 4;
+        }
+    }
+}
+</style>

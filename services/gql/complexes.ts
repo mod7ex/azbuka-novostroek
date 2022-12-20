@@ -1,3 +1,81 @@
+export const GQL_FOR_DETAIL = `
+id
+name
+address
+count_homes
+count_apartments
+count_free_apartments
+apartments_summary
+coordinates
+is_has_feed
+is_has_parking
+is_has_offices
+description
+homes(
+  order_by: [
+    {column: "stage_id", order: ASC},
+    {column: "year_end", order: ASC},
+    {column: "quarter_end",order: ASC},
+    {column: "name", order: ASC}
+  ],
+  has_free_apartments: true
+) {
+  id
+  name
+  quarter_end
+  year_end
+
+  stage {
+    id
+    name
+  }
+}
+banks {
+  name
+}
+saleDepartments {
+  id
+  name
+  email
+  phone
+  address
+}
+developer {
+  id
+  name
+  homes_statuses
+  description
+  saleDepartments {
+    id
+    name
+    email
+    phone
+    address
+  }
+  logo {
+    url
+  }
+}
+city {
+  name
+  region {
+    name
+  }
+}
+peoplesDistrict {
+  name
+}
+district {
+  name
+}
+image {
+  url
+},
+images {
+  url
+}
+`;
+
 export const GQL_FOR_LIST = `
   id
   name
@@ -136,6 +214,35 @@ export function complexes(data = "name", filter = { page: 1, first: 12 }, option
       }
     }`,
         () => filter,
+        options
+    );
+}
+
+export function complex(id: string, data = "name", options = { notifyOnNetworkStatusChange: true }) {
+    return useQuery(
+        gql`
+    query complex($id: ID) {
+      complex(id: $id) {
+        ${data}
+      }
+    }`,
+        () => ({ id }),
+        options
+    );
+}
+
+export function similarComplexes(id: string, data = "name", options = { notifyOnNetworkStatusChange: true }) {
+    return useQuery(
+        gql`
+        query similarComplexes($id: ID) {
+          similarComplexes(id: $id) {
+            data {
+              ${data}
+            }
+            ${GQL_PAGINATION_PART}
+          }
+        }`,
+        () => ({ id }),
         options
     );
 }

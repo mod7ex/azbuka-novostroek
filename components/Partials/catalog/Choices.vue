@@ -3,11 +3,36 @@ import Building from "~/assets/img/catalog-building-md.png";
 import BuildingA from "~/assets/img/gallery-building_a.png";
 import BuildingB from "~/assets/img/gallery-building_b.png";
 
-const choices = ["1 - Дом  (1 кв. 2022)", "2 - Дом  (2 кв. 2022)", "3 - Дом  (2 кв. 2022)", "4 - Дом  (2 кв. 2022)", "5 - Дом  (2 кв. 2022)", "6 - Дом  (2 кв. 2022)"];
+const props = defineProps<{ complex?: any; home?: any }>();
 
-const current = shallowRef(0);
+const computeDeadline = ({ stage, quarter_end, year_end }) => {
+    if (stage?.name.toLocaleLowerCase() === "сдан") return "Сдан";
+    else if (quarter_end && year_end) return `${quarter_end} квартал ${year_end}`;
+    else return undefined;
+};
+
+const choices = computed(() => {
+    return (
+        props.complex?.homes?.map(({ id, name, stage, quarter_end, year_end }) => {
+            const _dead_line = computeDeadline({ quarter_end, stage, year_end });
+
+            return { value: id, label: `${name} ${_dead_line ? `(${_dead_line})` : ""}` };
+        }) ?? []
+    );
+});
+
+const currentHome = useCurrentHome();
+
+const selectedHome = computed(() => props.complex?.homes?.find(({ id }) => id == currentHome.value));
+
+const stage = computed(() => {
+    return selectedHome.value?.stage;
+});
+
+const deadline = computed(() => computeDeadline(selectedHome.value));
 
 const options = ["Характеристики", "Документы", "Ход строительства"];
+const current = shallowRef(0);
 </script>
 
 <template>
@@ -17,11 +42,15 @@ const options = ["Характеристики", "Документы", "Ход �
                 <h1 class="text-[26px] md:text-[24px] font-bold md:font-extrabold leading-9 md:leading-[28px] font-[Raleway] text-[#131313]">Выбор дома</h1>
             </template>
 
-            <ul class="mt-[22px] mb-8 md:mb-[50px] grid grid-cols-2 md:flex md:flex-wrap gap-[10px]">
-                <li v-for="(choice, i) in choices" :key="i" class="col-span-1 w-full md:w-fit">
-                    <button :class="['py-2 w-full rounded-[3px] px-[18px] font-medium text-[13px] md:text-base md:leading-[19px] leading-[15px]', i == 0 ? 'bg-[#1DA958] text-white' : 'bg-[#D2EEDE]']">{{ choice }}</button>
-                </li>
-            </ul>
+            <x-scroll-header :choices="choices" v-model.lazy="currentHome" class="mb-[28px] mt-[22px]" buttons />
+
+            <!-- 
+                <ul class="mt-[22px] mb-8 md:mb-[50px] grid grid-cols-2 md:flex md:flex-wrap gap-[10px]">
+                    <li v-for="(choice, i) in choices" :key="i" class="col-span-1 w-full md:w-fit">
+                        <button :class="['py-2 w-full rounded-[3px] px-[18px] font-medium text-[13px] md:text-base md:leading-[19px] leading-[15px]', i == 0 ? 'bg-[#1DA958] text-white' : 'bg-[#D2EEDE]']">{{ choice }}</button>
+                    </li>
+                </ul>
+            -->
 
             <x-scroll-header :choices="options" v-model="current" class="mb-[21px]" />
 
@@ -30,37 +59,38 @@ const options = ["Характеристики", "Документы", "Ход �
                     <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between mb-4">
                         <p class="font-normal text-[#878787]">Застройщик</p>
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                        <p class="font-medium text-[#131313]">ОOО “Застройщик”</p>
+                        <p class="font-medium text-[#131313]">{{ home?.developer_name ?? "Не заполнено" }}</p>
                     </li>
                     <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between mb-4">
                         <p class="font-normal text-[#878787]">Город</p>
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                        <p class="font-medium text-[#131313]">Ростов-на-Дону</p>
+                        <p class="font-medium text-[#131313]">{{ complex?.city?.name ?? "Не заполнено" }}</p>
                     </li>
+                    <!-- <pre> {{ complex }} </pre> -->
                     <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between mb-4">
                         <p class="font-normal text-[#878787]">Район</p>
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                        <p class="font-medium text-[#131313]">Северный</p>
+                        <p class="font-medium text-[#131313]">{{ complex?.city?.region?.name ?? "Не заполнено" }}</p>
                     </li>
                     <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between mb-4">
                         <p class="font-normal text-[#878787]">Адрес</p>
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                        <p class="font-medium text-[#131313]">Евдокимова 25б</p>
+                        <p class="font-medium text-[#131313]">{{ home?.address ?? "Не заполнено" }}</p>
                     </li>
                     <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between mb-4">
                         <p class="font-normal text-[#878787]">Этап строительства</p>
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                        <p class="font-medium text-[#131313]">Отделка</p>
+                        <p class="font-medium text-[#131313]">{{ stage?.name ?? "Не заполнено" }}</p>
                     </li>
                     <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between mb-4">
                         <p class="font-normal text-[#878787]">Срок здачи</p>
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                        <p class="font-medium text-[#131313]">4 квартал 2021 года</p>
+                        <p class="font-medium text-[#131313]">{{ deadline ?? "Не заполнено" }}</p>
                     </li>
                     <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between mb-4">
                         <p class="font-normal text-[#878787]">Класс дома</p>
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                        <p class="font-medium text-[#131313]">Комфорт</p>
+                        <p class="font-medium text-[#131313]">{{ home?.homeClass?.name ?? "Не заполнено" }}</p>
                     </li>
                 </ul>
                 <ul class="md:col-span-1">
@@ -72,32 +102,32 @@ const options = ["Характеристики", "Документы", "Ход �
                     <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between mb-4">
                         <p class="font-normal text-[#878787]">Этажность</p>
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                        <p class="font-medium text-[#131313]">есть</p>
+                        <p class="font-medium text-[#131313]">{{ home?.count_floors ?? "Не заполнено" }}</p>
                     </li>
                     <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between mb-4">
                         <p class="font-normal text-[#878787]">Высота потолков</p>
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                        <p class="font-medium text-[#131313]">да</p>
+                        <p class="font-medium text-[#131313]">{{ home?.ceiling_height ?? "Не заполнено" }}</p>
                     </li>
                     <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between mb-4">
                         <p class="font-normal text-[#878787]">Пассажирский лифт</p>
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                        <p class="font-medium text-[#131313]">подземная</p>
+                        <p class="font-medium text-[#131313]">{{ home?.lift || "Нет" }}</p>
                     </li>
                     <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between mb-4">
                         <p class="font-normal text-[#878787]">Грузовой лифт</p>
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                        <p class="font-medium text-[#131313]">бизнес</p>
+                        <p class="font-medium text-[#131313]">{{ home?.freight_lift || "Нет" }}</p>
                     </li>
                     <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between mb-4">
                         <p class="font-normal text-[#878787]">Закрытая территория</p>
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                        <p class="font-medium text-[#131313]">4.5</p>
+                        <p class="font-medium text-[#131313]">_</p>
                     </li>
                     <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between">
                         <p class="font-normal text-[#878787]">Наземный паркинг</p>
                         <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                        <p class="font-medium text-[#131313]">4.5</p>
+                        <p class="font-medium text-[#131313]">_</p>
                     </li>
                 </ul>
             </div>
@@ -157,7 +187,7 @@ const options = ["Характеристики", "Документы", "Ход �
                 </div>
             </div>
 
-            <template #foot> <dashed-devider class="md:hidden" /> </template>
+            <!-- <template #foot> <dashed-devider class="md:hidden" /> </template> -->
         </NuxtLayout>
     </div>
 </template>

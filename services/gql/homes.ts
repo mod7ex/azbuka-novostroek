@@ -1,7 +1,77 @@
-// import { isObject } from "lodash";
 import { useQuery /* , useLazyQuery, useMutation */ } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 // import { GQL_PAGINATION_PART } from "~/paginationUtilites.js";
+import { isObject } from "~/utils/types";
+
+export const GQL_FOR_DETAIL = `
+  id
+  name
+  address
+  quarter_end
+  year_end
+  count_floors
+  count_apartments
+  count_free_apartments
+  count_offices
+  count_free_offices
+  count_parking
+  count_free_parking
+  count_entrances
+  ceiling_height
+  summary
+  is_free_layout
+  issuance_of_keys
+  energy_class
+  living_area
+  count_playgrounds
+  count_sportgrounds
+  count_garbage_places
+  lift
+  freight_lift
+  is_has_ramp
+  is_has_lowering_platforms
+  count_wheelchair_lifts
+  rpd
+  report
+  documentation
+  other
+  permits
+  building
+  merged_at
+  developer_name
+
+  sales {
+    id
+    name
+    start_at
+    end_at
+    text
+    image {
+      url
+    }
+  }
+
+  salesDynamics {
+    id
+    avg_price_area
+    avg_area
+    realised
+    month
+    year
+  }
+
+  homeClass {
+    name
+  }
+
+  homeType {
+    name
+  }
+
+  decors {
+    name
+  }
+`;
 
 /*
 
@@ -112,76 +182,6 @@ export const GQL_FOR_CHESS = `
         }
       }
     }
-  }
-`;
-
-export const GQL_FOR_DETAIL = `
-  id
-  name
-  address
-  quarter_end
-  year_end
-  count_floors
-  count_apartments
-  count_free_apartments
-  count_offices
-  count_free_offices
-  count_parking
-  count_free_parking
-  count_entrances
-  ceiling_height
-  summary
-  is_free_layout
-  issuance_of_keys
-  energy_class
-  living_area
-  count_playgrounds
-  count_sportgrounds
-  count_garbage_places
-  lift
-  freight_lift
-  is_has_ramp
-  is_has_lowering_platforms
-  count_wheelchair_lifts
-  rpd
-  report
-  documentation
-  other
-  permits
-  building
-  merged_at
-  developer_name
-
-  sales {
-    id
-    name
-    start_at
-    end_at
-    text
-    image {
-      url
-    }
-  }
-
-  salesDynamics {
-    id
-    avg_price_area
-    avg_area
-    realised
-    month
-    year
-  }
-
-  homeClass {
-    name
-  }
-
-  homeType {
-    name
-  }
-
-  decors {
-    name
   }
 `;
 
@@ -323,36 +323,34 @@ export function homesData(options = { notifyOnNetworkStatusChange: true }) {
     );
 }
 
-// export function home(
-//   id,
-//   data = 'name',
-//   options = { notifyOnNetworkStatusChange: true },
-// ) {
-//   if (!id || isObject(id)) {
-//     return useLazyQuery(
-//       gql`
-//         query home($id: ID) {
-//           home(id: $id) {
-//             ${data}
-//           }
-//         }`, id, {
-//         ...options,
-//         // fetchPolicy: 'cache-and-network',
-//       },
-//     );
-//   }
+export function home(id, data = "name", options = { notifyOnNetworkStatusChange: true }) {
+    if (!id || isObject(id)) {
+        return useLazyQuery(
+            gql`
+            query home($id: ID) {
+              home(id: $id) {
+                ${data}
+              }
+            }`,
+            id,
+            {
+                ...options,
+                // fetchPolicy: 'cache-and-network',
+            }
+        );
+    }
 
-//   return useQuery(
-//     gql`
-//     query home($id: ID) {
-//       home(id: $id) {
-//         ${data}
-//       }
-//     }`,
-//     () => ({ id }),
-//     options,
-//   );
-// }
+    return useQuery(
+        gql`
+        query home($id: ID) {
+          home(id: $id) {
+            ${data}
+          }
+        }`,
+        () => ({ id }),
+        options
+    );
+}
 
 // export function myHomes(
 //   data = 'id',

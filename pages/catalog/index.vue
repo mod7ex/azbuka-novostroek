@@ -9,7 +9,7 @@ import BuildingMortgage from "~/components/Partials/catalog/Mortgage.vue";
 import BuildingPromotion from "~/components/Partials/catalog/Promotion.vue";
 import BuildingDiscounts from "~/components/Partials/catalog/Discounts.vue";
 import BuildingReviews from "~/components/Partials/catalog/Reviews.vue";
-import BuildingSuggestions from "~/components/Partials/catalog/Suggestions.vue";
+// import BuildingSuggestions from "~/components/Partials/catalog/Suggestions.vue";
 import CTA from "~/components/Partials/catalog/CTA.vue";
 
 // useMountAnimation();
@@ -47,7 +47,7 @@ import CTA from "~/components/Partials/catalog/CTA.vue";
                         </div>
                     </div>
 
-                    <building-suggestions />
+                    <!-- <building-suggestions /> -->
                 </div>
 
                 <div class="right pb-14">
