@@ -7,7 +7,7 @@ import BuildingLocation from "~/components/Partials/catalog/Location.vue";
 import BuildingChoices from "~/components/Partials/catalog/Choices.vue";
 import BuildingMortgage from "~/components/Partials/catalog/Mortgage.vue";
 import BuildingPromotion from "~/components/Partials/catalog/Promotion.vue";
-import BuildingDiscounts from "~/components/Partials/catalog/Discounts.vue";
+// import BuildingDiscounts from "~/components/Partials/catalog/Discounts.vue";
 import BuildingPlan from "~/components/Partials/catalog/Plan.vue";
 import BuildingReviews from "~/components/Partials/catalog/Reviews.vue";
 import CTA from "~/components/Partials/catalog/CTA.vue";
@@ -26,20 +26,15 @@ const complex = computed(() => result.value?.complex ?? null);
 // Home
 // const currentHome = shallowRef<Numberish>();
 const currentHome = useCurrentHome();
-const { result: homeResult, loading: homeLoading, error: homeError, refetch: homeRefetch } = getHome(currentHome.value, GQL_HOME_FOR_DETAIL);
+const currentHomeID = reactive({ id: currentHome }); // [FIX] : just to fix @vue/apollo issue of using old values
+const { result: homeResult, loading: homeLoading, error: homeError, refetch: homeRefetch, load } = getHome(currentHomeID, GQL_HOME_FOR_DETAIL);
 const home = computed(() => homeResult.value?.home ?? null);
 
 watch(
-    () => complex.value?.homes[0]?.id,
-    (v) => {
-        currentHome.value = v;
-    }
-);
-
-watch(
     currentHome,
-    debounce((id) => {
-        homeRefetch({ id });
+    debounce((id, oldID) => {
+        if (oldID == null) return load();
+        return homeRefetch({ id });
     })
 );
 
@@ -59,10 +54,10 @@ watch(
                 <div class="left">
                     <building-description v-if="complex" :complex="complex" :id="SECTIONS.DESCRIPTION" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
-                    <building-location v-if="complex" :complex="complex" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                    <!-- <building-location v-if="complex" :complex="complex" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" /> -->
 
                     <div class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
-                        <pre> {{ home }} </pre>
+                        <pre> home: {{ home?.id }} </pre>
                         <pre> {{ currentHome }} </pre>
                         <!-- <pre> {{ complex }} </pre> -->
                         <building-choices v-if="complex" :complex="complex" :home="home" class="mb-[25px] md:mb-[63px]" />
@@ -73,7 +68,7 @@ watch(
 
                     <building-promotion class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
-                    <building-discounts class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                    <!-- <building-discounts class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" /> -->
 
                     <div class="mount-animation anm-hidden bg-[#F9F9F9] md:bg-transparent mb-[37px] md:mb-[93px]">
                         <div class="bg-[#F9F9F9] shadow-inner-md pt-[25px] px-5 md:px-0 pb-[41px] md:pt-[38px] md:pb-[50px] w-fit">

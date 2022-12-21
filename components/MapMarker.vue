@@ -1,23 +1,22 @@
 <script setup lang="ts">
-// import { MAP_ZOOM } from "~/constants";
+import { MAP_ZOOM } from "~/constants";
 
-// import { yandexMap as YandexMap, ymapMarker as YandexMarker } from "vue-yandex-maps";
-// import { settings, coordinates, controls } from "~/services/map";
+import { yandexMap as YandexMap, ymapMarker as YandexMarker } from "vue-yandex-maps";
+import { settings, coordinates, controls } from "~/services/map";
 
-// const props = withDefaults(defineProps<{ coordinates?: { lat: number; lng: number } }>(), {
-//     coordinates: null,
-// });
+const props = withDefaults(defineProps<{ coordinates?: { lat: number; lng: number } }>(), {
+    coordinates: null,
+});
 
-// const coords = props.coordinates ? [props.coordinates.lat, props.coordinates.lng] : coordinates.Russia;
+const coords = props.coordinates ? [props.coordinates.lat, props.coordinates.lng] : coordinates.Russia;
 
-// const zoom = props.coordinates ? MAP_ZOOM.FOCUS : MAP_ZOOM.DEFAULT;
+const zoom = props.coordinates ? MAP_ZOOM.FOCUS : MAP_ZOOM.DEFAULT;
 </script>
 
 <template>
-    <!-- <YandexMap :scroll-zoom="true" :coords="coords" :controls="controls" :settings="settings" :zoom="zoom">
+    <YandexMap :scroll-zoom="true" :coords="coords" :controls="controls" :settings="settings" :zoom="zoom">
         <YandexMarker marker-id="complex" :coords="coords" />
-    </YandexMap> -->
-    <p>Lorem ipsum dolor sit amet consectetur.</p>
+    </YandexMap>
 </template>
 
 <style lang="scss">

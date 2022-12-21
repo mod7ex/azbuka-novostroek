@@ -17,8 +17,8 @@ import CTA from "~/components/Partials/catalog/CTA.vue";
 
 <template>
     <div class="relative">
+        <!-- 
         <NuxtLayout name="inner">
-            <!-- 59 + 31 = 90 -->
             <app-width class="mt-7 md:mt-[59px] mb-[33px] md:mb-[100px]" tag="section">
                 <the-bread-crumb class="mb-[19px] md:mb-[40px]" />
                 <building-card class="mount-animation anm-hidden" />
@@ -47,7 +47,6 @@ import CTA from "~/components/Partials/catalog/CTA.vue";
                         </div>
                     </div>
 
-                    <!-- <building-suggestions /> -->
                 </div>
 
                 <div class="right pb-14">
@@ -55,6 +54,7 @@ import CTA from "~/components/Partials/catalog/CTA.vue";
                 </div>
             </app-width>
         </NuxtLayout>
+-->
     </div>
 </template>
 

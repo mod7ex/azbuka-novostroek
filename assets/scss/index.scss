@@ -85,7 +85,7 @@
     }
 }
 
-/* *************************************************** **************** *************************************************** */
+/* *************************************************** Slide up & Fade transition *************************************************** */
 
 .slide-up-fade-out-enter-active {
     transition: all 0.3s ease-out;
@@ -107,6 +107,31 @@
     *,
     & {
         opacity: 0;
+    }
+}
+
+/* *************************************************** Tooltip *************************************************** */
+
+.tooltip {
+    position: relative;
+
+    &::before {
+        content: attr(data-tooltip);
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.9);
+        border-radius: 5px;
+        color: white;
+        padding: 3px 6px;
+        left: 0%;
+        bottom: 150%;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    &:hover::before {
+        visibility: visible;
+        transition: opacity $duration ease-out;
+        opacity: 1;
     }
 }
 

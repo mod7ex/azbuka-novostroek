@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import Building from "~/assets/img/catalog-building-md.png";
-import BuildingA from "~/assets/img/gallery-building_a.png";
-import BuildingB from "~/assets/img/gallery-building_b.png";
-
 const props = defineProps<{ complex?: any; home?: any }>();
 
 const computeDeadline = ({ stage, quarter_end, year_end }) => {
@@ -23,16 +19,32 @@ const choices = computed(() => {
 
 const currentHome = useCurrentHome();
 
-const selectedHome = computed(() => props.complex?.homes?.find(({ id }) => id == currentHome.value));
-
 const stage = computed(() => {
-    return selectedHome.value?.stage;
+    return props?.home?.stage;
 });
 
-const deadline = computed(() => computeDeadline(selectedHome.value));
+const deadline = computed(() => {
+    const _home = props?.home;
+    if (_home) computeDeadline(_home);
+    return undefined;
+});
 
 const options = ["Характеристики", "Документы", "Ход строительства"];
 const current = shallowRef(0);
+
+// -----------------------------------------------------------
+
+const construction = computed(() => {
+    return props.home?.building ?? [];
+});
+
+// -----------------------------------------------------------
+
+onMounted(() => {
+    const _default = choices.value[0]?.value;
+    if (_default == null) return undefined;
+    currentHome.value = _default;
+});
 </script>
 
 <template>
@@ -42,7 +54,7 @@ const current = shallowRef(0);
                 <h1 class="text-[26px] md:text-[24px] font-bold md:font-extrabold leading-9 md:leading-[28px] font-[Raleway] text-[#131313]">Выбор дома</h1>
             </template>
 
-            <x-scroll-header :choices="choices" v-model.lazy="currentHome" class="mb-[28px] mt-[22px]" buttons />
+            <x-scroll-header :choices="choices" v-model="currentHome" class="mb-[28px] mt-[22px]" buttons />
 
             <!-- 
                 <ul class="mt-[22px] mb-8 md:mb-[50px] grid grid-cols-2 md:flex md:flex-wrap gap-[10px]">
@@ -135,35 +147,18 @@ const current = shallowRef(0);
             <div class="mb-3" v-if="current === 2">
                 <div class="relative h-44 overflow-x-scroll no-scroll-thum mb-5">
                     <ul class="absolute top-0 bottom-0 flex items-stretch gap-1">
-                        <li class="w-56 h-36">
-                            <app-img :src="BuildingA" class="rounded-[5px] mb-2" fill />
+                        <li v-for="({ url, title, updated }, i) in construction" :key="i">
+                            <div class="w-56 h-36 cursor-pointer construction-img-container" :data-tooltip="`Обновлено: ${updated}`">
+                                <app-img :src="url" class="rounded-[5px] mb-2" fill />
+
+                                <button v-if="i != 0" class="text-white w-[40px] h-[40px] top-0 bottom-0 my-auto -mx-5 absolute z-50 bg-[#1DA958] rounded-[2px]">
+                                    <app-i name="material-symbols:arrow-right-alt-rounded" />
+                                </button>
+                            </div>
+
                             <p class="font-[Inter] text-[14px] leading-5 pl-6">
-                                <span class="font-bold">Март</span>
-                                <span class="ml-[5px] text-[#878787] font-normal">2022</span>
-                            </p>
-                        </li>
-                        <li class="relative h-36">
-                            <button class="text-white w-[40px] h-[40px] top-0 bottom-0 my-auto -mx-5 absolute z-50 bg-[#1DA958] rounded-[2px]">
-                                <app-i name="material-symbols:arrow-right-alt-rounded" />
-                            </button>
-                        </li>
-                        <li class="w-56 h-36">
-                            <app-img :src="Building" class="rounded-[5px] mb-2" fill />
-                            <p class="font-[Inter] text-[14px] leading-5 pl-6">
-                                <span class="font-bold">Апрель</span>
-                                <span class="ml-[5px] text-[#878787] font-normal">2022</span>
-                            </p>
-                        </li>
-                        <li class="relative h-36">
-                            <button class="text-white w-[40px] h-[40px] top-0 bottom-0 my-auto -mx-5 absolute z-50 bg-[#1DA958] rounded-[2px]">
-                                <app-i name="material-symbols:arrow-right-alt-rounded" />
-                            </button>
-                        </li>
-                        <li class="w-56 h-36">
-                            <app-img :src="BuildingB" class="rounded-[5px] mb-2" fill />
-                            <p class="font-[Inter] text-[14px] leading-5 pl-6">
-                                <span class="font-bold">Март</span>
-                                <span class="ml-[5px] text-[#878787] font-normal">2022</span>
+                                <span class="font-bold">{{ title.split(",")[0] }}</span>
+                                <span class="ml-[5px] text-[#878787] font-normal">{{ title.split(",")[1] }}</span>
                             </p>
                         </li>
                     </ul>
@@ -191,3 +186,30 @@ const current = shallowRef(0);
         </NuxtLayout>
     </div>
 </template>
+
+<style lang="scss">
+.construction-img-container {
+    position: relative;
+
+    &::before {
+        content: attr(data-tooltip);
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.2);
+        color: white;
+        padding: 3px 6px;
+        visibility: hidden;
+        opacity: 0;
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        @include flex;
+    }
+
+    &:hover::before {
+        visibility: visible;
+        transition: opacity $duration ease-out;
+        opacity: 1;
+    }
+}
+</style>

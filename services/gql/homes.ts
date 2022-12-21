@@ -1,4 +1,4 @@
-import { useQuery /* , useLazyQuery, useMutation */ } from "@vue/apollo-composable";
+import { useQuery, useLazyQuery /*, useMutation */ } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 // import { GQL_PAGINATION_PART } from "~/paginationUtilites.js";
 import { isObject } from "~/utils/types";
@@ -324,6 +324,21 @@ export function homesData(options = { notifyOnNetworkStatusChange: true }) {
 }
 
 export function home(id, data = "name", options = { notifyOnNetworkStatusChange: true }) {
+    return useLazyQuery(
+        gql`
+        query home($id: ID) {
+          home(id: $id) {
+            ${data}
+          }
+        }`,
+        id,
+        {
+            ...options,
+            // fetchPolicy: 'cache-and-network',
+        }
+    );
+
+    /*
     if (!id || isObject(id)) {
         return useLazyQuery(
             gql`
@@ -350,6 +365,7 @@ export function home(id, data = "name", options = { notifyOnNetworkStatusChange:
         () => ({ id }),
         options
     );
+*/
 }
 
 // export function myHomes(
