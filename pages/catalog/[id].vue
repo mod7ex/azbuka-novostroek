@@ -54,7 +54,9 @@ watch(
                 <div class="left">
                     <building-description v-if="complex" :complex="complex" :id="SECTIONS.DESCRIPTION" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
-                    <!-- <building-location v-if="complex" :complex="complex" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" /> -->
+                    <!-- <client-only>
+                        <building-location v-if="complex" :complex="complex" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                    </client-only> -->
 
                     <div class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
                         <pre> home: {{ home?.id }} </pre>
