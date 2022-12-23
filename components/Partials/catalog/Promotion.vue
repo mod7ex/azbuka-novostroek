@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Promotion from "~/assets/svg/promotion.svg";
 
+defineProps<{ id: string }>();
+
 const count = shallowRef(19);
 
 // useInterval(() => {
@@ -9,7 +11,7 @@ const count = shallowRef(19);
 </script>
 
 <template>
-    <div>
+    <div :id="id">
         <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-0']">
             <div class="bg-[#E1F1FF] rounded-[3px] pt-[33px] pb-[31px] px-[29px] md:pt-[38px] md:px-[46px] md:pb-[25px] text-center md:flex md:items-end md:justify-between md:flex-row-reverse promotion">
                 <div class="font-[Inter] mb-[30px] md:hidden">

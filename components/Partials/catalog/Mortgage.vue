@@ -1,22 +1,28 @@
 <script setup lang="ts">
-import VTB from "~/assets/svg/vtb-bank.svg";
-import SBER from "~/assets/svg/sber-bank.svg";
-import RAIFFEISEN from "~/assets/svg/raiffeisen-bank.svg";
+// import VTB from "~/assets/svg/vtb-bank.svg";
+// import SBER from "~/assets/svg/sber-bank.svg";
+// import RAIFFEISEN from "~/assets/svg/raiffeisen-bank.svg";
 import LoanOffer from "~/components/Partials/catalog/LoanOffer.vue";
 
-const banks = [VTB, SBER, RAIFFEISEN];
+const props = defineProps<{ complex?: any; id: string }>();
+
+const banks = computed(() => props.complex?.banks ?? []);
+
+// const banks = [VTB, SBER, RAIFFEISEN];
 
 const current = shallowRef(0);
 
 const options = ["Все программы", "Оптимальные условия"];
 
-const selection = ["some randome select option a", "some randome selection b"];
+const selection = Array.from(Array(10).keys()).map((value) => ({ value, label: `Selection ${value}` }));
 
 const isMatch = useMediaQuery("(min-width: 768px)");
+
+const foo = ref();
 </script>
 
 <template>
-    <div>
+    <div :id="id">
         <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-[46px] md:pb-[33px] md:pt-[90px]']">
             <template #head>
                 <div class="md:flex md:justify-between md:items-center md:mb-12">
@@ -30,12 +36,11 @@ const isMatch = useMediaQuery("(min-width: 768px)");
 
             <!-- form -->
             <div class="md:grid grid-cols-3 md:gap-y-[29px] md:gap-x-4">
-                <app-select class="form-section mb-[23px] md:col-span-1 md:mb-0" :options="selection" label="Новостройка" inner-label="ЖК “Оганово”" bg />
+                <app-select class="form-section mb-[23px] md:col-span-1 md:mb-0" :options="[]" label="Новостройка" disabled :inner-label="complex?.name" bg />
 
                 <div class="form-section mb-[23px] flex gap-[9px] md:gap-4 md:col-span-2 md:mb-0">
-                    <app-select class="flex-grow" :options="selection" label="Срок сдачи" inner-label="Любой" bg />
-
-                    <app-select class="flex-grow" :options="selection" label="Комнатность" inner-label="Любая" bg />
+                    <app-select class="flex-grow" :options="selection" v-model="foo" label="Срок сдачи" bg />
+                    <app-select class="flex-grow" :options="selection" label="Комнатность" bg />
                 </div>
 
                 <div class="form-section mb-[23px] md:col-span-1 md:mb-0">

@@ -54,25 +54,28 @@ watch(
                 <div class="left">
                     <building-description v-if="complex" :complex="complex" :id="SECTIONS.DESCRIPTION" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
-                    <!-- <client-only>
-                        <building-location v-if="complex" :complex="complex" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
-                    </client-only> -->
+                    <!--
+                        <client-only>
+                            <building-location v-if="complex" :complex="complex" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                        </client-only>
+                    -->
 
-                    <div class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
-                        <pre> home: {{ home?.id }} </pre>
-                        <pre> {{ currentHome }} </pre>
-                        <!-- <pre> {{ complex }} </pre> -->
+                    <div :id="SECTIONS.CHARACTERISTICS_AND_APARTMENTS" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
                         <building-choices v-if="complex" :complex="complex" :home="home" class="mb-[25px] md:mb-[63px]" />
-                        <building-plan v-if="complex" :complex="complex" :home="home" class="mb-[25px]" />
+                        <!-- <building-plan v-if="home" :home="home" class="mb-[25px]" /> -->
                     </div>
 
-                    <building-mortgage class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                    <!-- <pre> home: {{ home?.entrances }} </pre> -->
+                    <!-- <pre> {{ currentHome }} </pre> -->
+                    <pre> {{ complex }} </pre>
 
-                    <building-promotion class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                    <building-mortgage :complex="complex" :id="SECTIONS.MORTGAGE" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+
+                    <building-promotion :id="SECTIONS.STOCK" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
                     <!-- <building-discounts class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" /> -->
 
-                    <div class="mount-animation anm-hidden bg-[#F9F9F9] md:bg-transparent mb-[37px] md:mb-[93px]">
+                    <div :id="SECTIONS.REVIEWS_QR" class="mount-animation anm-hidden bg-[#F9F9F9] md:bg-transparent mb-[37px] md:mb-[93px]">
                         <div class="bg-[#F9F9F9] shadow-inner-md pt-[25px] px-5 md:px-0 pb-[41px] md:pt-[38px] md:pb-[50px] w-fit">
                             <building-reviews class="bg-[#F9F9F9] md:rounded-[3px]" />
                         </div>

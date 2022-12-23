@@ -71,6 +71,60 @@ export const GQL_FOR_DETAIL = `
   decors {
     name
   }
+
+  entrances(
+    order_by: [
+      {column: "name", order: ASC},
+    ],
+  ) {
+    name
+
+    floors(
+      order_by: [
+        {column: "number", order: DESC},
+      ],
+    ) {
+      number
+      layout_url
+
+      apartments(
+        order_by: [
+          {column: "order", order: ASC},
+          {column: "number", order: ASC},
+        ],
+      ) {
+        id
+        number
+        price
+        price_area
+        final_price
+        final_price_area
+        area_total
+        count_rooms
+        is_studio
+        is_euro
+        is_assignment
+        has_discounts
+        step_over_color
+        step_over_name
+        assignment_agreement
+        assignment_status
+
+        area_living
+        area_kitchen
+        count_loggias
+        area_loggias
+
+        status {
+          name
+          color
+          is_disabled
+          is_free
+          hide_price
+        }
+      }
+    }
+  }
 `;
 
 /*

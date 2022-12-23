@@ -32,6 +32,10 @@ homes(
 }
 banks {
   name
+  percents
+  family_percents
+  state_percents
+  country_percents
 }
 saleDepartments {
   id
@@ -183,14 +187,14 @@ const FILTER_AS_QUERY = `
 
 export const GQL_PAGINATION_PART = `
     paginatorInfo {
-    count
-    currentPage
-    firstItem
-    hasMorePages
-    lastItem
-    lastPage
-    perPage
-    total
+      count
+      currentPage
+      firstItem
+      hasMorePages
+      lastItem
+      lastPage
+      perPage
+      total
     }
 `;
 

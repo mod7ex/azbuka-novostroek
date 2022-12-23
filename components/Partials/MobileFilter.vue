@@ -3,6 +3,8 @@ withDefaults(defineProps<{ open: boolean }>(), {
     open: false,
 });
 
+const selection = Array.from(Array(5).keys()).map((value) => ({ value, label: value ? `${value} комн` : "Студия" }));
+
 defineEmits(["close"]);
 </script>
 
@@ -31,7 +33,7 @@ defineEmits(["close"]);
                 </div>
             </div>
 
-            <app-select class="mb-6" :options="['1 комн.', '2 комн.', '3 комн.', '4 комн.', '5 комн.', '6 комн.', 'Студия']" label="Выберите тип квартиры" inner-label="Тип квартиры" shrink />
+            <app-select class="mb-6" :options="selection" label="Выберите тип квартиры" multiple inner-label="Тип квартиры" shrink />
 
             <div class="mb-6 relative">
                 <labled-range-input class="bg-white" label="Задайте стоимость">

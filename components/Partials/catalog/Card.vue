@@ -49,23 +49,23 @@ defineProps<{ complex?: any }>();
 
             <ul class="text-[15px] md:text-base md:leading-[19px] font-medium leading-[18px]">
                 <li class="mb-[17px]"><a :href="`#${SECTIONS.DESCRIPTION}`">Описание</a></li>
-                <li class="mb-[17px]">Характеристики</li>
+                <li class="mb-[17px]"><a :href="`#${SECTIONS.CHARACTERISTICS_AND_APARTMENTS}`">Характеристики</a></li>
                 <li class="mb-[17px]">
-                    Квартиры
+                    <a :href="`#${SECTIONS.CHARACTERISTICS_AND_APARTMENTS}`">Квартиры</a>
                     <b class="md:bg-[#1DA958] md:rounded-[2px] md:px-[6px] md:py-[3px] md:ml-[10px]"> <span class="md:hidden">(</span>69<span class="md:hidden">)</span></b>
                 </li>
                 <li class="mb-[17px]">
-                    Ход строительства
+                    <a :href="`#${SECTIONS.CHARACTERISTICS_AND_APARTMENTS}`">Ход строительства</a>
                     <b class="md:bg-[#1DA958] md:rounded-[2px] md:px-[6px] md:py-[3px] md:ml-[10px]"> <span class="md:hidden">(</span>30.03.2021<span class="md:hidden">)</span></b>
                 </li>
-                <li class="mb-[17px]">Ипотека</li>
-                <li class="mb-[17px]">Акции</li>
+                <li class="mb-[17px]"><a :href="`#${SECTIONS.MORTGAGE}`">Ипотека</a></li>
+                <li class="mb-[17px]"><a :href="`#${SECTIONS.STOCK}`">Акции</a></li>
                 <li class="mb-[17px]">
-                    Отзывы
+                    <a :href="`#${SECTIONS.REVIEWS_QR}`">Отзывы</a>
                     <b class="md:bg-[#1DA958] md:rounded-[2px] md:px-[6px] md:py-[3px] md:ml-[10px]"> <span class="md:hidden">(</span>31<span class="md:hidden">)</span></b>
                 </li>
                 <li class="mb-[17px]">
-                    Вопрос-ответ
+                    <a :href="`#${SECTIONS.REVIEWS_QR}`">Вопрос-ответ</a>
                     <b class="md:bg-[#1DA958] md:rounded-[2px] md:px-[6px] md:py-[3px] md:ml-[10px]"> <span class="md:hidden">(</span>26<span class="md:hidden">)</span></b>
                 </li>
             </ul>

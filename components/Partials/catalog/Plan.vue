@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import ApartmentPlan from "~/components/Partials/catalog/ApartmentPlan.vue";
 
-const props = defineProps<{ complex?: any; home?: any }>();
-
-// const options = ["Все", "1а комнатные", "2х комнатные", "3х комнатные"];
+const props = defineProps<{ home?: any }>();
 
 const options = computed(() => {
     let _options =
@@ -21,6 +19,32 @@ const options = computed(() => {
 });
 
 const current = shallowRef(-1);
+
+const computeApartments = (payload, rooms = -1) => {
+    return (
+        payload
+            ?.map(({ name: entrance, floors }) => {
+                return floors?.map(({ number: floor, layout_url, apartments }) => {
+                    let _apartments = apartments;
+
+                    if (rooms == 0) _apartments = apartments?.filter(({ is_studio }) => is_studio);
+                    else if (rooms > 0) _apartments = apartments?.filter(({ count_rooms }) => count_rooms == rooms);
+
+                    return _apartments?.map(({ __typename, status, ...v }) => ({ entrance, layout_url, floor, status_name: status?.name, ...v }));
+                });
+            })
+            ?.flat()
+            ?.flat() ?? []
+    );
+};
+
+const entrances = computed(() => {
+    const _entrances = props.home?.entrances;
+
+    const _rooms = current.value;
+
+    return computeApartments(_entrances, _rooms);
+});
 </script>
 
 <template>
@@ -31,8 +55,7 @@ const current = shallowRef(-1);
                 <x-scroll-header :choices="options" v-model="current" class="mb-[28px]" buttons />
             </template>
 
-            <apartment-plan class="mb-[13px]" />
-            <apartment-plan class="mb-[25px]" />
+            <apartment-plan v-for="item in entrances" :key="item?.id" :apartment="item" class="mb-[13px]" />
 
             <template #foot>
                 <div class="text-center">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps<{ complex?: any; home?: any }>();
+const props = defineProps<{ complex?: any; home?: any; id?: string }>();
 
 const computeDeadline = ({ stage, quarter_end, year_end }) => {
     if (stage?.name.toLocaleLowerCase() === "сдан") return "Сдан";
@@ -48,7 +48,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div>
+    <div :id="id">
         <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-[46px]']">
             <template #head>
                 <h1 class="text-[26px] md:text-[24px] font-bold md:font-extrabold leading-9 md:leading-[28px] font-[Raleway] text-[#131313]">Выбор дома</h1>
