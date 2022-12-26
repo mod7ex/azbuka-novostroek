@@ -67,7 +67,7 @@ watch(
 
                     <!-- <pre> home: {{ home?.entrances }} </pre> -->
                     <!-- <pre> {{ currentHome }} </pre> -->
-                    <pre> {{ complex }} </pre>
+                    <!-- <pre> {{ complex }} </pre> -->
 
                     <building-mortgage :complex="complex" :id="SECTIONS.MORTGAGE" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 

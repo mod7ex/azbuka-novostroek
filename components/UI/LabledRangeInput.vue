@@ -1,19 +1,39 @@
 <script setup lang="ts">
 import RangeInput from "~/components/UI/TowThumbsRangeInput.vue";
+import { format_thousands } from "~/utils";
 
 interface Props {
     label?: Numberish;
     maxLabel?: Numberish;
-    minLabel?: Numberish;
+    min?: number;
+    max?: number;
     bg?: true;
     uni?: true;
+    modelValue?: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
     label: "",
     maxLabel: "",
-    minLabel: "",
+    min: 500,
+    max: 1000000,
 });
+
+const emit = defineEmits(["update:modelValue"]);
+
+const handelInput = (v: string) => {
+    /*
+        Array.from(v.matchAll(/\b\d+\b/gi))
+            .map((v) => v[0])
+            .join("")
+    */
+
+    const _v = parseInt(v.replace(" ", ""));
+
+    const min = props.min;
+
+    emit("update:modelValue", Number.isNaN(_v) ? min : _v < min ? min : _v);
+};
 </script>
 
 <template>
@@ -27,7 +47,7 @@ const props = withDefaults(defineProps<Props>(), {
                 <ul :class="['text-[14px] font-medium leading-4 font-[Inter] flex items-center justify-between w-full', bg ? 'text-[#4F4F4F]' : '']">
                     <li>
                         <slot name="min-label">
-                            <p class="text-[#828282]">{{ minLabel }}</p>
+                            <input type="text" :value="format_thousands(modelValue ?? min)" @input="(e) => handelInput((e.target as HTMLInputElement).value)" />
                         </slot>
                     </li>
                     <li>

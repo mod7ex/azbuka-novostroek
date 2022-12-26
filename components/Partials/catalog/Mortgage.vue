@@ -39,21 +39,22 @@ const foo = ref();
                 <app-select class="form-section mb-[23px] md:col-span-1 md:mb-0" :options="[]" label="Новостройка" disabled :inner-label="complex?.name" bg />
 
                 <div class="form-section mb-[23px] flex gap-[9px] md:gap-4 md:col-span-2 md:mb-0">
-                    <app-select class="flex-grow" :options="selection" v-model="foo" label="Срок сдачи" bg />
+                    <app-select class="flex-grow" :options="selection" label="Срок сдачи" bg />
                     <app-select class="flex-grow" :options="selection" label="Комнатность" bg />
                 </div>
 
                 <div class="form-section mb-[23px] md:col-span-1 md:mb-0">
-                    <labled-range-input label="Стоимость недвижимости" min-label="6 702 000" max-label="₽" bg uni />
+                    <!-- foo: {{ foo }} -->
+                    <labled-range-input label="Стоимость недвижимости" v-model="foo" max-label="₽" bg uni />
                 </div>
 
                 <div class="form-section mb-[23px] md:col-span-1 md:mb-0">
-                    <labled-range-input label="Первый взнос" min-label="6 702 000" max-label="₽" bg uni />
+                    <labled-range-input label="Первый взнос" max-label="₽" bg uni />
                 </div>
 
                 <div class="form-section mb-[23px] md:col-span-1 md:mb-[41px]">
                     <!-- 29 + 41 = 70 -->
-                    <labled-range-input label="Срок кредита" min-label="6 702 000" max-label="₽" bg uni />
+                    <labled-range-input label="Срок кредита" max-label="₽" bg uni />
                 </div>
 
                 <div class="form-section mb-[25px] md:col-span-3 md:mb-0">
