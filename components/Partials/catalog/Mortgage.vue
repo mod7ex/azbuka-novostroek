@@ -3,6 +3,7 @@
 // import SBER from "~/assets/svg/sber-bank.svg";
 // import RAIFFEISEN from "~/assets/svg/raiffeisen-bank.svg";
 import LoanOffer from "~/components/Partials/catalog/LoanOffer.vue";
+import RangeInput from "~/components/UI/TowThumbsRangeInput.vue";
 
 const props = defineProps<{ complex?: any; id: string }>();
 
@@ -18,7 +19,7 @@ const selection = Array.from(Array(10).keys()).map((value) => ({ value, label: `
 
 const isMatch = useMediaQuery("(min-width: 768px)");
 
-const foo = ref();
+const value = ref(30000);
 </script>
 
 <template>
@@ -36,7 +37,13 @@ const foo = ref();
 
             <!-- form -->
             <div class="md:grid grid-cols-3 md:gap-y-[29px] md:gap-x-4">
-                <app-select class="form-section mb-[23px] md:col-span-1 md:mb-0" :options="[]" label="Новостройка" disabled :inner-label="complex?.name" bg />
+                <app-select class="form-section mb-[23px] md:col-span-1 md:mb-0" :options="[]" label="Новостройка" disabled bg>
+                    <template #inner-label>
+                        <p class="text-[16px] leading-[14px] font-medium text-[#828282]">
+                            {{ complex?.name }}
+                        </p>
+                    </template>
+                </app-select>
 
                 <div class="form-section mb-[23px] flex gap-[9px] md:gap-4 md:col-span-2 md:mb-0">
                     <app-select class="flex-grow" :options="selection" label="Срок сдачи" bg />
@@ -44,17 +51,27 @@ const foo = ref();
                 </div>
 
                 <div class="form-section mb-[23px] md:col-span-1 md:mb-0">
-                    <!-- foo: {{ foo }} -->
-                    <labled-range-input label="Стоимость недвижимости" v-model="foo" max-label="₽" bg uni />
+                    <labled-range-input label="Стоимость недвижимости" v-model:last_range="value" max-label="₽" bg>
+                        <template #thums>
+                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :max="1000000" :min="500" v-model:last_range="value" />
+                        </template>
+                    </labled-range-input>
                 </div>
 
                 <div class="form-section mb-[23px] md:col-span-1 md:mb-0">
-                    <labled-range-input label="Первый взнос" max-label="₽" bg uni />
+                    <labled-range-input label="Первый взнос" v-model:last_range="value" max-label="₽" bg>
+                        <template #thums>
+                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :max="1000000" :min="500" v-model:last_range="value" />
+                        </template>
+                    </labled-range-input>
                 </div>
 
                 <div class="form-section mb-[23px] md:col-span-1 md:mb-[41px]">
-                    <!-- 29 + 41 = 70 -->
-                    <labled-range-input label="Срок кредита" max-label="₽" bg uni />
+                    <labled-range-input label="Срок кредита" v-model:last_range="value" max-label="₽" bg>
+                        <template #thums>
+                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :max="1000000" :min="500" v-model:last_range="value" />
+                        </template>
+                    </labled-range-input>
                 </div>
 
                 <div class="form-section mb-[25px] md:col-span-3 md:mb-0">

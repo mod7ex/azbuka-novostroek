@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import RangeInput from "~/components/UI/TowThumbsRangeInput.vue";
-import { format_thousands } from "~/utils";
+import { debounce, format_thousands } from "~/utils";
 
 interface Props {
     label?: Numberish;
@@ -8,8 +7,7 @@ interface Props {
     min?: number;
     max?: number;
     bg?: true;
-    uni?: true;
-    modelValue?: number;
+    last_range?: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -19,20 +17,30 @@ const props = withDefaults(defineProps<Props>(), {
     max: 1000000,
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:last_range"]);
+
+const check = (v: string, max = props.max, min = props.min) => {
+    const _v = parseInt(v?.replaceAll(" ", ""));
+
+    if (Number.isNaN(_v)) return min;
+
+    if (_v < min) return min;
+
+    if (_v > max) return max;
+
+    return _v;
+};
+
+const inputRef = ref<HTMLInputElement>();
+
+const _handelInput = debounce((v: number) => {
+    inputRef.value.value = format_thousands(v);
+
+    emit("update:last_range", v);
+});
 
 const handelInput = (v: string) => {
-    /*
-        Array.from(v.matchAll(/\b\d+\b/gi))
-            .map((v) => v[0])
-            .join("")
-    */
-
-    const _v = parseInt(v.replace(" ", ""));
-
-    const min = props.min;
-
-    emit("update:modelValue", Number.isNaN(_v) ? min : _v < min ? min : _v);
+    _handelInput(check(v));
 };
 </script>
 
@@ -47,7 +55,7 @@ const handelInput = (v: string) => {
                 <ul :class="['text-[14px] font-medium leading-4 font-[Inter] flex items-center justify-between w-full', bg ? 'text-[#4F4F4F]' : '']">
                     <li>
                         <slot name="min-label">
-                            <input type="text" :value="format_thousands(modelValue ?? min)" @input="(e) => handelInput((e.target as HTMLInputElement).value)" />
+                            <input ref="inputRef" :value="format_thousands(last_range)" type="text" @input="(e) => handelInput((e.target as HTMLInputElement).value)" />
                         </slot>
                     </li>
                     <li>
@@ -57,7 +65,14 @@ const handelInput = (v: string) => {
                     </li>
                 </ul>
             </button>
-            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" :uni="uni" />
+
+            <slot name="thums"></slot>
         </div>
     </div>
 </template>
+
+<style lang="scss" scoped>
+input {
+    background-color: transparent;
+}
+</style>

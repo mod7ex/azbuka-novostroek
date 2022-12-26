@@ -1,27 +1,31 @@
 <script lang="ts" setup>
 import { uuidGen } from "~/utils";
 
-defineProps<{ uni?: true }>();
+const props = withDefaults(defineProps<{ max?: number; min?: number; uni?: true; step?: number; last_range?: number; first_range?: number }>(), {
+    step: 1,
+    last_range: 0,
+    first_range: 0,
+});
+
+const emit = defineEmits(["update:last_range", "update:first_range"]);
 
 const uuid = uuidGen("range-selector");
 
 const uuids = [uuid(), uuid()];
 
-const max = 50;
-const min = 0;
-
-const first_range = shallowRef(0);
-const last_range = shallowRef(30);
-
 const width = computed(() => {
-    return 100 * (1 - last_range.value / (max - min));
+    return 100 * (1 - props.last_range / (props.max - props.min));
 });
+
+const handelInput = (e: Event, item: "last" | "first") => {
+    emit(`update:${item}_range`, (e.target as HTMLInputElement).value);
+};
 </script>
 
 <template>
     <div :class="['ranger', $attrs.class, uni ? 'one-range' : '']">
-        <input :id="uuids[0]" v-model="first_range" type="range" :min="min" :max="max" v-if="!uni" />
-        <input :id="uuids[1]" :style="`--width: ${width}%`" v-model="last_range" type="range" :min="min" :max="max" />
+        <input :id="uuids[0]" :value="first_range" type="range" :min="min" :max="max" :step="step" @input="(e) => handelInput(e, 'first')" v-if="!uni" />
+        <input :id="uuids[1]" :value="last_range" type="range" :min="min" :max="max" :step="step" @input="(e) => handelInput(e, 'last')" :style="`--width: ${width}%`" />
     </div>
 </template>
 

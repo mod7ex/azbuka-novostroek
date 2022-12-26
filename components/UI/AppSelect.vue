@@ -73,7 +73,7 @@ const selectedOptions = computed(() => {
         >
             <slot name="inner-label">
                 <p class="text-[16px] leading-[14px] font-medium" :class="[bg ? 'text-[#828282]' : 'text-[#4F4F4F]']">
-                    {{ !multiple ? selectedOptions[0]?.label ?? "Любой" : innerLabel }}
+                    {{ multiple ? innerLabel : selectedOptions[0]?.label ?? "Любой" }}
                 </p>
             </slot>
             <app-i name="ic:baseline-keyboard-arrow-down" :class="[bg ? 'text-[#1DA958]' : 'text-[#3478F6]', ' h-5 w-5 transition-transform duration-300', isCollaped ? 'rotate-180' : '']" />
