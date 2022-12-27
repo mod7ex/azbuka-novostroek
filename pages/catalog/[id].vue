@@ -62,24 +62,29 @@ watch(
 
                     <div :id="SECTIONS.CHARACTERISTICS_AND_APARTMENTS" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
                         <building-choices v-if="complex" :complex="complex" :home="home" class="mb-[25px] md:mb-[63px]" />
-                        <!-- <building-plan v-if="home" :home="home" class="mb-[25px]" /> -->
+                        <building-plan v-if="home" :home="home" class="mb-[25px]" />
                     </div>
 
                     <!-- <pre> home: {{ home?.entrances }} </pre> -->
                     <!-- <pre> {{ currentHome }} </pre> -->
-                    <!-- <pre> {{ complex }} </pre> -->
+                    <!-- <pre> {{ complex?.min_price }} </pre> -->
+                    <!-- <pre> {{ complex?.max_price }} </pre> -->
 
-                    <building-mortgage :complex="complex" :id="SECTIONS.MORTGAGE" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                    <client-only>
+                        <building-mortgage v-if="complex" :complex="complex" :id="SECTIONS.MORTGAGE" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                    </client-only>
 
-                    <building-promotion :id="SECTIONS.STOCK" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                    <!-- <building-promotion :id="SECTIONS.STOCK" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" /> -->
 
                     <!-- <building-discounts class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" /> -->
 
-                    <div :id="SECTIONS.REVIEWS_QR" class="mount-animation anm-hidden bg-[#F9F9F9] md:bg-transparent mb-[37px] md:mb-[93px]">
-                        <div class="bg-[#F9F9F9] shadow-inner-md pt-[25px] px-5 md:px-0 pb-[41px] md:pt-[38px] md:pb-[50px] w-fit">
-                            <building-reviews class="bg-[#F9F9F9] md:rounded-[3px]" />
+                    <!--
+                        <div :id="SECTIONS.REVIEWS_QR" class="mount-animation anm-hidden bg-[#F9F9F9] md:bg-transparent mb-[37px] md:mb-[93px]">
+                            <div class="bg-[#F9F9F9] shadow-inner-md pt-[25px] px-5 md:px-0 pb-[41px] md:pt-[38px] md:pb-[50px] w-fit">
+                                <building-reviews class="bg-[#F9F9F9] md:rounded-[3px]" />
+                            </div>
                         </div>
-                    </div>
+                    -->
 
                     <!-- <building-suggestions /> -->
                 </div>

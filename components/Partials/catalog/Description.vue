@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import Building from "~/assets/img/catalog-building-md.png";
-import BuildingA from "~/assets/img/gallery-building_a.png";
-import BuildingB from "~/assets/img/gallery-building_b.png";
-
 import Document from "~/assets/svg/description/document.svg";
 import Buildings from "~/assets/svg/description/buildings.svg";
 import Etage from "~/assets/img/etages.png";
@@ -24,6 +20,10 @@ const descriptionText = computed(() => {
     const _description = props?.complex?.description;
     return isExpanded.value ? _description : firstFewWords(stripHTMLPTag(_description));
 });
+
+const images = props.complex?.images ?? [];
+
+const { current, next, previous, pick } = useSpinner(images.length);
 
 const descriptionItems = [
     {
@@ -87,34 +87,27 @@ const descriptionItems = [
             </template>
 
             <div class="gallery mb-[25px] md:mb-10 mt-5 md:mt-[15px] md:flex md:gap-[10px] md:items-stretch">
-                <div class="min-h-[254px] current-img rounded-[5px] md:flex-grow" :style="{ backgroundImage: `url(${Building})` }"></div>
+                <div class="min-h-[254px] current-img rounded-[5px] md:flex-grow" :style="{ backgroundImage: `url(${images[current]?.url})` }"></div>
 
                 <ul class="flex items-stretch justify-center md:justify-between gap-1 mt-3 md:mt-0 md:flex-col">
                     <li class="flex items-center justify-center">
-                        <button class="md:hidden">
+                        <button class="md:hidden" @click="() => next()">
                             <app-i name="tabler:chevron-left" />
                         </button>
-                        <button class="hidden md:block">
+                        <button class="hidden md:block" @click="() => next()">
                             <app-i name="bx:chevron-up" />
                         </button>
                     </li>
-                    <li class="img items-stretch justify-center hidden md:flex">
-                        <button><app-img :src="Building" class="h-full rounded-[5px]" /></button>
+
+                    <li class="img items-stretch justify-center hidden md:flex border" v-for="({ url }, i) in images" :key="i" :class="i === current ? 'border-red-600' : 'border-transparent'">
+                        <button @click="() => pick(i)"><app-img :src="url" class="h-full rounded-[5px]" /></button>
                     </li>
-                    <li class="img flex items-stretch justify-center">
-                        <button><app-img :src="Building" class="h-full rounded-[5px]" /></button>
-                    </li>
-                    <li class="img flex items-stretch justify-center">
-                        <button><app-img :src="BuildingA" class="h-full rounded-[5px]" /></button>
-                    </li>
-                    <li class="img flex items-stretch justify-center">
-                        <button><app-img :src="BuildingB" class="h-full rounded-[5px]" /></button>
-                    </li>
+
                     <li class="flex items-center justify-center">
-                        <button class="md:hidden">
+                        <button class="md:hidden" @click="() => previous()">
                             <app-i name="tabler:chevron-right" />
                         </button>
-                        <button class="hidden md:block">
+                        <button class="hidden md:block" @click="() => previous()">
                             <app-i name="bx:chevron-down" />
                         </button>
                     </li>

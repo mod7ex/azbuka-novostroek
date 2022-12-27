@@ -4,6 +4,7 @@
 // import RAIFFEISEN from "~/assets/svg/raiffeisen-bank.svg";
 import LoanOffer from "~/components/Partials/catalog/LoanOffer.vue";
 import RangeInput from "~/components/UI/TowThumbsRangeInput.vue";
+import { format_thousands } from "~/utils";
 
 const props = defineProps<{ complex?: any; id: string }>();
 
@@ -15,11 +16,44 @@ const current = shallowRef(0);
 
 const options = ["Все программы", "Оптимальные условия"];
 
-const selection = Array.from(Array(10).keys()).map((value) => ({ value, label: `Selection ${value}` }));
+const percents_options = [
+    { value: "percents", label: "Стандартная ипотека" },
+    { value: "family_percents", label: "Субсидированная застройщиком" },
+    { value: "state_percents", label: "Господдержка" },
+    // { value: "country_percents", label: "" },
+];
+
+const selected_percents = shallowRef(percents_options[0].value);
+
+const selection = Array.from(Array(10).keys()).map((value) => ({ value, label: `Pick ${value}` }));
 
 const isMatch = useMediaQuery("(min-width: 768px)");
 
-const value = ref(30000);
+const price = shallowRef<number>(props.complex.min_price);
+const advance = shallowRef<number>(props.complex.min_price * 0.15);
+const credit_period = shallowRef<number>(20);
+
+watch(price, (v, _v) => {
+    /* const _rate = advance.value / _v; */
+    /* advance.value = Math.floor(v * _rate); */
+    advance.value = v * 0.15;
+});
+
+const pay_per_month = (bank: any) => {
+    const months = credit_period.value * 12;
+    const sum = price.value - advance.value;
+    const percents = bank[selected_percents.value];
+
+    if (typeof percents === "number") {
+        const percentOnMonth = percents / 100 / 12;
+
+        const monthly_price = (sum * percentOnMonth) / (1 - Math.pow(1 + percentOnMonth, -months));
+
+        return `${format_thousands(Math.round(monthly_price))} ₽`;
+    }
+
+    return "_";
+};
 </script>
 
 <template>
@@ -51,37 +85,47 @@ const value = ref(30000);
                 </div>
 
                 <div class="form-section mb-[23px] md:col-span-1 md:mb-0">
-                    <labled-range-input label="Стоимость недвижимости" v-model:last_range="value" max-label="₽" bg>
+                    <labled-range-input label="Стоимость недвижимости" v-model:last_range="price" :max="complex.max_price" :min="complex.min_price" max-label="₽" bg>
                         <template #thums>
-                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :max="1000000" :min="500" v-model:last_range="value" />
+                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :max="complex.max_price" :min="complex.min_price" v-model:last_range="price" />
                         </template>
                     </labled-range-input>
                 </div>
 
                 <div class="form-section mb-[23px] md:col-span-1 md:mb-0">
-                    <labled-range-input label="Первый взнос" v-model:last_range="value" max-label="₽" bg>
+                    <labled-range-input label="Первый взнос" v-model:last_range="advance" :max="price" :min="price * 0.15" bg>
                         <template #thums>
-                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :max="1000000" :min="500" v-model:last_range="value" />
+                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :max="price" :min="price * 0.15" v-model:last_range="advance" />
+                        </template>
+
+                        <template #max-label>
+                            <div class="flex gap-5">
+                                <p class="flex text-gray-400">{{ `${Math.floor((100 * advance) / price)}%` }}</p>
+                                <p class="text-[#1DA958]">₽</p>
+                            </div>
                         </template>
                     </labled-range-input>
                 </div>
 
                 <div class="form-section mb-[23px] md:col-span-1 md:mb-[41px]">
-                    <labled-range-input label="Срок кредита" v-model:last_range="value" max-label="₽" bg>
+                    <labled-range-input label="Срок кредита" v-model:last_range="credit_period" :max="30" :min="1" max-label="лет" bg>
                         <template #thums>
-                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :max="1000000" :min="500" v-model:last_range="value" />
+                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :step="1" :max="30" :min="1" v-model:last_range="credit_period" />
                         </template>
                     </labled-range-input>
                 </div>
 
                 <div class="form-section mb-[25px] md:col-span-3 md:mb-0">
-                    <app-radio :options="['Стандартная ипотека', 'Субсидированная застройщиком', 'Господдержка']" class="md:flex-row md:justify-between md:mb-[60px]" />
+                    <app-radio :options="percents_options" class="md:flex-row md:justify-between md:mb-[60px]" v-model="selected_percents" />
                 </div>
             </div>
             <!-- ---------------------------------------- -->
 
             <template #foot>
-                <loan-offer :banks="banks" />
+                <!-- <div v-for="(bank, i) in banks" :key="i">{{ pay_per_month(bank) }}</div> -->
+                <loan-offer :banks="banks" :advance="`${format_thousands(advance)} ₽`" :period="credit_period" :percents="selected_percents">
+                    <template #slot-data="{ bank }"> {{ pay_per_month(bank) }} </template>
+                </loan-offer>
             </template>
         </NuxtLayout>
     </div>

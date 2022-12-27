@@ -11,6 +11,8 @@ is_has_feed
 is_has_parking
 is_has_offices
 description
+min_price
+max_price
 homes(
   order_by: [
     {column: "stage_id", order: ASC},

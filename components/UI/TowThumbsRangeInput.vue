@@ -2,9 +2,7 @@
 import { uuidGen } from "~/utils";
 
 const props = withDefaults(defineProps<{ max?: number; min?: number; uni?: true; step?: number; last_range?: number; first_range?: number }>(), {
-    step: 1,
-    last_range: 0,
-    first_range: 0,
+    step: 1000,
 });
 
 const emit = defineEmits(["update:last_range", "update:first_range"]);
@@ -14,7 +12,7 @@ const uuid = uuidGen("range-selector");
 const uuids = [uuid(), uuid()];
 
 const width = computed(() => {
-    return 100 * (1 - props.last_range / (props.max - props.min));
+    return 100 * (1 - (props.last_range - props.min) / (props.max - props.min));
 });
 
 const handelInput = (e: Event, item: "last" | "first") => {

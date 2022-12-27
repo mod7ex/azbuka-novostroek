@@ -74,5 +74,6 @@ const handelInput = (v: string) => {
 <style lang="scss" scoped>
 input {
     background-color: transparent;
+    width: 100%;
 }
 </style>

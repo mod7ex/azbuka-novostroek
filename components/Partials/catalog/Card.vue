@@ -6,7 +6,7 @@ defineProps<{ complex?: any }>();
 
 <template>
     <article :class="['bg-[#3478F6] rounded-[5px] card-container', $attrs.class]">
-        <div class="rounded-t-[5px] md:rounded-t-none p-[21px] md:py-[40px] md:px-[30px] flex flex-col justify-between card-photo md:flex-grow">
+        <div class="rounded-t-[5px] md:rounded-t-none p-[21px] md:py-[40px] md:px-[30px] flex flex-col justify-between card-photo md:flex-grow" :style="{ backgroundImage: `url(${complex?.image?.url})` }">
             <div class="flex items-center justify-start gap-[6px] md:gap-[10px] md:items-end md:flex-col">
                 <button class="flex items-center justify-center w-[28px] h-[28px] md:w-[40px] md:h-[40px] relative bg-[#E71F61] rounded-full cursor-pointer">
                     <app-i class="absolute text-white w-3 h-3 md:w-5 md:h-5" name="ic:round-local-phone" />
@@ -78,7 +78,9 @@ defineProps<{ complex?: any }>();
     .card-photo {
         height: 70vw;
 
-        @include bg-img("catalog-building-md.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
 
         @include break_point(768px) {
             border-top-right-radius: 5px;

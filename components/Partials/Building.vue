@@ -1,17 +1,14 @@
 <script lang="ts" setup>
-import Building from "~/assets/img/building.png";
 import { format_thousands } from "~/utils";
 
 withDefaults(
     defineProps<{
         complex: any;
-        img?: string;
         actions?: boolean;
         shadow?: true;
         whiteCta?: true;
     }>(),
     {
-        img: Building,
         actions: true,
     }
 );
@@ -41,7 +38,7 @@ const startingPrice = (payload) => {
         <div :class="['building transition-all duration-300 md:rounded-[3px] h-full flex flex-col', shadow ? 'building-shadow' : '']">
             <div class="relative img rounded-[5px] md:rounded-none md:rounded-t w-full">
                 <div :class="['h-[120px] sm:h-44', whiteCta ? 'md:h-[163px]' : 'md:h-[200px]']">
-                    <app-img class="rounded-[5px] md:rounded-b-none" fill :src="img" alt="" />
+                    <app-img class="rounded-[5px] md:rounded-b-none" fill :src="complex?.image?.url" alt="" />
                 </div>
 
                 <span class="absolute top-0 right-0 left-0 flex justify-between p-[9px] md:p-[13px]" v-if="actions">
