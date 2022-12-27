@@ -71,7 +71,6 @@ const loadMore = () => {
                 <div class="grid grid-cols-12 gap-3 md:gap-[30px] mb-[28px] md:mb-[61px]">
                     <!-- 26 + 2 = 28 -->
                     <Building v-for="complex in complexes" :key="complex.id" :complex="complex" under-construction shadow />
-                    <div v-for="complex in complexes" :key="complex.id">{{ complex?.image?.url }}</div>
                 </div>
             </div>
 

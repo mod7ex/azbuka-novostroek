@@ -65,11 +65,6 @@ watch(
                         <building-plan v-if="home" :home="home" class="mb-[25px]" />
                     </div>
 
-                    <!-- <pre> home: {{ home?.entrances }} </pre> -->
-                    <!-- <pre> {{ currentHome }} </pre> -->
-                    <!-- <pre> {{ complex?.min_price }} </pre> -->
-                    <!-- <pre> {{ complex?.max_price }} </pre> -->
-
                     <client-only>
                         <building-mortgage v-if="complex" :complex="complex" :id="SECTIONS.MORTGAGE" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
                     </client-only>
