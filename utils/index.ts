@@ -28,7 +28,7 @@ export const queuedLast = (fn: TFunc, timeout: number = 0) => {
 };
 
 function separateEach3BY(x: number, separator: string) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator);
+    return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator);
 }
 
 export const format_thousands = (n: number) => {

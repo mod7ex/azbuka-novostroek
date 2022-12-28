@@ -18,7 +18,7 @@ const areaLabel = (v, flbk = "Не заполнено") => {
         </div>
 
         <div class="h-50 w-50 pt-5">
-            <app-img :src="apartment?.layout_url ?? PlanA" class="mx-auto" fill />
+            <app-img :src="apartment?.layout_url" class="mx-auto" fill />
         </div>
 
         <div class="md:flex-grow">

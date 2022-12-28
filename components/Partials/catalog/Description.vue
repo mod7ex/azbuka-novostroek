@@ -23,7 +23,8 @@ const descriptionText = computed(() => {
 
 const images = props.complex?.images ?? [];
 
-const { current, next, previous, pick } = useSpinner(images.length);
+const { current, next, previous, pick } = useSpinner(10);
+// const { current, next, previous, pick } = useSpinner(images.length);
 
 const descriptionItems = [
     {
@@ -87,31 +88,27 @@ const descriptionItems = [
             </template>
 
             <div class="gallery mb-[25px] md:mb-10 mt-5 md:mt-[15px] md:flex md:gap-[10px] md:items-stretch">
-                <div class="min-h-[254px] current-img rounded-[5px] md:flex-grow" :style="{ backgroundImage: `url(${images[current]?.url})` }"></div>
+                <div class="h-[254px] md:h-[365px] current-img rounded-[5px] md:flex-grow" :style="{ backgroundImage: `url(${images[current]?.url})` }"></div>
 
-                <ul class="flex items-stretch justify-center md:justify-between gap-1 mt-3 md:mt-0 md:flex-col">
-                    <li class="flex items-center justify-center">
-                        <button class="md:hidden" @click="() => next()">
-                            <app-i name="tabler:chevron-left" />
-                        </button>
-                        <button class="hidden md:block" @click="() => next()">
-                            <app-i name="bx:chevron-up" />
-                        </button>
-                    </li>
+                <div class="max-h-[365px] flex items-stretch justify-center md:justify-between gap-1 mt-3 md:mt-0 md:flex-col">
+                    <button @click="() => next()">
+                        <span class="md:hidden"><app-i name="tabler:chevron-left" /></span>
+                        <span class="hidden md:inline"><app-i name="tabler:chevron-up" /></span>
+                    </button>
 
-                    <li class="img items-stretch justify-center hidden md:flex border" v-for="({ url }, i) in images" :key="i" :class="i === current ? 'border-red-600' : 'border-transparent'">
-                        <button @click="() => pick(i)"><app-img :src="url" class="h-full rounded-[5px]" /></button>
-                    </li>
+                    <ul class="flex items-stretch justify-center md:justify-between gap-2 md:flex-col overflow-x-scroll overflow-y-scroll no-scroll-thum">
+                        <li class="img items-stretch justify-center md:flex" v-for="({ url }, i) in images" :key="i">
+                            <button class="h-16 w-24 rounded-[5px] border-2" :class="i === current ? 'border-red-600' : 'border-transparent'" @click="() => pick(i)"><app-img :src="url" fill class="rounded-[5px]" /></button>
+                        </li>
+                    </ul>
 
                     <li class="flex items-center justify-center">
-                        <button class="md:hidden" @click="() => previous()">
-                            <app-i name="tabler:chevron-right" />
-                        </button>
-                        <button class="hidden md:block" @click="() => previous()">
-                            <app-i name="bx:chevron-down" />
+                        <button @click="() => previous()">
+                            <span class="md:hidden"><app-i name="tabler:chevron-right" /></span>
+                            <span class="hidden md:inline"><app-i name="bx:chevron-down" /></span>
                         </button>
                     </li>
-                </ul>
+                </div>
             </div>
 
             <ul class="grid grid-cols-2 mb-[18px] md:mb-11 md:gap-y-10">
@@ -168,16 +165,9 @@ const descriptionItems = [
 
     ul {
         li {
-            &.img {
-                // height: ;
-            }
-
             cursor: pointer;
             color: #8c8c8c;
             max-width: 93px;
-            img {
-                width: 100%;
-            }
         }
     }
 }
