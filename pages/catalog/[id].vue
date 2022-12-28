@@ -38,13 +38,18 @@ watch(
     })
 );
 
+// https://nuxt.com/docs/getting-started/seo-meta
+
 // useMountAnimation();
 </script>
 
 <template>
     <div class="relative">
+        <Head>
+            <Script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript" defer />
+        </Head>
+
         <NuxtLayout name="inner">
-            <!-- 59 + 31 = 90 -->
             <app-width class="mt-7 md:mt-[59px] mb-[33px] md:mb-[100px]" tag="section">
                 <the-bread-crumb class="mb-[19px] md:mb-[40px]" />
                 <building-card :complex="complex" class="mount-animation anm-hidden" />
@@ -54,11 +59,9 @@ watch(
                 <div class="left">
                     <building-description v-if="complex" :complex="complex" :id="SECTIONS.DESCRIPTION" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
-                    <!--
-                        <client-only>
-                            <building-location v-if="complex" :complex="complex" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
-                        </client-only>
-                    -->
+                    <client-only>
+                        <building-location v-if="complex" :complex="complex" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                    </client-only>
 
                     <div :id="SECTIONS.CHARACTERISTICS_AND_APARTMENTS" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
                         <building-choices v-if="complex" :complex="complex" :home="home" class="mb-[25px] md:mb-[63px]" />

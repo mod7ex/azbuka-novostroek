@@ -6,7 +6,7 @@ export const settings = {
     version: "2.1",
 };
 
-export const controls = ["zoomControl", "trafficControl", "rulerControl", "typeSelector"];
+export const controls = ["routeEditor" /* ,"zoomControl", "trafficControl", "rulerControl", "typeSelector" */];
 
 export const coordinates = {
     Russia: [58.000054, 103.0],

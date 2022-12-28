@@ -28,7 +28,7 @@ const locationDetails = [
             </template>
 
             <div class="my-4 md:mt-[34px] md:mb-[28px] h-[513px] md:h-[296px] w-full">
-                <map-marker :coordinates="complex?.coordinates" />
+                <map-marker :coordinates="complex?.coordinates" :label="complex?.name" />
             </div>
 
             <template #foot>
