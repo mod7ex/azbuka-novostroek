@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { MAP_ZOOM } from "~/constants";
-
 import { yandexMap as YandexMap, ymapMarker as YandexMarker } from "vue-yandex-maps";
 import { settings, coordinates, controls } from "~/services/map";
 
