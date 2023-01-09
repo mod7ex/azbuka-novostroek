@@ -14,7 +14,7 @@ const zoom = props.coordinates ? MAP_ZOOM.FOCUS : MAP_ZOOM.DEFAULT;
 // https://yandex.com/dev/maps/jsapi/doc/2.1/quick-start/index.html?from=techmapsmain
 
 // @ts-ignore
-ymaps.ready(function init() {
+ymaps?.ready(function init() {
     // @ts-ignore
     var myMap = new ymaps.Map("map", {
         center: coords,

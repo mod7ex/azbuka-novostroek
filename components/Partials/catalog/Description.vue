@@ -26,58 +26,58 @@ const images = props.complex?.images ?? [];
 const { current, next, previous, pick } = useSpinner(10);
 // const { current, next, previous, pick } = useSpinner(images.length);
 
-const descriptionItems = [
+const descriptionItems = computed(() => [
     {
         img: Document,
         light: "Тип договора",
-        bold: (v?: any) => v?.some_key ?? "Не заполнено" /*"ДДУ, 214 ФЗ"*/,
+        bold: props.complex?.some_key ?? "Не заполнено" /*"ДДУ, 214 ФЗ"*/,
     },
     {
         img: Buildings,
         light: "Класс недвижимости",
-        bold: (v?: any) => v?.some_key ?? "Не заполнено" /*"Комфорт"*/,
+        bold: props.complex?.some_key ?? "Не заполнено" /*"Комфорт"*/,
     },
     {
         img: BuildingSvg,
         light: "Число корпусов",
-        bold: (v?: any) => v?.count_homes?.total ?? "Не заполнено",
+        bold: props.complex?.count_homes?.total ?? "Не заполнено",
     },
     {
         img: Etage,
         light: "Этажность",
-        bold: (v?: any) => v?.some_key ?? "Не заполнено" /*"от 7 до 16"*/,
+        bold: props.complex?.some_key ?? "Не заполнено" /*"от 7 до 16"*/,
     },
     {
         img: Apartments,
         light: "Число квартир",
-        bold: (v?: any) => v?.count_apartments ?? "Не заполнено",
+        bold: props.complex?.count_apartments ?? "Не заполнено",
     },
     {
         img: Height,
         light: "Высота потолков",
-        bold: (v?: any) => v?.some_key ?? "Не заполнено" /*"2.8 м"*/,
+        bold: props.complex?.some_key ?? "Не заполнено" /*"2.8 м"*/,
     },
     {
         img: Type,
         light: "Тип дома",
-        bold: (v?: any) => v?.some_key ?? "Не заполнено" /*"Кирпично монолитный"*/,
+        bold: props.complex?.some_key ?? "Не заполнено" /*"Кирпично монолитный"*/,
     },
     {
         img: Paint,
         light: "Отделка",
-        bold: (v?: any) => v?.some_key ?? "Не заполнено" /*"Черновая, под ключ"*/,
+        bold: props.complex?.some_key ?? "Не заполнено" /*"Черновая, под ключ"*/,
     },
     {
         img: Parking,
         light: "Паркинг, машиноместа",
-        bold: (v?: any) => v?.some_key ?? "Не заполнено" /*"48 – открытый,<br />есть подземный"*/,
+        bold: props.complex?.some_key ?? "Не заполнено" /*"48 – открытый,<br />есть подземный"*/,
     },
     {
         img: Elevator,
         light: "Лифты",
-        bold: (v?: any) => v?.some_key ?? "Не заполнено" /*"5 пассажирских"*/,
+        bold: props.complex?.some_key ?? "Не заполнено" /*"5 пассажирских"*/,
     },
-];
+]);
 </script>
 
 <template>
@@ -130,7 +130,7 @@ const descriptionItems = [
 
                         <div class="text-center md:text-left font-[Inter] leading-[17px] md:leading-5">
                             <p class="text-xs md:text-[14px] font-normal text-[#878787] mb-[5px]" v-html="item.light"></p>
-                            <p class="text-[13px] font-semibold md:text-base md:font-bold" v-html="item.bold(complex)"></p>
+                            <p class="text-[13px] font-semibold md:text-base md:font-bold" :key="item.bold" v-html="item.bold"></p>
                         </div>
                     </div>
                 </li>

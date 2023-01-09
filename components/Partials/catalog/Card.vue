@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import { SECTIONS } from "~/constants";
 
-defineProps<{ complex?: any }>();
+const props = defineProps<{ complex?: any }>();
+
+// const deadline = computed(() => {
+//     const last = props.complex?.developer?.homes_statuses.reduce((({delay}), prev) => {
+
+//     })
+// })
 </script>
 
 <template>
@@ -52,7 +58,7 @@ defineProps<{ complex?: any }>();
                 <li class="mb-[17px]"><a :href="`#${SECTIONS.CHARACTERISTICS_AND_APARTMENTS}`">Характеристики</a></li>
                 <li class="mb-[17px]">
                     <a :href="`#${SECTIONS.CHARACTERISTICS_AND_APARTMENTS}`">Квартиры</a>
-                    <b class="md:bg-[#1DA958] md:rounded-[2px] md:px-[6px] md:py-[3px] md:ml-[10px]"> <span class="md:hidden">(</span>69<span class="md:hidden">)</span></b>
+                    <b class="md:bg-[#1DA958] md:rounded-[2px] md:px-[6px] md:py-[3px] md:ml-[10px]"> <span class="md:hidden">(</span>{{ complex?.count_apartments }}<span class="md:hidden">)</span></b>
                 </li>
                 <li class="mb-[17px]">
                     <a :href="`#${SECTIONS.CHARACTERISTICS_AND_APARTMENTS}`">Ход строительства</a>

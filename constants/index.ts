@@ -10,3 +10,10 @@ export enum MAP_ZOOM {
     DEFAULT = 3,
     FOCUS = 15,
 }
+
+export enum MS {
+    DAY = 1000 * 60 * 60 * 24,
+    HOUR = 1000 * 60 * 60,
+    MIN = 1000 * 60,
+    SEC = 1000,
+}

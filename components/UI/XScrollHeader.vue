@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isObject } from "~/utils/types";
+import { isObject, isPlainObject } from "~/utils/types";
 
 interface Props {
     choices: string[] | { label: string; value: Numberish }[];
@@ -25,10 +25,10 @@ const handle = (e: MouseEvent) => {
 
     const choice = props.choices[index];
 
-    emit("update:modelValue", typeof choice === "object" ? choice.value : index);
+    emit("update:modelValue", isPlainObject(choice) ? choice.value : index);
 };
 
-const isSelected = (v: unknown, index) => {
+const isSelected = (v: unknown, index: number) => {
     if (isObject(v)) return v?.value === props.modelValue;
     return index === props.modelValue;
 };
@@ -36,7 +36,7 @@ const isSelected = (v: unknown, index) => {
 
 <template>
     <div @click="handle" v-if="buttons" :class="['overflow-x-scroll flex gap-2 no-scroll-thum font-medium text-[13px] md:text-base md:leading-[19px] leading-[15px] font-[Inter]', $attrs.class]">
-        <button v-for="(choice, i) in choices" :key="i" :data-index="i" :class="['whitespace-nowrap py-2 px-[10px] rounded-[3px]', isSelected(choice, i) ? 'bg-[#1DA958] text-white' : 'bg-[#D2EEDE]']">
+        <button v-for="(choice, i) in choices" :key="`${i}-${modelValue}`" :data-index="i" :class="['whitespace-nowrap py-2 px-[10px] rounded-[3px]', isSelected(choice, i) ? 'bg-[#1DA958] text-white' : 'bg-[#D2EEDE]']">
             {{ isObject(choice) ? choice.label : choice }}
         </button>
     </div>

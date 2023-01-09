@@ -1,16 +1,11 @@
 <script setup lang="ts">
-// import VTB from "~/assets/svg/vtb-bank.svg";
-// import SBER from "~/assets/svg/sber-bank.svg";
-// import RAIFFEISEN from "~/assets/svg/raiffeisen-bank.svg";
 import LoanOffer from "~/components/Partials/catalog/LoanOffer.vue";
 import RangeInput from "~/components/UI/TowThumbsRangeInput.vue";
 import { format_thousands } from "~/utils";
 
-const props = defineProps<{ complex?: any; id: string }>();
+const props = defineProps<{ complex?: any; id: string; deadlines?: any[]; rooms?: { label: string; value: Numberish }[] }>();
 
 const banks = computed(() => props.complex?.banks ?? []);
-
-// const banks = [VTB, SBER, RAIFFEISEN];
 
 const current = shallowRef(0);
 
@@ -25,8 +20,6 @@ const percents_options = [
 
 const selected_percents = shallowRef(percents_options[0].value);
 
-const selection = Array.from(Array(10).keys()).map((value) => ({ value, label: `Pick ${value}` }));
-
 const isMatch = useMediaQuery("(min-width: 768px)");
 
 const price = shallowRef<number>(props.complex.min_price);
@@ -36,7 +29,7 @@ const credit_period = shallowRef<number>(20);
 watch(price, (v, _v) => {
     /* const _rate = advance.value / _v; */
     /* advance.value = Math.floor(v * _rate); */
-    advance.value = v * 0.15;
+    advance.value = Math.floor(v * 0.15);
 });
 
 const pay_per_month = (bank: any) => {
@@ -80,8 +73,8 @@ const pay_per_month = (bank: any) => {
                 </app-select>
 
                 <div class="form-section mb-[23px] flex gap-[9px] md:gap-4 md:col-span-2 md:mb-0">
-                    <app-select class="flex-grow" :options="selection" label="Срок сдачи" bg />
-                    <app-select class="flex-grow" :options="selection" label="Комнатность" bg />
+                    <app-select class="flex-grow" :options="deadlines" label="Срок сдачи" bg />
+                    <app-select class="flex-grow" :options="rooms" label="Комнатность" bg />
                 </div>
 
                 <div class="form-section mb-[23px] md:col-span-1 md:mb-0">

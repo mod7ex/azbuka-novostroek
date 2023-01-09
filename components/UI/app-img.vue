@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 type Numberish = string | number;
 
-const props = defineProps<{ src: string; alt?: string; width?: Numberish; height?: Numberish; fill?: true; title?: string }>();
+const props = defineProps<{ src: string | null; alt?: string; width?: Numberish; height?: Numberish; fill?: true; title?: string }>();
 
 // const config = useRuntimeConfig();
 // const _src = `${config.public.baseURL}${props.src.replace("~/", "/")}`;

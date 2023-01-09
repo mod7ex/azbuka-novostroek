@@ -39,7 +39,22 @@ export const GQL_FOR_DETAIL = `
   building
   merged_at
   developer_name
-
+  discounts {
+    id
+    order
+    date_start
+    date_end
+    title
+    amount
+    description
+    type
+    home_id
+    image {
+      url
+    }
+    created_at
+    updated_at
+  }
   sales {
     id
     name

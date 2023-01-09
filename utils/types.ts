@@ -1,17 +1,17 @@
 // check this for more https://github.com/vuejs/core/blob/main/packages/shared/src/index.ts
 
-// export enum OBJECT_TYPES {
-//     MAP = "[object Map]",
-//     WEAK_MAP = "[object WeakMap]",
-//     SET = "[object Set]",
-//     WEAK_SET = "[object WeakSet]",
-//     DATE = "[object Date]",
-//     PLAIN_OBJECT = "[object Object]",
-// }
+export enum OBJECT_TYPES {
+    MAP = "[object Map]",
+    WEAK_MAP = "[object WeakMap]",
+    SET = "[object Set]",
+    WEAK_SET = "[object WeakSet]",
+    DATE = "[object Date]",
+    PLAIN_OBJECT = "[object Object]",
+}
 
-// export const objectToString = Object.prototype.toString;
+export const objectToString = Object.prototype.toString;
 
-// export const toTypeString = (value: unknown): string => objectToString.call(value);
+export const toTypeString = (value: unknown): string => objectToString.call(value);
 
 // export const isMap = <K, V>(value: unknown): value is Map<K, V> => toTypeString(value) === OBJECT_TYPES.MAP;
 
@@ -23,7 +23,7 @@
 
 // export const isDate = (value: unknown): value is Date => toTypeString(value) === OBJECT_TYPES.DATE;
 
-// export const isPlainObject = (value: unknown): value is object => toTypeString(value) === OBJECT_TYPES.PLAIN_OBJECT;
+export const isPlainObject = (value: unknown): value is object => toTypeString(value) === OBJECT_TYPES.PLAIN_OBJECT;
 
 export const isArray = Array.isArray;
 

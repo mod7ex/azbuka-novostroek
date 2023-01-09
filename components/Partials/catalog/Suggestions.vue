@@ -1,12 +1,16 @@
 <script setup lang="ts">
-import BuildingSuggestions from "~/components/Partials/home/Suggestions.vue";
 import Building from "~/components/Partials/Building.vue";
+import { similarComplexes, GQL_FOR_DETAIL } from "~/services/gql/complexes";
+
+const props = defineProps<{ complex_id?: Numberish }>();
+
+// complex
+const { result, loading, error } = similarComplexes(props.complex_id as string, GQL_FOR_DETAIL);
+const complexes = computed(() => result.value?.similarComplexes?.data ?? []);
 </script>
 
 <template>
-    <div :class="$attrs.class">
-        <building-suggestions :count="4" class="md:hidden" />
-
+    <div :class="$attrs.class" v-if="!loading">
         <div class="hidden md:block">
             <p class="text-left text-[38px] leading-[44px] font-extrabold text-[#131313] font-[Raleway] mb-3">Вам подойдет</p>
             <div class="md:flex buildings-gallery">
@@ -15,7 +19,7 @@ import Building from "~/components/Partials/Building.vue";
                         <app-i name="material-symbols:arrow-right-alt-rounded" />
                     </button>
                     <div class="pl-[10px] pr-[20px] overflow-x-scroll no-scroll-thum py-14 flex gap-3 md:gap-[30px]">
-                        <Building v-for="i in 8" :key="i" under-construction shadow class="min-w-[308px]" />
+                        <Building v-for="complex in complexes" :key="complex.id" :complex="complex" under-construction shadow class="md:min-w-[300px]" />
                     </div>
                 </div>
 

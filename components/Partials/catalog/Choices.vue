@@ -1,21 +1,5 @@
 <script setup lang="ts">
-const props = defineProps<{ complex?: any; home?: any; id?: string }>();
-
-const computeDeadline = ({ stage, quarter_end, year_end }) => {
-    if (stage?.name.toLocaleLowerCase() === "сдан") return "Сдан";
-    else if (quarter_end && year_end) return `${quarter_end} квартал ${year_end}`;
-    else return undefined;
-};
-
-const choices = computed(() => {
-    return (
-        props.complex?.homes?.map(({ id, name, stage, quarter_end, year_end }) => {
-            const _dead_line = computeDeadline({ quarter_end, stage, year_end });
-
-            return { value: id, label: `${name} ${_dead_line ? `(${_dead_line})` : ""}` };
-        }) ?? []
-    );
-});
+const props = defineProps<{ complex?: any; home?: any; id?: string; deadlines?: any[] }>();
 
 const currentHome = useCurrentHome();
 
@@ -23,11 +7,7 @@ const stage = computed(() => {
     return props?.home?.stage;
 });
 
-const deadline = computed(() => {
-    const _home = props?.home;
-    if (_home) computeDeadline(_home);
-    return undefined;
-});
+const deadline = computed(() => props.deadlines?.find(({ value }) => value == props.home?.id)?.label);
 
 const options = ["Характеристики", "Документы", "Ход строительства"];
 const current = shallowRef(0);
@@ -41,8 +21,8 @@ const construction = computed(() => {
 // -----------------------------------------------------------
 
 onMounted(() => {
-    const _default = choices.value[0]?.value;
-    if (_default == null) return undefined;
+    const _default = props.deadlines[0]?.value;
+    if (_default == null) return;
     currentHome.value = _default;
 });
 </script>
@@ -54,15 +34,7 @@ onMounted(() => {
                 <h1 class="text-[26px] md:text-[24px] font-bold md:font-extrabold leading-9 md:leading-[28px] font-[Raleway] text-[#131313]">Выбор дома</h1>
             </template>
 
-            <x-scroll-header :choices="choices" v-model="currentHome" class="mb-[28px] mt-[22px]" buttons />
-
-            <!-- 
-                <ul class="mt-[22px] mb-8 md:mb-[50px] grid grid-cols-2 md:flex md:flex-wrap gap-[10px]">
-                    <li v-for="(choice, i) in choices" :key="i" class="col-span-1 w-full md:w-fit">
-                        <button :class="['py-2 w-full rounded-[3px] px-[18px] font-medium text-[13px] md:text-base md:leading-[19px] leading-[15px]', i == 0 ? 'bg-[#1DA958] text-white' : 'bg-[#D2EEDE]']">{{ choice }}</button>
-                    </li>
-                </ul>
-            -->
+            <x-scroll-header v-if="currentHome" :choices="deadlines" v-model="currentHome" class="mb-[28px] mt-[22px]" buttons />
 
             <x-scroll-header :choices="options" v-model="current" class="mb-[21px]" />
 
