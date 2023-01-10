@@ -12,10 +12,16 @@ const current = shallowRef(0);
 const options = ["Все программы", "Оптимальные условия"];
 
 const percents_options = [
+    /*  
     { value: "percents", label: "Стандартная ипотека" },
     { value: "family_percents", label: "Субсидированная застройщиком" },
     { value: "state_percents", label: "Господдержка" },
-    // { value: "country_percents", label: "" },
+*/
+    { value: "a", label: "Субсидированная застройщиком" },
+    { value: "b", label: "Ипотека с Господдержкой" },
+    { value: "c", label: "Семейная ипотека" },
+    { value: "d", label: "Военная ипотека" },
+    { value: "e", label: "Материнский капитал" },
 ];
 
 const selected_percents = shallowRef(percents_options[0].value);
@@ -109,13 +115,13 @@ const pay_per_month = (bank: any) => {
                 </div>
 
                 <div class="form-section mb-[25px] md:col-span-3 md:mb-0">
-                    <app-radio :options="percents_options" class="md:flex-row md:justify-between md:mb-[60px]" v-model="selected_percents" />
+                    <app-radio :options="percents_options" class="flex flex-col gap-4 md:flex-row md:flex-wrap md:gap-5 mb-8" v-model="selected_percents" />
                 </div>
             </div>
             <!-- ---------------------------------------- -->
 
             <template #foot>
-                <!-- <div v-for="(bank, i) in banks" :key="i">{{ pay_per_month(bank) }}</div> -->
+                <!-- <pre>{{ banks }}</pre> -->
                 <loan-offer :banks="banks" :advance="`${format_thousands(advance)} ₽`" :period="credit_period" :percents="selected_percents">
                     <template #slot-data="{ bank }"> {{ pay_per_month(bank) }} </template>
                 </loan-offer>

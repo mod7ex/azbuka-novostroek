@@ -3,11 +3,11 @@ import { SECTIONS } from "~/constants";
 
 const props = defineProps<{ complex?: any }>();
 
-// const deadline = computed(() => {
-//     const last = props.complex?.developer?.homes_statuses.reduce((({delay}), prev) => {
+const isAllBuilt = (payload) => payload?.count_homes?.total === payload?.count_homes?.finished;
 
-//     })
-// })
+const onlyFewBuilt = (payload) => payload?.count_homes?.finished > 0 && payload?.count_homes?.finished < payload?.count_homes?.total;
+
+const current = useCurrentChoicesOption();
 </script>
 
 <template>
@@ -23,7 +23,8 @@ const props = defineProps<{ complex?: any }>();
             </div>
 
             <div class="flex items-center justify-between md:flex-row-reverse">
-                <button class="bg-[#FCBD00] text-white py-[7px] px-3 rounded-[60px] md:rounded-[3px] md:py-5 md:px-[30px] text-xs md:text-[15px] leading-[13px] md:leading-[17px] font-bold font-[Raleway]">Узнать об акциях</button>
+                <a class="bg-[#FCBD00] text-white py-[7px] px-3 rounded-[60px] md:rounded-[3px] md:py-5 md:px-[30px] text-xs md:text-[15px] leading-[13px] md:leading-[17px] font-bold font-[Raleway]" :href="`#${SECTIONS.STOCK}`">Узнать об акциях</a>
+                <!-- <button >Узнать об акциях</button> -->
                 <ul class="flex items-center justify-center gap-[6px] md:gap-[10px]">
                     <ul class="flex items-center justify-center gap-[6px] md:gap-[10px] md:flex-row-reverse">
                         <ol>
@@ -60,19 +61,27 @@ const props = defineProps<{ complex?: any }>();
                     <a :href="`#${SECTIONS.CHARACTERISTICS_AND_APARTMENTS}`">Квартиры</a>
                     <b class="md:bg-[#1DA958] md:rounded-[2px] md:px-[6px] md:py-[3px] md:ml-[10px]"> <span class="md:hidden">(</span>{{ complex?.count_apartments }}<span class="md:hidden">)</span></b>
                 </li>
-                <li class="mb-[17px]">
-                    <a :href="`#${SECTIONS.CHARACTERISTICS_AND_APARTMENTS}`">Ход строительства</a>
-                    <b class="md:bg-[#1DA958] md:rounded-[2px] md:px-[6px] md:py-[3px] md:ml-[10px]"> <span class="md:hidden">(</span>30.03.2021<span class="md:hidden">)</span></b>
+                <li class="mb-[17px] flex items-center">
+                    <a :href="`#${SECTIONS.CHARACTERISTICS_AND_APARTMENTS}`" @click="() => (current = 2)">Ход строительства</a>
+                    <b class="md:bg-[#1DA958] md:rounded-[2px] md:px-[6px] md:py-[3px] md:ml-[10px] flex">
+                        <span class="md:hidden">(</span>
+                        <span class="flex gap-1">
+                            <p v-if="isAllBuilt(complex)">{{ "Сдан" }}</p>
+                            <p v-else>{{ "Строится" }}</p>
+                            <p v-if="onlyFewBuilt(complex)">({{ "Есть сданные" }})</p>
+                        </span>
+                        <span class="md:hidden">)</span>
+                    </b>
                 </li>
                 <li class="mb-[17px]"><a :href="`#${SECTIONS.MORTGAGE}`">Ипотека</a></li>
                 <li class="mb-[17px]"><a :href="`#${SECTIONS.STOCK}`">Акции</a></li>
                 <li class="mb-[17px]">
                     <a :href="`#${SECTIONS.REVIEWS_QR}`">Отзывы</a>
-                    <b class="md:bg-[#1DA958] md:rounded-[2px] md:px-[6px] md:py-[3px] md:ml-[10px]"> <span class="md:hidden">(</span>31<span class="md:hidden">)</span></b>
+                    <b class="md:bg-[#1DA958] md:rounded-[2px] md:px-[6px] md:py-[3px] md:ml-[10px]"> <span class="md:hidden">(</span>_<span class="md:hidden">)</span></b>
                 </li>
                 <li class="mb-[17px]">
                     <a :href="`#${SECTIONS.REVIEWS_QR}`">Вопрос-ответ</a>
-                    <b class="md:bg-[#1DA958] md:rounded-[2px] md:px-[6px] md:py-[3px] md:ml-[10px]"> <span class="md:hidden">(</span>26<span class="md:hidden">)</span></b>
+                    <b class="md:bg-[#1DA958] md:rounded-[2px] md:px-[6px] md:py-[3px] md:ml-[10px]"> <span class="md:hidden">(</span>_<span class="md:hidden">)</span></b>
                 </li>
             </ul>
         </div>

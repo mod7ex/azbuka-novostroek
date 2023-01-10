@@ -7,6 +7,8 @@ const props = defineProps<{ complex_id?: Numberish }>();
 // complex
 const { result, loading, error } = similarComplexes(props.complex_id as string, GQL_FOR_DETAIL);
 const complexes = computed(() => result.value?.similarComplexes?.data ?? []);
+
+const { scroll, targetRef } = useScroll();
 </script>
 
 <template>
@@ -15,15 +17,23 @@ const complexes = computed(() => result.value?.similarComplexes?.data ?? []);
             <p class="text-left text-[38px] leading-[44px] font-extrabold text-[#131313] font-[Raleway] mb-3">Вам подойдет</p>
             <div class="md:flex buildings-gallery">
                 <div class="relative left">
-                    <button class="text-white w-[50px] h-[50px] top-0 bottom-0 my-auto absolute right-[-25px] z-50 bg-[#1DA958] rounded-[2px]">
+                    <button class="text-white w-[50px] h-[50px] top-0 bottom-0 my-auto absolute right-[-25px] z-50 bg-[#1DA958] rounded-[2px]" @click="() => scroll({ left: 300 })">
                         <app-i name="material-symbols:arrow-right-alt-rounded" />
                     </button>
-                    <div class="pl-[10px] pr-[20px] overflow-x-scroll no-scroll-thum py-14 flex gap-3 md:gap-[30px]">
+                    <div ref="targetRef" class="pl-[10px] pr-[20px] overflow-x-scroll no-scroll-thum py-14 flex gap-3 md:gap-[30px]">
                         <Building v-for="complex in complexes" :key="complex.id" :complex="complex" under-construction shadow class="md:min-w-[300px]" />
                     </div>
                 </div>
 
                 <div class="bridge-shadow relative z-50 climp right"></div>
+            </div>
+        </div>
+
+        <div class="md:hidden">
+            <p class="text-center text-[26px] leading-[36px] font-bold text-[#131313] font-[Raleway] mb-7">Вам подойдет</p>
+
+            <div class="grid grid-cols-12 gap-3 md:gap-[30px] mb-[28px] md:mb-[61px] px-5">
+                <Building v-for="complex in complexes" :key="complex.id" :complex="complex" under-construction shadow class="" />
             </div>
         </div>
     </div>

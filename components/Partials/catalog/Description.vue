@@ -11,6 +11,7 @@ import Elevator from "~/assets/svg/description/elevator.svg";
 import BuildingSvg from "~/assets/svg/description/building.svg";
 
 import { stripHTMLPTag, firstFewWords } from "~/utils";
+import { isPlainObject } from "@vue/shared";
 
 const props = defineProps<{ id?: string; complex?: any }>();
 
@@ -26,58 +27,81 @@ const images = props.complex?.images ?? [];
 const { current, next, previous, pick } = useSpinner(10);
 // const { current, next, previous, pick } = useSpinner(images.length);
 
-const descriptionItems = computed(() => [
+const desc = [
     {
         img: Document,
         light: "Тип договора",
-        bold: props.complex?.some_key ?? "Не заполнено" /*"ДДУ, 214 ФЗ"*/,
+        keys: ["some_key"],
     },
     {
         img: Buildings,
         light: "Класс недвижимости",
-        bold: props.complex?.some_key ?? "Не заполнено" /*"Комфорт"*/,
+        keys: ["some_key"],
     },
     {
         img: BuildingSvg,
         light: "Число корпусов",
-        bold: props.complex?.count_homes?.total ?? "Не заполнено",
+        keys: ["count_homes", "total"],
     },
     {
         img: Etage,
         light: "Этажность",
-        bold: props.complex?.some_key ?? "Не заполнено" /*"от 7 до 16"*/,
+        keys: ["some_key"],
     },
     {
         img: Apartments,
-        light: "Число квартир",
-        bold: props.complex?.count_apartments ?? "Не заполнено",
+        light: "Свободно квартир",
+        keys: ["count_free_apartments"],
     },
     {
         img: Height,
         light: "Высота потолков",
-        bold: props.complex?.some_key ?? "Не заполнено" /*"2.8 м"*/,
+        keys: ["some_key"],
     },
     {
         img: Type,
         light: "Тип дома",
-        bold: props.complex?.some_key ?? "Не заполнено" /*"Кирпично монолитный"*/,
+        keys: ["some_key"],
     },
     {
         img: Paint,
         light: "Отделка",
-        bold: props.complex?.some_key ?? "Не заполнено" /*"Черновая, под ключ"*/,
+        keys: ["some_key"],
     },
     {
         img: Parking,
         light: "Паркинг, машиноместа",
-        bold: props.complex?.some_key ?? "Не заполнено" /*"48 – открытый,<br />есть подземный"*/,
+        keys: ["some_key"],
     },
     {
         img: Elevator,
         light: "Лифты",
-        bold: props.complex?.some_key ?? "Не заполнено" /*"5 пассажирских"*/,
+        keys: ["some_key"],
     },
-]);
+];
+
+const getNestedValue = <T>(target: T, keys: string[]) => {
+    if (keys.length && isPlainObject(target)) {
+        const [p, ..._keys] = keys;
+
+        if (p in target) {
+            return getNestedValue(target[p], _keys);
+        }
+    } else return target;
+};
+
+const descriptionItems = computed(() => {
+    const complex = props.complex ?? {};
+
+    return desc.map(({ img, keys, light }, key) => {
+        return {
+            key,
+            img,
+            light,
+            bold: getNestedValue(complex, keys) ?? "Не заполнено",
+        };
+    });
+});
 </script>
 
 <template>
@@ -91,7 +115,7 @@ const descriptionItems = computed(() => [
                 <div class="h-[254px] md:h-[365px] current-img rounded-[5px] md:flex-grow" :style="{ backgroundImage: `url(${images[current]?.url})` }"></div>
 
                 <div class="max-h-[365px] flex items-stretch justify-center md:justify-between gap-1 mt-3 md:mt-0 md:flex-col">
-                    <button @click="() => next()">
+                    <button @click="() => previous()">
                         <span class="md:hidden"><app-i name="tabler:chevron-left" /></span>
                         <span class="hidden md:inline"><app-i name="tabler:chevron-up" /></span>
                     </button>
@@ -103,7 +127,7 @@ const descriptionItems = computed(() => [
                     </ul>
 
                     <li class="flex items-center justify-center">
-                        <button @click="() => previous()">
+                        <button @click="() => next()">
                             <span class="md:hidden"><app-i name="tabler:chevron-right" /></span>
                             <span class="hidden md:inline"><app-i name="bx:chevron-down" /></span>
                         </button>
@@ -130,7 +154,9 @@ const descriptionItems = computed(() => [
 
                         <div class="text-center md:text-left font-[Inter] leading-[17px] md:leading-5">
                             <p class="text-xs md:text-[14px] font-normal text-[#878787] mb-[5px]" v-html="item.light"></p>
-                            <p class="text-[13px] font-semibold md:text-base md:font-bold" :key="item.bold" v-html="item.bold"></p>
+                            <p class="text-[13px] font-semibold md:text-base md:font-bold" :key="`${item.key}-item`">
+                                {{ item.bold }}
+                            </p>
                         </div>
                     </div>
                 </li>

@@ -98,7 +98,7 @@ const startingPrice = (payload) => {
                 <!-- desktop -->
                 <div class="hidden md:block">
                     <slot name="body">
-                        <p class="flex items-center justify-between flex-wrap" v-for="(item, i) in complex?.apartments_summary" :key="`sum-${i}`">
+                        <p v-for="(item, i) in complex?.apartments_summary" :class="['flex items-center justify-between flex-wrap', i + 1 === complex?.apartments_summary?.length ? '' : 'mb-3']" :key="`sum-${i}`">
                             <span class="text-[#8C8C8C] text-[14px] leading-4 font-normal">{{ item?.rooms }}-комн. от {{ item?.min_area }} м²</span>
                             <span class="flex-grow mx-1 border-b border-dashed self-stretch"></span>
                             <span class="text-[14px] font-medium leading-4 text-[#131313]">{{ format_thousands(item?.min_price) }} ₽</span>

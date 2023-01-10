@@ -20,7 +20,7 @@ const handelInput = (e: Event) => {
 </script>
 
 <template>
-    <ul :class="[$attrs.class, 'flex flex-col gap-4']">
+    <ul :class="[$attrs.class]">
         <li v-for="({ label, value }, i) in options" :key="i">
             <label :for="IDS[i]" class="flex items-center gap-[15px]">
                 <input :name="name" :id="IDS[i]" type="radio" :value="value" @change="handelInput" :checked="modelValue == value" />

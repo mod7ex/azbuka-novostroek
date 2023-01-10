@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Logo from "~/assets/svg/logo.svg";
-
 const isMatch = useMediaQuery("(min-width: 1247px)");
 
 defineEmits(["toggle"]);
@@ -10,7 +9,7 @@ defineEmits(["toggle"]);
     <!-- Desktop header -->
     <div class="flex items-center pt-4 mb-[42px]" v-if="isMatch">
         <NuxtLink :to="{ name: 'index' }">
-            <app-img :src="Logo" alt="" width="123" height="60" />
+            <app-logo :width="123" :height="60" />
         </NuxtLink>
 
         <ul class="ml-[71px] flex items-center">

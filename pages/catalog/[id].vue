@@ -3,12 +3,12 @@ import TheBreadCrumb from "~/components/TheBreadCrumb.vue";
 import BuildingCard from "~/components/Partials/catalog/Card.vue";
 import BuildingSuggestions from "~/components/Partials/catalog/Suggestions.vue";
 import BuildingDescription from "~/components/Partials/catalog/Description.vue";
-import BuildingLocation from "~/components/Partials/catalog/Location.vue";
+// import BuildingLocation from "~/components/Partials/catalog/Location.vue";
 import BuildingChoices from "~/components/Partials/catalog/Choices.vue";
 import BuildingMortgage from "~/components/Partials/catalog/Mortgage.vue";
 import BuildingPromotion from "~/components/Partials/catalog/Promotion.vue";
 // import BuildingDiscounts from "~/components/Partials/catalog/Discounts.vue";
-import BuildingPlan from "~/components/Partials/catalog/Plan.vue";
+// import BuildingPlan from "~/components/Partials/catalog/Plan.vue";
 // import BuildingReviews from "~/components/Partials/catalog/Reviews.vue";
 import CTA from "~/components/Partials/catalog/CTA.vue";
 import { SECTIONS } from "~/constants";
@@ -82,9 +82,9 @@ watch(
 
 <template>
     <div class="relative">
-        <Head>
+        <!-- <Head>
             <Script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript" defer />
-        </Head>
+        </Head> -->
 
         <NuxtLayout name="inner">
             <app-width class="mt-7 md:mt-[59px] mb-[33px] md:mb-[100px]" tag="section">
@@ -97,11 +97,11 @@ watch(
                     <building-description v-if="complex" :complex="complex" :id="SECTIONS.DESCRIPTION" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
                     <client-only>
-                        <building-location v-if="complex" :complex="complex" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                        <!-- <building-location v-if="complex" :complex="complex" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" /> -->
 
                         <div :id="SECTIONS.CHARACTERISTICS_AND_APARTMENTS" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
                             <building-choices v-if="complex" :complex="complex" :home="home" :deadlines="deadlines" :rooms="rooms" class="border border-transparent mb-[25px] md:mb-[63px]" />
-                            <building-plan v-if="home" :home="home" class="mb-[25px]" />
+                            <!-- <building-plan v-if="home" :home="home" class="mb-[25px]" /> -->
                         </div>
 
                         <building-mortgage v-if="complex" :complex="complex" :deadlines="deadlines" :rooms="rooms" :id="SECTIONS.MORTGAGE" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
@@ -125,6 +125,8 @@ watch(
                             </div>
                         </div>
 
+                        <CTA class="mount-animation anm-hidden h-full md:hidden" />
+
                         <!-- <building-discounts class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" /> -->
 
                         <!--
@@ -135,7 +137,7 @@ watch(
                             </div>
                         -->
 
-                        <building-suggestions v-if="complex?.id != null" :complex_id="complex?.id" />
+                        <building-suggestions v-if="complex?.id != null" :complex_id="complex?.id" class="mt-6" />
                     </client-only>
                 </div>
 
