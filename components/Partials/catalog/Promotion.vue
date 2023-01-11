@@ -3,7 +3,7 @@ import Promotion from "~/assets/svg/promotion.svg";
 import { format_thousands } from "~/utils";
 import { MS } from "~/constants";
 
-const props = defineProps<{ discount?: any; scrollable?: boolean }>();
+const props = defineProps<{ discount?: any }>();
 
 const generate_count_down = () => {
     let diff = new Date(props.discount?.date_end).getTime() - Date.now();
@@ -31,14 +31,14 @@ useInterval(refresh, MS.SEC, { right_away: true });
 
 <template>
     <div>
-        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-0']">
-            <div :class="['bg-[#E1F1FF] rounded-[3px] pt-[33px] px-[29px] md:pt-[38px] md:px-[46px] pb-[31px] md:pb-[25px] text-center promotion', !scrollable ? 'md:flex md:items-center md:justify-between md:flex-row-reverse' : '']">
-                <div :class="['font-[Inter] mb-[30px]', !scrollable ? 'md:hidden' : '']">
+        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-0 shadow-inner-md']">
+            <div :class="['bg-[#E1F1FF] rounded-[3px] pt-[33px] px-[29px] md:pt-[38px] md:px-[46px] pb-[31px] md:pb-[25px] text-center promotion', 'md:flex md:items-center md:justify-between md:flex-row-reverse']">
+                <div :class="['font-[Inter] mb-[30px]', 'md:hidden']">
                     <h2 class="font-bold text-xl leading-[30px]">{{ discount?.title }}</h2>
 
                     <h1 class="text-[#3478F6] font-bold text-xl leading-[30px] mb-[10px]" v-if="discount?.amount">Выгода до {{ format_thousands(discount?.amount) }} рублей</h1>
 
-                    <p class="text-[#8C8C8C] font-light text-[15px] leading-5">{{ discount?.description }}</p>
+                    <p class="text-[#8C8C8C] font-light text-[15px] leading-5 mt-2">{{ discount?.description }}</p>
                 </div>
 
                 <div class="flex-grow">
@@ -86,7 +86,7 @@ useInterval(refresh, MS.SEC, { right_away: true });
                     </div>
                 </div>
                 <div>
-                    <div v-if="!scrollable" class="font-[Inter] mb-[41px] hidden md:block text-left">
+                    <div class="font-[Inter] mb-[41px] hidden md:block text-left">
                         <h2 class="font-extrabold text-[28px] leading-[32px] mb-[5px]">{{ discount?.title }}</h2>
 
                         <h1 class="text-[#3478F6] font-bold text-[22px] leading-[26px] mb-[11px]" v-if="discount?.amount">Выгода до {{ format_thousands(discount?.amount) }} рублей</h1>

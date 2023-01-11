@@ -85,6 +85,38 @@
     }
 }
 
+/* *************************************************** Slide up & down *************************************************** */
+@mixin items($columns: 10) {
+    @for $i from 1 through $columns {
+        &.hg-#{$i} {
+            height: ($i * (4rem)) + (2rem + 3rem + 1rem);
+        }
+
+        &.loan-hg-#{$i} {
+            height: ($i * (1rem));
+        }
+    }
+}
+
+.search-expand-enter-active {
+    transition: all 0.3s ease-out;
+}
+.search-expand-leave-active {
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.search-expand-enter-from,
+.search-expand-leave-to {
+    opacity: 0;
+    height: 0;
+}
+
+.search-expand-enter-to {
+    @include items;
+}
+.search-expand-leave-from {
+    @include items;
+}
+
 /* *************************************************** Slide up & Fade transition *************************************************** */
 
 .slide-up-fade-out-enter-active {

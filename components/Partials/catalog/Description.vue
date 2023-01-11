@@ -10,8 +10,7 @@ import Parking from "~/assets/svg/description/parking.svg";
 import Elevator from "~/assets/svg/description/elevator.svg";
 import BuildingSvg from "~/assets/svg/description/building.svg";
 
-import { stripHTMLPTag, firstFewWords } from "~/utils";
-import { isPlainObject } from "@vue/shared";
+import { stripHTMLPTag, firstFewWords, getNestedValue } from "~/utils";
 
 const props = defineProps<{ id?: string; complex?: any }>();
 
@@ -24,19 +23,18 @@ const descriptionText = computed(() => {
 
 const images = props.complex?.images ?? [];
 
-const { current, next, previous, pick } = useSpinner(10);
-// const { current, next, previous, pick } = useSpinner(images.length);
+const { current, next, previous, pick } = useSpinner(images.length);
 
 const desc = [
     {
         img: Document,
         light: "Тип договора",
-        keys: ["some_key"],
+        keys: ["_"],
     },
     {
         img: Buildings,
         light: "Класс недвижимости",
-        keys: ["some_key"],
+        keys: ["_"],
     },
     {
         img: BuildingSvg,
@@ -46,7 +44,7 @@ const desc = [
     {
         img: Etage,
         light: "Этажность",
-        keys: ["some_key"],
+        keys: ["_"],
     },
     {
         img: Apartments,
@@ -56,39 +54,29 @@ const desc = [
     {
         img: Height,
         light: "Высота потолков",
-        keys: ["some_key"],
+        keys: ["_"],
     },
     {
         img: Type,
         light: "Тип дома",
-        keys: ["some_key"],
+        keys: ["_"],
     },
     {
         img: Paint,
         light: "Отделка",
-        keys: ["some_key"],
+        keys: ["_"],
     },
     {
         img: Parking,
         light: "Паркинг, машиноместа",
-        keys: ["some_key"],
+        keys: ["_"],
     },
     {
         img: Elevator,
         light: "Лифты",
-        keys: ["some_key"],
+        keys: ["_"],
     },
 ];
-
-const getNestedValue = <T>(target: T, keys: string[]) => {
-    if (keys.length && isPlainObject(target)) {
-        const [p, ..._keys] = keys;
-
-        if (p in target) {
-            return getNestedValue(target[p], _keys);
-        }
-    } else return target;
-};
 
 const descriptionItems = computed(() => {
     const complex = props.complex ?? {};
@@ -102,6 +90,18 @@ const descriptionItems = computed(() => {
         };
     });
 });
+
+const { scroll, targetRef } = useScroll();
+
+const _next = () => {
+    scroll({ top: 300 });
+    next();
+};
+
+const _previous = () => {
+    scroll({ top: -300 });
+    previous();
+};
 </script>
 
 <template>
@@ -115,19 +115,19 @@ const descriptionItems = computed(() => {
                 <div class="h-[254px] md:h-[365px] current-img rounded-[5px] md:flex-grow" :style="{ backgroundImage: `url(${images[current]?.url})` }"></div>
 
                 <div class="max-h-[365px] flex items-stretch justify-center md:justify-between gap-1 mt-3 md:mt-0 md:flex-col">
-                    <button @click="() => previous()">
+                    <button @click="() => _previous()">
                         <span class="md:hidden"><app-i name="tabler:chevron-left" /></span>
                         <span class="hidden md:inline"><app-i name="tabler:chevron-up" /></span>
                     </button>
 
-                    <ul class="flex items-stretch justify-center md:justify-between gap-2 md:flex-col overflow-x-scroll overflow-y-scroll no-scroll-thum">
+                    <ul ref="targetRef" class="flex items-stretch justify-center md:justify-between gap-2 md:flex-col overflow-x-scroll overflow-y-scroll no-scroll-thum">
                         <li class="img items-stretch justify-center md:flex" v-for="({ url }, i) in images" :key="i">
                             <button class="h-16 w-24 rounded-[5px] border-2" :class="i === current ? 'border-red-600' : 'border-transparent'" @click="() => pick(i)"><app-img :src="url" fill class="rounded-[5px]" /></button>
                         </li>
                     </ul>
 
                     <li class="flex items-center justify-center">
-                        <button @click="() => next()">
+                        <button @click="() => _next()">
                             <span class="md:hidden"><app-i name="tabler:chevron-right" /></span>
                             <span class="hidden md:inline"><app-i name="bx:chevron-down" /></span>
                         </button>

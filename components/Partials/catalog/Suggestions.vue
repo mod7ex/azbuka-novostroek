@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import Building from "~/components/Partials/Building.vue";
-import { similarComplexes, GQL_FOR_DETAIL } from "~/services/gql/complexes";
+import { similarComplexes } from "~/services/gql/complexes";
 
 const props = defineProps<{ complex_id?: Numberish }>();
 
 // complex
-const { result, loading, error } = similarComplexes(props.complex_id as string, GQL_FOR_DETAIL);
+const { result, loading, error } = similarComplexes(props.complex_id as string);
 const complexes = computed(() => result.value?.similarComplexes?.data ?? []);
 
 const { scroll, targetRef } = useScroll();

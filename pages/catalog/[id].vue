@@ -8,7 +8,7 @@ import BuildingChoices from "~/components/Partials/catalog/Choices.vue";
 import BuildingMortgage from "~/components/Partials/catalog/Mortgage.vue";
 import BuildingPromotion from "~/components/Partials/catalog/Promotion.vue";
 // import BuildingDiscounts from "~/components/Partials/catalog/Discounts.vue";
-// import BuildingPlan from "~/components/Partials/catalog/Plan.vue";
+import BuildingPlan from "~/components/Partials/catalog/Plan.vue";
 // import BuildingReviews from "~/components/Partials/catalog/Reviews.vue";
 import CTA from "~/components/Partials/catalog/CTA.vue";
 import { SECTIONS } from "~/constants";
@@ -29,6 +29,7 @@ const computeDeadline = ({ stage, quarter_end, year_end }) => {
     else return undefined;
 };
 
+// Homes rather (:
 const deadlines = computed(() => {
     return (
         complex.value?.homes?.map(({ id, name, stage, quarter_end, year_end }) => {
@@ -38,6 +39,16 @@ const deadlines = computed(() => {
         }) ?? []
     );
 });
+
+/* ******************************************************************************************************** */
+
+// Home
+const currentHome = useCurrentHome();
+const currentHomeID = reactive({ id: currentHome }); // [FIX] : just to fix @vue/apollo issue of using old values
+const { result: homeResult, loading: homeLoading, error: homeError, refetch: homeRefetch, load } = getHome(currentHomeID, GQL_HOME_FOR_DETAIL);
+const home = computed(() => homeResult.value?.home ?? null);
+
+const discounts = computed(() => home.value?.discounts ?? []);
 
 const rooms = computed(() => {
     let _options =
@@ -53,17 +64,6 @@ const rooms = computed(() => {
 
     return [{ label: "Все", value: -1 }, ..._options];
 });
-
-/* ******************************************************************************************************** */
-
-// Home
-const currentHome = useCurrentHome();
-const currentHomeID = reactive({ id: currentHome }); // [FIX] : just to fix @vue/apollo issue of using old values
-const { result: homeResult, loading: homeLoading, error: homeError, refetch: homeRefetch, load } = getHome(currentHomeID, GQL_HOME_FOR_DETAIL);
-const home = computed(() => homeResult.value?.home ?? null);
-
-const discounts = computed(() => home.value?.discounts ?? []);
-const isDiscountScrollable = computed(() => (discounts.value.length ?? 0) > 2);
 
 watch(
     currentHome,
@@ -100,36 +100,31 @@ watch(
                         <!-- <building-location v-if="complex" :complex="complex" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" /> -->
 
                         <div :id="SECTIONS.CHARACTERISTICS_AND_APARTMENTS" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
-                            <building-choices v-if="complex" :complex="complex" :home="home" :deadlines="deadlines" :rooms="rooms" class="border border-transparent mb-[25px] md:mb-[63px]" />
-                            <!-- <building-plan v-if="home" :home="home" class="mb-[25px]" /> -->
+                            <building-choices v-if="complex" :loading="homeLoading" :city="complex?.city" :home="home" :deadlines="deadlines" class="border border-transparent mb-[25px] md:mb-[63px]" />
+                            <building-plan v-if="home" :home="home" :rooms="rooms" class="mb-[25px]" />
                         </div>
 
-                        <building-mortgage v-if="complex" :complex="complex" :deadlines="deadlines" :rooms="rooms" :id="SECTIONS.MORTGAGE" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                        <building-mortgage
+                            v-if="complex"
+                            :complex-name="complex.name"
+                            :min-price="complex.min_price"
+                            :max-price="complex.max_price"
+                            :banks="complex.banks"
+                            :deadlines="deadlines"
+                            :rooms="rooms"
+                            :id="SECTIONS.MORTGAGE"
+                            class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md"
+                        />
 
                         <div :id="SECTIONS.STOCK" v-if="discounts.length">
-                            <div :class="[isDiscountScrollable ? 'bg-transparent mb-[25px] shadow-inner-md flex gap-3 overflow-x-scroll no-scroll-thum' : '']">
-                                <!-- <building-promotion
-                                    v-for="i in 6"
-                                    :key="i"
-                                    :discount="discounts[0]"
-                                    :scrollable="isDiscountScrollable"
-                                    :class="['mount-animation anm-hidden catalog-section-p md:rounded-[3px]', !isDiscountScrollable ? 'mb-[25px] shadow-inner-md md:mb-[30px] md:bg-white' : '']"
-                                /> -->
-                                <building-promotion
-                                    v-for="item in discounts"
-                                    :key="item?.id"
-                                    :discount="item"
-                                    :scrollable="isDiscountScrollable"
-                                    :class="['mount-animation anm-hidden catalog-section-p md:rounded-[3px]', !isDiscountScrollable ? 'mb-[25px] shadow-inner-md md:mb-[30px] md:bg-white' : '']"
-                                />
-                            </div>
+                            <building-promotion v-for="item in discounts" :key="item?.id" :discount="item" :class="['mount-animation anm-hidden catalog-section-p md:rounded-[3px] mb-[25px] md:mb-[30px] md:bg-white']" />
                         </div>
 
                         <CTA class="mount-animation anm-hidden h-full md:hidden" />
 
-                        <!-- <building-discounts class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" /> -->
-
                         <!--
+                            <building-discounts class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
+                            
                             <div :id="SECTIONS.REVIEWS_QR" class="mount-animation anm-hidden bg-[#F9F9F9] md:bg-transparent mb-[37px] md:mb-[93px]">
                                 <div class="bg-[#F9F9F9] shadow-inner-md pt-[25px] px-5 md:px-0 pb-[41px] md:pt-[38px] md:pb-[50px] w-fit">
                                     <building-reviews class="bg-[#F9F9F9] md:rounded-[3px]" />

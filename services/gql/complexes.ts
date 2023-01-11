@@ -5,14 +5,28 @@ address
 count_homes
 count_apartments
 count_free_apartments
-apartments_summary
+image { url }
+images { url }
 coordinates
-is_has_feed
-is_has_parking
-is_has_offices
 description
 min_price
 max_price
+
+banks {
+  name
+  percents
+  family_percents
+  state_percents
+  country_percents
+}
+
+city {
+  name
+  region {
+    name
+  }
+}
+
 homes(
   order_by: [
     {column: "stage_id", order: ASC},
@@ -26,60 +40,45 @@ homes(
   name
   quarter_end
   year_end
-
   stage {
     id
     name
   }
 }
-banks {
-  name
-  percents
-  family_percents
-  state_percents
-  country_percents
-}
-saleDepartments {
-  id
-  name
-  email
-  phone
-  address
-}
-developer {
-  id
-  name
-  homes_statuses
-  description
-  saleDepartments {
-    id
-    name
-    email
-    phone
-    address
-  }
-  logo {
-    url
-  }
-}
-city {
-  name
-  region {
-    name
-  }
-}
-peoplesDistrict {
-  name
-}
-district {
-  name
-}
-image {
-  url
-},
-images {
-  url
-}
+
+# apartments_summary
+# is_has_feed
+# is_has_parking
+# is_has_offices
+# saleDepartments {
+#   id
+#   name
+#   email
+#   phone
+#   address
+# }
+# developer {
+#   id
+#   name
+#   homes_statuses
+#   description
+#   saleDepartments {
+#     id
+#     name
+#     email
+#     phone
+#     address
+#   }
+#   logo {
+#     url
+#   }
+# }
+# peoplesDistrict {
+#   name
+# }
+# district {
+#   name
+# }
 `;
 
 export const GQL_FOR_LIST = `
@@ -89,30 +88,11 @@ export const GQL_FOR_LIST = `
   count_homes
   count_free_apartments
   apartments_summary
-  is_has_feed
-  real_updated_at
-  manual_updated_at
-  developer {
-    name
-  }
-  city {
-    name
-  }
-  peoplesDistrict {
-    name
-  }
-  district {
-    name
-  }
-  image {
-    url
-  }
-  homes(
-    has_free_apartments: true
-  ) {
-    id
-    name
-  }
+  developer { name }
+  city { name }
+  district { name }
+  image { url }
+  # peoplesDistrict { name }
 `;
 
 const FILTER_AS_ARGUMENT = `
@@ -200,7 +180,7 @@ export const GQL_PAGINATION_PART = `
     }
 `;
 
-export function complexes(data = "name", filter = { page: 1, first: 12 }, options = { notifyOnNetworkStatusChange: true }) {
+export function complexes(data = GQL_FOR_LIST, filter = { page: 1, first: 12 }, options = { notifyOnNetworkStatusChange: true }) {
     return useQuery(
         gql`
     query complexes(
@@ -237,7 +217,7 @@ export function complex(id: string, data = "name", options = { notifyOnNetworkSt
     );
 }
 
-export function similarComplexes(id: string, data = "name", options = { notifyOnNetworkStatusChange: true }) {
+export function similarComplexes(id: string, data = GQL_FOR_LIST, options = { notifyOnNetworkStatusChange: true }) {
     return useQuery(
         gql`
         query similarComplexes($id: ID) {

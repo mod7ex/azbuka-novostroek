@@ -40,12 +40,12 @@ const entrances = computed(() => {
                 <x-scroll-header :choices="rooms" v-model="current" class="mb-[28px]" buttons />
             </template>
 
-            <apartment-plan v-for="item in entrances" :key="item?.id" :apartment="item" class="mb-[13px]" />
+            <!-- <apartment-plan v-for="item in entrances" :key="item?.id" :apartment="item" class="mb-[13px]" /> -->
 
             <template #foot>
-                <div class="text-center">
+                <!-- <div class="text-center">
                     <Button label="Загрузить еще" class="bg-[#E71F61] mb-[29px] md:mb-0" />
-                </div>
+                </div> -->
                 <dashed-devider class="md:hidden" />
             </template>
         </NuxtLayout>

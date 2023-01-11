@@ -3,38 +3,31 @@ import LoanOffer from "~/components/Partials/catalog/LoanOffer.vue";
 import RangeInput from "~/components/UI/TowThumbsRangeInput.vue";
 import { format_thousands } from "~/utils";
 
-const props = defineProps<{ complex?: any; id: string; deadlines?: any[]; rooms?: { label: string; value: Numberish }[] }>();
+const props = defineProps<{ id: string; deadlines?: any[]; rooms?: { label: string; value: Numberish }[]; complexName?: string; minPrice?: number; maxPrice?: number; banks?: any[] }>();
 
-const banks = computed(() => props.complex?.banks ?? []);
+const banks = computed(() => props.banks ?? []);
 
 const current = shallowRef(0);
 
 const options = ["Все программы", "Оптимальные условия"];
 
 const percents_options = [
-    /*  
-    { value: "percents", label: "Стандартная ипотека" },
-    { value: "family_percents", label: "Субсидированная застройщиком" },
-    { value: "state_percents", label: "Господдержка" },
-*/
-    { value: "a", label: "Субсидированная застройщиком" },
-    { value: "b", label: "Ипотека с Господдержкой" },
-    { value: "c", label: "Семейная ипотека" },
-    { value: "d", label: "Военная ипотека" },
-    { value: "e", label: "Материнский капитал" },
+    { value: "percents", label: "Субсидированная застройщиком" },
+    { value: "percents", label: "Ипотека с Господдержкой" },
+    { value: "percents", label: "Семейная ипотека" },
+    { value: "percents", label: "Военная ипотека" },
+    { value: "percents", label: "Материнский капитал" },
 ];
 
 const selected_percents = shallowRef(percents_options[0].value);
 
 const isMatch = useMediaQuery("(min-width: 768px)");
 
-const price = shallowRef<number>(props.complex.min_price);
-const advance = shallowRef<number>(props.complex.min_price * 0.15);
+const price = shallowRef<number>(props.minPrice);
+const advance = shallowRef<number>(props.minPrice * 0.15);
 const credit_period = shallowRef<number>(20);
 
 watch(price, (v, _v) => {
-    /* const _rate = advance.value / _v; */
-    /* advance.value = Math.floor(v * _rate); */
     advance.value = Math.floor(v * 0.15);
 });
 
@@ -73,7 +66,7 @@ const pay_per_month = (bank: any) => {
                 <app-select class="form-section mb-[23px] md:col-span-1 md:mb-0" :options="[]" label="Новостройка" disabled bg>
                     <template #inner-label>
                         <p class="text-[16px] leading-[14px] font-medium text-[#828282]">
-                            {{ complex?.name }}
+                            {{ complexName }}
                         </p>
                     </template>
                 </app-select>
@@ -84,9 +77,9 @@ const pay_per_month = (bank: any) => {
                 </div>
 
                 <div class="form-section mb-[23px] md:col-span-1 md:mb-0">
-                    <labled-range-input label="Стоимость недвижимости" v-model:last_range="price" :max="complex.max_price" :min="complex.min_price" max-label="₽" bg>
+                    <labled-range-input label="Стоимость недвижимости" v-model:last_range="price" :max="maxPrice" :min="minPrice" max-label="₽" bg>
                         <template #thums>
-                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :max="complex.max_price" :min="complex.min_price" v-model:last_range="price" />
+                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :max="maxPrice" :min="minPrice" v-model:last_range="price" />
                         </template>
                     </labled-range-input>
                 </div>
@@ -121,8 +114,7 @@ const pay_per_month = (bank: any) => {
             <!-- ---------------------------------------- -->
 
             <template #foot>
-                <!-- <pre>{{ banks }}</pre> -->
-                <loan-offer :banks="banks" :advance="`${format_thousands(advance)} ₽`" :period="credit_period" :percents="selected_percents">
+                <loan-offer v-for="(bank, i) in banks" :key="i" :bank="bank" :advance="`${format_thousands(advance)} ₽`" :period="credit_period" :percents="selected_percents">
                     <template #slot-data="{ bank }"> {{ pay_per_month(bank) }} </template>
                 </loan-offer>
             </template>

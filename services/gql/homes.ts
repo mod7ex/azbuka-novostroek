@@ -1,145 +1,129 @@
 import { useQuery, useLazyQuery /*, useMutation */ } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 // import { GQL_PAGINATION_PART } from "~/paginationUtilites.js";
-import { isObject } from "~/utils/types";
 
 export const GQL_FOR_DETAIL = `
   id
-  name
   address
-  quarter_end
-  year_end
-  count_floors
-  count_apartments
-  count_free_apartments
-  count_offices
-  count_free_offices
-  count_parking
-  count_free_parking
-  count_entrances
-  ceiling_height
   summary
-  is_free_layout
-  issuance_of_keys
-  energy_class
-  living_area
-  count_playgrounds
-  count_sportgrounds
-  count_garbage_places
+  count_floors
+  ceiling_height
   lift
   freight_lift
-  is_has_ramp
-  is_has_lowering_platforms
-  count_wheelchair_lifts
-  rpd
-  report
-  documentation
-  other
-  permits
   building
-  merged_at
   developer_name
+  documentation
+  homeClass { name }
+  stage {
+    id
+    name
+  }
   discounts {
     id
     order
-    date_start
     date_end
     title
     amount
     description
-    type
-    home_id
-    image {
-      url
-    }
-    created_at
-    updated_at
   }
-  sales {
-    id
-    name
-    start_at
-    end_at
-    text
-    image {
-      url
-    }
-  }
+  
+  # name
+  # count_apartments
+  # count_free_apartments
+  # count_offices
+  # count_free_offices
+  # count_parking
+  # count_free_parking
+  # count_entrances
+  # is_free_layout
+  # issuance_of_keys
+  # energy_class
+  # living_area
+  # count_playgrounds
+  # count_sportgrounds
+  # count_garbage_places
+  # is_has_ramp
+  # is_has_lowering_platforms
+  # count_wheelchair_lifts
+  # rpd
+  # report
+  # other
+  # permits
+  # merged_at
+  # sales {
+  #   id
+  #   name
+  #   start_at
+  #   end_at
+  #   text
+  #   image {
+  #     url
+  #   }
+  # }
+  # salesDynamics {
+  #   id
+  #   avg_price_area
+  #   avg_area
+  #   realised
+  #   month
+  #   year
+  # }
 
-  salesDynamics {
-    id
-    avg_price_area
-    avg_area
-    realised
-    month
-    year
-  }
-
-  homeClass {
-    name
-  }
-
-  homeType {
-    name
-  }
-
-  decors {
-    name
-  }
-
-  entrances(
-    order_by: [
-      {column: "name", order: ASC},
-    ],
-  ) {
-    name
-
-    floors(
-      order_by: [
-        {column: "number", order: DESC},
-      ],
-    ) {
-      number
-      layout_url
-
-      apartments(
-        order_by: [
-          {column: "order", order: ASC},
-          {column: "number", order: ASC},
-        ],
-      ) {
-        id
-        number
-        price
-        price_area
-        final_price
-        final_price_area
-        area_total
-        count_rooms
-        is_studio
-        is_euro
-        is_assignment
-        has_discounts
-        step_over_color
-        step_over_name
-        assignment_agreement
-        assignment_status
-
-        area_living
-        area_kitchen
-        count_loggias
-        area_loggias
-
-        status {
-          name
-          color
-          is_disabled
-          is_free
-          hide_price
-        }
-      }
-    }
-  }
+  # homeType { name }
+  # decors { name }
+  #  entrances(
+  #    order_by: [
+  #      {column: "name", order: ASC},
+  #    ],
+  #  ) {
+  #    name
+  #
+  #    floors(
+  #      order_by: [
+  #        {column: "number", order: DESC},
+  #      ],
+  #    ) {
+  #      number
+  #      layout_url
+  #
+  #      apartments(
+  #        order_by: [
+  #          {column: "order", order: ASC},
+  #          {column: "number", order: ASC},
+  #        ],
+  #      ) {
+  #        id
+  #        number
+  #        price
+  #        price_area
+  #        final_price
+  #        final_price_area
+  #        area_total
+  #        count_rooms
+  #        is_studio
+  #        is_euro
+  #        is_assignment
+  #        has_discounts
+  #        step_over_color
+  #        step_over_name
+  #        assignment_agreement
+  #        assignment_status
+  #
+  #        area_living
+  #        area_kitchen
+  #        count_loggias
+  #        area_loggias
+  #
+  #        status {
+  #          name
+  #          color
+  #          is_disabled
+  #          is_free
+  #          hide_price
+  #        }
+  #      }
+  #    }
+  #  }
 `;
 
 /*

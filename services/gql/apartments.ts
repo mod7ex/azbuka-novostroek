@@ -167,9 +167,12 @@ const APARTMENTS_FILTER_AS_ARGUMENT = `
 `;
 
 const APARTMENTS_FILTER_AS_QUERY = `
-  $count_rooms: count_rooms,
+  $limit: limit,
   $home_id: home_id,
+  $complex_id: complex_id,
+  $count_rooms: count_rooms,
   $is_available: is_available,
+  $status_id: status_id
 `;
 
 export function apartments(variables, data = APARTMENT_DETAILS, options = { notifyOnNetworkStatusChange: true }) {

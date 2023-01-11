@@ -3,7 +3,7 @@ import MobileFilter from "~/components/Partials/MobileFilter.vue";
 import { apartmentsData } from "~/services/gql/apartments";
 import { homesData } from "~/services/gql/homes";
 
-const [isCollaped, toggle] = useToggle();
+const [isCollapsed, toggle] = useToggle();
 
 const [isVisible, toggleVisibility] = useToggle(false);
 
@@ -89,8 +89,8 @@ const deadline = shallowRef({});
             </ul>
         </div>
 
-        <Transition name="search-expand" :aria-expanded="isCollaped">
-            <Blurable tag="ul" @blured="() => toggle(true)" class="filter mx-auto grid gap-4 grid-cols-12 py-4 pb-8 rounded-[5px] px-5 bg-white overflow-hidden hg-6" v-if="!isCollaped">
+        <Transition name="search-expand" :aria-expanded="isCollapsed">
+            <Blurable tag="ul" @blured="() => toggle(true)" class="filter mx-auto grid gap-4 grid-cols-12 py-4 pb-8 rounded-[5px] px-5 bg-white overflow-hidden hg-6" v-if="!isCollapsed">
                 <li class="col-span-4">
                     <h4 class="mb-4 text-[#50535A] text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">расположение</h4>
                     <div>
@@ -202,33 +202,5 @@ $w: 1160px;
             }
         }
     }
-}
-
-// ************************************************
-@mixin items($columns: 10) {
-    @for $i from 1 through $columns {
-        &.hg-#{$i} {
-            height: ($i * (4rem)) + (2rem + 3rem + 1rem);
-        }
-    }
-}
-
-.search-expand-enter-active {
-    transition: all 0.3s ease-out;
-}
-.search-expand-leave-active {
-    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.search-expand-enter-from,
-.search-expand-leave-to {
-    opacity: 0;
-    height: 0;
-}
-
-.search-expand-enter-to {
-    @include items;
-}
-.search-expand-leave-from {
-    @include items;
 }
 </style>

@@ -1,3 +1,5 @@
+import { isPlainObject } from "~/utils/types";
+
 export const debounce = <T extends (...args: any[]) => any>(fn: T, duration: number = 1000) => {
     let timer: NodeJS.Timeout | undefined;
 
@@ -57,4 +59,14 @@ export const stripHTMLPTag = (payload: string) => {
 
 export const firstFewWords = (payload: string, count = 13) => {
     return payload?.split(" ").slice(0, count).join(" ");
+};
+
+export const getNestedValue = <T>(target: T, keys: string[]) => {
+    if (keys.length && isPlainObject(target)) {
+        const [p, ..._keys] = keys;
+
+        if (p in target) {
+            return getNestedValue(target[p], _keys);
+        }
+    } else return target;
 };
