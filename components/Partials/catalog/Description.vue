@@ -94,12 +94,12 @@ const descriptionItems = computed(() => {
 const { scroll, targetRef } = useScroll();
 
 const _next = () => {
-    scroll({ top: 300 });
+    scroll({ top: 68 });
     next();
 };
 
 const _previous = () => {
-    scroll({ top: -300 });
+    scroll({ top: -68 });
     previous();
 };
 </script>
@@ -122,7 +122,7 @@ const _previous = () => {
 
                     <ul ref="targetRef" class="flex items-stretch justify-center md:justify-between gap-2 md:flex-col overflow-x-scroll overflow-y-scroll no-scroll-thum">
                         <li class="img items-stretch justify-center md:flex" v-for="({ url }, i) in images" :key="i">
-                            <button class="h-16 w-24 rounded-[5px] border-2" :class="i === current ? 'border-red-600' : 'border-transparent'" @click="() => pick(i)"><app-img :src="url" fill class="rounded-[5px]" /></button>
+                            <button class="h-16 w-24 rounded-[5px] border-4" :class="i === current ? 'border-red-600' : 'border-transparent'" @click="() => pick(i)"><app-img :src="url" fill class="rounded-[5px]" /></button>
                         </li>
                     </ul>
 
