@@ -25,35 +25,35 @@ defineProps<{
         <dashed-devider class="border-[#00000014]" v-if="!isCollapsed" />
 
         <Transition name="search-expand" :aria-expanded="isCollapsed">
-            <Blurable @blured="() => toggle(true)" class="loan-hg-6 overflow-hidden" v-if="!isCollapsed">
-                <div class="mt-[15px] mb-[18px] md:flex md:gap-x-[50px] md:flex-wrap">
+            <div class="loan-hg-6 overflow-hidden flex justify-between py-[15px]" v-if="!isCollapsed">
+                <div class="mb-[18px] md:flex md:gap-x-[50px] md:flex-wrap">
                     <p class="mb-1 text-[14px] font-normal leading-5 text-[#8C8C8C] whitespace-nowrap">Программа</p>
                     <h1 class="text-[15px] font-semibold leading-[18px] mb-[14px] w-20-char">_</h1>
                     <!-- <h1 class="text-[15px] font-semibold leading-[18px] mb-[14px] w-20-char">Ипотека 0,1 % на весь период</h1> -->
                 </div>
 
                 <ul class="grid grid-cols-3 md:flex md:gap-[50px]">
-                    <li class="col-span-1">
+                    <li class="mb-2 md:mb-0 col-span-3 md:col-span-1">
                         <p class="text-[14px] font-normal leading-5 text-[#8C8C8C] mb-2 whitespace-nowrap">Ставка</p>
                         <p class="text-[14px] font-semibold leading-4">{{ bank[percents] ?? bank?.percents }} %</p>
                     </li>
-                    <li class="col-span-1">
+                    <li class="mb-2 md:mb-0 col-span-3 md:col-span-1">
                         <p class="text-[14px] font-normal leading-5 text-[#8C8C8C] mb-2 whitespace-nowrap">Нач. взнос</p>
                         <p class="text-[14px] font-semibold leading-4">{{ advance }}</p>
                     </li>
-                    <li class="col-span-1">
+                    <li class="mb-2 md:mb-0 col-span-3 md:col-span-1">
                         <p class="text-[14px] font-normal leading-5 text-[#8C8C8C] mb-2 whitespace-nowrap">Срок кредита</p>
                         <p class="text-[14px] font-semibold leading-4">до {{ period ?? 30 }} лет</p>
                     </li>
 
-                    <li class="col-span-1 hidden md:inline">
+                    <li class="col-span-3 md:col-span-1 hidden md:inline">
                         <p class="text-[14px] font-normal leading-5 text-[#8C8C8C] mb-2 whitespace-nowrap">Платеж в месяц</p>
                         <p class="text-[14px] font-semibold leading-4">
                             <slot name="slot-data" :bank="bank"></slot>
                         </p>
                     </li>
                 </ul>
-            </Blurable>
+            </div>
         </Transition>
 
         <dashed-devider class="border-[#00000014] md:hidden" v-if="!isCollapsed" />

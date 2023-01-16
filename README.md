@@ -91,10 +91,10 @@ pm2 start node .output/server/index.mjs
 > few commands
 
 ```
-$ pm2 restart app_name
-$ pm2 reload app_name
-$ pm2 stop app_name
-$ pm2 delete app_name
+$ pm2 restart app_process
+$ pm2 reload app_process
+$ pm2 stop app_process
+$ pm2 delete app_process
 ```
 
 -   for example on build run `pm2 restart node .output/server/index.mjs`
