@@ -6,19 +6,19 @@ const props = withDefaults(defineProps<{ sort?: true; count?: number }>(), {
     count: 8,
 });
 
-const { filter } = useFilter();
+// const { filter } = useFilter();
 
 const [isCollapsed, toggle] = useToggle();
 
-const { result, loading, error, fetchMore, refetch } = getComplexes(GQL_FOR_LIST, { page: 1, first: props.count, ...filter });
+const { result, loading, error, fetchMore, refetch } = getComplexes(GQL_FOR_LIST, { page: 1, first: props.count /* , ...filter */ });
 
-watch(
-    filter,
-    async (_filter) => {
-        await refetch({ page: 1, first: props.count, ..._filter });
-    },
-    { deep: true }
-);
+// watch(
+//     filter,
+//     async (_filter) => {
+//         await refetch({ page: 1, first: props.count, ..._filter });
+//     },
+//     { deep: true }
+// );
 
 const complexes = computed(() => result.value?.complexes?.data ?? []);
 

@@ -73,7 +73,7 @@ const isMatch = useMediaQuery("(min-width: 768px)");
         </div>
 
         <client-only>
-            <app-width class="max-w-[1199px] search z-1 relative mb-[31px] px-0" v-if="!inner || isMatch">
+            <app-width class="max-w-[1199px] search z-1 relative mb-[31px] px-5 md:px-0" v-if="!inner || isMatch">
                 <LazySearch />
             </app-width>
         </client-only>

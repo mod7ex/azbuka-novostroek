@@ -1,25 +1,23 @@
 <script setup lang="ts">
 import MobileFilter from "~/components/Partials/MobileFilter.vue";
-import { apartmentsData } from "~/services/gql/apartments";
-import { homesData } from "~/services/gql/homes";
+import { apartmentsData as getApartmentsData } from "~/services/gql/apartments";
+import { homesData as getHomesData } from "~/services/gql/homes";
+import { countRoomsGen } from "~/utils";
 
 const [isCollapsed, toggle] = useToggle();
-
 const [isVisible, toggleVisibility] = useToggle(false);
+const [isTypeCollapsed, toggleType] = useToggle();
+const [isPriceCollapsed, togglePrice] = useToggle();
+const [isSquareCollapsed, toggleSquare] = useToggle();
+const [isDeadlineCollapsed, toggleDeadline] = useToggle();
 
-const [isTypeCollaped, toggleType] = useToggle();
-const [isPriceCollaped, togglePrice] = useToggle();
-const [isSquareCollaped, toggleSquare] = useToggle();
-const [isDeadlineCollaped, toggleDeadline] = useToggle();
-
-const { filter, reset, clear } = useFilter();
+const { filter, reset } = useFilter();
 
 // ApartmentsData
-const { result } = apartmentsData();
-const apartments = computed(() => result.value?.apartmentsData ?? null);
+const { result } = getApartmentsData();
+const apartmentsData = computed(() => result.value?.apartmentsData ?? null);
 
-// Type [Rooms count]
-const countRooms = computed<{ label: `${number} комн.`; value: number }[]>(() => apartments.value?.count_rooms?.filter((e) => e > 0)?.map((e) => ({ label: `${e} комн.`, value: e })) ?? null);
+const countRooms = countRoomsGen(apartmentsData);
 
 // Price
 const PRICE_MIN = 500000;
@@ -28,19 +26,13 @@ const PRICE_MAX = 10000000;
 // ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // Deadlines
-const { result: homesResult } = homesData();
+const { result: homesResult } = getHomesData();
 
 const deadlines = computed(() => homesResult.value?.homesData?.deadlines ?? []);
-
-const deadline = shallowRef({});
-
-// onScopeDispose(clear);
 </script>
 
 <template>
     <section :class="[$attrs.class]">
-        <pre><!-- {{ result }} --><!-- {{ filter }} --></pre>
-
         <div class="search-container mx-auto border md:border-none flex items-center border-[#3478f624] rounded h-[50px] px-[18px] md:px-5 bg-white mb-[6px]">
             <ul :class="['search-area flex items-center justify-between w-full flex-wrap']">
                 <li :class="['search-input flex items-center flex-grow']">
@@ -52,7 +44,7 @@ const deadline = shallowRef({});
                     <ul class="flex items-center divide-x divide-gray-300">
                         <li class="px-[27px] flex items-center relative">
                             <button @click="() => toggleType()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Тип квартиры</button>
-                            <filter-by-rooms :is-collapsed="isTypeCollaped" :handel-blur="() => toggleType(true)" :options="countRooms" v-model="filter.count_rooms">
+                            <filter-by-rooms :is-collapsed="isTypeCollapsed" :handel-blur="() => toggleType(true)" :options="countRooms" v-model="filter.count_rooms">
                                 <template #before>
                                     <label :for="`room-count_studio-0`" class="flex gap-3 px-3 py-[6px] cursor-pointer hover:bg-gray-100">
                                         <input type="checkbox" :id="`room-count_studio-0`" v-model="filter.is_studio" />
@@ -65,17 +57,17 @@ const deadline = shallowRef({});
 
                         <li class="px-[27px] flex items-center relative">
                             <button @click="() => togglePrice()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Цена</button>
-                            <filter-from-to v-model:from="filter.price_from" v-model:to="filter.price_to" :is-collapsed="isPriceCollaped" :handel-blur="() => togglePrice(true)" :min="PRICE_MIN" :max="PRICE_MAX" :step="PRICE_MIN" />
+                            <filter-from-to v-model:from="filter.price_from" v-model:to="filter.price_to" :is-collapsed="isPriceCollapsed" :handel-blur="() => togglePrice(true)" :min="PRICE_MIN" :max="PRICE_MAX" :step="PRICE_MIN" />
                         </li>
 
                         <li class="px-[27px] flex items-center relative">
                             <button @click="() => toggleSquare()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Площадь</button>
-                            <filter-from-to v-model:from="filter.area_total_from" v-model:to="filter.area_total_to" :is-collapsed="isSquareCollaped" :handel-blur="() => toggleSquare(true)" :min="10" :step="20" :max="apartments?.max_area_total" />
+                            <filter-from-to v-model:from="filter.area_total_from" v-model:to="filter.area_total_to" :is-collapsed="isSquareCollapsed" :handel-blur="() => toggleSquare(true)" :min="10" :step="20" :max="apartmentsData?.max_area_total" />
                         </li>
 
                         <li class="px-[27px] flex items-center relative">
                             <button @click="() => toggleDeadline()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Срок аренды</button>
-                            <filter-by-deadline v-model="deadline" :options="deadlines" :is-collapsed="isDeadlineCollaped" :handel-blur="() => toggleDeadline(true)" />
+                            <filter-by-deadline v-model="filter.deadline" :options="deadlines" :is-collapsed="isDeadlineCollapsed" :handel-blur="() => toggleDeadline(true)" />
                         </li>
 
                         <li class="pl-[27px] flex items-center">
@@ -128,14 +120,13 @@ const deadline = shallowRef({});
         </Transition>
 
         <!-- Filter Mobile -->
-
         <button @click="() => toggleVisibility()" class="md:hidden mb-10 flex justify-center font-[Raleway] items-center gap-x-[14px] py-[15px] border-2 border-[#f8f8f8] rounded-[5px] w-full">
             <app-i name="carbon:settings-adjust" class="text-[#1DA958] h-5 w-5" />
             <p class="text-[13px] leading-[13px] font-bold text-[#131313]">Показать фильтры</p>
         </button>
 
         <Teleport to="body">
-            <mobile-filter :open="isVisible" @close="toggleVisibility" />
+            <mobile-filter :count-rooms="countRooms" :open="isVisible" @close="toggleVisibility" />
         </Teleport>
 
         <!-- ****** -->

@@ -1,9 +1,11 @@
 <script setup lang="ts">
-withDefaults(defineProps<{ open: boolean }>(), {
+type Props = { open: boolean; countRooms: any[] };
+
+withDefaults(defineProps<Props>(), {
     open: false,
 });
 
-const selection = Array.from(Array(5).keys()).map((value) => ({ value, label: value ? `${value} комн` : "Студия" }));
+const { filter, reset } = useFilter();
 
 defineEmits(["close"]);
 </script>
@@ -29,11 +31,11 @@ defineEmits(["close"]);
 
                 <div class="flex items-center justify-center gap-x-4 border border-[#3478f624] rounded-[5px] py-4 px-3">
                     <app-i name="heroicons-outline:search" class="text-[#1DA958] w-[17px] h-[17px] cursor-pointer" />
-                    <input autofocus type="text" placeholder="Название новостройки или застройщика" class="flex-grow" />
+                    <input v-model="filter.name" autofocus type="text" placeholder="Название новостройки или застройщика" class="flex-grow" />
                 </div>
             </div>
 
-            <app-select class="mb-6" :options="selection" label="Выберите тип квартиры" multiple inner-label="Тип квартиры" shrink />
+            <app-select class="mb-6" :options="countRooms" label="Выберите тип квартиры" multiple inner-label="Тип квартиры" shrink />
 
             <div class="mb-6 relative">
                 <labled-range-input class="bg-white" label="Задайте стоимость">
