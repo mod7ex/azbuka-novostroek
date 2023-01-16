@@ -117,6 +117,7 @@ watch(
                         />
 
                         <div :id="SECTIONS.STOCK">
+                            discounts:
                             <pre>{{ discounts }}</pre>
                             <building-promotion v-for="item in discounts" :key="item?.id" :discount="item" :class="['mount-animation anm-hidden catalog-section-p md:rounded-[3px] mb-[25px] md:mb-[30px] md:bg-white']" />
                         </div>
