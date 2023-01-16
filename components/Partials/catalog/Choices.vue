@@ -46,7 +46,7 @@ onMounted(() => {
             </div>
 
             <div v-else>
-                <div class="mb-[28px] md:mb-0 md:grid md:grid-cols-2 md:gap-[55px]" v-if="current === 0">
+                <div v-if="current === 0" class="mb-[28px] md:mb-0 md:grid md:grid-cols-2 md:gap-[55px]">
                     <ul class="md:col-span-1">
                         <li class="text-[13px] leading-[15px] font-[Inter] flex items-end justify-between mb-4">
                             <p class="font-normal text-[#878787]">Застройщик</p>
@@ -123,7 +123,7 @@ onMounted(() => {
                     </ul>
                 </div>
 
-                <div v-if="current === 1 && docs.length">
+                <div v-else-if="current === 1">
                     <p class="text-gray-700">Мы имеем все необходимые сертификаты и</p>
                     <p class="text-gray-700 mb-6">документы для лицензионной деятельности</p>
 
@@ -137,7 +137,7 @@ onMounted(() => {
                     </div>
                 </div>
 
-                <div class="mb-3" v-if="current === 2 && construction.length">
+                <div v-else-if="current === 2" class="mb-3">
                     <div class="relative h-44 overflow-x-scroll no-scroll-thum mb-5" ref="targetRef">
                         <ul class="absolute top-0 bottom-0 flex items-stretch gap-1">
                             <li v-for="({ url, title, updated }, i) in construction" :key="i">
