@@ -99,6 +99,12 @@ watch(
                     <client-only>
                         <!-- <building-location v-if="complex" :complex="complex" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" /> -->
 
+                        <p>building</p>
+                        <p>discounts</p>
+                        <p>documentation</p>
+
+                        <pre>{{ home }}</pre>
+
                         <div :id="SECTIONS.CHARACTERISTICS_AND_APARTMENTS" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
                             <building-choices v-if="complex" :loading="homeLoading" :city="complex?.city" :home="home" :deadlines="deadlines" class="border border-transparent mb-[25px]" />
                             <building-plan v-if="home" :home="home" :rooms="rooms" class="mb-[25px]" />
@@ -117,8 +123,6 @@ watch(
                         />
 
                         <div :id="SECTIONS.STOCK">
-                            discounts:
-                            <pre>{{ home?.discounts }}</pre>
                             <building-promotion v-for="item in discounts" :key="item?.id" :discount="item" :class="['mount-animation anm-hidden catalog-section-p md:rounded-[3px] mb-[25px] md:mb-[30px] md:bg-white']" />
                         </div>
 

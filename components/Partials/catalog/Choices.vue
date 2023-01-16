@@ -124,9 +124,6 @@ onMounted(() => {
                 </div>
 
                 <div v-else-if="current === 1">
-                    docs:
-                    <pre>{{ home?.documentation }}</pre>
-
                     <p class="text-gray-700">Мы имеем все необходимые сертификаты и</p>
                     <p class="text-gray-700 mb-6">документы для лицензионной деятельности</p>
 
@@ -141,8 +138,6 @@ onMounted(() => {
                 </div>
 
                 <div v-else-if="current === 2" class="mb-3">
-                    construction:
-                    <pre>{{ home?.building }}</pre>
                     <div class="relative h-44 overflow-x-scroll no-scroll-thum mb-5" ref="targetRef">
                         <ul class="absolute top-0 bottom-0 flex items-stretch gap-1">
                             <li v-for="({ url, title, updated }, i) in construction" :key="i">
