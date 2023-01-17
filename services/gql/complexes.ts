@@ -18,6 +18,7 @@ banks {
   family_percents
   state_percents
   country_percents
+  image
 }
 
 city {
