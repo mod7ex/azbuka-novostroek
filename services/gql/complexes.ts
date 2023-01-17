@@ -18,7 +18,10 @@ banks {
   family_percents
   state_percents
   country_percents
-  image
+  logo {
+    id
+    url
+  }
 }
 
 city {

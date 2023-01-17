@@ -161,29 +161,58 @@ export const APARTMENT_DETAILS = `
 `;
 
 const APARTMENTS_FILTER_AS_ARGUMENT = `
-  $count_rooms: Int,
   $home_id: ID,
-  $is_available: Boolean,
+  $count_rooms: [Int],
+  $is_studio: Boolean,
 `;
 
 const APARTMENTS_FILTER_AS_QUERY = `
-  $limit: limit,
-  $home_id: home_id,
-  $complex_id: complex_id,
-  $count_rooms: count_rooms,
-  $is_available: is_available,
-  $status_id: status_id
+  home_id: $home_id,
+  count_rooms: $count_rooms,
+  is_studio: $is_studio,
 `;
 
-export function apartments(variables, data = APARTMENT_DETAILS, options = { notifyOnNetworkStatusChange: true }) {
+export const GQL_PAGINATION_PART = `
+    paginatorInfo {
+      count
+      currentPage
+      firstItem
+      hasMorePages
+      lastItem
+      lastPage
+      perPage
+      total
+    }
+`;
+
+export type Filter = Partial<{
+    page: Numberish;
+    first: Numberish;
+    home_id: Numberish;
+    count_rooms: Numberish[];
+    is_studio: boolean;
+}>;
+
+export function apartments(filter: Filter, data = APARTMENT_DETAILS, options = { notifyOnNetworkStatusChange: true }) {
     return useLazyQuery(
         gql`
-        query apartments(${APARTMENTS_FILTER_AS_ARGUMENT}) {
-          apartments(${APARTMENTS_FILTER_AS_QUERY}) {
-            ${data}
+        query apartments(
+          $page: Int
+          $first: Int
+          ${APARTMENTS_FILTER_AS_ARGUMENT}
+        ) {
+          apartments(
+            page: $page
+            first: $first
+            ${APARTMENTS_FILTER_AS_QUERY}
+          ) {
+            data {
+              ${data}
+            }
+            ${GQL_PAGINATION_PART}
           }
         }`,
-        variables,
+        () => filter,
         options
     );
 }

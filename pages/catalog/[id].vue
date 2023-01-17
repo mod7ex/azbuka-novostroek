@@ -13,7 +13,6 @@ import BuildingPlan from "~/components/Partials/catalog/Plan.vue";
 import CTA from "~/components/Partials/catalog/CTA.vue";
 import { SECTIONS } from "~/constants";
 import { home as getHome, GQL_FOR_DETAIL as GQL_HOME_FOR_DETAIL } from "~/services/gql/homes";
-
 import { complex as getComplex, GQL_FOR_DETAIL } from "~/services/gql/complexes";
 import { debounce } from "~/utils";
 

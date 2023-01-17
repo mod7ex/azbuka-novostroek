@@ -1,10 +1,43 @@
 <script setup lang="ts">
 import ApartmentPlan from "~/components/Partials/catalog/ApartmentPlan.vue";
+import { apartments as getApartments, type Filter } from "~/services/gql/apartments";
+import { debounce } from "~/utils";
 
 const props = defineProps<{ home?: any; rooms?: { label: string; value: Numberish }[] }>();
 
 const current = shallowRef(-1);
 
+const currentHome = useCurrentHome();
+
+const { result, error, loading, refetch, load } = getApartments({ page: 1, first: 2, home_id: currentHome.value });
+
+let count = 0;
+
+watch(
+    [currentHome, current],
+    debounce(([home_id, count_rooms], [old_home_id, old_count_rooms]) => {
+        alert(count_rooms);
+
+        if (!count) {
+            count++;
+            return load();
+        }
+
+        let _filter: Filter = {
+            page: 1,
+            first: 3,
+            home_id,
+        };
+        if (count_rooms === 0) _filter.is_studio = true;
+        else if (count_rooms > 0) _filter.count_rooms = [count_rooms];
+        return refetch(_filter);
+    }),
+    {
+        immediate: true,
+    }
+);
+
+/*
 const computeApartments = (payload, rooms = -1) => {
     return (
         payload
@@ -30,6 +63,7 @@ const entrances = computed(() => {
 
     return computeApartments(_entrances, _rooms);
 });
+*/
 </script>
 
 <template>
@@ -40,6 +74,7 @@ const entrances = computed(() => {
                 <x-scroll-header :choices="rooms" v-model="current" class="mb-[28px]" buttons />
             </template>
 
+            <pre>{{ result }}</pre>
             <!-- <apartment-plan v-for="item in entrances" :key="item?.id" :apartment="item" class="mb-[13px]" /> -->
 
             <template #foot>
