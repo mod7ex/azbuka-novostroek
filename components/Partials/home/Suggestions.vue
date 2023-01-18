@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Building from "~/components/Partials/Building.vue";
 import { complexes as getComplexes, GQL_FOR_LIST } from "~/services/gql/complexes";
+import { debounce } from "~/utils";
 
 const props = withDefaults(defineProps<{ sort?: true; count?: number }>(), {
     count: 8,
@@ -8,7 +9,9 @@ const props = withDefaults(defineProps<{ sort?: true; count?: number }>(), {
 
 const [isCollapsed, toggle] = useToggle();
 
-const { result, loading, error, fetchMore, refetch } = getComplexes(GQL_FOR_LIST, { page: 1, first: props.count /* , ...filter */ });
+const { filter, prepare } = useFilter();
+
+const { result, loading, error, fetchMore, refetch } = getComplexes(GQL_FOR_LIST, { page: 1, first: props.count, ...filter.value });
 
 const complexes = computed(() => result.value?.complexes?.data ?? []);
 
@@ -16,7 +19,7 @@ const loadMore = () => {
     const page = (result.value?.complexes?.paginatorInfo?.currentPage ?? 0) + 1;
 
     return fetchMore({
-        variables: { page },
+        variables: { page, first: props.count, ...filter.value },
         updateQuery: (previousResult, { fetchMoreResult }) => {
             if (!fetchMoreResult) return previousResult;
 
@@ -30,6 +33,20 @@ const loadMore = () => {
         },
     });
 };
+
+const isFilterOpen = useMobileFilterState();
+
+watch(
+    [filter, isFilterOpen],
+    ([v, _isFilterOpen]) => {
+        if (_isFilterOpen) return;
+        alert("");
+        debounce(async () => {
+            await refetch({ page: 1, first: props.count, ...prepare(v) });
+        })();
+    },
+    { deep: true }
+);
 </script>
 
 <template>
@@ -66,9 +83,9 @@ const loadMore = () => {
             </div>
 
             <template #foot>
-                <div class="flex justify-center" v-if="result?.complexes.paginatorInfo.hasMorePages">
+                <div class="flex justify-center">
                     <loader v-if="loading" />
-                    <Button v-else @click="loadMore" label="Загрузить еще" class="mx-auto block md:inline bg-[#E71F61]" :disabled="loading" />
+                    <Button v-if="!loading && result?.complexes.paginatorInfo.hasMorePages" @click="loadMore" label="Загрузить еще" class="mx-auto block md:inline bg-[#E71F61]" :disabled="loading" />
                 </div>
             </template>
         </NuxtLayout>

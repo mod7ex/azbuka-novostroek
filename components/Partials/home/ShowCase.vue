@@ -12,7 +12,7 @@ import SVGGroup from "~/assets/svg/group.svg";
                 </h1>
                 <h4 class="text-base md:text-2xl md:leading-[29px] leading-6 font-normal text-[#8C8C8C]">Ростова-на-Дону и Ростовской области</h4>
             </div>
-            <Button label="Подробнее" class="mx-auto block md:inline bg-[#E71F61]" />
+            <!-- <Button label="Подробнее" class="mx-auto block md:inline bg-[#E71F61]" /> -->
         </div>
 
         <div class="divider"></div>

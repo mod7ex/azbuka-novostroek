@@ -167,6 +167,21 @@
     }
 }
 
+/* *************************************************** Mobile filter *************************************************** */
+
+.mobile-filter-enter-active {
+    transition: all 0.3s ease-out;
+}
+
+.mobile-filter-leave-active {
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.mobile-filter-enter-from,
+.mobile-filter-leave-to {
+    transform: translateX(375px);
+}
+
 /* *************************************************** **************** *************************************************** */
 
 /*

@@ -90,7 +90,7 @@ export const rawFilter = () => ({
     price_from: PRICE.MIN,
     price_to: PRICE.MAX,
     area_total_from: MIN_TOTAL_AREA,
-    area_total_to: MIN_TOTAL_AREA * 10,
+    area_total_to: MIN_TOTAL_AREA * 30 * 19,
     home_class: [],
     home_type: [],
     count_floors_from: null,

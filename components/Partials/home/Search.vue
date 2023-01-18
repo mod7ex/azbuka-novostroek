@@ -6,14 +6,22 @@ import { PRICE, MIN_TOTAL_AREA } from "~/constants";
 
 const LazyMobileFilter = defineAsyncComponent(() => import("~/components/Partials/MobileFilter.vue"));
 
+const isVisible = useMobileFilterState();
+const toggleVisibility = (v?: boolean): void => {
+    if (typeof v === "boolean") {
+        isVisible.value = v;
+    } else {
+        isVisible.value = !isVisible.value;
+    }
+};
+
 const [isCollapsed, toggle] = useToggle();
-const [isVisible, toggleVisibility] = useToggle(false);
 const [isTypeCollapsed, toggleType] = useToggle();
 const [isPriceCollapsed, togglePrice] = useToggle();
 const [isSquareCollapsed, toggleSquare] = useToggle();
 const [isDeadlineCollapsed, toggleDeadline] = useToggle();
 
-const { filter, reset } = useFilter();
+const { filter } = useFilter();
 
 // ApartmentsData
 const { result } = getApartmentsData();
@@ -131,14 +139,17 @@ const deadlineOptions = computed(() => deadlines.value.map((value) => ({ label: 
         </button>
 
         <Teleport to="body">
-            <!-- prettier-ignore -->
-            <lazy-mobile-filter 
-                :deadlines="deadlineOptions"
-                :count-rooms="countRooms"
-                :max-total-area="apartmentsData?.max_area_total"
-                :open="isVisible"
-                @close="toggleVisibility"
-            />
+            <Transition name="mobile-filter">
+                <!-- prettier-ignore -->
+                <lazy-mobile-filter
+                    v-if="isVisible"
+                    :deadlines="deadlineOptions"
+                    :count-rooms="countRooms"
+                    :max-total-area="apartmentsData?.max_area_total"
+                    @close="() => toggleVisibility()"
+                    @search="() => toggleVisibility(false)"
+                    />
+            </Transition>
         </Teleport>
 
         <!-- ****** -->
