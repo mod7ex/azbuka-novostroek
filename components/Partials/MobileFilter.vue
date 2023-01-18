@@ -1,5 +1,8 @@
 <script setup lang="ts">
-type Props = { open: boolean; countRooms: any[] };
+import RangeInput from "~/components/UI/TowThumbsRangeInput.vue";
+import { PRICE, MIN_TOTAL_AREA, DONE_DEADLINE } from "~/constants";
+
+type Props = { open?: boolean; countRooms?: any[]; maxTotalArea?: number; deadlines: { value: any; label: string }[] };
 
 withDefaults(defineProps<Props>(), {
     open: false,
@@ -35,41 +38,85 @@ defineEmits(["close"]);
                 </div>
             </div>
 
-            <app-select class="mb-6" :options="countRooms" label="Выберите тип квартиры" multiple inner-label="Тип квартиры" shrink />
+            <!-- prettier-ignore -->
+            <app-select
+                class="mb-6"
+                :options="countRooms"
+                label="Выберите тип квартиры"
+                inner-label="Тип квартиры"
+                multiple
+                shrink
+                v-model="filter.count_rooms"
+            />
 
+            <!-- Price -->
             <div class="mb-6 relative">
                 <labled-range-input class="bg-white" label="Задайте стоимость">
                     <template #min-label>
-                        <p>от <span class="text-[#3478F6]">3.9 млн ₽</span></p>
+                        <p>
+                            от <span class="text-[#3478F6]">{{ Math.floor(filter.price_from / 100000) / 10 }} млн ₽</span>
+                        </p>
                     </template>
 
                     <template #max-label>
-                        <p>до <span class="text-[#3478F6]">43.9 млн ₽</span></p>
+                        <p>
+                            до <span class="text-[#3478F6]">{{ Math.floor(filter.price_to / 100000) / 10 }} млн ₽</span>
+                        </p>
+                    </template>
+
+                    <template #thums>
+                        <!-- prettier-ignore -->
+                        <range-input
+                            :max="PRICE.MAX"
+                            :min="PRICE.MIN"
+                            v-model:last_range="filter.price_to"
+                            v-model:first_range="filter.price_from"
+                            class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full"
+                        />
                     </template>
                 </labled-range-input>
             </div>
 
+            <!-- Area -->
             <div class="mb-6 relative">
                 <labled-range-input class="bg-white" label="Задайте площадь">
                     <template #min-label>
-                        <p>от <span class="text-[#3478F6]">58 м²</span></p>
+                        <p>
+                            от <span class="text-[#3478F6]">{{ filter.area_total_from }} м²</span>
+                        </p>
                     </template>
 
                     <template #max-label>
-                        <p>до <span class="text-[#3478F6]">87 м²</span></p>
+                        <p>
+                            до <span class="text-[#3478F6]">{{ filter.area_total_to }} м²</span>
+                        </p>
+                    </template>
+
+                    <template #thums>
+                        <!-- prettier-ignore -->
+                        <range-input
+                            :max="maxTotalArea"
+                            :min="MIN_TOTAL_AREA"
+                            v-model:last_range="filter.area_total_to"
+                            v-model:first_range="filter.area_total_from"
+                            class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full"
+                            start
+                        />
                     </template>
                 </labled-range-input>
             </div>
 
-            <div class="mb-6">
-                <p class="mb-[13px] text-[12px] leading-[14px] font-normal font-[Raleway] text-[#4F4F4F]">Выберите срок аренды</p>
-                <button class="flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] px-3 border border-[#3478f624] rounded-[5px] w-full">
-                    <p class="text-[16px] leading-[14px] font-medium text-[#4F4F4F]">12 месяцев</p>
-                    <app-i name="ic:baseline-keyboard-arrow-down" class="text-[#3478F6] h-5 w-5" />
-                </button>
-            </div>
+            <!-- prettier-ignore -->
+            <app-select
+                :options="[{ value: DONE_DEADLINE, label: 'Сдан' }, ...deadlines]"
+                label="Выберите срок аренды"
+                v-model="filter.deadline"
+                inner-label="Не выбран"
+                class="mb-6"
+                shrink
+            />
 
-            <button class="mx-auto flex items-center justify-center gap-x-[14px] mb-6">
+            <button class="mx-auto flex items-center justify-center gap-x-[14px] mb-6" @click="reset">
                 <app-i class="w-5 h-5 text-[#1DA958]" name="material-symbols:close" />
                 <p class="text-[13px] leading-[13px] font-bold font-[Inter] text-[#131313]">Сбросить фильтры</p>
             </button>

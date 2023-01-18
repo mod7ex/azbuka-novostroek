@@ -134,30 +134,13 @@ export const APARTMENT_DETAILS = `
   price
   price_area
   final_price
-  final_price_area
   area_total
   count_rooms
-  is_studio
-  is_euro
-  is_assignment
-  has_discounts
-  step_over_color
-  step_over_name
-  assignment_agreement
-  assignment_status
-
   area_living
   area_kitchen
   count_loggias
   area_loggias
-
-  status {
-    name
-    color
-    is_disabled
-    is_free
-    hide_price
-  }
+  layout_url
 `;
 
 const APARTMENTS_FILTER_AS_ARGUMENT = `

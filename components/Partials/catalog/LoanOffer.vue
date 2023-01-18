@@ -13,7 +13,7 @@ defineProps<{
     <Card class="bg-[#F9F9F9] py-[14px] px-[18px] rounded-[5px] md:rounded-none mb-[10px] md:mb-5">
         <template #header>
             <div :class="['flex items-center justify-between', !isCollapsed ? 'mb-[13px]' : '']">
-                <app-img :title="bank?.name" :src="bank?.logo?.url" class="w-[67px] h-[24px] md:w-[91px] md:h-[43px]" />
+                <app-img :title="bank?.name" :src="bank?.logo?.url" class="w-[67px] md:w-[91px]" />
                 <button class="bg-white rounded-full border-[1.6px] border-[#1da95814] relative flex items-center justify-center w-[30px] h-[30px]" @click="() => toggle()">
                     <app-i name="ic:round-arrow-drop-down" :class="['text-[#878787] absolute', isCollapsed ? 'rotate-180' : '']" />
                 </button>

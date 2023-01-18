@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import MobileFilter from "~/components/Partials/MobileFilter.vue";
 import { apartmentsData as getApartmentsData } from "~/services/gql/apartments";
 import { homesData as getHomesData } from "~/services/gql/homes";
 import { countRoomsGen } from "~/utils";
+import { PRICE, MIN_TOTAL_AREA } from "~/constants";
+
+const LazyMobileFilter = defineAsyncComponent(() => import("~/components/Partials/MobileFilter.vue"));
 
 const [isCollapsed, toggle] = useToggle();
 const [isVisible, toggleVisibility] = useToggle(false);
@@ -19,16 +21,19 @@ const apartmentsData = computed(() => result.value?.apartmentsData ?? null);
 
 const countRooms = countRoomsGen(apartmentsData);
 
-// Price
-const PRICE_MIN = 500000;
-const PRICE_MAX = 10000000;
-
-// ------------------------------------------------------------------------------------------------------------------------------------------------------
-
 // Deadlines
 const { result: homesResult } = getHomesData();
 
-const deadlines = computed(() => homesResult.value?.homesData?.deadlines ?? []);
+interface IDeadline {
+    quarter_end?: Numberish;
+    year_end?: Numberish;
+}
+
+const deadlines = computed<IDeadline[]>(() => homesResult.value?.homesData?.deadlines ?? []);
+
+const deadlineToLabel = (e: IDeadline) => `до ${e?.quarter_end} кв. ${e?.year_end}`;
+
+const deadlineOptions = computed(() => deadlines.value.map((value) => ({ label: deadlineToLabel(value), value })));
 </script>
 
 <template>
@@ -57,17 +62,17 @@ const deadlines = computed(() => homesResult.value?.homesData?.deadlines ?? []);
 
                         <li class="px-[27px] flex items-center relative">
                             <button @click="() => togglePrice()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Цена</button>
-                            <filter-from-to v-model:from="filter.price_from" v-model:to="filter.price_to" :is-collapsed="isPriceCollapsed" :handel-blur="() => togglePrice(true)" :min="PRICE_MIN" :max="PRICE_MAX" :step="PRICE_MIN" />
+                            <filter-from-to v-model:from="filter.price_from" v-model:to="filter.price_to" :is-collapsed="isPriceCollapsed" :handel-blur="() => togglePrice(true)" :min="PRICE.MIN" :max="PRICE.MAX" :step="PRICE.MIN" />
                         </li>
 
                         <li class="px-[27px] flex items-center relative">
                             <button @click="() => toggleSquare()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Площадь</button>
-                            <filter-from-to v-model:from="filter.area_total_from" v-model:to="filter.area_total_to" :is-collapsed="isSquareCollapsed" :handel-blur="() => toggleSquare(true)" :min="10" :step="20" :max="apartmentsData?.max_area_total" />
+                            <filter-from-to v-model:from="filter.area_total_from" v-model:to="filter.area_total_to" :is-collapsed="isSquareCollapsed" :handel-blur="() => toggleSquare(true)" :min="MIN_TOTAL_AREA" :step="20" :max="apartmentsData?.max_area_total" />
                         </li>
 
                         <li class="px-[27px] flex items-center relative">
                             <button @click="() => toggleDeadline()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Срок аренды</button>
-                            <filter-by-deadline v-model="filter.deadline" :options="deadlines" :is-collapsed="isDeadlineCollapsed" :handel-blur="() => toggleDeadline(true)" />
+                            <filter-by-deadline v-model="filter.deadline" :options="deadlineOptions" :is-collapsed="isDeadlineCollapsed" :handel-blur="() => toggleDeadline(true)" />
                         </li>
 
                         <li class="pl-[27px] flex items-center">
@@ -126,7 +131,14 @@ const deadlines = computed(() => homesResult.value?.homesData?.deadlines ?? []);
         </button>
 
         <Teleport to="body">
-            <mobile-filter :count-rooms="countRooms" :open="isVisible" @close="toggleVisibility" />
+            <!-- prettier-ignore -->
+            <lazy-mobile-filter 
+                :deadlines="deadlineOptions"
+                :count-rooms="countRooms"
+                :max-total-area="apartmentsData?.max_area_total"
+                :open="isVisible"
+                @close="toggleVisibility"
+            />
         </Teleport>
 
         <!-- ****** -->

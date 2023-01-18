@@ -17,3 +17,12 @@ export enum MS {
     MIN = 1000 * 60,
     SEC = 1000,
 }
+
+export enum PRICE {
+    MIN = 500000,
+    MAX = 10000000,
+}
+
+export const MIN_TOTAL_AREA = 10;
+
+export const DONE_DEADLINE = { quarter_end: -1, year_end: -1 };

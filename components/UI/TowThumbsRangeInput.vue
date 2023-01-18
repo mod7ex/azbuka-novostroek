@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { uuidGen } from "~/utils";
 
-const props = withDefaults(defineProps<{ max?: number; min?: number; uni?: true; step?: number; last_range?: number; first_range?: number }>(), {
+const props = withDefaults(defineProps<{ max?: number; min?: number; uni?: true; step?: number; last_range?: number; first_range?: number; start?: true }>(), {
     step: 1000,
 });
 
@@ -18,6 +18,15 @@ const width = computed(() => {
 const handelInput = (e: Event, item: "last" | "first") => {
     emit(`update:${item}_range`, (e.target as HTMLInputElement).value);
 };
+
+onMounted(() => {
+    if (props.start === true) {
+        // @ts-ignore
+        handelInput({ target: { value: props.min } }, "first");
+        // @ts-ignore
+        handelInput({ target: { value: props.max } }, "last");
+    }
+});
 </script>
 
 <template>

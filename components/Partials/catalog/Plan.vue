@@ -9,25 +9,21 @@ const current = shallowRef(-1);
 
 const currentHome = useCurrentHome();
 
-const { result, error, loading, refetch, load } = getApartments({ page: 1, first: 2, home_id: currentHome.value });
+const { result, error, loading, refetch, load, fetchMore } = getApartments({ page: 1, first: 3, home_id: currentHome.value });
+
+const apartments = computed(() => result.value?.apartments?.data ?? []);
 
 let count = 0;
 
 watch(
     [currentHome, current],
-    debounce(([home_id, count_rooms], [old_home_id, old_count_rooms]) => {
-        alert(count_rooms);
-
+    debounce(([home_id, count_rooms] /* , [old_home_id, old_count_rooms] */) => {
         if (!count) {
             count++;
             return load();
         }
 
-        let _filter: Filter = {
-            page: 1,
-            first: 3,
-            home_id,
-        };
+        let _filter: Filter = { page: 1, first: 3, home_id };
         if (count_rooms === 0) _filter.is_studio = true;
         else if (count_rooms > 0) _filter.count_rooms = [count_rooms];
         return refetch(_filter);
@@ -37,33 +33,29 @@ watch(
     }
 );
 
-/*
-const computeApartments = (payload, rooms = -1) => {
-    return (
-        payload
-            ?.map(({ name: entrance, floors }) => {
-                return floors?.map(({ number: floor, layout_url, apartments }) => {
-                    let _apartments = apartments;
+const loadMore = () => {
+    const page = (result.value?.apartments?.paginatorInfo?.currentPage ?? 0) + 1;
 
-                    if (rooms == 0) _apartments = apartments?.filter(({ is_studio }) => is_studio);
-                    else if (rooms > 0) _apartments = apartments?.filter(({ count_rooms }) => count_rooms == rooms);
+    console.log(page);
 
-                    return _apartments?.map(({ __typename, status, ...v }) => ({ entrance, layout_url, floor, status_name: status?.name, ...v }));
-                });
-            })
-            ?.flat()
-            ?.flat() ?? []
-    );
+    return fetchMore({
+        variables: { page },
+        updateQuery: (previousResult, { fetchMoreResult }) => {
+            console.log("previousResult", previousResult.apartments.paginatorInfo);
+            console.log("fetchMoreResult", fetchMoreResult.apartments.paginatorInfo);
+
+            if (!fetchMoreResult) return previousResult;
+
+            return {
+                apartments: {
+                    __typename: previousResult?.apartments?.__typename,
+                    paginatorInfo: fetchMoreResult?.apartments?.paginatorInfo ?? previousResult?.apartments?.paginatorInfo,
+                    data: [...previousResult?.apartments?.data, ...fetchMoreResult?.apartments?.data],
+                },
+            };
+        },
+    });
 };
-
-const entrances = computed(() => {
-    const _entrances = props.home?.entrances;
-
-    const _rooms = current.value;
-
-    return computeApartments(_entrances, _rooms);
-});
-*/
 </script>
 
 <template>
@@ -74,13 +66,15 @@ const entrances = computed(() => {
                 <x-scroll-header :choices="rooms" v-model="current" class="mb-[28px]" buttons />
             </template>
 
-            <pre>{{ result }}</pre>
-            <!-- <apartment-plan v-for="item in entrances" :key="item?.id" :apartment="item" class="mb-[13px]" /> -->
+            <apartment-plan v-for="item in apartments" :key="item?.id" :apartment="item" class="mb-[13px]" />
 
             <template #foot>
-                <!-- <div class="text-center">
-                    <Button label="Загрузить еще" class="bg-[#E71F61] mb-[29px] md:mb-0" />
-                </div> -->
+                <div v-if="loading" class="flex items-center justify-center">
+                    <loader />
+                </div>
+                <div class="text-center" v-else>
+                    <Button @click="loadMore" label="Загрузить еще" class="bg-[#E71F61] mb-[29px] md:mb-0" />
+                </div>
                 <dashed-devider class="md:hidden" />
             </template>
         </NuxtLayout>

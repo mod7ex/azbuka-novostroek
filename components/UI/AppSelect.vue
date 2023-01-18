@@ -2,16 +2,21 @@
 import { uuidGen } from "~/utils";
 import { isArray } from "~/utils/types";
 
-const props = defineProps<{
-    options: Record<"label" | "value", Numberish>[];
-    label?: string;
-    innerLabel?: string;
-    bg?: true;
-    shrink?: true;
-    disabled?: true;
-    multiple?: true;
-    modelValue?: Numberish | Numberish[];
-}>();
+const props = withDefaults(
+    defineProps<{
+        options: Record<"label" | "value", Numberish>[];
+        label?: string;
+        innerLabel?: string;
+        bg?: true;
+        shrink?: true;
+        disabled?: true;
+        multiple?: true;
+        modelValue?: Numberish | Numberish[];
+    }>(),
+    {
+        innerLabel: "Любой",
+    }
+);
 
 const emit = defineEmits(["update:modelValue"]);
 
@@ -29,6 +34,14 @@ const init = (v = props.modelValue) => {
 
 let selected = ref(new Set<Numberish>(init()));
 
+watch(
+    () => props.modelValue,
+    (v) => {
+        selected.value.clear();
+        init(v).forEach((item) => selected.value.add(item));
+    }
+);
+
 const selected_arr = (v: Iterable<Numberish>) => Array.from(v);
 
 const emitSelection = () => {
@@ -44,6 +57,8 @@ const unpick = (v: Numberish) => {
 };
 
 const pick = (v: Numberish, checked: boolean) => {
+    console.log(v, checked);
+
     if (!checked) return unpick(v);
 
     if (!props.multiple) selected.value.clear();
@@ -73,7 +88,7 @@ const selectedOptions = computed(() => {
         >
             <slot name="inner-label">
                 <p class="text-[16px] leading-[14px] font-medium" :class="[bg ? 'text-[#828282]' : 'text-[#4F4F4F]']">
-                    {{ multiple ? innerLabel : selectedOptions[0]?.label ?? "Любой" }}
+                    {{ multiple ? innerLabel : selectedOptions[0]?.label ?? innerLabel }}
                 </p>
             </slot>
             <app-i name="ic:baseline-keyboard-arrow-down" :class="[bg ? 'text-[#1DA958]' : 'text-[#3478F6]', ' h-5 w-5 transition-transform duration-300', isCollaped ? 'rotate-180' : '']" />
@@ -104,7 +119,7 @@ const selectedOptions = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-@mixin apartment_types_count($rows: 10) {
+@mixin apartment_types_count($rows: 20) {
     @for $i from 1 through $rows {
         &.hg-#{$i} {
             height: ($i * (14px + 20px)) + (6px + 10px);
@@ -126,11 +141,9 @@ const selectedOptions = computed(() => {
 }
 
 .shrink-enter-to {
-    // height: 241px;
     @include apartment_types_count;
 }
 .shrink-leave-from {
-    // height: 241px;
     @include apartment_types_count;
 }
 
@@ -150,7 +163,6 @@ input[type="checkbox"]:checked {
 .shadow-select {
     button {
         @include shadow($x: 0, $y: 8px, $blur: 6px, $spread: 1px, $color: rgba(0, 0, 0, 0.18));
-        // border: 1px solid #0000001f;
     }
 
     .shadow-select-target {
