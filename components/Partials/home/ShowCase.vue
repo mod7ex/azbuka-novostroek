@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import SVGGroup from "~/assets/svg/group.svg";
+
+const [_, toggleVisibility] = useMobileFilter();
+
+const { filter } = useFilter();
 </script>
 
 <template>
@@ -14,6 +18,10 @@ import SVGGroup from "~/assets/svg/group.svg";
             </div>
             <!-- <Button label="Подробнее" class="mx-auto block md:inline bg-[#E71F61]" /> -->
         </div>
+
+        <app-width class="md:hidden">
+            <text-search class="max-w-md mx-auto px-[18px] bg-white border-[#3478f624] rounded h-[50px] app-shadow" v-model="filter.name" @filter="() => toggleVisibility(true)" />
+        </app-width>
 
         <div class="divider"></div>
 

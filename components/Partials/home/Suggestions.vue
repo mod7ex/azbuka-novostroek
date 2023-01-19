@@ -40,7 +40,6 @@ watch(
     [filter, isFilterOpen],
     ([v, _isFilterOpen]) => {
         if (_isFilterOpen) return;
-        alert("");
         debounce(async () => {
             await refetch({ page: 1, first: props.count, ...prepare(v) });
         })();

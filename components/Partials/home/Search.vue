@@ -6,14 +6,7 @@ import { PRICE, MIN_TOTAL_AREA } from "~/constants";
 
 const LazyMobileFilter = defineAsyncComponent(() => import("~/components/Partials/MobileFilter.vue"));
 
-const isVisible = useMobileFilterState();
-const toggleVisibility = (v?: boolean): void => {
-    if (typeof v === "boolean") {
-        isVisible.value = v;
-    } else {
-        isVisible.value = !isVisible.value;
-    }
-};
+const [isVisible, toggleVisibility] = useMobileFilter();
 
 const [isCollapsed, toggle] = useToggle();
 const [isTypeCollapsed, toggleType] = useToggle();
@@ -46,11 +39,10 @@ const deadlineOptions = computed(() => deadlines.value.map((value) => ({ label: 
 
 <template>
     <section :class="[$attrs.class]">
-        <div class="search-container mx-auto border md:border-none flex items-center border-[#3478f624] rounded h-[50px] px-[18px] md:px-5 bg-white mb-[6px]">
+        <div class="hidden md:flex search-container mx-auto border md:border-none items-center border-[#3478f624] rounded h-[50px] px-[18px] md:px-5 bg-white mb-[6px]">
             <ul :class="['search-area flex items-center justify-between w-full flex-wrap']">
-                <li :class="['search-input flex items-center flex-grow']">
-                    <app-i name="heroicons-outline:search" class="text-[#1DA958] mr-4 w-[17px] h-[17px] md:text-[#5F5F5F] cursor-pointer" />
-                    <input type="text" v-model="filter.name" placeholder="Название новостройки или застройщика" class="w-full sm:flex-grow md:flex-grow-0 md:inline-block outline-none py-2" />
+                <li :class="['search-input']">
+                    <text-search v-model="filter.name" @filter="() => toggleVisibility(true)" />
                 </li>
 
                 <li class="search-options py-2">
@@ -131,12 +123,6 @@ const deadlineOptions = computed(() => deadlines.value.map((value) => ({ label: 
                 </li>
             </Blurable>
         </Transition>
-
-        <!-- Filter Mobile -->
-        <button @click="() => toggleVisibility()" class="md:hidden mb-10 flex justify-center font-[Raleway] items-center gap-x-[14px] py-[15px] border-2 border-[#f8f8f8] rounded-[5px] w-full">
-            <app-i name="carbon:settings-adjust" class="text-[#1DA958] h-5 w-5" />
-            <p class="text-[13px] leading-[13px] font-bold text-[#131313]">Показать фильтры</p>
-        </button>
 
         <Teleport to="body">
             <Transition name="mobile-filter">
