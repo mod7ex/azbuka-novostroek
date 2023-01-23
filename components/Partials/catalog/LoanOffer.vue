@@ -35,7 +35,7 @@ defineProps<{
                         <p class="text-[14px] font-normal leading-5 text-[#8C8C8C] mb-2 whitespace-nowrap">Ставка</p>
                         <p class="text-[14px] font-semibold leading-4">{{ bank[percents] ?? bank?.percents }} %</p>
                     </li>
-                    <li class="mb-2 md:mb-0 col-span-3 md:col-span-1">
+                    <li class="mb-2 md:mb-0 col-span-3 md:col-span-1 whitespace-nowrap">
                         <p class="text-[14px] font-normal leading-5 text-[#8C8C8C] mb-2 whitespace-nowrap">Нач. взнос</p>
                         <p class="text-[14px] font-semibold leading-4">{{ advance }}</p>
                     </li>

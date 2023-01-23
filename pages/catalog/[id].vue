@@ -3,7 +3,7 @@ import TheBreadCrumb from "~/components/TheBreadCrumb.vue";
 import BuildingCard from "~/components/Partials/catalog/Card.vue";
 import BuildingSuggestions from "~/components/Partials/catalog/Suggestions.vue";
 import BuildingDescription from "~/components/Partials/catalog/Description.vue";
-// import BuildingLocation from "~/components/Partials/catalog/Location.vue";
+import BuildingLocation from "~/components/Partials/catalog/Location.vue";
 import BuildingChoices from "~/components/Partials/catalog/Choices.vue";
 import BuildingMortgage from "~/components/Partials/catalog/Mortgage.vue";
 import BuildingPromotion from "~/components/Partials/catalog/Promotion.vue";
@@ -81,11 +81,9 @@ watch(
 
 <template>
     <div class="relative">
-        <!--
-            <Head>
-                <Script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript" defer />
-            </Head>
-        -->
+        <Head>
+            <Script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript" />
+        </Head>
 
         <NuxtLayout name="inner">
             <app-width class="mt-7 md:mt-[59px] mb-[33px] md:mb-[100px]" tag="section">
@@ -98,7 +96,7 @@ watch(
                     <building-description v-if="complex" :complex="complex" :id="SECTIONS.DESCRIPTION" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
                     <client-only>
-                        <!-- <building-location v-if="complex" :complex="complex" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" /> -->
+                        <building-location v-if="complex" :complex="complex" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
                         <div :id="SECTIONS.CHARACTERISTICS_AND_APARTMENTS" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
                             <building-choices v-if="complex" :loading="homeLoading" :city="complex?.city" :home="home" :deadlines="deadlines" class="border border-transparent mb-[25px]" />
