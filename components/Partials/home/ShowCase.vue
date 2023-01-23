@@ -19,9 +19,11 @@ const { filter } = useFilter();
             <!-- <Button label="Подробнее" class="mx-auto block md:inline bg-[#E71F61]" /> -->
         </div>
 
-        <app-width class="md:hidden">
-            <text-search class="max-w-md mx-auto px-[18px] bg-white border-[#3478f624] rounded h-[50px] app-shadow" v-model="filter.name" @filter="() => toggleVisibility(true)" />
-        </app-width>
+        <client-only>
+            <app-width class="md:hidden">
+                <text-search class="max-w-md mx-auto px-[18px] bg-white border-[#3478f624] rounded h-[50px] app-shadow" v-model="filter.name" @filter="() => toggleVisibility(true)" />
+            </app-width>
+        </client-only>
 
         <div class="divider"></div>
 

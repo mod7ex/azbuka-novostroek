@@ -2,7 +2,6 @@
 import TheDefaultFooter from "~/components/TheDefaultFooter.vue";
 import TheDefaultHeader from "~/components/TheDefaultHeader.vue";
 import ShowCase from "~/components/Partials/home/ShowCase.vue";
-// import Search from "~/components/Partials/home/Search.vue";
 import Logo from "~/assets/svg/logo.svg";
 
 const LazySearch = defineAsyncComponent(() => import("~/components/Partials/home/Search.vue"));
