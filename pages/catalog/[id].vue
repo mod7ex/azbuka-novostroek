@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import MetaItems from "~/components/Partials/catalog/MetaItems.vue";
 import TheBreadCrumb from "~/components/TheBreadCrumb.vue";
 import BuildingCard from "~/components/Partials/catalog/Card.vue";
 import BuildingSuggestions from "~/components/Partials/catalog/Suggestions.vue";
@@ -81,9 +82,7 @@ watch(
 
 <template>
     <div class="relative">
-        <Head>
-            <Script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript" />
-        </Head>
+        <meta-items />
 
         <NuxtLayout name="inner">
             <app-width class="mt-7 md:mt-[59px] mb-[33px] md:mb-[100px]" tag="section">

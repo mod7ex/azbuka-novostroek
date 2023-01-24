@@ -28,6 +28,8 @@ onMounted(() => {
     if (_default == null) return;
     currentHome.value = _default;
 });
+
+// const { preview } = useImgPreview();
 </script>
 
 <template>

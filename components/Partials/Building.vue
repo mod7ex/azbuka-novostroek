@@ -15,7 +15,9 @@ withDefaults(
 
 const isAllBuilt = (payload) => payload?.count_homes?.total === payload?.count_homes?.finished;
 
-const onlyFewBuilt = (payload) => payload?.count_homes?.finished > 0 && payload?.count_homes?.finished < payload?.count_homes?.total;
+const onlyFewBuilt = (payload) => {
+    return payload?.count_homes?.finished > 0 && !isAllBuilt(payload);
+};
 
 const startingPrice = (payload) => {
     let _items = payload?.apartments_summary;
@@ -119,9 +121,7 @@ const startingPrice = (payload) => {
                     </p>
 
                     <button :class="['block text-center py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[15px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full z-50 relative hover-bg', whiteCta ? 'bg-white' : 'bg-transparent ']">
-                        <!-- <button :class="['py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[15px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full z-50 relative hover-bg', whiteCta ? 'bg-white' : 'bg-transparent ']"> -->
                         <p>{{ whiteCta ? "Узнать больше" : "Подробнее" }}</p>
-                        <!-- </button> -->
                     </button>
                 </div>
             </div>

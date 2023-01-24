@@ -133,14 +133,33 @@ export const APARTMENT_DETAILS = `
   number
   price
   price_area
-  final_price
   area_total
   count_rooms
   area_living
   area_kitchen
-  count_loggias
-  area_loggias
   layout_url
+  difference_last_price
+  is_grow_last_price
+  # status {
+  #   id
+  #   name
+  #   color
+  #   order
+  #   is_disabled
+  #   is_free
+  #   is_sold
+  #   hide_price
+  #   not_demo
+  #   feed_yandex
+  #   feed_avito
+  #   feed_cian
+  #   feed_domclick
+  #   created_at
+  #   updated_at
+  # }
+  # final_price
+  # count_loggias
+  # area_loggias
 `;
 
 const APARTMENTS_FILTER_AS_ARGUMENT = `

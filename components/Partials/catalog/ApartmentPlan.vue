@@ -7,86 +7,71 @@ const areaLabel = (v, flbk = "_") => {
     if (v == null) return flbk;
     else return `${v} м2`;
 };
+
+const { preview } = useImgPreview();
 </script>
 
 <template>
-    <article :class="['flex gap-3 items-center justify-center flex-wrap md:flex-nowrap md:justify-start flex-col md:flex-row md:items-start pt-6 md:pt-[30px] rounded-[5px] border md:border-[1.6px] border-[#00000014] md:border-[#1da95826] px-[21px] pb-[31px]', $attrs.class]">
-        <div class="font-[Inter] text-center mb-[7px] md:hidden">
-            <h1 class="text-[18px] font-semibold leading-6 mb-[6px]">Квартира №{{ apartment?.number }}</h1>
-            <p class="font-medium text-[15px] leading-[18px] text-[#878787]">{{ apartment?.count_rooms }} к. {{ areaLabel(apartment?.area_total) }} {{ apartment?.floor }} этаж</p>
-        </div>
-
-        <div class="md:h-72 md:w-96 pt-5">
+    <article :class="['w-[334px] rounded-[5px] border-[1.6px] border-[#00000014] md:border-[#1da95826]', $attrs.class]">
+        <div class="h-[215px] bg-[#F4FAFF] relative">
             <app-img :src="apartment?.layout_url" class="mx-auto" fill />
+            <button @click="() => preview(apartment?.layout_url)" class="hover:bg-gray-900 transition-all duration-300 opacity-20 absolute top-0 left-0 right-0 bottom-0 cursor-pointer"></button>
         </div>
 
-        <div class="md:flex-grow w-full">
-            <div class="mt-4 mb-[29px] md:mb-[33px]">
-                <header class="font-[Inter] mb-[25px] md:mb-[20px] md:flex md:items-start md:justify-between md:flex-wrap">
-                    <div class="mb-[7px] hidden md:inline-block">
-                        <h1 class="text-[18px] font-semibold leading-6 mb-[6px]">Квартира №{{ apartment?.number }}</h1>
-                        <p class="font-medium text-[15px] leading-[18px] text-[#878787]">{{ apartment?.count_rooms }} к. {{ areaLabel(apartment?.area_total) }} {{ apartment?.floor }} этаж</p>
-                    </div>
+        <div class="pt-[14px] px-[22px]">
+            <ul class="mb-[9px] text-xs leading-[14.5px] flex items-center justify-between">
+                <li class="font-normal text-[#4D4D4D]">{{ apartment?.count_rooms }} комн. №{{ apartment?.number }}</li>
+                <li class="text-[#1DA958] font-medium italic font-[Inter]">Строится</li>
+            </ul>
 
-                    <div>
-                        <div class="flex items-center justify-center gap-[13px] md:flex md:flex-col md:gap-[2.3px] md:items-end md:mb-[6px]">
-                            <h1 class="font-bold text-[18px] md:text-[21px] leading-[21px] md:flex md:items-center md:gap-[6px]">
-                                <button class="text-[14px] md:text-[13px] leading-4 md:leading-[15px] font-normal mb-[6px] hidden md:flex items-center text-[#1DA958]">
-                                    <app-i name="ic:round-arrow-drop-down" />
-                                    <span>{{ format_thousands(apartment?.final_price) }} ₽</span>
-                                </button>
-
-                                <p>{{ format_thousands(apartment?.price) }} ₽</p>
-                            </h1>
-                            <p class="font-normal text-[14px] leading-4 text-[#878787]">{{ format_thousands(apartment?.price_area) }} ₽/ м2</p>
-                        </div>
-
-                        <div class="flex items-center justify-center md:justify-end gap-[13px] text-[#1DA958]">
-                            <button class="text-[14px] leading-4 font-normal mb-[6px] flex items-center md:hidden">
-                                <app-i name="ic:round-arrow-drop-down" />
-                                <span>{{ format_thousands(apartment?.final_price) }} ₽</span>
-                            </button>
-                            <p class="bg-[#D2EEDE] py-[3px] px-[5px] font-medium text-xs leading-[14px] rounded-[3px]">Следить за ценой</p>
-                        </div>
-                    </div>
-                </header>
-
-                <div class="text-[14px] leading-4 font-medium flex flex-col justify-center w-max mx-auto md:mx-0 md:flex-row md:flex-wrap md:items-start md:justify-between md:gap-x-[35px] md:gap-y-4">
-                    <ul class="md:flex-grow">
-                        <li class="flex items-end md:justify-between mb-4">
-                            <p class="text-[#878787] font-[Raleway]">Расчетная площадь</p>
-                            <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                            <p class="font-[Inter]">{{ areaLabel(apartment?.area_total) }}</p>
-                        </li>
-                        <li class="flex items-end md:justify-between mb-4">
-                            <p class="text-[#878787] font-[Raleway]">Жилая площадь</p>
-                            <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                            <p class="font-[Inter]">{{ areaLabel(apartment?.area_living) }}</p>
-                        </li>
-                        <li class="flex items-end md:justify-between mb-4 md:mb-0">
-                            <p class="text-[#878787] font-[Raleway]">Площадь кухни</p>
-                            <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                            <p class="font-[Inter]">{{ areaLabel(apartment?.area_kitchen) }}</p>
-                        </li>
-                    </ul>
-                    <ul class="md:flex-grow">
-                        <li class="flex items-end md:justify-between mb-4">
-                            <p class="text-[#878787] font-[Raleway]">Количество лоджий</p>
-                            <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                            <p class="font-[Inter]">{{ apartment?.count_loggias ?? "Не заполнено" }}</p>
-                        </li>
-                        <li class="flex items-end md:justify-between">
-                            <p class="text-[#878787] font-[Raleway]">Площадь {{ apartment.count_loggias > 1 ? "лоджий" : "лоджии" }}</p>
-                            <span class="flex-grow border-b border-dotted border-[#00000014] mx-1"></span>
-                            <p class="font-[Inter]">{{ areaLabel(apartment?.area_loggias) }}</p>
-                        </li>
-                    </ul>
-                </div>
+            <div class="flex items-end justify-start font-[Inter] mb-[15px]">
+                <p class="font-bold text-base leading-[21px] text-[#131313]">{{ format_thousands(apartment?.price) }} ₽</p>
+                <p :class="['flex items-center justify-center font-normal text-[14px] leading-4', apartment?.is_grow_last_price ? 'text-[red]' : 'text-[#1DA958]']">
+                    <app-i name="ic:round-arrow-drop-down" :class="[apartment?.is_grow_last_price ? 'rotate-180' : '']" />
+                    <span>{{ format_thousands(apartment?.difference_last_price ?? 0) }} ₽</span>
+                </p>
             </div>
 
-            <div class="w-full text-white flex items-center justify-center md:justify-start gap-1 md:gap-[10px]">
-                <Button label="Забронировать" class="bg-[#1DA958] py-[13px] px-[15px] md:px-[20px] text-[13px] md:text-[15px] font-bold leading-[17px] font-[Raleway]" />
-                <Button label="Рассчитать ипотеку" class="bg-[#FCBD00] py-[13px] px-[15px] md:px-[20px] whitespace-nowrap text-[13px] md:text-[15px] font-bold leading-[17px] font-[Raleway]" />
+            <div class="divide-y px-3">
+                <hr />
+            </div>
+
+            <ul class="pt-[10px] pb-[15px]">
+                <li class="font-[Inter] text-[14px] leading-[17px] flex justify-between items-center mb-3">
+                    <span class="font-normal text-[#878787]">Цена за м²</span>
+                    <span class="font-medium">{{ format_thousands(apartment?.price_area) }} ₽</span>
+                </li>
+                <li class="font-[Inter] text-[14px] leading-[17px] flex justify-between items-center mb-3">
+                    <span class="font-normal text-[#878787]">Площадь</span>
+                    <span class="font-medium">{{ areaLabel(apartment?.area_total) }}</span>
+                </li>
+                <li class="font-[Inter] text-[14px] leading-[17px] flex justify-between items-center mb-3">
+                    <span class="font-normal text-[#878787]">Жилая</span>
+                    <span class="font-medium">{{ areaLabel(apartment?.area_living) }}</span>
+                </li>
+                <li class="font-[Inter] text-[14px] leading-[17px] flex justify-between items-center mb-3">
+                    <span class="font-normal text-[#878787]">Кухня</span>
+                    <span class="font-medium">{{ areaLabel(apartment?.area_kitchen) }}</span>
+                </li>
+                <li class="font-[Inter] text-[14px] leading-[17px] flex justify-between items-center mb-3">
+                    <span class="font-normal text-[#878787]">Отделка</span>
+                    <!-- Чистовая -->
+                    <span class="font-medium">{{ "_" }}</span>
+                </li>
+                <li class="font-[Inter] text-[14px] leading-[17px] flex justify-between items-center">
+                    <span class="font-normal text-[#878787]">Ипотека</span>
+                    <span class="font-medium underline text-[#3478F6]">от {{ format_thousands(64335) }} ₽/мес</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="px-[22px] bg-[#F4FAFF] py-[10px]">
+            <p class="font-[Inter] leading-[17px] text-[14px] flex items-center justify-between mb-4">
+                <span class="font-semibold">ЖК Пальмира</span>
+                <span class="text-[#1DA958] underline font-normal">50 похожих</span>
+            </p>
+            <div class="px-3">
+                <button :class="['block text-center py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[15px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full hover:bg-[#FCBD00] hover:text-white transition-all duration-300']">Расчитать ипотеку</button>
             </div>
         </div>
     </article>

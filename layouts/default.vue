@@ -6,7 +6,7 @@ import Logo from "~/assets/svg/logo.svg";
 
 const LazySearch = defineAsyncComponent(() => import("~/components/Partials/home/Search.vue"));
 
-const props = defineProps<{ inner?: true }>();
+defineProps<{ inner?: true }>();
 
 const [isCollaped, toggle] = useToggle();
 
@@ -15,6 +15,8 @@ const isMatch = useMediaQuery("(min-width: 768px)");
 
 <template>
     <div :class="['z-0', inner ? 'inner' : '', $attrs.class]">
+        <image-viewer />
+
         <div class="show-case-container">
             <div :class="['show-case-overlay relative', inner ? 'md:mb-[60px]' : '']">
                 <app-width tag="header">
