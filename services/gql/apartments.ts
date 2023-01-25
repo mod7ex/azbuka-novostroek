@@ -140,6 +140,7 @@ export const APARTMENT_DETAILS = `
   layout_url
   difference_last_price
   is_grow_last_price
+  
   # status {
   #   id
   #   name

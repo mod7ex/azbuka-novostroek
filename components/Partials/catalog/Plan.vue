@@ -56,6 +56,16 @@ const loadMore = () => {
         },
     });
 };
+
+const elementRef = ref<HTMLDivElement>();
+const rootRef = ref<HTMLDivElement>();
+
+const condition = computed(() => result.value.apartments?.paginatorInfo?.hasMorePages);
+
+useIntersectionObserver(elementRef, loadMore, {
+    root: rootRef,
+    condition,
+});
 </script>
 
 <template>
@@ -66,27 +76,19 @@ const loadMore = () => {
                 <x-scroll-header :choices="rooms" v-model="current" class="mb-[28px]" buttons />
             </template>
 
-            <div class="overflow-x-scroll mb-4 md:mb-[17px] no-scroll-thum">
+            <div ref="rootRef" class="overflow-x-scroll mb-4 md:mb-[17px] no-scroll-thum">
                 <div class="flex gap-3 w-fit">
                     <apartment-plan v-for="item in apartments" :key="item?.id" :apartment="item" class="mb-[13px]" />
 
-                    <div class="w-3 bg-black"></div>
+                    <div ref="elementRef" class="w-3"></div>
 
-                    <div class="flex items-center justify-center">
+                    <div v-if="loading" class="flex items-center justify-center">
                         <loader />
                     </div>
                 </div>
             </div>
 
             <template #foot>
-                <!--
-                <div v-if="loading" class="flex items-center justify-center mb-[29px] md:mb-0">
-                    <loader />
-                </div>
-                <div class="text-center" v-else>
-                    <Button @click="loadMore" label="Загрузить еще" class="bg-[#E71F61] mb-[29px] md:mb-0" />
-                </div>
--->
                 <dashed-devider class="md:hidden" />
             </template>
         </NuxtLayout>

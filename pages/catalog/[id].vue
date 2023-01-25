@@ -107,7 +107,7 @@ watch(
                             :complex-name="complex.name"
                             :min-price="complex.min_price"
                             :max-price="complex.max_price"
-                            :banks="complex.banks"
+                            :banks="complex?.banks"
                             :deadlines="deadlines"
                             :rooms="rooms"
                             :id="SECTIONS.MORTGAGE"

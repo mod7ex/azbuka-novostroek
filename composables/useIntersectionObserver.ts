@@ -1,69 +1,42 @@
-import { Ref, ComputedRef } from "nuxt/dist/app/compat/capi";
+import { type Ref, type ToRefs } from "nuxt/dist/app/compat/capi";
 
-type Props = {
-    cb: IntersectionObserverCallback;
-    options?: IntersectionObserverInit;
-    target: Element;
-};
+interface Args extends IntersectionObserverInit {
+    condition?: boolean;
+}
 
-const createObserver = ({ cb, target, options }: Props) => {
-    const observer = new IntersectionObserver(cb, options);
+export default function (target: Ref<Element>, exploit: () => any | Promise<any>, options?: ToRefs<Args>) {
+    if (!process.client) return;
 
-    const observe = () => {
-        observer.observe(target);
-    };
+    // for SSR
+    watchEffect((cleanUp) => {
+        let _target = target.value;
 
-    const unobserve = () => {
-        observer.unobserve(target);
-    };
+        if (!_target) return;
 
-    return {
-        observer,
-        observe,
-        unobserve,
-    };
-};
+        let root = options?.root?.value ?? null;
+        let condition = options?.condition?.value ?? true;
+        let rootMargin = options?.rootMargin?.value ?? "0%";
+        let threshold = options?.threshold?.value ?? 0;
 
-export default function (cb: () => Promise<void>, condition: Ref<boolean>) {
-    const container = ref();
-    const target = ref();
+        console.log("root", root);
 
-    let handler: ReturnType<typeof createObserver>;
+        const observer = new IntersectionObserver(
+            async ([entry]) => {
+                if (!condition) return;
 
-    watch([container, target], ([root, _target]) => {
-        handler = createObserver({});
+                if (!entry.isIntersecting) return;
+
+                await exploit();
+            },
+            {
+                root,
+                rootMargin,
+                threshold,
+            }
+        );
+
+        observer.observe(target.value);
+
+        cleanUp(() => observer.disconnect());
     });
-
-    const observer = new IntersectionObserver(
-        async ([entry]) => {
-            if (!condition.value) return;
-
-            if (!entry.isIntersecting) return;
-
-            await cb();
-        },
-        {
-            root: container.value,
-            rootMargin: "0px",
-            threshold: 1,
-        }
-    );
-
-    const pixel = defineComponent({
-        setup() {
-            onMounted(() => {
-                observer.observe(target.value);
-            });
-
-            return () =>
-                h("div", {
-                    class: "bg-transparent p-1",
-                    ref: (v) => {
-                        target.value = v;
-                    },
-                });
-        },
-    });
-
-    return { target, container, pixel };
 }
