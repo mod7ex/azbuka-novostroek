@@ -35,7 +35,7 @@ const isSelected = (v: unknown, index: number) => {
 </script>
 
 <template>
-    <div @click="handle" v-if="buttons" :class="['overflow-x-scroll flex gap-2 no-scroll-thum font-medium text-[13px] md:text-base md:leading-[19px] leading-[15px] font-[Inter]', $attrs.class]">
+    <div v-if="buttons" @click="handle" :class="['overflow-x-scroll flex gap-2 no-scroll-thum font-medium text-[13px] md:text-base md:leading-[19px] leading-[15px] font-[Inter]', $attrs.class]">
         <button v-for="(choice, i) in choices" :key="`${i}-${modelValue}`" :data-index="i" :class="['whitespace-nowrap py-2 px-[10px] rounded-[3px]', isSelected(choice, i) ? 'bg-[#1DA958] text-white' : 'bg-[#D2EEDE]']">
             {{ isObject(choice) ? choice.label : choice }}
         </button>
@@ -43,7 +43,7 @@ const isSelected = (v: unknown, index: number) => {
 
     <div v-else :class="['choices no-scroll-thum overflow-x-scroll', $attrs.class]">
         <header :class="['flex gap-[30px] text-[15px] leading-[18px] font-[Inter] border-b-[2px]', dottedBorder ? 'border-dotted' : 'border-transparent']" @click="handle">
-            <button v-for="(choice, i) in choices" :key="i" :data-index="i" :class="[isSelected(choice, i) ? 'selected font-medium text-[#131313]' : 'font-normal text-[#878787]', padding ? 'md:pb-[28px] md:px-6' : 'md:pb-[3px]', 'pb-[13px] whitespace-nowrap']">
+            <button v-for="(choice, i) in choices" :key="i" :data-index="i" :class="[isSelected(choice, i) ? 'selected font-medium text-[#131313]' : 'font-normal text-[#878787]', padding ? 'md:pb-[28px] md:px-6' : '', 'pb-[13px] whitespace-nowrap']">
                 {{ isObject(choice) ? choice.label : choice }}
             </button>
         </header>

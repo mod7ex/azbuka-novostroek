@@ -3,7 +3,7 @@ import ApartmentPlan from "~/components/Partials/catalog/ApartmentPlan.vue";
 import { apartments as getApartments, type Filter } from "~/services/gql/apartments";
 import { debounce } from "~/utils";
 
-const props = defineProps<{ home?: any; rooms?: { label: string; value: Numberish }[] }>();
+const props = defineProps<{ complexName?: string; rooms?: { label: string; value: Numberish }[] }>();
 
 const current = shallowRef(-1);
 
@@ -41,9 +41,6 @@ const loadMore = () => {
     return fetchMore({
         variables: { page },
         updateQuery: (previousResult, { fetchMoreResult }) => {
-            console.log("previousResult", previousResult.apartments.paginatorInfo);
-            console.log("fetchMoreResult", fetchMoreResult.apartments.paginatorInfo);
-
             if (!fetchMoreResult) return previousResult;
 
             return {
@@ -72,13 +69,21 @@ useIntersectionObserver(elementRef, loadMore, {
     <div>
         <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-[46px] md:pb-[53px]']">
             <template #head>
-                <h1 class="text-[26px] md:text-[18px] font-bold md:font-extrabold leading-9 md:leading-[21px] font-[Raleway] text-[#131313] mb-4 md:mb-[17px]">Планировки</h1>
-                <x-scroll-header :choices="rooms" v-model="current" class="mb-[28px]" buttons />
+                <h1 class="text-[26px] md:text-[18px] font-bold md:font-extrabold leading-9 md:leading-[21px] font-[Raleway] text-[#131313] mb-4 md:mb-[20px]">Квартир</h1>
+                <x-scroll-header :choices="rooms" v-model="current" class="mb-[28px]" :padding="false" />
+                <!-- <x-scroll-header :choices="rooms" v-model="current" class="mb-[28px]" buttons /> -->
             </template>
 
             <div ref="rootRef" class="overflow-x-scroll mb-4 md:mb-[17px] no-scroll-thum">
                 <div class="flex gap-3 w-fit">
-                    <apartment-plan v-for="item in apartments" :key="item?.id" :apartment="item" class="mb-[13px]" />
+                    <apartment-plan v-for="item in apartments" :key="item?.id" :apartment="item" class="mb-[13px]">
+                        <template #pre-cta>
+                            <p class="font-[Inter] leading-[17px] text-[14px] flex items-center justify-between mb-4">
+                                <span class="font-semibold">ЖК {{ complexName }}</span>
+                                <span class="text-[#1DA958] underline font-normal">50 похожих</span>
+                            </p>
+                        </template>
+                    </apartment-plan>
 
                     <div ref="elementRef" class="w-3"></div>
 

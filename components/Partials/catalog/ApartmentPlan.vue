@@ -14,8 +14,8 @@ const { preview } = useImgPreview();
 <template>
     <article :class="['w-[334px] rounded-[5px] border-[1.6px] border-[#00000014] md:border-[#1da95826]', $attrs.class]">
         <div class="h-[215px] bg-[#F4FAFF] relative">
-            <app-img :src="apartment?.layout_url" class="mx-auto" fill />
-            <button @click="() => preview(apartment?.layout_url)" class="hover:bg-gray-900 transition-all duration-300 opacity-20 absolute top-0 left-0 right-0 bottom-0 cursor-pointer"></button>
+            <app-img :src="apartment?.layout_url" class="mx-auto h-full" />
+            <button v-if="apartment?.layout_url" @click="() => preview(apartment?.layout_url)" class="hover:bg-gray-900 transition-all duration-300 opacity-20 absolute top-0 left-0 right-0 bottom-0 cursor-pointer"></button>
         </div>
 
         <div class="pt-[14px] px-[22px]">
@@ -66,10 +66,7 @@ const { preview } = useImgPreview();
         </div>
 
         <div class="px-[22px] bg-[#F4FAFF] py-[10px]">
-            <p class="font-[Inter] leading-[17px] text-[14px] flex items-center justify-between mb-4">
-                <span class="font-semibold">ЖК Пальмира</span>
-                <span class="text-[#1DA958] underline font-normal">50 похожих</span>
-            </p>
+            <slot name="pre-cta"> </slot>
             <div class="px-3">
                 <button :class="['block text-center py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[15px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full hover:bg-[#FCBD00] hover:text-white transition-all duration-300']">Расчитать ипотеку</button>
             </div>
