@@ -85,6 +85,8 @@ watch(
         <meta-items />
 
         <NuxtLayout name="inner">
+            <div id="main-content"></div>
+
             <app-width class="mt-7 md:mt-[59px] mb-[33px] md:mb-[100px]" tag="section">
                 <the-bread-crumb v-if="complex" :city="complex?.city" :complex="complex?.name" class="mb-[19px] md:mb-[40px]" />
                 <building-card :complex="complex" class="mount-animation anm-hidden" />
@@ -99,7 +101,7 @@ watch(
 
                         <div :id="SECTIONS.CHARACTERISTICS_AND_APARTMENTS" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
                             <building-choices v-if="complex" :loading="homeLoading" :city="complex?.city" :home="home" :deadlines="deadlines" class="border border-transparent mb-[25px]" />
-                            <building-plan :complex-name="complex?.name" :rooms="rooms" class="mb-[25px]" />
+                            <building-plan :count-homes="complex.count_homes" :complex-name="complex?.name" :rooms="rooms" class="mb-[25px]" />
                         </div>
 
                         <building-mortgage

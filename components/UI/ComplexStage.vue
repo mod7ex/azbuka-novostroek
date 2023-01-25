@@ -1,0 +1,22 @@
+<script setup lang="ts">
+interface ICountHomes {
+    finished?: number;
+    total?: number;
+}
+
+defineProps<{ countHomes?: ICountHomes }>();
+
+const isAllBuilt = (payload: ICountHomes) => payload?.total === payload?.finished;
+
+const onlyFewBuilt = (payload: ICountHomes) => {
+    return payload?.finished > 0 && !isAllBuilt(payload);
+};
+</script>
+
+<template>
+    <p :class="['italic font-medium text-xs leading-[14px] font-[Inter] flex gap-2', $attrs.class]">
+        <span class="text-[#1DA958]" v-if="isAllBuilt(countHomes)">{{ "Сдан" }}</span>
+        <span class="text-[#3478F6]" v-else>{{ "Строится" }}</span>
+        <span class="text-[#1DA958]" v-if="onlyFewBuilt(countHomes)">{{ "Есть сданные" }}</span>
+    </p>
+</template>

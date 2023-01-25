@@ -3,7 +3,7 @@ import ApartmentPlan from "~/components/Partials/catalog/ApartmentPlan.vue";
 import { apartments as getApartments, type Filter } from "~/services/gql/apartments";
 import { debounce } from "~/utils";
 
-const props = defineProps<{ complexName?: string; rooms?: { label: string; value: Numberish }[] }>();
+const props = defineProps<{ countHomes; complexName?: string; rooms?: { label: string; value: Numberish }[] }>();
 
 const current = shallowRef(-1);
 
@@ -77,6 +77,10 @@ useIntersectionObserver(elementRef, loadMore, {
             <div ref="rootRef" class="overflow-x-scroll mb-4 md:mb-[17px] no-scroll-thum">
                 <div class="flex gap-3 w-fit">
                     <apartment-plan v-for="item in apartments" :key="item?.id" :apartment="item" class="mb-[13px]">
+                        <template #stage>
+                            <complex-stage :count-homes="countHomes" class="hidden md:flex" />
+                        </template>
+
                         <template #pre-cta>
                             <p class="font-[Inter] leading-[17px] text-[14px] flex items-center justify-between mb-4">
                                 <span class="font-semibold">ЖК {{ complexName }}</span>

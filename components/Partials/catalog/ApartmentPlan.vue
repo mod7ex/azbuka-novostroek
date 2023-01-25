@@ -21,7 +21,9 @@ const { preview } = useImgPreview();
         <div class="pt-[14px] px-[22px]">
             <ul class="mb-[9px] text-xs leading-[14.5px] flex items-center justify-between">
                 <li class="font-normal text-[#4D4D4D]">{{ apartment?.count_rooms }} комн. №{{ apartment?.number }}</li>
-                <li class="text-[#1DA958] font-medium italic font-[Inter]">Строится</li>
+                <li class="text-[#1DA958] font-medium italic font-[Inter]">
+                    <slot name="stage"></slot>
+                </li>
             </ul>
 
             <div class="flex items-end justify-start font-[Inter] mb-[15px]">

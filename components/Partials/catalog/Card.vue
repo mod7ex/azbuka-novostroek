@@ -39,9 +39,9 @@ const current = useCurrentChoicesOption();
                         </ol>
                     </ul>
                     <ol>
-                        <button class="flex items-center justify-center w-[28px] h-[28px] md:w-[40px] md:h-[40px] relative bg-[#FAFCFE] border-[1.5px] border-[#1da95814] rounded-full cursor-pointer">
+                        <a :href="`#${SECTIONS.DESCRIPTION}`" class="flex items-center justify-center w-[28px] h-[28px] md:w-[40px] md:h-[40px] relative bg-[#FAFCFE] border-[1.5px] border-[#1da95814] rounded-full cursor-pointer">
                             <app-i class="absolute text-[#3478F6] w-5 h-5" name="heroicons-outline:photograph" />
-                        </button>
+                        </a>
                     </ol>
                 </ul>
             </div>
