@@ -7,7 +7,7 @@ import BuildingDescription from "~/components/Partials/catalog/Description.vue";
 import BuildingLocation from "~/components/Partials/catalog/Location.vue";
 import BuildingChoices from "~/components/Partials/catalog/Choices.vue";
 import BuildingMortgage from "~/components/Partials/catalog/Mortgage.vue";
-import BuildingPromotion from "~/components/Partials/catalog/Promotion.vue";
+import BuildingPromotions from "~/components/Partials/catalog/Promotions.vue";
 // import BuildingDiscounts from "~/components/Partials/catalog/Discounts.vue";
 import BuildingPlan from "~/components/Partials/catalog/Plan.vue";
 // import BuildingReviews from "~/components/Partials/catalog/Reviews.vue";
@@ -51,18 +51,16 @@ const home = computed(() => homeResult.value?.home ?? null);
 const discounts = computed(() => home.value?.discounts ?? []);
 
 const rooms = computed(() => {
-    let _options =
+    return (
         home.value?.summary?.map(({ rooms: value }) => {
             let label = "";
 
             if (value === 0) label = "Студия";
-            else if (value === 1) label = `1а комнатные `;
-            else label = `${value}x комнатные`;
+            else label = `${value}-комнатные `;
 
             return { label, value };
-        }) ?? [];
-
-    return [{ label: "Все", value: -1 }, ..._options];
+        }) ?? []
+    );
 });
 
 watch(
@@ -78,6 +76,33 @@ watch(
 // https://nuxt.com/docs/getting-started/seo-meta
 
 // useMountAnimation();
+
+/* const fakeData = [
+    {
+        id: "1",
+        date_end: "10-03-2024",
+        title: "something random",
+        description: "lorem ipsum dolor qmzprg qrgpoqe gùqeog qeùgpi",
+    },
+    {
+        id: "12",
+        date_end: "10-03-2024",
+        title: "something random",
+        description: "lorem ipsum dolor qmzprg qrgpoqe gùqeog qeùgpi",
+    },
+    {
+        id: "13",
+        date_end: "10-03-2024",
+        title: "something random",
+        description: "lorem ipsum dolor qmzprg qrgpoqe gùqeog qeùgpi",
+    },
+    {
+        id: "14",
+        date_end: "10-03-2024",
+        title: "something random",
+        description: "lorem ipsum dolor qmzprg qrgpoqe gùqeog qeùgpi",
+    },
+]; */
 </script>
 
 <template>
@@ -85,7 +110,7 @@ watch(
         <meta-items />
 
         <NuxtLayout name="inner">
-            <div id="main-content"></div>
+            <div id="main-content" class="border border-transparent"></div>
 
             <app-width class="mt-7 md:mt-[59px] mb-[33px] md:mb-[100px]" tag="section">
                 <the-bread-crumb v-if="complex" :city="complex?.city" :complex="complex?.name" class="mb-[19px] md:mb-[40px]" />
@@ -101,7 +126,7 @@ watch(
 
                         <div :id="SECTIONS.CHARACTERISTICS_AND_APARTMENTS" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
                             <building-choices v-if="complex" :loading="homeLoading" :city="complex?.city" :home="home" :deadlines="deadlines" class="border border-transparent mb-[25px]" />
-                            <building-plan :count-homes="complex.count_homes" :complex-name="complex?.name" :rooms="rooms" class="mb-[25px]" />
+                            <building-plan v-if="rooms.length" :count-homes="complex.count_homes" :complex-name="complex?.name" :rooms="rooms" class="mb-[25px]" />
                         </div>
 
                         <building-mortgage
@@ -116,9 +141,7 @@ watch(
                             class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md"
                         />
 
-                        <div :id="SECTIONS.STOCK">
-                            <building-promotion v-for="item in discounts" :key="item?.id" :discount="item" :class="['mount-animation anm-hidden catalog-section-p md:rounded-[3px] mb-[25px] md:mb-[30px] md:bg-white']" />
-                        </div>
+                        <building-promotions v-if="discounts.length" :id="SECTIONS.STOCK" :discounts="discounts" />
 
                         <CTA class="mount-animation anm-hidden h-full md:hidden" />
 

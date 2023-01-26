@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Document from "~/assets/svg/description/document.svg";
 import Buildings from "~/assets/svg/description/buildings.svg";
-import Etage from "~/assets/img/etages.png";
+import Stairs from "~/assets/svg/stairs.svg";
 import Apartments from "~/assets/svg/description/apartments.svg";
 import Height from "~/assets/svg/description/height.svg";
 import Type from "~/assets/svg/description/type.svg";
@@ -42,7 +42,7 @@ const desc = [
         keys: ["count_homes", "total"],
     },
     {
-        img: Etage,
+        img: Stairs,
         light: "Этажность",
         keys: ["_"],
     },

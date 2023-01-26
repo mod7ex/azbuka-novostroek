@@ -17,9 +17,8 @@ const { scroll, targetRef } = useScroll();
             <p class="text-left text-[38px] leading-[44px] font-extrabold text-[#131313] font-[Raleway] mb-3">Вам подойдет</p>
             <div class="md:flex buildings-gallery">
                 <div class="relative left">
-                    <button class="text-white w-[50px] h-[50px] top-0 bottom-0 my-auto absolute right-[-25px] z-50 bg-[#1DA958] rounded-[2px]" @click="() => scroll({ left: 300 })">
-                        <app-i name="material-symbols:arrow-right-alt-rounded" />
-                    </button>
+                    <scroll-button v-if="complexes.length" class="shadow-lg top-0 bottom-0 my-auto absolute right-[-25px]" :on-scroll="() => scroll({ left: 300 })" />
+
                     <div ref="targetRef" class="pl-[10px] pr-[20px] overflow-x-scroll no-scroll-thum py-14 flex gap-3 md:gap-[30px]">
                         <Building v-for="complex in complexes" :key="complex.id" :complex="complex" under-construction shadow class="md:min-w-[300px]" />
                     </div>

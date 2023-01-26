@@ -57,44 +57,59 @@ const loadMore = () => {
 const elementRef = ref<HTMLDivElement>();
 const rootRef = ref<HTMLDivElement>();
 
-const condition = computed(() => result.value.apartments?.paginatorInfo?.hasMorePages);
+const condition = computed(() => result.value?.apartments?.paginatorInfo?.hasMorePages);
 
 useIntersectionObserver(elementRef, loadMore, {
     root: rootRef,
     condition,
 });
+
+const { scroll, targetRef } = useScroll();
 </script>
 
 <template>
     <div>
         <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-[46px] md:pb-[53px]']">
             <template #head>
-                <h1 class="text-[26px] md:text-[18px] font-bold md:font-extrabold leading-9 md:leading-[21px] font-[Raleway] text-[#131313] mb-4 md:mb-[20px]">Квартир</h1>
-                <x-scroll-header :choices="rooms" v-model="current" class="mb-[28px]" :padding="false" />
-                <!-- <x-scroll-header :choices="rooms" v-model="current" class="mb-[28px]" buttons /> -->
+                <h1 class="text-[26px] md:text-[18px] font-bold md:font-extrabold leading-9 md:leading-[21px] font-[Raleway] text-[#131313] mb-4 md:mb-[20px]">Квартиры</h1>
+                <x-scroll-header :choices="[{ value: -1, label: 'Все' }, ...rooms]" v-model="current" class="mb-[28px]" :padding="false" />
             </template>
 
-            <div ref="rootRef" class="overflow-x-scroll mb-4 md:mb-[17px] no-scroll-thum">
-                <div class="flex gap-3 w-fit">
-                    <apartment-plan v-for="item in apartments" :key="item?.id" :apartment="item" class="mb-[13px]">
-                        <template #stage>
-                            <complex-stage :count-homes="countHomes" class="hidden md:flex" />
-                        </template>
+            <div class="relative">
+                <!-- <scroll-button v-if="apartments.length" left class="hidden md:block top-0 bottom-0 my-auto absolute left-[-25px]" :on-scroll="() => scroll({ left: -300 })" /> -->
 
-                        <template #pre-cta>
-                            <p class="font-[Inter] leading-[17px] text-[14px] flex items-center justify-between mb-4">
-                                <span class="font-semibold">ЖК {{ complexName }}</span>
-                                <span class="text-[#1DA958] underline font-normal">50 похожих</span>
-                            </p>
-                        </template>
-                    </apartment-plan>
+                <div
+                    :ref="
+                        (v) => {
+                            rootRef = v as HTMLDivElement;
+                            targetRef = v as HTMLDivElement;
+                        }
+                    "
+                    class="overflow-x-scroll mb-4 md:mb-[17px] no-scroll-thum"
+                >
+                    <div class="flex gap-3 w-fit">
+                        <apartment-plan v-for="item in apartments" :key="item?.id" :apartment="item" class="mb-[13px]">
+                            <template #stage>
+                                <complex-stage :count-homes="countHomes" class="hidden md:flex" />
+                            </template>
 
-                    <div ref="elementRef" class="w-3"></div>
+                            <template #pre-cta>
+                                <p class="font-[Inter] leading-[17px] text-[14px] flex items-center justify-between mb-4">
+                                    <span class="font-semibold">ЖК {{ complexName }}</span>
+                                    <span class="text-[#1DA958] underline font-normal">50 похожих</span>
+                                </p>
+                            </template>
+                        </apartment-plan>
 
-                    <div v-if="loading" class="flex items-center justify-center">
-                        <loader />
+                        <div ref="elementRef" class="w-3"></div>
+
+                        <div v-if="loading" class="flex items-center justify-center">
+                            <loader />
+                        </div>
                     </div>
                 </div>
+
+                <scroll-button v-if="apartments.length" class="hidden md:block shadow-lg top-0 bottom-0 my-auto absolute right-[-25px]" :on-scroll="() => scroll({ left: 300 })" />
             </div>
 
             <template #foot>

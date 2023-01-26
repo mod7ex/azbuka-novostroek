@@ -9,8 +9,8 @@ const data = reactive({
     previous: props.initial,
 });
 
-const frontTopRef = shallowRef<HTMLParagraphElement>();
-const frontBottomRef = shallowRef<HTMLParagraphElement>();
+const frontTopRef = ref<HTMLParagraphElement>();
+const frontBottomRef = ref<HTMLParagraphElement>();
 
 const ANIMATE_CLASS = "animate";
 
@@ -54,6 +54,10 @@ $clockCountHeight: 50px;
 $radius: 3px;
 $color: white;
 // $duration: 2000ms;
+
+.overlay {
+    @include abs-expand;
+}
 
 @keyframes flip-up {
     from {

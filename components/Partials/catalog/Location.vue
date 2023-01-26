@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { uuidGen } from "~/utils";
+// import { uuidGen } from "~/utils";
 import MapMarker from "~/components/MapMarker.vue";
 
 defineProps<{ complex?: any }>();
 
-const uuid = uuidGen("location");
+/* const uuid = uuidGen("location");
 
 const locationDetails = [
     { label: "Расположение", key: uuid() },
@@ -17,12 +17,12 @@ const locationDetails = [
     { label: "Метро", key: uuid() },
     { label: "Спорт", key: uuid() },
     { label: "Торговые центры", key: uuid() },
-];
+]; */
 </script>
 
 <template>
     <div>
-        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-[46px] md:pt-[40px]']">
+        <NuxtLayout name="app-section" :class="[$attrs.class, 'px-0 md:px-[46px] md:pt-[40px] md:pb-[59px]']">
             <template #head>
                 <h1 class="text-[24px] font-black leading-[28px] font-[Raleway] text-[#131313]">Расположение</h1>
             </template>
@@ -31,6 +31,7 @@ const locationDetails = [
                 <map-marker :coordinates="complex?.coordinates" :label="complex?.name" />
             </div>
 
+            <!--
             <template #foot>
                 <div class="grid grid-cols-2 md:grid-cols-4 mb-8 md:pb-[59px] gap-y-[18px]">
                     <label v-for="item in locationDetails" :key="item.key" :for="item.key" class="pl-2 col-span-1 flex">
@@ -41,10 +42,12 @@ const locationDetails = [
 
                 <dashed-devider class="md:hidden" />
             </template>
+            -->
         </NuxtLayout>
     </div>
 </template>
 
+<!-- 
 <style lang="scss" scoped>
 label {
     max-width: fit-content;
@@ -92,3 +95,4 @@ label {
     }
 }
 </style>
+ -->

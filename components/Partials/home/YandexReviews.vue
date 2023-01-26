@@ -121,9 +121,7 @@ const { scroll, targetRef } = useScroll();
             </div>
         </div>
 
-        <button class="hidden md:block text-white w-[50px] h-[50px] top-0 bottom-0 my-auto absolute right-[32px] z-50 bg-[#1DA958] rounded-[2px]" @click="() => scroll({ left: 300 })">
-            <app-i name="material-symbols:arrow-right-alt-rounded" />
-        </button>
+        <scroll-button class="shadow-lg top-0 bottom-0 my-auto absolute right-[32px]" :on-scroll="() => scroll({ left: 300 })" />
     </NuxtLayout>
 </template>
 

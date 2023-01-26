@@ -18,8 +18,6 @@ export default function (target: Ref<Element>, exploit: () => any | Promise<any>
         let rootMargin = options?.rootMargin?.value ?? "0%";
         let threshold = options?.threshold?.value ?? 0;
 
-        console.log("root", root);
-
         const observer = new IntersectionObserver(
             async ([entry]) => {
                 if (!condition) return;

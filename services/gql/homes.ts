@@ -20,10 +20,10 @@ export const GQL_FOR_DETAIL = `
   }
   discounts {
     id
-    order
+    # order
     date_end
     title
-    amount
+    # amount
     description
   }
   
