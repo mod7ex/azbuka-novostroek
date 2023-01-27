@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CTASVG from "~/assets/svg/cta.svg";
+import { SECTIONS, CONTACT } from "~/constants";
 </script>
 
 <template>
@@ -9,7 +10,7 @@ import CTASVG from "~/assets/svg/cta.svg";
                 <p class="text-[28px] leading-8 font-extrabold font-[Raleway] mb-[14px]">Позвоните нам</p>
 
                 <div class="font-[Inter] mb-5">
-                    <p class="font-extrabold text-xl leading-6 text-[#E71F61] mb-1">+7 (863) 548-21-38</p>
+                    <p class="font-extrabold text-xl leading-6 text-[#E71F61] mb-1">{{ CONTACT.PHONE }}</p>
                     <p class="font-light text-base leading-5 text-[#8C8C8C]">с 09:00 — 21:00</p>
                 </div>
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 withDefaults(
     defineProps<{
-        modelValue: string;
-        placeholder: string;
+        modelValue?: string;
+        placeholder?: string;
     }>(),
     {
         placeholder: "Название новостройки или застройщика",

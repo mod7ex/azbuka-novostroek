@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import YandexReviews from "~/components/Partials/home/YandexReviews.vue";
 import Suggestions from "~/components/Partials/home/Suggestions.vue";
+// import Advantages from "~/components/Partials/home/Advantages.vue";
 // import Locations from "~/components/Partials/home/Locations.vue";
 // import About from "~/components/Partials/home/About.vue";
-// import Advantages from "~/components/Partials/home/Advantages.vue";
-
-const { scroll, targetRef } = useScroll();
+import { SECTIONS } from "~/constants";
 
 // useMountAnimation();
 </script>
@@ -13,7 +12,7 @@ const { scroll, targetRef } = useScroll();
 <template>
     <div>
         <NuxtLayout>
-            <Suggestions sort class="mount-animation anm-hidden" />
+            <Suggestions :id="SECTIONS.COMPLEXES" sort class="mount-animation anm-hidden border border-transparent" />
 
             <client-only>
                 <yandex-reviews />

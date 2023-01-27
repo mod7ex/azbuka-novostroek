@@ -18,6 +18,7 @@ const { scroll, targetRef } = useScroll();
             <div class="md:flex buildings-gallery">
                 <div class="relative left">
                     <scroll-button v-if="complexes.length" class="shadow-lg top-0 bottom-0 my-auto absolute right-[-25px]" :on-scroll="() => scroll({ left: 300 })" />
+                    <scroll-button left v-if="complexes.length" class="shadow-lg top-0 bottom-0 my-auto absolute left-[-25px]" :on-scroll="() => scroll({ left: -300 })" />
 
                     <div ref="targetRef" class="pl-[10px] pr-[20px] overflow-x-scroll no-scroll-thum py-14 flex gap-3 md:gap-[30px]">
                         <Building v-for="complex in complexes" :key="complex.id" :complex="complex" under-construction shadow class="md:min-w-[300px]" />

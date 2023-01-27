@@ -38,7 +38,7 @@ const deadlineOptions = computed(() => deadlines.value.map((value) => ({ label: 
 </script>
 
 <template>
-    <section :class="[$attrs.class]">
+    <app-width tag="section" :class="[$attrs.class, 'max-w-[1199px] search z-1 relative mb-[31px] px-5 md:px-0']">
         <div class="hidden md:flex search-container mx-auto border md:border-none items-center border-[#3478f624] rounded h-[50px] px-[18px] md:px-5 bg-white mb-[6px]">
             <ul :class="['search-area flex items-center justify-between w-full flex-wrap']">
                 <li :class="['search-input']">
@@ -139,7 +139,7 @@ const deadlineOptions = computed(() => deadlines.value.map((value) => ({ label: 
         </Teleport>
 
         <!-- ****** -->
-    </section>
+    </app-width>
 </template>
 
 <style lang="scss" scoped>

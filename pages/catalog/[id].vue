@@ -76,33 +76,6 @@ watch(
 // https://nuxt.com/docs/getting-started/seo-meta
 
 // useMountAnimation();
-
-/* const fakeData = [
-    {
-        id: "1",
-        date_end: "10-03-2024",
-        title: "something random",
-        description: "lorem ipsum dolor qmzprg qrgpoqe gùqeog qeùgpi",
-    },
-    {
-        id: "12",
-        date_end: "10-03-2024",
-        title: "something random",
-        description: "lorem ipsum dolor qmzprg qrgpoqe gùqeog qeùgpi",
-    },
-    {
-        id: "13",
-        date_end: "10-03-2024",
-        title: "something random",
-        description: "lorem ipsum dolor qmzprg qrgpoqe gùqeog qeùgpi",
-    },
-    {
-        id: "14",
-        date_end: "10-03-2024",
-        title: "something random",
-        description: "lorem ipsum dolor qmzprg qrgpoqe gùqeog qeùgpi",
-    },
-]; */
 </script>
 
 <template>
@@ -114,7 +87,7 @@ watch(
 
             <app-width class="mt-7 md:mt-[59px] mb-[33px] md:mb-[100px]" tag="section">
                 <the-bread-crumb v-if="complex" :city="complex?.city" :complex="complex?.name" class="mb-[19px] md:mb-[40px]" />
-                <building-card :complex="complex" class="mount-animation anm-hidden" />
+                <building-card :complex="complex" :stocks="!!discounts.length" class="mount-animation anm-hidden" />
             </app-width>
 
             <app-width class="tow-cols-md" id="anm-root">

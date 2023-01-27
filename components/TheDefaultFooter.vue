@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Logo from "~/assets/svg/logo.svg";
+import { CONTACT } from "~/constants";
 </script>
 
 <template>
@@ -9,8 +10,8 @@ import Logo from "~/assets/svg/logo.svg";
                 <div class="flex items-center justify-between">
                     <app-img :src="Logo" alt="" class="w-[113px] h-[55px] lg:w-44 lg:h-20 lg:mr-4" />
                     <div class="text-right text-[#131313] lg:text-left">
-                        <h1 class="text-[17px] lg:text-[14px] leading-[20px] font-[Inter] font-bold mb-[2px] lg:mb-[14px] whitespace-nowrap">+7 (435) 985-22-41</h1>
-                        <a href="mailto:admin@admin.com" class="font-medium lg:font-bold font-[Inter] leading-[20px] lg:mb-[14px] text-sm lg:block">admin@admin.com</a>
+                        <h1 class="text-[17px] lg:text-[14px] leading-[20px] font-[Inter] font-bold mb-[2px] lg:mb-[14px] whitespace-nowrap">{{ CONTACT.PHONE }}</h1>
+                        <a href="mailto:admin@admin.com" class="font-medium lg:font-bold font-[Inter] leading-[20px] lg:mb-[14px] text-sm lg:block">{{ CONTACT.ADMIN_EMAIL }}</a>
                         <p class="text-gray-500 hidden lg:block lg:text-sm">&copy; 2011—2021</p>
                     </div>
                 </div>

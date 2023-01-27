@@ -110,4 +110,13 @@ export const rawFilter = () => ({
     deadline: null,
 });
 
+interface CountHomes {
+    total?: number;
+    finished?: number;
+}
+
+export const isAllBuilt = (countHomes: CountHomes) => countHomes?.total === countHomes?.finished;
+
+export const onlyFewBuilt = (countHomes: CountHomes) => !isAllBuilt(countHomes) && countHomes?.finished > 0;
+
 export * from "~/utils/filter";

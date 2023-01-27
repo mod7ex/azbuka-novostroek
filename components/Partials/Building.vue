@@ -30,7 +30,7 @@ const startingPrice = (payload) => {
 </script>
 
 <template>
-    <a :class="['wrapper cursor-pointer', $attrs.class]" :href="`/catalog/${complex?.id}#main-content`" target="_blank">
+    <NuxtLink :to="{ name: 'catalog-id', params: { id: complex?.id }, hash: '#main-content' }" :class="['wrapper cursor-pointer', $attrs.class]">
         <div :class="['building transition-all duration-300 md:rounded-[3px] h-full flex flex-col', shadow ? 'building-shadow' : '']">
             <div class="relative img rounded-[5px] md:rounded-none md:rounded-t w-full">
                 <div :class="['h-[120px] sm:h-44', whiteCta ? 'md:h-[163px]' : 'md:h-[200px]']">
@@ -38,18 +38,20 @@ const startingPrice = (payload) => {
                 </div>
 
                 <span class="absolute top-0 right-0 left-0 flex justify-between p-[9px] md:p-[13px]" v-if="actions">
-                    <span class="relative flex items-center justify-center h-6 w-6 md:w-10 md:h-10 bg-[#E71F61] rounded-full">
-                        <app-i name="heroicons-solid:phone" class="text-white absolute w-3 h-3 md:h-5 md:w-5" />
-                    </span>
+                    <client-only>
+                        <call-us @click.stop="() => {}" class="z-[49]" />
+                    </client-only>
 
-                    <span class="md:flex">
-                        <span class="md:w-10 md:h-10 relative flex items-center justify-center md:bg-[#FAFCFE] md:rounded-full mb-[10px]">
-                            <app-i name="heroicons-outline:star" class="text-white md:absolute md:text-[#3478F6] w-4 h-4 md:h-5 md:w-5" />
+                    <!-- 
+                        <span class="md:flex">
+                            <span class="md:w-10 md:h-10 relative flex items-center justify-center md:bg-[#FAFCFE] md:rounded-full mb-[10px]">
+                                <app-i name="heroicons-outline:star" class="text-white md:absolute md:text-[#3478F6] w-4 h-4 md:h-5 md:w-5" />
+                            </span>
+                            <span class="md:w-10 md:h-10 relative flex items-center justify-center md:bg-[#FAFCFE] md:rounded-full md:ml-[9px]">
+                                <bars-svg class="w-4 h-4" />
+                            </span>
                         </span>
-                        <span class="md:w-10 md:h-10 relative flex items-center justify-center md:bg-[#FAFCFE] md:rounded-full md:ml-[9px]">
-                            <bars-svg class="w-4 h-4" />
-                        </span>
-                    </span>
+                    -->
                 </span>
             </div>
 
@@ -115,7 +117,7 @@ const startingPrice = (payload) => {
                 </button>
             </div>
         </div>
-    </a>
+    </NuxtLink>
 </template>
 
 <style lang="scss">

@@ -5,3 +5,4 @@ export const useCurrentChoicesOption = () => useState<Numberish>("current_choice
 export const useRawFilter = () => useState<ReturnType<typeof reactive<ReturnType<typeof rawFilter>>>>("filter", rawFilter);
 export const useMobileFilterState = () => useState<boolean>("mobile-filter-state", () => false);
 export const useCurrentPreviewedImg = () => useState<string | undefined>("current-previewed-img", () => undefined);
+export const useComplexOrderValue = () => useState<string | undefined>("complex-order", () => undefined);

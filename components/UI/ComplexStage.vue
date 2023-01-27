@@ -1,16 +1,7 @@
 <script setup lang="ts">
-interface ICountHomes {
-    finished?: number;
-    total?: number;
-}
+import { isAllBuilt, onlyFewBuilt } from "~/utils";
 
-defineProps<{ countHomes?: ICountHomes }>();
-
-const isAllBuilt = (payload: ICountHomes) => payload?.total === payload?.finished;
-
-const onlyFewBuilt = (payload: ICountHomes) => {
-    return payload?.finished > 0 && !isAllBuilt(payload);
-};
+defineProps<{ countHomes?: object }>();
 </script>
 
 <template>

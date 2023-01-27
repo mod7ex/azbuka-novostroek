@@ -87,6 +87,8 @@ homes(
 
 export const GQL_FOR_LIST = `
   id
+  min_price
+  max_price
   name
   address
   count_homes

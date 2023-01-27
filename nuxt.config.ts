@@ -5,7 +5,7 @@ export default defineNuxtConfig({
         title: "Азбука Новостроек",
         titleTemplate: (title: string) => `Азбука - ${title}`,
         meta: [
-            { name: "author", content: "Mourad EL CADI" }, // To be removed at Prod
+            { name: "author", content: "Azb" }, // To be removed at Prod
         ],
         link: [{ rel: "icon", type: "image/x-icon", href: "./assets/favicon.ico" }],
     },
@@ -15,8 +15,6 @@ export default defineNuxtConfig({
             // baseURL: process.env.NODE_ENV === "production" ? "WE STILL DON'T KNOW" : "http://localhost:3000/",
         },
     },
-
-    // ssr: false,
 
     modules: ["nuxt-icon", "@nuxtjs/apollo"],
 
