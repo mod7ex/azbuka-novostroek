@@ -2,13 +2,13 @@
 import TheDefaultFooter from "~/components/TheDefaultFooter.vue";
 import TheDefaultHeader from "~/components/TheDefaultHeader.vue";
 import ShowCase from "~/components/Partials/home/ShowCase.vue";
+import Search from "~/components/Partials/home/Search.vue";
 
-const LazySearch = defineAsyncComponent(() => import("~/components/Partials/home/Search.vue"));
 const LazyMobileMenu = defineAsyncComponent(() => import("~/components/Partials/MobileMenu.vue"));
 
 defineProps<{ inner?: true }>();
 
-const [isCollaped, toggle] = useToggle();
+const [isCollapsed, toggle] = useToggle();
 
 const isMatch = useMediaQuery("(min-width: 768px)");
 </script>
@@ -24,8 +24,8 @@ const isMatch = useMediaQuery("(min-width: 768px)");
                 <the-default-header @toggle="() => toggle()" />
 
                 <Transition name="slide-fade">
-                    <Blurable @blured="() => toggle(true)" v-if="!isCollaped" class="mobile-nav absolute z-50 top-0 left-0 right-0 bg-white app-shadow pt-5 pb-[58px]">
-                        <LazyMobileMenu v-if="!isCollaped" @close="() => toggle()" />
+                    <Blurable @blured="() => toggle(true)" v-if="!isCollapsed" class="mobile-nav absolute z-50 top-0 left-0 right-0 bg-white app-shadow pt-5 pb-[58px]">
+                        <LazyMobileMenu v-if="!isCollapsed" @close="() => toggle()" />
                     </Blurable>
                 </Transition>
 
@@ -33,7 +33,7 @@ const isMatch = useMediaQuery("(min-width: 768px)");
             </div>
         </div>
 
-        <LazySearch v-if="!inner || isMatch" />
+        <Search v-if="!inner || isMatch" />
 
         <main>
             <slot />

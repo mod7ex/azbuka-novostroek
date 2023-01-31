@@ -17,7 +17,9 @@ const closeAndReset = () => {
 </script>
 
 <template>
-    <div class="fixed z-50 px-5 top-0 bottom-0 h-full right-0 left-0 pt-[15px] pb-[45px] border-t-2 bg-white overflow-y-scroll">
+    <div>
+        Lorem, ipsum dolor.
+        <!--
         <div class="mb-[34px]">
             <header class="flex items-center justify-between mb-[34px]">
                 <button @click="closeAndReset" class="flex justify-center font-[Raleway] items-center gap-x-[10px]">
@@ -39,20 +41,21 @@ const closeAndReset = () => {
                 <input v-model="filter.name" autofocus type="text" placeholder="Название новостройки или застройщика" class="flex-grow" />
             </div>
         </div>
+        -->
 
         <!-- prettier-ignore -->
-        <app-select
-                class="mb-6"
-                :options="countRooms"
-                label="Выберите тип квартиры"
-                inner-label="Тип квартиры"
-                multiple
-                shrink
-                v-model="filter.count_rooms"
-            />
+        <!-- <app-select
+            class="mb-6"
+            :options="countRooms"
+            label="Выберите тип квартиры"
+            inner-label="Тип квартиры"
+            multiple
+            shrink
+            v-model="filter.count_rooms"
+        /> -->
 
         <!-- Price -->
-        <div class="mb-6 relative">
+        <!-- <div class="mb-6 relative">
             <labled-range-input class="bg-white" label="Задайте стоимость">
                 <template #min-label>
                     <p>
@@ -67,7 +70,6 @@ const closeAndReset = () => {
                 </template>
 
                 <template #thums>
-                    <!-- prettier-ignore -->
                     <range-input
                             :max="PRICE.MAX"
                             :min="PRICE.MIN"
@@ -78,10 +80,10 @@ const closeAndReset = () => {
                         />
                 </template>
             </labled-range-input>
-        </div>
+        </div> -->
 
         <!-- Area -->
-        <div class="mb-6 relative">
+        <!-- <div class="mb-6 relative">
             <labled-range-input class="bg-white" label="Задайте площадь">
                 <template #min-label>
                     <p>
@@ -96,7 +98,6 @@ const closeAndReset = () => {
                 </template>
 
                 <template #thums>
-                    <!-- prettier-ignore -->
                     <range-input
                             :step="1"
                             :max="maxTotalArea"
@@ -107,23 +108,23 @@ const closeAndReset = () => {
                         />
                 </template>
             </labled-range-input>
-        </div>
+        </div> -->
 
         <!-- prettier-ignore -->
-        <app-select
-                :options="[{ value: DONE_DEADLINE, label: 'Сдан' }, ...deadlines]"
-                label="Выберите срок аренды"
-                v-model="filter.deadline"
-                inner-label="Не выбран"
-                class="mb-6"
-                shrink
-            />
+        <!-- <app-select
+            :options="[{ value: DONE_DEADLINE, label: 'Сдан' }, ...deadlines]"
+            label="Выберите срок аренды"
+            v-model="filter.deadline"
+            inner-label="Не выбран"
+            class="mb-6"
+            shrink
+        />
 
         <button class="mx-auto flex items-center justify-center gap-x-[14px] mb-6" @click="reset">
             <app-i class="w-5 h-5 text-[#1DA958]" name="material-symbols:close" />
             <p class="text-[13px] leading-[13px] font-bold font-[Inter] text-[#131313]">Сбросить фильтры</p>
         </button>
 
-        <Button @click="() => $emit('search')" label="Показать 852 предложения" class="bg-[#E71F61] text-white w-full" />
+        <Button @click="() => $emit('search')" label="Показать 852 предложения" class="bg-[#E71F61] text-white w-full" /> -->
     </div>
 </template>

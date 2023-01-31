@@ -7,3 +7,4 @@ export const useMobileFilterState = () => useState<boolean>("mobile-filter-state
 export const useCurrentPreviewedImg = () => useState<string | undefined>("current-previewed-img", () => undefined);
 export const useComplexOrderValue = () => useState<string | undefined>("complex-order", () => undefined);
 export const useMortgageData = () => useState("mortgage-form", RawMortgageData);
+export const useFilterStateData = () => useState("filter-state-data", () => ({ apartments: null, homes: null }));

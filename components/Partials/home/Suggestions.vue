@@ -32,7 +32,7 @@ const loadMore = () => {
     });
 };
 
-const isFilterOpen = useMobileFilterState();
+const [isFilterOpen] = useMobileFilter();
 
 watch(
     [filter, isFilterOpen],
