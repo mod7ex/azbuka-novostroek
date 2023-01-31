@@ -110,6 +110,15 @@ export const rawFilter = () => ({
     deadline: null,
 });
 
+export const RawMortgageData = () => ({
+    selected_percents: "",
+    price: 0,
+    advance: 0,
+    credit_period: 20,
+    home: undefined,
+    room_count: undefined,
+});
+
 interface CountHomes {
     total?: number;
     finished?: number;

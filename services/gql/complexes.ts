@@ -19,7 +19,6 @@ banks {
   state_percents
   country_percents
   logo {
-    id
     url
   }
 }

@@ -3,7 +3,7 @@ const [isCollapsed, toggle] = useToggle(true);
 
 defineProps<{
     bank: any;
-    period?: number;
+    period?: Numberish;
     advance?: Numberish;
     percents?: string;
 }>();
@@ -15,15 +15,16 @@ defineProps<{
             <div :class="['flex items-center justify-between', !isCollapsed ? 'mb-[13px]' : '']">
                 <app-img :title="bank?.name" :src="bank?.logo?.url" class="w-[67px] md:w-[91px]" />
                 <button class="bg-white rounded-full border-[1.6px] border-[#1da95814] relative flex items-center justify-center w-[30px] h-[30px]" @click="() => toggle()">
-                    <app-i name="ic:round-arrow-drop-down" :class="['text-[#878787] absolute', isCollapsed ? 'rotate-180' : '']" />
+                    <app-i name="ic:round-arrow-drop-down" :class="['text-[#878787] absolute transition-all duration-300', isCollapsed ? 'rotate-180' : '']" />
                 </button>
             </div>
         </template>
 
-        <dashed-devider class="border-[#00000014]" v-if="!isCollapsed" />
+        <!-- <Transition name="search-expand" :aria-expanded="isCollapsed"> -->
+        <div class="overflow-hidden" v-if="!isCollapsed">
+            <dashed-devider class="border-[#00000014]" />
 
-        <Transition name="search-expand" :aria-expanded="isCollapsed">
-            <div class="loan-hg-6 overflow-hidden flex justify-between py-[15px]" v-if="!isCollapsed">
+            <div class="flex justify-between py-[15px]">
                 <div class="mb-[18px] md:flex md:gap-x-[50px] md:flex-wrap">
                     <p class="mb-1 text-[14px] font-normal leading-5 text-[#8C8C8C] whitespace-nowrap">Программа</p>
                     <h1 class="text-[15px] font-semibold leading-[18px] mb-[14px] w-20-char">_</h1>
@@ -52,9 +53,14 @@ defineProps<{
                     </li>
                 </ul>
             </div>
-        </Transition>
 
-        <dashed-devider class="border-[#00000014] md:hidden" v-if="!isCollapsed" />
+            <div class="flex justify-end">
+                <button class="bg-[#FCBD00] rounded-[3px] px-2 py-1 text-white">подробнee</button>
+            </div>
+        </div>
+        <!-- </Transition> -->
+
+        <dashed-devider class="border-[#00000014] mt-3 md:hidden" v-if="!isCollapsed" />
 
         <template #footer>
             <div v-if="!isCollapsed" class="mt-4 text-[14px] font-[Inter] flex justify-between items-center md:hidden">

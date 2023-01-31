@@ -4,6 +4,7 @@ import { uuidGen } from "~/utils";
 const props = defineProps<{
     options: Record<"value" | "label", Numberish>[];
     modelValue?: Numberish;
+    disabled?: true;
 }>();
 
 const emit = defineEmits(["update:modelValue"]);
@@ -23,7 +24,7 @@ const handelInput = (e: Event) => {
     <ul :class="[$attrs.class]">
         <li v-for="({ label, value }, i) in options" :key="i">
             <label :for="IDS[i]" class="flex items-center gap-[15px]">
-                <input :name="name" :id="IDS[i]" type="radio" :value="value" @change="handelInput" :checked="modelValue == value" />
+                <input :disabled="disabled" :name="name" :id="IDS[i]" type="radio" :value="value" @change="handelInput" :checked="modelValue == value" />
                 <span class="text-sm font-normal leading-5 font-[Inter]">{{ label }}</span>
             </label>
         </li>

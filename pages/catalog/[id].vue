@@ -50,6 +50,7 @@ const home = computed(() => homeResult.value?.home ?? null);
 
 const discounts = computed(() => home.value?.discounts ?? []);
 
+// [FIX] studio won't appear
 const rooms = computed(() => {
     return (
         home.value?.summary?.map(({ rooms: value }) => {

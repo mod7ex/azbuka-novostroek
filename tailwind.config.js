@@ -27,7 +27,11 @@ module.exports = {
     ],
 
     theme: {
-        extend: {},
+        extend: {
+            screens: {
+                header: "1314px", // => @media (min-width: 1314px) { ... }
+            },
+        },
     },
 
     plugins: [],

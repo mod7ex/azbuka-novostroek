@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { format_thousands } from "~/utils";
+import { SECTIONS } from "~/constants";
 
 defineProps<{ apartment?: any }>();
 
@@ -9,6 +10,10 @@ const areaLabel = (v, flbk = "_") => {
 };
 
 const { preview } = useImgPreview();
+
+const home = useCurrentHome();
+
+const { prepare } = useMortgageForm();
 </script>
 
 <template>
@@ -70,7 +75,13 @@ const { preview } = useImgPreview();
         <div class="px-[22px] bg-[#F4FAFF] py-[10px]">
             <slot name="pre-cta"> </slot>
             <div class="px-3">
-                <button :class="['block text-center py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[15px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full hover:bg-[#FCBD00] hover:text-white transition-all duration-300']">Расчитать ипотеку</button>
+                <NuxtLink
+                    @click="() => prepare({ home, rooms: apartment?.count_rooms, price: apartment?.price })"
+                    :to="{ hash: `#${SECTIONS.MORTGAGE}` }"
+                    :class="['block text-center py-4 font-[Raleway] rounded-[3px] border-[1.6px] text-[13px] leading-[15px] font-bold cursor-pointer border-[#FCBD00] text-[#131313] w-full hover:bg-[#FCBD00] hover:text-white transition-all duration-300']"
+                >
+                    Расчитать ипотеку
+                </NuxtLink>
             </div>
         </div>
     </article>

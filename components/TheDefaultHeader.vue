@@ -8,7 +8,7 @@ defineEmits(["toggle"]);
 <template>
     <app-width tag="header">
         <!-- Desktop header -->
-        <div class="desktop-section items-center pt-4 mb-[42px]">
+        <div class="hidden header:flex desktop-section items-center pt-4 mb-[42px]">
             <NuxtLink :to="{ name: 'index' }">
                 <app-logo :width="123" :height="60" />
             </NuxtLink>
@@ -55,7 +55,7 @@ defineEmits(["toggle"]);
         </div>
 
         <!-- Mobile + Tablet header -->
-        <div class="mobile-section head flex justify-between items-center mb-16 pt-3">
+        <div class="mobile-section head flex header:hidden justify-between items-center mb-16 pt-3">
             <span class="head-left flex items-center justify-center">
                 <NuxtLink :to="{ name: 'index' }" class="uppercase font-bold">
                     <app-img :src="Logo" alt="" width="57" height="28" />
@@ -96,21 +96,7 @@ defineEmits(["toggle"]);
     </app-width>
 </template>
 
-<style lang="scss">
-.desktop-section {
-    display: none;
-}
-
-@include break_point(1314px) {
-    .desktop-section {
-        display: flex;
-    }
-
-    .mobile-section {
-        display: none;
-    }
-}
-
+<style lang="scss" scoped>
 .head {
     flex-wrap: wrap;
     justify-content: center;

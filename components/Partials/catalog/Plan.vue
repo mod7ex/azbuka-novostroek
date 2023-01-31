@@ -76,8 +76,6 @@ const { scroll, targetRef } = useScroll();
             </template>
 
             <div class="relative">
-                <!-- <scroll-button v-if="apartments.length" left class="hidden md:block top-0 bottom-0 my-auto absolute left-[-25px]" :on-scroll="() => scroll({ left: -300 })" /> -->
-
                 <div
                     :ref="
                         (v) => {

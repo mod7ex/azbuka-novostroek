@@ -5,47 +5,36 @@ import { format_thousands } from "~/utils";
 
 const props = defineProps<{ id: string; deadlines?: any[]; rooms?: { label: string; value: Numberish }[]; complexName?: string; minPrice?: number; maxPrice?: number; banks?: any[] }>();
 
-const banks = computed(() => props.banks ?? []);
+const isMatch = useMediaQuery("(min-width: 768px)");
 
-const current = shallowRef(0);
+const banks = computed(() => props.banks ?? []);
 
 const options = ["Все программы", "Оптимальные условия"];
 
+const current = shallowRef(0);
+
 const percents_options = [
-    { value: "percents", label: "Субсидированная застройщиком" },
-    { value: "percents", label: "Ипотека с Господдержкой" },
-    { value: "percents", label: "Семейная ипотека" },
-    { value: "percents", label: "Военная ипотека" },
-    { value: "percents", label: "Материнский капитал" },
+    { value: "percents-1", label: "Субсидированная застройщиком" },
+    { value: "percents-1", label: "Ипотека с Господдержкой" },
+    { value: "percents-1", label: "Семейная ипотека" },
+    { value: "percents-1", label: "Военная ипотека" },
+    { value: "percents-1", label: "Материнский капитал" },
 ];
 
-const selected_percents = shallowRef(percents_options[0].value);
+const { state: mortgageForm, pay_per_month } = useMortgageForm();
 
-const isMatch = useMediaQuery("(min-width: 768px)");
-
-const price = shallowRef<number>(props.minPrice);
-const advance = shallowRef<number>(props.minPrice * 0.15);
-const credit_period = shallowRef<number>(20);
-
-watch(price, (v, _v) => {
-    advance.value = Math.floor(v * 0.15);
+onMounted(() => {
+    mortgageForm.value.selected_percents = "percents";
+    mortgageForm.value.advance = props.minPrice * 0.15;
+    mortgageForm.value.price = props.minPrice;
 });
 
-const pay_per_month = (bank: any) => {
-    const months = credit_period.value * 12;
-    const sum = price.value - advance.value;
-    const percents = bank[selected_percents.value];
-
-    if (typeof percents === "number") {
-        const percentOnMonth = percents / 100 / 12;
-
-        const monthly_price = (sum * percentOnMonth) / (1 - Math.pow(1 + percentOnMonth, -months));
-
-        return `${format_thousands(Math.round(monthly_price))} ₽`;
+watch(
+    () => mortgageForm.value.price,
+    (v, _v) => {
+        mortgageForm.value.advance = Math.floor(v * 0.15);
     }
-
-    return "_";
-};
+);
 </script>
 
 <template>
@@ -72,27 +61,27 @@ const pay_per_month = (bank: any) => {
                 </app-select>
 
                 <div class="form-section mb-[23px] flex gap-[9px] md:gap-4 md:col-span-2 md:mb-0">
-                    <app-select class="flex-grow" :options="deadlines" label="Срок сдачи" bg />
-                    <app-select class="flex-grow" :options="rooms" label="Комнатность" bg />
+                    <app-select class="flex-grow" v-model="mortgageForm.home" :options="deadlines" label="Срок сдачи" bg />
+                    <app-select class="flex-grow" v-model="mortgageForm.room_count" :options="rooms" label="Комнатность" bg />
                 </div>
 
                 <div class="form-section mb-[23px] md:col-span-1 md:mb-0">
-                    <labled-range-input label="Стоимость недвижимости" v-model:last_range="price" :max="maxPrice" :min="minPrice" max-label="₽" bg>
+                    <labled-range-input label="Стоимость недвижимости" v-model:last_range="mortgageForm.price" :max="maxPrice" :min="minPrice" max-label="₽" bg>
                         <template #thums>
-                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :max="maxPrice" :min="minPrice" v-model:last_range="price" />
+                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :max="maxPrice" :min="minPrice" v-model:last_range="mortgageForm.price" />
                         </template>
                     </labled-range-input>
                 </div>
 
                 <div class="form-section mb-[23px] md:col-span-1 md:mb-0">
-                    <labled-range-input label="Первый взнос" v-model:last_range="advance" :max="price" :min="price * 0.15" bg>
+                    <labled-range-input label="Первый взнос" v-model:last_range="mortgageForm.advance" :max="mortgageForm.price" :min="mortgageForm.price * 0.15" bg>
                         <template #thums>
-                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :max="price" :min="price * 0.15" v-model:last_range="advance" />
+                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :max="mortgageForm.price" :min="mortgageForm.price * 0.15" v-model:last_range="mortgageForm.advance" />
                         </template>
 
                         <template #max-label>
                             <div class="flex gap-5">
-                                <p class="flex text-gray-400">{{ `${Math.floor((100 * advance) / price)}%` }}</p>
+                                <p class="flex text-gray-400">{{ `${Math.floor((100 * mortgageForm.advance) / mortgageForm.price)}%` }}</p>
                                 <p class="text-[#1DA958]">₽</p>
                             </div>
                         </template>
@@ -100,21 +89,28 @@ const pay_per_month = (bank: any) => {
                 </div>
 
                 <div class="form-section mb-[23px] md:col-span-1 md:mb-[41px]">
-                    <labled-range-input label="Срок кредита" v-model:last_range="credit_period" :max="30" :min="1" max-label="лет" bg>
+                    <labled-range-input label="Срок кредита" v-model:last_range="mortgageForm.credit_period" :max="30" :min="1" max-label="лет" bg>
                         <template #thums>
-                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :step="1" :max="30" :min="1" v-model:last_range="credit_period" />
+                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :step="1" :max="30" :min="1" v-model:last_range="mortgageForm.credit_period" />
                         </template>
                     </labled-range-input>
                 </div>
 
                 <div class="form-section mb-[25px] md:col-span-3 md:mb-0">
-                    <app-radio :options="percents_options" class="flex flex-col gap-4 md:flex-row md:flex-wrap md:gap-5 mb-8" v-model="selected_percents" />
+                    <!-- prettier-ignore -->
+                    <app-radio
+                        disabled
+                        :options="percents_options"
+                        class="flex flex-col gap-4 md:flex-row md:flex-wrap md:gap-5 mb-8"
+                        v-model="mortgageForm.selected_percents"
+                    />
                 </div>
             </div>
+
             <!-- ---------------------------------------- -->
 
             <template #foot>
-                <loan-offer v-for="(bank, i) in banks" :key="i" :bank="bank" :advance="`${format_thousands(advance)} ₽`" :period="credit_period" :percents="selected_percents">
+                <loan-offer v-for="(bank, i) in banks" :key="i" :bank="bank" :advance="`${format_thousands(mortgageForm.advance)} ₽`" :period="mortgageForm.credit_period" :percents="mortgageForm.selected_percents">
                     <template #slot-data="{ bank }"> {{ pay_per_month(bank) }} </template>
                 </loan-offer>
             </template>
