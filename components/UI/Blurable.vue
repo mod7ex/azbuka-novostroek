@@ -7,10 +7,10 @@ withDefaults(defineProps<{ tag?: string }>(), {
 
 const emit = defineEmits(["blured"]);
 
-const containerRef = shallowRef();
+const containerRef = ref();
 
 queuedLast(() => {
-    useClickOutside(containerRef, (e) => emit("blured", e));
+    useClickOutside(containerRef, (e) => emit("blured", e), false);
 });
 </script>
 

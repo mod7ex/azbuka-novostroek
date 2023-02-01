@@ -2,7 +2,7 @@
 import TheDefaultFooter from "~/components/TheDefaultFooter.vue";
 import TheDefaultHeader from "~/components/TheDefaultHeader.vue";
 import ShowCase from "~/components/Partials/home/ShowCase.vue";
-import Search from "~/components/Partials/home/Search.vue";
+import Search from "~/components/Partials/filter/Search.vue";
 
 const LazyMobileMenu = defineAsyncComponent(() => import("~/components/Partials/MobileMenu.vue"));
 
@@ -14,11 +14,11 @@ const isMatch = useMediaQuery("(min-width: 768px)");
 </script>
 
 <template>
-    <client-only>
-        <image-viewer />
-    </client-only>
-
     <div :class="['z-0', inner ? 'inner' : '', $attrs.class]">
+        <client-only>
+            <image-viewer />
+        </client-only>
+
         <div class="show-case-container">
             <div :class="['show-case-overlay relative', inner ? 'md:mb-[60px]' : '']">
                 <the-default-header @toggle="() => toggle()" />
@@ -33,7 +33,7 @@ const isMatch = useMediaQuery("(min-width: 768px)");
             </div>
         </div>
 
-        <Search v-if="!inner || isMatch" />
+        <Search v-if="!inner || isMatch" class="z-[100]" />
 
         <main>
             <slot />
@@ -76,11 +76,9 @@ main {
 }
 
 .inner {
-    // background-color: #e5e5e5;
-
     .show-case-container {
         background: transparent;
-        // background: linear-gradient(179.92deg, rgba(229, 240, 252, 0.1) 14.39%, rgba(255, 255, 255, 0) 99.93%), rgba(229, 240, 252, 0.3);
+        background: linear-gradient(179.92deg, rgba(229, 240, 252, 0.1) 14.39%, rgba(255, 255, 255, 0) 99.93%), rgba(229, 240, 252, 0.3);
 
         @include break_point(761px) {
             padding-bottom: 183px;

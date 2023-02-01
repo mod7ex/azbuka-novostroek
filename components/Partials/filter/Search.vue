@@ -1,15 +1,33 @@
 <script setup lang="ts">
-import { PRICE, MIN_TOTAL_AREA } from "~/constants";
+enum CURRENT {
+    All,
+    Type,
+    Price,
+    Area,
+    Deadline,
+}
 
-const [isCollapsed, toggle] = useToggle();
-const [isTypeCollapsed, toggleType] = useToggle();
-const [isPriceCollapsed, togglePrice] = useToggle();
-const [isSquareCollapsed, toggleSquare] = useToggle();
-const [isDeadlineCollapsed, toggleDeadline] = useToggle();
+const state = shallowRef<CURRENT>();
+
+const setState = (v: CURRENT) => {
+    state.value = v;
+};
+
+const clearState = () => {
+    state.value = undefined;
+};
+
+// const isCollapsed = computed(() => state.value !== CURRENT.All);
+const isTypeCollapsed = computed(() => state.value !== CURRENT.Type);
+const isPriceCollapsed = computed(() => state.value !== CURRENT.Price);
+const isAreaCollapsed = computed(() => state.value !== CURRENT.Area);
+const isDeadlineCollapsed = computed(() => state.value !== CURRENT.Deadline);
 
 const { filter } = useFilter();
 
-const { data, deadlines, count_rooms } = useFilterData();
+const { apartments, deadlines, count_rooms, load } = useFilterData();
+
+onMounted(load);
 </script>
 
 <template>
@@ -23,8 +41,14 @@ const { data, deadlines, count_rooms } = useFilterData();
                 <li class="search-options py-2">
                     <ul class="flex items-center divide-x divide-gray-300">
                         <li class="px-[27px] flex items-center relative">
-                            <button @click="() => toggleType()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Тип квартиры</button>
-                            <filter-by-rooms :is-collapsed="isTypeCollapsed" :handel-blur="() => toggleType(true)" :options="count_rooms" v-model="filter.count_rooms">
+                            <button @click="() => setState(CURRENT.Type)" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Тип квартиры</button>
+                            <!-- prettier-ignore -->
+                            <filter-by-rooms
+                                :is-collapsed="isTypeCollapsed"
+                                :handel-blur="clearState"
+                                :options="count_rooms"
+                                v-model="filter.count_rooms"
+                            >
                                 <template #before>
                                     <label :for="`room-count_studio-0`" class="flex gap-3 px-3 py-[6px] cursor-pointer hover:bg-gray-100">
                                         <input type="checkbox" :id="`room-count_studio-0`" v-model="filter.is_studio" />
@@ -36,22 +60,46 @@ const { data, deadlines, count_rooms } = useFilterData();
                         </li>
 
                         <li class="px-[27px] flex items-center relative">
-                            <button @click="() => togglePrice()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Цена</button>
-                            <filter-from-to v-model:from="filter.price_from" v-model:to="filter.price_to" :is-collapsed="isPriceCollapsed" :handel-blur="() => togglePrice(true)" :min="PRICE.MIN" :max="PRICE.MAX" :step="PRICE.MIN" />
+                            <button @click="() => setState(CURRENT.Price)" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Цена</button>
+                            <!-- prettier-ignore -->
+                            <filter-from-to
+                                v-model:from="filter.price_from"
+                                v-model:to="filter.price_to"
+                                :is-collapsed="isPriceCollapsed"
+                                :handel-blur="clearState"
+                                :min="apartments?.min_price"
+                                :max="apartments?.max_price"
+                                :step="500000"
+                            />
                         </li>
 
                         <li class="px-[27px] flex items-center relative">
-                            <button @click="() => toggleSquare()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Площадь</button>
-                            <filter-from-to v-model:from="filter.area_total_from" v-model:to="filter.area_total_to" :is-collapsed="isSquareCollapsed" :handel-blur="() => toggleSquare(true)" :min="MIN_TOTAL_AREA" :step="20" :max="data.apartments?.max_area_total" />
+                            <button @click="() => setState(CURRENT.Area)" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Площадь</button>
+                            <!-- prettier-ignore -->
+                            <filter-from-to
+                                v-model:from="filter.area_total_from"
+                                v-model:to="filter.area_total_to"
+                                :is-collapsed="isAreaCollapsed"
+                                :handel-blur="clearState"
+                                :min="apartments?.min_area_total"
+                                :max="apartments?.max_area_total"
+                                :step="20"
+                            />
                         </li>
 
                         <li class="px-[27px] flex items-center relative">
-                            <button @click="() => toggleDeadline()" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Срок аренды</button>
-                            <filter-by-deadline v-model="filter.deadline" :options="deadlines" :is-collapsed="isDeadlineCollapsed" :handel-blur="() => toggleDeadline(true)" />
+                            <button @click="() => setState(CURRENT.Deadline)" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Срок аренды</button>
+                            <!-- prettier-ignore -->
+                            <filter-by-deadline
+                                v-model="filter.deadline"
+                                :options="deadlines"
+                                :is-collapsed="isDeadlineCollapsed"
+                                :handel-blur="clearState"
+                            />
                         </li>
 
                         <li class="pl-[27px] flex items-center">
-                            <button class="flex items-center text-[#1DA958] cursor-pointer" @click="() => toggle()" role="expand" aria-label="expand filter">
+                            <button class="flex items-center text-[#1DA958] cursor-pointer" @click="() => setState(CURRENT.All)" role="expand" aria-label="expand filter">
                                 <app-i name="heroicons-outline:adjustments" class="mr-2 rotate-90 transform" />
                                 <p class="whitespace-nowrap font-bold text-[14px] leading-5">Все фильтры</p>
                             </button>
@@ -61,8 +109,14 @@ const { data, deadlines, count_rooms } = useFilterData();
             </ul>
         </div>
 
-        <Transition name="search-expand" :aria-expanded="isCollapsed">
-            <Blurable tag="ul" @blured="() => toggle(true)" class="filter mx-auto grid gap-4 grid-cols-12 py-4 pb-8 rounded-[5px] px-5 bg-white overflow-hidden hg-6" v-if="!isCollapsed">
+        <!-- prettier-ignore -->
+        <!--
+            <filter-wrapper
+                tag="ul"
+                :is-collapsed="!isCollapsed"
+                :handel-blur="clearState"
+                class="filter mx-auto grid gap-4 grid-cols-12 py-4 pb-8 rounded-[5px] px-5 bg-white overflow-hidden hg-6 top-0"
+            >
                 <li class="col-span-4">
                     <h4 class="mb-4 text-[#50535A] text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">расположение</h4>
                     <div>
@@ -72,7 +126,7 @@ const { data, deadlines, count_rooms } = useFilterData();
                         <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Народный район</button>
                     </div>
                 </li>
-
+    
                 <li class="col-span-4">
                     <h4 class="mb-4 text-[#50535A] text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">Дом</h4>
                     <div>
@@ -84,7 +138,7 @@ const { data, deadlines, count_rooms } = useFilterData();
                         <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Коммерция</button>
                     </div>
                 </li>
-
+    
                 <li class="col-span-4">
                     <h4 class="mb-4 text-[#50535A] text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">КВАРТИРА</h4>
                     <div>
@@ -96,8 +150,8 @@ const { data, deadlines, count_rooms } = useFilterData();
                         <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Санузел</button>
                     </div>
                 </li>
-            </Blurable>
-        </Transition>
+            </filter-wrapper>
+        -->
     </app-width>
 </template>
 

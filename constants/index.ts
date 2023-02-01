@@ -19,18 +19,11 @@ export enum MS {
     SEC = 1000,
 }
 
-export enum PRICE {
-    MIN = 500000,
-    MAX = 10000000,
-}
-
 export enum COMPLEX_ORDER {
     ASCENDING_PRICE = "по возрастанию цены",
     DESCENDING_PRICE = "по убыванию цены",
     NEAREST_DELIVERY_DATE = "ближайшему сроку сдачи",
 }
-
-export const MIN_TOTAL_AREA = 10;
 
 export enum CONTACT {
     ADMIN_EMAIL = "admin@admin.com",

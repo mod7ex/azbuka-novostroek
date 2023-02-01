@@ -32,25 +32,22 @@ const loadMore = () => {
     });
 };
 
-const [isFilterOpen] = useMobileFilter();
-
-watch(
-    [filter, isFilterOpen],
-    ([v, _isFilterOpen]) => {
-        if (_isFilterOpen) return;
-        debounce(async () => {
-            await refetch({ page: 1, first: props.count, ...prepare(v) });
-        })();
-    },
-    { deep: true }
-);
+// watch(
+//     filter,
+//     (v) => {
+//         debounce(async () => {
+//             await refetch({ page: 1, first: props.count, ...prepare(v) });
+//         })();
+//     },
+//     { deep: true }
+// );
 </script>
 
 <template>
     <div :id="id">
         <NuxtLayout name="app-section" class="search-result-section mb-[34px] md:mb-[85px] md:mt-[75px]">
             <template #head>
-                <div class="sm:flex sm:items-center sm:justify-between flex-wrap relative z-50 mb-[18px] md:mb-[61px]">
+                <div class="sm:flex sm:items-center sm:justify-between flex-wrap relative md:z-50 mb-[18px] md:mb-[61px]">
                     <p class="text-center text-[26px] md:text-[38px] md:leading-[44px] leading-9 font-bold md:font-extrabold text-[#131313] font-[Raleway] mb-4 sm:mb-0">Вам подойдет</p>
 
                     <complex-order v-if="sort" />

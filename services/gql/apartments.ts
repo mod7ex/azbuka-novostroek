@@ -1,4 +1,3 @@
-import { useQuery } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 
 export const GQL_FOR_DETAIL = `
@@ -71,42 +70,8 @@ status {
 }
 `;
 
-/* export function apartmentsData(options = { notifyOnNetworkStatusChange: true }) {
-    return useQuery(
-        gql`
-            query apartmentsData {
-                apartmentsData {
-                    count_rooms
-                    min_price
-                    max_price
-                    min_area_total
-                    max_area_total
-                    decors
-                    balcony_types
-                    bathrooms
-                }
-            }
-        `,
-        null,
-        options
-    );
-} */
-
-export function apartment(id, data = "number", options = { notifyOnNetworkStatusChange: true }) {
-    return useQuery(
-        gql`
-        query apartment($id: ID) {
-          apartment(id: $id) {
-            ${data}
-          }
-        }`,
-        () => ({ id }),
-        options
-    );
-}
-
 export function apartmentsData(options = { notifyOnNetworkStatusChange: true }) {
-    return useQuery(
+    return useLazyQuery(
         gql`
             query apartmentsData {
                 apartmentsData {
@@ -115,9 +80,9 @@ export function apartmentsData(options = { notifyOnNetworkStatusChange: true }) 
                     max_price
                     min_area_total
                     max_area_total
-                    decors
-                    balcony_types
-                    bathrooms
+                    # decors
+                    # balcony_types
+                    # bathrooms
                 }
             }
         `,

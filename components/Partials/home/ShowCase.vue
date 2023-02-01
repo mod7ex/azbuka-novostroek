@@ -1,13 +1,6 @@
 <script setup lang="ts">
 import SVGGroup from "~/assets/svg/group.svg";
-
-const LazyMobileFilter = defineAsyncComponent(() => import("~/components/Partials/MobileFilter.vue"));
-
-const [isVisible, toggleVisibility] = useMobileFilter();
-
-const { data, deadlines, count_rooms } = useFilterData();
-
-const { filter } = useFilter();
+import MobileSearch from "~/components/Partials/filter/MobileFilter.vue";
 </script>
 
 <template>
@@ -22,35 +15,7 @@ const { filter } = useFilter();
             </div>
         </div>
 
-        <app-width class="md:hidden">
-            <!-- prettier-ignore -->
-            <text-search
-                v-model="filter.name"
-                :class="['max-w-md mx-auto px-[18px] bg-white border-[#3478f624] h-[50px] app-shadow', isVisible ? 'rounded-t' : 'rounded']"
-                @filter="() => toggleVisibility(true)"
-            />
-
-            <Transition name="slide-up-fade-out">
-                <!-- prettier-ignore -->
-                <Blurable
-                    tag="div"
-                    v-if="isVisible"
-                    @blured="() => toggleVisibility(false)"
-                    class="relative z-50"
-                >
-                    <!-- prettier-ignore -->
-                    <lazy-mobile-filter
-                        v-if="isVisible"
-                        :deadlines="deadlines"
-                        :count-rooms="count_rooms"
-                        :max-total-area="data.apartments?.max_area_total"
-                        @close="() => toggleVisibility()"
-                        @search="() => toggleVisibility(false)"
-                        class="px-[18px] pb-2 absolute left-0 right-0 bg-white rounded-b"
-                    />
-                </Blurable>
-            </Transition>
-        </app-width>
+        <mobile-search class="z-50" />
 
         <div class="divider"></div>
 

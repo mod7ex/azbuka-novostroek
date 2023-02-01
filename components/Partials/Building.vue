@@ -41,17 +41,6 @@ const startingPrice = (payload) => {
                     <client-only>
                         <call-us @click.stop="() => {}" class="z-[49]" />
                     </client-only>
-
-                    <!-- 
-                        <span class="md:flex">
-                            <span class="md:w-10 md:h-10 relative flex items-center justify-center md:bg-[#FAFCFE] md:rounded-full mb-[10px]">
-                                <app-i name="heroicons-outline:star" class="text-white md:absolute md:text-[#3478F6] w-4 h-4 md:h-5 md:w-5" />
-                            </span>
-                            <span class="md:w-10 md:h-10 relative flex items-center justify-center md:bg-[#FAFCFE] md:rounded-full md:ml-[9px]">
-                                <bars-svg class="w-4 h-4" />
-                            </span>
-                        </span>
-                    -->
                 </span>
             </div>
 

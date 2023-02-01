@@ -1,5 +1,4 @@
 import { isPlainObject } from "~/utils/types";
-import { PRICE, MIN_TOTAL_AREA } from "~/constants";
 
 export const debounce = <T extends (...args: any[]) => any>(fn: T, duration: number = 1000) => {
     let timer: NodeJS.Timeout | undefined;
@@ -87,10 +86,10 @@ export const rawFilter = () => ({
     is_studio: null,
     quarter_end: null,
     year_end: null,
-    price_from: PRICE.MIN,
-    price_to: PRICE.MAX,
-    area_total_from: MIN_TOTAL_AREA,
-    area_total_to: MIN_TOTAL_AREA * 30 * 19,
+    price_from: null,
+    price_to: null,
+    area_total_from: null,
+    area_total_to: null,
     home_class: [],
     home_type: [],
     count_floors_from: null,

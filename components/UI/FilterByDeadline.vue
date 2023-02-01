@@ -27,23 +27,26 @@ const isSelected = (e: any) => {
 </script>
 
 <template>
-    <Transition name="slide-up-fade-out" :aria-expanded="isCollapsed">
-        <Blurable class="absolute top-7 z-50 bg-white app-shadow rounded py-[6px] min-w-[200px]" tag="div" @blured="handelBlur" v-if="!isCollapsed">
-            <span class="px-2 w-full block">
-                <button @click="() => handelSelect(DONE_DEADLINE)" :class="['w-full px-4 py-2 text-left hover:bg-gray-100 rounded text-xs', isSelected(DONE_DEADLINE) ? 'bg-gray-300' : '']">Сдан</button>
-            </span>
-            <hr />
-            <ul>
-                <li v-for="(e, i) in options" :key="i" class="px-2">
-                    <button @click="() => handelSelect(e.value)" :class="['px-4 py-2 w-full text-left hover:bg-gray-100 rounded text-xs', isSelected(e.value) ? 'bg-gray-300' : '']">
-                        {{ e.label }}
-                    </button>
-                </li>
-            </ul>
-            <hr />
-            <span class="px-2 w-full block">
-                <button @click="() => handelSelect({})" :class="['w-full px-4 py-2 text-left hover:bg-gray-100 rounded text-xs', isSelected({}) ? 'bg-gray-300' : '']">Не выбран</button>
-            </span>
-        </Blurable>
-    </Transition>
+    <!-- prettier-ignore -->
+    <filter-wrapper
+        :is-collapsed="isCollapsed"
+        @blured="handelBlur"
+        class="absolute top-7 z-50 bg-white app-shadow rounded py-[6px] min-w-[200px]"
+    >
+        <span class="px-2 w-full block">
+            <button @click="() => handelSelect(DONE_DEADLINE)" :class="['w-full px-4 py-2 text-left hover:bg-gray-100 rounded text-xs', isSelected(DONE_DEADLINE) ? 'bg-gray-300' : '']">Сдан</button>
+        </span>
+        <hr />
+        <ul>
+            <li v-for="(e, i) in options" :key="i" class="px-2">
+                <button @click="() => handelSelect(e.value)" :class="['px-4 py-2 w-full text-left hover:bg-gray-100 rounded text-xs', isSelected(e.value) ? 'bg-gray-300' : '']">
+                    {{ e.label }}
+                </button>
+            </li>
+        </ul>
+        <hr />
+        <span class="px-2 w-full block">
+            <button @click="() => handelSelect({})" :class="['w-full px-4 py-2 text-left hover:bg-gray-100 rounded text-xs', isSelected({}) ? 'bg-gray-300' : '']">Не выбран</button>
+        </span>
+    </filter-wrapper>
 </template>

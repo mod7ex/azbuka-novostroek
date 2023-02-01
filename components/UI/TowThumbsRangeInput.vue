@@ -12,7 +12,9 @@ const uuid = uuidGen("range-selector");
 const uuids = [uuid(), uuid()];
 
 const width = computed(() => {
-    return 100 * (1 - (props.last_range - props.min) / (props.max - props.min));
+    const { min, max, last_range } = props;
+    if (last_range !== null) return 100 * (1 - (last_range - min) / (max - min));
+    return 100;
 });
 
 const handelInput = (e: Event, item: "last" | "first") => {
@@ -22,8 +24,8 @@ const handelInput = (e: Event, item: "last" | "first") => {
 
 <template>
     <div :class="['ranger', $attrs.class, uni ? 'one-range' : '']">
-        <input :id="uuids[0]" :value="first_range" type="range" :min="min" :max="max" :step="step" @input="(e) => handelInput(e, 'first')" v-if="!uni" />
-        <input :id="uuids[1]" :value="last_range" type="range" :min="min" :max="max" :step="step" @input="(e) => handelInput(e, 'last')" :style="`--width: ${width}%`" />
+        <input :id="uuids[0]" :value="first_range ?? min" type="range" :min="min" :max="max" :step="step" @input="(e) => handelInput(e, 'first')" v-if="!uni" />
+        <input :id="uuids[1]" :value="last_range ?? max" type="range" :min="min" :max="max" :step="step" @input="(e) => handelInput(e, 'last')" :style="`--width: ${width}%`" />
     </div>
 </template>
 

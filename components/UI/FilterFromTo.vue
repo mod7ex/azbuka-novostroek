@@ -49,30 +49,33 @@ const handelInput = (e: Event, el: "from" | "to") => {
 </script>
 
 <template>
-    <Transition name="slide-up-fade-out" :aria-expanded="isCollapsed">
-        <Blurable class="text-xs divide-x absolute top-7 -left-16 z-50 bg-white app-shadow rounded py-[6px] min-w-[300px] flex" tag="div" @blured="handelBlur" v-if="!isCollapsed">
-            <div class="px-3 py-[6px]">
-                <input :value="from" type="text" class="border border-[#00000014] p-1 rounded mb-2 w-full" :placeholder="fromLabel" @input="(e) => handelInput(e, 'from')" />
-                <ul class="max-h-96 overflow-y-scroll" @click="handelFrom">
-                    <li>
-                        <button v-for="i in options" :key="`from-${i}`" :data-value="i" :disabled="i > parseInt(`${to}`)" :class="['rounded w-full text-left p-2', i > parseInt(`${to}`) ? 'text-gray-400' : 'hover:bg-gray-100', i == parseInt(`${from}`) ? 'bg-gray-300' : '']">
-                            {{ format_thousands(i) }}
-                        </button>
-                    </li>
-                </ul>
-            </div>
-            <div class="px-3 py-[6px]">
-                <input :value="to" type="text" class="border border-[#00000014] p-1 rounded mb-2 w-full" :placeholder="toLabel" @input="(e) => handelInput(e, 'to')" />
-                <ul class="max-h-96 overflow-y-scroll" @click="handelTo">
-                    <li>
-                        <button v-for="i in options" :key="`to-${i}`" :data-value="i" :disabled="i < parseInt(`${from}`)" :class="['rounded w-full text-left p-2', i < parseInt(`${from}`) ? 'text-gray-400' : 'hover:bg-gray-100', i == parseInt(`${to}`) ? 'bg-gray-300' : '']">
-                            {{ format_thousands(i) }}
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </Blurable>
-    </Transition>
+    <!-- prettier-ignore -->
+    <filter-wrapper
+        :is-collapsed="isCollapsed"
+        @blured="handelBlur"
+        class="text-xs divide-x absolute top-7 -left-16 z-50 bg-white app-shadow rounded py-[6px] min-w-[300px] flex"
+    >
+        <div class="px-3 py-[6px]">
+            <input :value="from" type="text" class="border border-[#00000014] p-1 rounded mb-2 w-full" :placeholder="fromLabel" @input="(e) => handelInput(e, 'from')" />
+            <ul class="max-h-96 overflow-y-scroll" @click="handelFrom">
+                <li>
+                    <button v-for="i in options" :key="`from-${i}`" :data-value="i" :disabled="i > parseInt(`${to}`)" :class="['rounded w-full text-left p-2', i > parseInt(`${to}`) ? 'text-gray-400' : 'hover:bg-gray-100', i == parseInt(`${from}`) ? 'bg-gray-300' : '']">
+                        {{ format_thousands(i) }}
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="px-3 py-[6px]">
+            <input :value="to" type="text" class="border border-[#00000014] p-1 rounded mb-2 w-full" :placeholder="toLabel" @input="(e) => handelInput(e, 'to')" />
+            <ul class="max-h-96 overflow-y-scroll" @click="handelTo">
+                <li>
+                    <button v-for="i in options" :key="`to-${i}`" :data-value="i" :disabled="i < parseInt(`${from}`)" :class="['rounded w-full text-left p-2', i < parseInt(`${from}`) ? 'text-gray-400' : 'hover:bg-gray-100', i == parseInt(`${to}`) ? 'bg-gray-300' : '']">
+                        {{ format_thousands(i) }}
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </filter-wrapper>
 </template>
 
 <style scoped lang="scss">

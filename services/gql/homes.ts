@@ -1,4 +1,3 @@
-import { useQuery, useLazyQuery /*, useMutation */ } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 // import { GQL_PAGINATION_PART } from "~/paginationUtilites.js";
 
@@ -358,7 +357,7 @@ export const GQL_FOR_PARSED_HOME = `
 */
 
 export function homesData(options = { notifyOnNetworkStatusChange: true }) {
-    return useQuery(
+    return useLazyQuery(
         gql`
             query homesData {
                 homesData {

@@ -121,7 +121,7 @@ const { scroll, targetRef } = useScroll();
             </div>
         </div>
 
-        <scroll-button class="shadow-lg top-0 bottom-0 my-auto absolute right-[32px]" :on-scroll="() => scroll({ left: 300 })" />
+        <scroll-button class="hidden md:block shadow-lg top-0 bottom-0 my-auto absolute right-[32px]" :on-scroll="() => scroll({ left: 300 })" />
     </NuxtLayout>
 </template>
 
