@@ -9,7 +9,7 @@ withDefaults(
     }
 );
 
-defineEmits(["update:modelValue", "search" /* , "filter" */]);
+defineEmits(["update:modelValue", "search", "filter"]);
 </script>
 
 <template>
@@ -24,15 +24,13 @@ defineEmits(["update:modelValue", "search" /* , "filter" */]);
             :value="modelValue"
             :placeholder="placeholder"
             type="text"
-            class="ml-4 w-full sm:flex-grow md:flex-grow-0 md:inline-block outline-none py-2"
+            class="mx-3 w-full sm:flex-grow md:flex-grow-0 md:inline-block outline-none py-2"
         />
 
         <!-- Filter Mobile -->
-        <!--
-            <button @click="() => $emit('filter')" class="md:hidden">
-                <app-i name="akar-icons:settings-vertical" class="text-[#1DA958] h-5 w-5" />
-            </button>
-        -->
+        <button @click="() => $emit('filter')" class="md:hidden">
+            <app-i name="akar-icons:settings-vertical" class="text-[#1DA958] h-5 w-5" />
+        </button>
     </div>
 </template>
 
