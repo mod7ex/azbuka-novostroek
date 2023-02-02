@@ -1,7 +1,6 @@
 import { apartmentsData } from "~/services/gql/apartments";
 import { homesData } from "~/services/gql/homes";
 import { countRoomsGen, deadlineToLabel } from "~/utils";
-import type { IDeadline } from "~/types";
 
 export default () => {
     const { result: apartmentsResult, load: loadApartmentsData } = apartmentsData(); // [FIX] UNIQUE

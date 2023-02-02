@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import RawMobileFilter from "~/components/Partials/filter/RawMobileFilter.vue";
 
+const { apartments, deadlines, count_rooms, ready, load } = useFilterData();
+
+onMounted(load);
+
 const [isCollapsed, toggle] = useToggle();
 
 const { filter, reset } = useFilter();
@@ -16,48 +20,76 @@ const { filter, reset } = useFilter();
                         v-model="filter.name"
                         :class="['max-w-md mx-auto px-[18px] h-[50px]']"
                     />
-                    <raw-mobile-filter @full-filter="() => toggle()" :is-full-filter-open="!isCollapsed" class="z-50 px-[18px] pb-2" />
+
+                    <!-- prettier-ignore -->
+                    <raw-mobile-filter
+                        v-if="ready"
+                        class="z-50 px-[18px] pb-2"
+                        :count_rooms="count_rooms"
+                        :deadlines="deadlines"
+                        :apartments="apartments"
+                    >
+                        <template #all-filters>
+                            <button class="mt-1 flex items-center gap-3" @click="() => toggle()" >
+                                <app-i v-if="!isCollapsed" name="material-symbols:close" class="w-5 h-5 text-[#3478F6]" />
+                                <app-i v-else name="akar-icons:settings-horizontal" class="text-[#3478F6] h-5 w-5" />
+                                
+                                <span class="font-[Inter] text-[14px] font-medium leading-4 text-[#3478F6]" >
+                                    {{ !isCollapsed ? 'Скрыть все фильтры' : 'Все фильтры' }}
+                                </span>
+                            </button>
+                        </template>
+                    </raw-mobile-filter>
                 </div>
 
                 <!-- full filter -->
-                <div v-if="!isCollapsed" class="app-shadow border border-[#3478f624] rounded mb-6 p-[18px]">
-                    <div class="mb-[18px] text-[#4F4F4F]">
-                        <p class="mb-2 font-[Raleway] text-[13px] leading-[15px] italic font-light">Расположение</p>
+                <!-- prettier-ignore -->
+                <filter-wrapper
+                    transition="shrink"
+                    :handel-blur="() => toggle(true)"
+                    :is-collapsed="isCollapsed"
+                    :class="[
+                        `hg-${16}`,
+                        'app-shadow border border-[#3478f624] rounded mb-6 p-[18px]',
+                    ]"
+                >
+                        <div class="mb-[18px] text-[#4F4F4F]">
+                            <button class="mb-2 font-[Raleway] text-[13px] leading-[15px] italic font-light">Расположение</button>
 
-                        <ul class="font-[Inter] font-medium text-[14px] leading-4 flex flex-col gap-[14px]">
-                            <li>Регион</li>
-                            <li>Город</li>
-                            <li>Адм. район</li>
-                            <li>Народный район</li>
-                        </ul>
-                    </div>
+                            <ul class="font-[Inter] font-medium text-[14px] leading-4 flex flex-col gap-[14px]">
+                                <li><button>Регион</button></li>
+                                <li><button>Город</button></li>
+                                <li><button>Адм. район</button></li>
+                                <li><button>Народный район</button></li>
+                            </ul>
+                        </div>
 
-                    <div class="mb-[18px] text-[#4F4F4F]">
-                        <p class="mb-2 font-[Raleway] text-[13px] leading-[15px] italic font-light">Дом</p>
+                        <div class="mb-[18px] text-[#4F4F4F]">
+                            <button class="mb-2 font-[Raleway] text-[13px] leading-[15px] italic font-light">Дом</button>
 
-                        <ul class="font-[Inter] font-medium text-[14px] leading-4 flex flex-col gap-[14px]">
-                            <li>Класс недвижимости</li>
-                            <li>Материал стен</li>
-                            <li>Этажей в доме</li>
-                            <li>Паркинг</li>
-                            <li>Лифт</li>
-                            <li>Коммерция</li>
-                        </ul>
-                    </div>
+                            <ul class="font-[Inter] font-medium text-[14px] leading-4 flex flex-col gap-[14px]">
+                                <li><button>Класс недвижимости</button></li>
+                                <li><button>Материал стен</button></li>
+                                <li><button>Этажей в доме</button></li>
+                                <li><button>Паркинг</button></li>
+                                <li><button>Лифт</button></li>
+                                <li><button>Коммерция</button></li>
+                            </ul>
+                        </div>
 
-                    <div class="text-[#4F4F4F]">
-                        <p class="mb-2 font-[Raleway] text-[13px] leading-[15px] italic font-light">Квартира</p>
+                        <div class="text-[#4F4F4F]">
+                            <button class="mb-2 font-[Raleway] text-[13px] leading-[15px] italic font-light">Квартира</button>
 
-                        <ul class="font-[Inter] font-medium text-[14px] leading-4 flex flex-col gap-[14px]">
-                            <li>Этаж</li>
-                            <li>Отделка</li>
-                            <li>Общая площадь</li>
-                            <li>Площадь жилья</li>
-                            <li>Площадь кухни</li>
-                            <li>Санузел</li>
-                        </ul>
-                    </div>
-                </div>
+                            <ul class="font-[Inter] font-medium text-[14px] leading-4 flex flex-col gap-[14px]">
+                                <li><button>Этаж</button></li>
+                                <li><button>Отделка</button></li>
+                                <li><button>Общая площадь</button></li>
+                                <li><button>Площадь жилья</button></li>
+                                <li><button>Площадь кухни</button></li>
+                                <li><button>Санузел</button></li>
+                            </ul>
+                        </div>
+                </filter-wrapper>
 
                 <div>
                     <button class="mx-auto flex items-center justify-center gap-x-[14px] mb-6" @click="reset">

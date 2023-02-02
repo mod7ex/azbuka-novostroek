@@ -1,5 +1,4 @@
 import { isPlainObject } from "~/utils/types";
-import type { IDeadline } from "~/types";
 
 export const debounce = <T extends (...args: any[]) => any>(fn: T, duration: number = 1000) => {
     let timer: NodeJS.Timeout | undefined;

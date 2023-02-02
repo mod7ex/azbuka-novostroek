@@ -23,7 +23,7 @@ const emit = defineEmits(["update:modelValue"]);
 
 const len = computed(() => props.options.length);
 
-const [isCollaped, toggle] = useToggle(true);
+const [isCollapsed, toggle] = useToggle(true);
 
 const uuid = uuidGen("mobile-filter");
 
@@ -74,7 +74,7 @@ const selectedOptions = computed(() => {
 </script>
 
 <template>
-    <div :class="[$attrs.class, shrink ? '' : 'relative', !isCollaped && !shrink ? 'shadow-select' : '']">
+    <div :class="[$attrs.class, shrink ? '' : 'relative', !isCollapsed && !shrink ? 'shadow-select' : '']">
         <slot v-if="!flat" name="label">
             <p :class="['mb-[13px] text-[12px] leading-[14px] font-normal font-[Raleway] text-[#4F4F4F] md:font-extrabold md:text-black md:mb-[17px]', bg ? 'uppercase' : '']">
                 {{ label }}
@@ -87,7 +87,7 @@ const selectedOptions = computed(() => {
             :disabled="disabled"
             :class="[
                 `hg-${len} border-[#3478f624]`,
-                flat ? 'border-0' : (!isCollaped ? 'border-b-0 rounded-b-none' : ''),
+                flat ? 'border-0' : (!isCollapsed ? 'border-b-0 rounded-b-none' : ''),
                 bg ? 'md:rounded-none md:border-[#1da95814] bg-[#1da95814] md:bg-[#FAFCFE]' : '',
                 'flex justify-between font-[Raleway] items-center gap-x-[14px] py-[15px] border-[1.6px] rounded-[5px] w-full',
                 flat ? '' : 'px-3'
@@ -98,36 +98,35 @@ const selectedOptions = computed(() => {
                     {{ multiple ? innerLabel : selectedOptions[0]?.label ?? innerLabel }}
                 </p>
             </slot>
-            <app-i v-if="!flat" name="ic:baseline-keyboard-arrow-down" :class="[bg ? 'text-[#1DA958]' : 'text-[#3478F6]', ' h-5 w-5 transition-transform duration-300', isCollaped ? 'rotate-180' : '']" />
+            <app-i v-if="!flat" name="ic:baseline-keyboard-arrow-down" :class="[bg ? 'text-[#1DA958]' : 'text-[#3478F6]', ' h-5 w-5 transition-transform duration-300', isCollapsed ? 'rotate-180' : '']" />
         </button>
 
-        <Transition :name="shrink ? 'shrink' : 'slide-up-fade-out'">
+        <!-- prettier-ignore -->
+        <filter-wrapper
+            :transition="shrink ? 'shrink' : 'slide-up-fade-out'"
+            :handel-blur="() => toggle(true)"
+            :is-collapsed="isCollapsed"
+            :class="[
+                shrink ? `hg-${len}` : 'absolute left-0 right-0 top-auto',
+                bg ? 'md:border-[#1da95814]' : '',
+                'border-[#3478f624] bg-white overflow-hidden rounded-b-[5px] z-10 border-t-0 shadow-select-target',
+                flat ? 'border-0' : 'border-[1.6px]',
+            ]"
+        >
             <!-- prettier-ignore -->
-            <Blurable
-                @blured="() => toggle(true)"
-                v-if="!isCollaped"
-                :class="[
-                    shrink ? `hg-${len}` : 'absolute left-0 right-0 top-auto',
-                    bg ? 'md:border-[#1da95814]' : '',
-                    'border-[#3478f624] bg-white overflow-hidden rounded-b-[5px] z-10 border-t-0 shadow-select-target',
-                    flat ? 'border-0' : 'border-[1.6px]',
-                ]"
-            >
-                <!-- prettier-ignore -->
-                <ul :class="[
-                    bg ? 'bg-[#1da95814] md:bg-[#FAFCFE]' : '',
-                    'rounded-b-[5px] pb-[10px] pt-[6px]',
-                    flat ? '' : 'px-3'
-                ]">
-                    <li v-for="({ value, label }, i) in options" :key="i" class="mb-[14px] h-5">
-                        <label :for="IDS[i]" class="flex items-center gap-x-3">
-                            <input @change="(e) => pick(value, (e.target as HTMLInputElement).checked)" :checked="selected.has(value)" :id="IDS[i]" type="checkbox" class="w-[18px] h-[18px] border border-[#0000001f] rounded-[2px]" />
-                            <span class="font-normal text-[13px] leading-[14px] font-[Inter] text-[#141414]">{{ label }}</span>
-                        </label>
-                    </li>
-                </ul>
-            </Blurable>
-        </Transition>
+            <ul :class="[
+                bg ? 'bg-[#1da95814] md:bg-[#FAFCFE]' : '',
+                'rounded-b-[5px] pb-[10px] pt-[6px]',
+                flat ? '' : 'px-3'
+            ]">
+                <li v-for="({ value, label }, i) in options" :key="i" class="mb-[14px] h-5">
+                    <label :for="IDS[i]" class="flex items-center gap-x-3">
+                        <input @change="(e) => pick(value, (e.target as HTMLInputElement).checked)" :checked="selected.has(value)" :id="IDS[i]" type="checkbox" class="w-[18px] h-[18px] border border-[#0000001f] rounded-[2px]" />
+                        <span class="font-normal text-[13px] leading-[14px] font-[Inter] text-[#141414]">{{ label }}</span>
+                    </label>
+                </li>
+            </ul>
+        </filter-wrapper>
 
         <ul v-if="multiple && !flat" class="flex items-center flex-wrap">
             <li v-for="{ label, value } in selectedOptions" :key="value" class="bg-[#3478F6] mt-3 rounded-md mr-[5px] py-[3px] px-2">
@@ -141,36 +140,6 @@ const selectedOptions = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-@mixin apartment_types_count($rows: 20) {
-    @for $i from 1 through $rows {
-        &.hg-#{$i} {
-            height: ($i * (14px + 20px)) + (6px + 10px);
-        }
-    }
-}
-
-.shrink-enter-active {
-    transition: all 0.3s ease-out;
-}
-.shrink-leave-active {
-    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.shrink-enter-from,
-.shrink-leave-to {
-    opacity: 0;
-    height: 0;
-}
-
-.shrink-enter-to {
-    @include apartment_types_count;
-}
-.shrink-leave-from {
-    @include apartment_types_count;
-}
-
-/* ****************************************************** */
-
 input[type="checkbox"]:checked {
     position: relative;
 

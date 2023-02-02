@@ -117,6 +117,36 @@
     @include items;
 }
 
+/* *************************************************** Shrink *************************************************** */
+
+@mixin apartment_types_count($rows: 20) {
+    @for $i from 1 through $rows {
+        &.hg-#{$i} {
+            height: ($i * (14px + 20px)) + (6px + 10px);
+        }
+    }
+}
+
+.shrink-enter-active {
+    transition: all 0.3s ease-out;
+}
+.shrink-leave-active {
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.shrink-enter-from,
+.shrink-leave-to {
+    opacity: 0;
+    height: 0;
+}
+
+.shrink-enter-to {
+    @include apartment_types_count;
+}
+.shrink-leave-from {
+    @include apartment_types_count;
+}
+
 /* *************************************************** Slide up & Fade transition *************************************************** */
 
 .slide-up-fade-out-enter-active {

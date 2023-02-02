@@ -3,19 +3,13 @@ import RangeInput from "~/components/UI/TowThumbsRangeInput.vue";
 import { DONE_DEADLINE } from "~/constants";
 import { deadlineToLabel } from "~/utils";
 
-defineProps<{ isFullFilterOpen?: boolean }>();
+const { apartments, count_rooms, deadlines } = defineProps<{ count_rooms: SelectOptions[]; deadlines: SelectOptions<IDeadline>[]; apartments: any }>();
 
 const [isAreaCollapsed, toggleArea] = useToggle();
 
 const [isPriceCollapsed, togglePrice] = useToggle();
 
-const { apartments, deadlines, count_rooms, ready, load } = useFilterData();
-
 const { filter } = useFilter();
-
-const emit = defineEmits(["full-filter"]);
-
-onMounted(load);
 
 // Rooms Count
 const rooms_bullets = computed(() => filter.value.count_rooms.map((value) => ({ value, label: `${value} комн.` })));
@@ -29,8 +23,8 @@ const price_bullet = computed(() => {
 
     if (!price_from && !price_to) return undefined;
 
-    const _from = Math.floor((price_from ?? apartments.value?.min_price) / 100000) / 10;
-    const _to = Math.floor((price_to ?? apartments.value?.max_price) / 100000) / 10;
+    const _from = Math.floor((price_from ?? apartments?.min_price) / 100000) / 10;
+    const _to = Math.floor((price_to ?? apartments?.max_price) / 100000) / 10;
 
     return `Цена от ${_from} до ${_to}`;
 });
@@ -58,8 +52,8 @@ const area_bullet = computed(() => {
 
     if (!area_total_to && !area_total_from) return undefined;
 
-    const _from = Math.floor(area_total_from ?? apartments.value?.min_area_total);
-    const _to = Math.floor(area_total_to ?? apartments.value?.max_area_total);
+    const _from = Math.floor(area_total_from ?? apartments?.min_area_total);
+    const _to = Math.floor(area_total_to ?? apartments?.max_area_total);
 
     return `Площадь от ${_from} до ${_to}`;
 });
@@ -70,7 +64,7 @@ const resetArea = () => {
 </script>
 
 <template>
-    <div v-if="ready" class="pb-6">
+    <div class="pb-6">
         <!-- prettier-ignore -->
         <app-select
             :options="count_rooms"
@@ -90,9 +84,10 @@ const resetArea = () => {
 
             <!-- prettier-ignore -->
             <filter-wrapper
+                transition="shrink"
                 :is-collapsed="isPriceCollapsed"
                 :handel-blur="() => togglePrice(true)"
-                class="relative shadow-none mt-[13px]"
+                class="relative shadow-none mt-[13px] hg-1"
             >
                 <div class="flex items-center justify-between mb-4">
                     <p>
@@ -120,9 +115,10 @@ const resetArea = () => {
 
             <!-- prettier-ignore -->
             <filter-wrapper
+                transition="shrink"
                 :is-collapsed="isAreaCollapsed"
                 :handel-blur="() => toggleArea(true)"
-                class="relative shadow-none mt-[13px]"
+                class="relative shadow-none mt-[13px] hg-1"
             >
                 <div class="flex items-center justify-between mb-4">
                     <p>
@@ -186,14 +182,6 @@ const resetArea = () => {
             </li>
         </ul>
 
-        <!-- prettier-ignore -->
-        <button class="mt-1 flex items-center gap-3" @click="() => $emit('full-filter')" >
-            <app-i v-if="isFullFilterOpen" name="material-symbols:close" class="w-5 h-5 text-[#3478F6]" />
-            <app-i v-else name="akar-icons:settings-horizontal" class="text-[#3478F6] h-5 w-5" />
-            
-            <span class="font-[Inter] text-[14px] font-medium leading-4 text-[#3478F6]" >
-                {{ isFullFilterOpen ? 'Скрыть все фильтры' : 'Все фильтры' }}
-            </span>
-        </button>
+        <slot name="all-filters"></slot>
     </div>
 </template>
