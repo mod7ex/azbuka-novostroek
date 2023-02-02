@@ -7,7 +7,7 @@ onMounted(load);
 
 const [isCollapsed, toggle] = useToggle();
 
-const { filter, reset } = useFilter();
+const { filter, reset, ping } = useFilter();
 </script>
 
 <template>
@@ -17,6 +17,7 @@ const { filter, reset } = useFilter();
                 <div class="app-shadow border border-[#3478f624] rounded mb-4">
                     <!-- prettier-ignore -->
                     <text-search
+                        @search="() => ping()"
                         v-model="filter.name"
                         :class="['max-w-md mx-auto px-[18px] h-[50px]']"
                     />

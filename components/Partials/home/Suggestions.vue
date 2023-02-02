@@ -7,9 +7,9 @@ const props = withDefaults(defineProps<{ id: string; sort?: true; count?: number
     count: 8,
 });
 
-const { filter, prepare } = useFilter();
+const { filter, prepare, pingRef } = useFilter();
 
-const { result, loading, error, fetchMore, refetch } = getComplexes(GQL_FOR_LIST, { page: 1, first: props.count, ...filter.value });
+const { result, loading, fetchMore, refetch } = getComplexes(GQL_FOR_LIST, { page: 1, first: props.count, ...filter.value });
 
 const complexes = computed(() => result.value?.complexes?.data ?? []);
 
@@ -32,22 +32,22 @@ const loadMore = () => {
     });
 };
 
-// watch(
-//     filter,
-//     (v) => {
-//         debounce(async () => {
-//             await refetch({ page: 1, first: props.count, ...prepare(v) });
-//         })();
-//     },
-//     { deep: true }
-// );
+watch(
+    pingRef,
+    () => {
+        debounce(async () => {
+            await refetch({ page: 1, first: props.count, ...prepare(filter.value) });
+        })();
+    },
+    { deep: true }
+);
 </script>
 
 <template>
     <div :id="id">
         <NuxtLayout name="app-section" class="search-result-section mb-[34px] md:mb-[85px] md:mt-[75px]">
             <template #head>
-                <div class="sm:flex sm:items-center sm:justify-between flex-wrap relative md:z-50 mb-[18px] md:mb-[61px]">
+                <div class="sm:flex sm:items-center sm:justify-between flex-wrap relative z-50 mb-[18px] md:mb-[61px]">
                     <p class="text-center text-[26px] md:text-[38px] md:leading-[44px] leading-9 font-bold md:font-extrabold text-[#131313] font-[Raleway] mb-4 sm:mb-0">Вам подойдет</p>
 
                     <complex-order v-if="sort" />
@@ -64,7 +64,14 @@ const loadMore = () => {
             <template #foot>
                 <div class="flex justify-center">
                     <loader v-if="loading" />
-                    <Button v-if="!loading && result?.complexes.paginatorInfo.hasMorePages" @click="loadMore" label="Загрузить еще" class="mx-auto block md:inline bg-[#E71F61]" :disabled="loading" />
+                    <!-- prettier-ignore -->
+                    <Button
+                        v-if="!loading && result?.complexes.paginatorInfo.hasMorePages"
+                        @click="loadMore"
+                        label="Загрузить еще"
+                        class="mx-auto block md:inline bg-[#E71F61]"
+                        :disabled="loading"
+                    />
                 </div>
             </template>
         </NuxtLayout>

@@ -60,7 +60,7 @@ watch(
                     </template>
                 </app-select>
 
-                <div class="form-section mb-[23px] flex gap-[9px] md:gap-4 md:col-span-2 md:mb-0">
+                <div class="form-section mb-[23px] flex flex-col md:flex-row gap-[9px] md:gap-4 md:col-span-2 md:mb-0">
                     <app-select class="flex-grow" v-model="mortgageForm.home" :options="deadlines" label="Срок сдачи" bg />
                     <app-select class="flex-grow" v-model="mortgageForm.room_count" :options="rooms" label="Комнатность" bg />
                 </div>

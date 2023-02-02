@@ -106,7 +106,7 @@ export const rawFilter = () => ({
     decors: [],
     balcony_types: [],
     bathrooms: [],
-    deadline: null,
+    deadline: null as IDeadline | null,
 });
 
 export const RawMortgageData = () => ({

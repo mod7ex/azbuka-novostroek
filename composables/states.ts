@@ -6,3 +6,4 @@ export const useRawFilter = () => useState<ReturnType<typeof reactive<ReturnType
 export const useCurrentPreviewedImg = () => useState<string | undefined>("current-previewed-img", () => undefined);
 export const useComplexOrderValue = () => useState<string | undefined>("complex-order", () => undefined);
 export const useMortgageData = () => useState("mortgage-form", RawMortgageData);
+export const useFilterPing = () => useState("filter-ping", () => 0);

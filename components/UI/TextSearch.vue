@@ -28,9 +28,11 @@ defineEmits(["update:modelValue", "search" /* , "filter" */]);
         />
 
         <!-- Filter Mobile -->
-        <!-- <button @click="() => $emit('filter')" class="md:hidden">
-            <app-i name="akar-icons:settings-vertical" class="text-[#1DA958] h-5 w-5" />
-        </button> -->
+        <!--
+            <button @click="() => $emit('filter')" class="md:hidden">
+                <app-i name="akar-icons:settings-vertical" class="text-[#1DA958] h-5 w-5" />
+            </button>
+        -->
     </div>
 </template>
 

@@ -3,7 +3,9 @@ import RangeInput from "~/components/UI/TowThumbsRangeInput.vue";
 import { DONE_DEADLINE } from "~/constants";
 import { deadlineToLabel } from "~/utils";
 
-const { apartments, count_rooms, deadlines } = defineProps<{ count_rooms: SelectOptions[]; deadlines: SelectOptions<IDeadline>[]; apartments: any }>();
+const props = defineProps<{ count_rooms: SelectOptions[]; deadlines: SelectOptions<IDeadline>[]; apartments: any }>();
+
+const apartments = computed(() => props.apartments);
 
 const [isAreaCollapsed, toggleArea] = useToggle();
 
@@ -23,8 +25,8 @@ const price_bullet = computed(() => {
 
     if (!price_from && !price_to) return undefined;
 
-    const _from = Math.floor((price_from ?? apartments?.min_price) / 100000) / 10;
-    const _to = Math.floor((price_to ?? apartments?.max_price) / 100000) / 10;
+    const _from = Math.floor((price_from ?? apartments.value?.min_price) / 100000) / 10;
+    const _to = Math.floor((price_to ?? apartments.value?.max_price) / 100000) / 10;
 
     return `Цена от ${_from} до ${_to}`;
 });
@@ -40,6 +42,8 @@ const deadline_bullet = computed(() => {
 
     if (!deadline) return undefined;
 
+    if (deadline.quarter_end == DONE_DEADLINE.quarter_end && deadline.year_end == DONE_DEADLINE.year_end) return "Сдан";
+
     return deadlineToLabel(deadline);
 });
 const resetDeadline = () => {
@@ -52,8 +56,8 @@ const area_bullet = computed(() => {
 
     if (!area_total_to && !area_total_from) return undefined;
 
-    const _from = Math.floor(area_total_from ?? apartments?.min_area_total);
-    const _to = Math.floor(area_total_to ?? apartments?.max_area_total);
+    const _from = Math.floor(area_total_from ?? apartments.value?.min_area_total);
+    const _to = Math.floor(area_total_to ?? apartments.value?.max_area_total);
 
     return `Площадь от ${_from} до ${_to}`;
 });

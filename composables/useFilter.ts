@@ -14,6 +14,14 @@ const prepare = (f: ReturnType<typeof rawFilter>) => {
 const useFilter = () => {
     const filter = useRawFilter();
 
+    const pingRef = useFilterPing();
+
+    const ping = () => {
+        pingRef.value = Date.now();
+    };
+
+    // const dirty = computed(() => JSON.stringify(rawFilter()) !== JSON.stringify(filter.value));
+
     const reset = () => {
         filter.value = rawFilter();
     };
@@ -22,6 +30,8 @@ const useFilter = () => {
         prepare,
         filter,
         reset,
+        ping,
+        pingRef,
     };
 };
 

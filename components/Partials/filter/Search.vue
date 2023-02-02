@@ -23,7 +23,7 @@ const isPriceCollapsed = computed(() => state.value !== CURRENT.Price);
 const isAreaCollapsed = computed(() => state.value !== CURRENT.Area);
 const isDeadlineCollapsed = computed(() => state.value !== CURRENT.Deadline);
 
-const { filter } = useFilter();
+const { filter, ping } = useFilter();
 
 const { apartments, deadlines, count_rooms, load } = useFilterData();
 
@@ -35,7 +35,7 @@ onMounted(load);
         <div class="hidden md:flex search-container mx-auto border md:border-none items-center border-[#3478f624] rounded h-[50px] px-[18px] md:px-5 bg-white mb-[6px]">
             <ul :class="['search-area flex items-center justify-between w-full flex-wrap']">
                 <li :class="['search-input']">
-                    <text-search v-model="filter.name" />
+                    <text-search v-model="filter.name" @search="() => ping()" />
                 </li>
 
                 <li class="search-options py-2">

@@ -12,7 +12,7 @@ const props = withDefaults(
         shrink?: true;
         disabled?: true;
         multiple?: true;
-        modelValue?: Numberish | Numberish[];
+        modelValue?: any;
     }>(),
     {
         innerLabel: "Любой",
