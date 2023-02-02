@@ -17,7 +17,12 @@ watch(payload, (v) => {
 </script>
 
 <template>
-    <filter-wrapper :is-collapsed="isCollapsed" @blured="handelBlur">
+    <!-- prettier-ignore -->
+    <filter-wrapper
+        :is-collapsed="isCollapsed"
+        @blured="handelBlur"
+        class="absolute top-7 z-50 bg-white app-shadow rounded py-[6px] min-w-[200px]"
+    >
         <slot name="before" />
 
         <label v-for="item in options" :key="item.value" :for="`room-count_${item.label}-${item.value}`" class="flex gap-3 px-3 py-[6px] cursor-pointer hover:bg-gray-100">

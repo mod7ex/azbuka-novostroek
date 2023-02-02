@@ -1,4 +1,5 @@
 import { isPlainObject } from "~/utils/types";
+import type { IDeadline } from "~/types";
 
 export const debounce = <T extends (...args: any[]) => any>(fn: T, duration: number = 1000) => {
     let timer: NodeJS.Timeout | undefined;
@@ -126,5 +127,7 @@ interface CountHomes {
 export const isAllBuilt = (countHomes: CountHomes) => countHomes?.total === countHomes?.finished;
 
 export const onlyFewBuilt = (countHomes: CountHomes) => !isAllBuilt(countHomes) && countHomes?.finished > 0;
+
+export const deadlineToLabel = (e: IDeadline) => `до ${e?.quarter_end} кв. ${e?.year_end}`;
 
 export * from "~/utils/filter";

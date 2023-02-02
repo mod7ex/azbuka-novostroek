@@ -1,5 +1,8 @@
 import { isFunction } from "~/utils";
 
+/**
+ * @_init is by default true
+ */
 export default (_init = true) => {
     const payload = shallowRef(_init);
 
