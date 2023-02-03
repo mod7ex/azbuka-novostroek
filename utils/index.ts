@@ -118,15 +118,15 @@ export const RawMortgageData = () => ({
     room_count: undefined,
 });
 
-interface CountHomes {
-    total?: number;
-    finished?: number;
-}
+export const isAllBuilt = (countHomes: ICountHomes) => countHomes?.total === countHomes?.finished;
 
-export const isAllBuilt = (countHomes: CountHomes) => countHomes?.total === countHomes?.finished;
-
-export const onlyFewBuilt = (countHomes: CountHomes) => !isAllBuilt(countHomes) && countHomes?.finished > 0;
+export const onlyFewBuilt = (countHomes: ICountHomes) => !isAllBuilt(countHomes) && countHomes?.finished > 0;
 
 export const deadlineToLabel = (e: IDeadline) => `до ${e?.quarter_end} кв. ${e?.year_end}`;
+
+export const computeDeadline = ({ stage, quarter_end, year_end }) => {
+    if (stage?.name.toLocaleLowerCase() === "сдан") return "Сдан";
+    else if (quarter_end && year_end) return `${quarter_end} квартал ${year_end}`;
+};
 
 export * from "~/utils/filter";

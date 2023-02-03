@@ -3,13 +3,13 @@ import ApartmentPlan from "~/components/Partials/catalog/ApartmentPlan.vue";
 import { apartments as getApartments, type Filter } from "~/services/gql/apartments";
 import { debounce } from "~/utils";
 
-const props = defineProps<{ countHomes; complexName?: string; rooms?: { label: string; value: Numberish }[] }>();
+defineProps<{ countHomes: ICountHomes; complexName?: string; rooms?: SelectOptions<Numberish, string>[] }>();
 
 const current = shallowRef(-1);
 
 const currentHome = useCurrentHome();
 
-const { result, error, loading, refetch, load, fetchMore } = getApartments({ page: 1, first: 3, home_id: currentHome.value });
+const { result, loading, refetch, load, fetchMore } = getApartments({ page: 1, first: 3, home_id: currentHome.value });
 
 const apartments = computed(() => result.value?.apartments?.data ?? []);
 
@@ -35,8 +35,6 @@ watch(
 
 const loadMore = () => {
     const page = (result.value?.apartments?.paginatorInfo?.currentPage ?? 0) + 1;
-
-    console.log(page);
 
     return fetchMore({
         variables: { page },
@@ -91,12 +89,14 @@ const { scroll, targetRef } = useScroll();
                                 <complex-stage :count-homes="countHomes" class="hidden md:flex" />
                             </template>
 
-                            <template #pre-cta>
-                                <p class="font-[Inter] leading-[17px] text-[14px] flex items-center justify-between mb-4">
-                                    <span class="font-semibold">ЖК {{ complexName }}</span>
-                                    <span class="text-[#1DA958] underline font-normal">50 похожих</span>
-                                </p>
-                            </template>
+                            <!--
+                                <template #pre-cta>
+                                    <p class="font-[Inter] leading-[17px] text-[14px] flex items-center justify-between mb-4">
+                                        <span class="font-semibold">ЖК {{ complexName }}</span>
+                                        <span class="text-[#1DA958] underline font-normal">50 похожих</span>
+                                    </p>
+                                </template>
+                            -->
                         </apartment-plan>
 
                         <div ref="elementRef" class="w-3"></div>

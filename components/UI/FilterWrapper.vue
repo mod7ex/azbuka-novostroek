@@ -1,20 +1,22 @@
 <script setup lang="ts">
-withDefaults(defineProps<{ isCollapsed?: boolean; handelBlur?: () => void; tag?: string; transition?: string }>(), {
+withDefaults(defineProps<{ isCollapsed?: boolean; handelBlur?: () => void; tag?: string; transition?: string; condition?: () => boolean }>(), {
     tag: "div",
     transition: "slide-up-fade-out",
+    condition: () => true,
 });
 </script>
 
 <template>
     <Transition :name="transition" :aria-expanded="isCollapsed">
         <!-- prettier-ignore -->
-        <Blurable
+        <Blurrable
             :tag="tag"
             :class="$attrs.class"
-            @blured="handelBlur"
+            @blurred="handelBlur"
+            :condition="condition"
             v-if="!isCollapsed"
         >
             <slot></slot>
-        </Blurable>
+        </Blurrable>
     </Transition>
 </template>

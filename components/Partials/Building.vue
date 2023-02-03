@@ -55,7 +55,7 @@ const startingPrice = (payload) => {
                 </div>
 
                 <h1 class="font-semibold md:font-bold text-[13px] md:text-[16px] text-[#131313] leading-[17px] md:leading-[19px] font-[Inter] md:mb-[13px]">
-                    <slot name="description-middle">{{ complex.name }}</slot>
+                    <slot name="description-middle">ЖК {{ complex.name }}</slot>
                 </h1>
 
                 <!-- mobile -->
@@ -65,12 +65,12 @@ const startingPrice = (payload) => {
                 </p>
 
                 <!-- desktop -->
-                <p class="items-center justify-start hidden md:flex">
-                    <app-i class="text-[#1DA958] h-5 w-5 mr-[9px]" name="heroicons-solid:location-marker" />
+                <p class="justify-start items-start hidden md:flex gap-2">
+                    <app-i class="text-[#1DA958] h-8 w-8 -mt-[2px]" name="heroicons-solid:location-marker" />
                     <span class="tex-[#131313] font-normal leading-5 text-[14px]">
                         <slot name="location">
-                            <p>{{ complex.city?.name }}, {{ complex.district?.name }}</p>
-                            <p class="inline-block">{{ complex.address }}</p>
+                            <p>{{ complex.city?.name }}, {{ complex.district?.name }}, {{ complex.address }}</p>
+                            <!-- <p class="inline-block"></p> -->
                         </slot>
                     </span>
                 </p>

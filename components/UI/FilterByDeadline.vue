@@ -30,7 +30,7 @@ const isSelected = (e: any) => {
     <!-- prettier-ignore -->
     <filter-wrapper
         :is-collapsed="isCollapsed"
-        @blured="handelBlur"
+        @blurred="handelBlur"
         class="absolute top-7 z-50 bg-white app-shadow rounded py-[6px] min-w-[200px]"
     >
         <span class="px-2 w-full block">

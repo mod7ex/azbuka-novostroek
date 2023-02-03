@@ -3,9 +3,11 @@ withDefaults(
     defineProps<{
         modelValue?: string;
         placeholder?: string;
+        type?: "text" | "search";
     }>(),
     {
         placeholder: "Название новостройки или застройщика",
+        type: "search",
     }
 );
 
@@ -23,8 +25,8 @@ defineEmits(["update:modelValue", "search", "filter"]);
             @input.lazy="(e) => $emit('update:modelValue', (e.target as HTMLInputElement).value)"
             :value="modelValue"
             :placeholder="placeholder"
-            type="text"
-            class="mx-3 w-full sm:flex-grow md:flex-grow-0 md:inline-block outline-none py-2"
+            :type="type"
+            class="md:inline-block outline-none py-2 mx-3 w-full sm:flex-grow md:flex-grow-0"
         />
 
         <!-- Filter Mobile -->

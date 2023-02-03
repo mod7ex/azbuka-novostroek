@@ -1,5 +1,6 @@
 import { isPlainObject } from "~/utils/types";
 import { rawFilter } from "~/utils";
+import { isArray } from "@vue/shared";
 
 const prepare = (f: ReturnType<typeof rawFilter>) => {
     let payload = JSON.parse(JSON.stringify(f)); // deep copy
@@ -20,7 +21,16 @@ const useFilter = () => {
         pingRef.value = Date.now();
     };
 
-    // const dirty = computed(() => JSON.stringify(rawFilter()) !== JSON.stringify(filter.value));
+    const dirty = computed(() => {
+        let _filter = filter.value;
+        for (let key in _filter) {
+            const _value = _filter[key];
+            if (isArray(_value)) {
+                if (_value.length) return true;
+            } else if (_value) return true;
+        }
+        return false;
+    });
 
     const reset = () => {
         filter.value = rawFilter();
@@ -32,6 +42,7 @@ const useFilter = () => {
         reset,
         ping,
         pingRef,
+        dirty,
     };
 };
 

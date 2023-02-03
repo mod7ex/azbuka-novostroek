@@ -102,8 +102,6 @@ const _previous = () => {
     scroll({ top: -68 });
     previous();
 };
-
-const { preview } = useImgPreview();
 </script>
 
 <template>
@@ -114,9 +112,7 @@ const { preview } = useImgPreview();
             </template>
 
             <div class="gallery mb-[25px] md:mb-10 mt-5 md:mt-[15px] md:flex md:gap-[10px] md:items-stretch">
-                <div class="h-[254px] md:h-[365px] current-img rounded-[5px] md:flex-grow relative" :style="{ backgroundImage: `url(${images[current]?.url})` }">
-                    <button v-if="images[current]?.url" @click="() => preview(images[current]?.url)" class="hover:bg-gray-900 transition-all duration-300 opacity-20 absolute top-0 left-0 right-0 bottom-0 cursor-pointer"></button>
-                </div>
+                <div class="h-[254px] md:h-[365px] current-img rounded-[5px] md:flex-grow relative" :style="{ backgroundImage: `url(${images[current]?.url})` }"></div>
 
                 <div class="max-h-[365px] flex items-stretch justify-center md:justify-between gap-1 mt-3 md:mt-0 md:flex-col">
                     <button @click="() => _previous()">

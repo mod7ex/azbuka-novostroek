@@ -7,7 +7,7 @@ import { CONTACT } from "~/constants";
     <a
         :href="`tel:${CONTACT.RAW_PHONE}`"
         :class="[
-            'flex items-center justify-center h-6 w-6 md:w-10 md:h-10 relative bg-[#E71F61] rounded-full cursor-pointer',
+            'flex items-center justify-center h-[28px] w-[28px] md:w-10 md:h-10 relative bg-[#E71F61] rounded-full cursor-pointer',
             $attrs.class
         ]"
     >

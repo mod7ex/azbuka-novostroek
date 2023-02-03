@@ -15,19 +15,13 @@ import CTA from "~/components/Partials/catalog/CTA.vue";
 import { SECTIONS } from "~/constants";
 import { home as getHome, GQL_FOR_DETAIL as GQL_HOME_FOR_DETAIL } from "~/services/gql/homes";
 import { complex as getComplex, GQL_FOR_DETAIL } from "~/services/gql/complexes";
-import { debounce } from "~/utils";
+import { debounce, computeDeadline } from "~/utils";
 
 const route = useRoute();
 
 // complex
 const { result, loading, error } = getComplex(route.params.id as string, GQL_FOR_DETAIL);
 const complex = computed(() => result.value?.complex ?? null);
-
-const computeDeadline = ({ stage, quarter_end, year_end }) => {
-    if (stage?.name.toLocaleLowerCase() === "сдан") return "Сдан";
-    else if (quarter_end && year_end) return `${quarter_end} квартал ${year_end}`;
-    else return undefined;
-};
 
 // Homes rather (:
 const deadlines = computed(() => {
@@ -88,7 +82,7 @@ watch(
 
             <app-width class="mt-7 md:mt-[59px] mb-[33px] md:mb-[100px]" tag="section">
                 <the-bread-crumb v-if="complex" :city="complex?.city" :complex="complex?.name" class="mb-[19px] md:mb-[40px]" />
-                <building-card :complex="complex" :stocks="!!discounts.length" class="mount-animation anm-hidden" />
+                <building-card :promotions-count="discounts.length" :complex="complex" :stocks="!!discounts.length" class="mount-animation anm-hidden" />
             </app-width>
 
             <app-width class="tow-cols-md" id="anm-root">

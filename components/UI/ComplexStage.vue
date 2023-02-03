@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { isAllBuilt, onlyFewBuilt } from "~/utils";
 
-defineProps<{ countHomes?: object }>();
+defineProps<{ countHomes?: ICountHomes }>();
 </script>
 
 <template>

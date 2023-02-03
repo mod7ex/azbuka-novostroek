@@ -32,12 +32,15 @@ const loadMore = () => {
     });
 };
 
+const debounceLoad = debounce(() => refetch({ page: 1, first: props.count, ...prepare(filter.value) }));
+
+watch(pingRef, debounceLoad, { deep: true });
+
 watch(
-    pingRef,
-    () => {
-        debounce(async () => {
-            await refetch({ page: 1, first: props.count, ...prepare(filter.value) });
-        })();
+    () => filter.value.name,
+    (v) => {
+        if (v) return;
+        debounceLoad();
     },
     { deep: true }
 );

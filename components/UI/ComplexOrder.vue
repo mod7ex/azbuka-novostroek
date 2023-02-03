@@ -19,7 +19,7 @@ const _set = (v: string) => {
         </button>
 
         <Transition name="slide-up-fade-out">
-            <Blurable v-if="!isCollapsed" @blured="() => toggle(true)" class="absolute shadow bg-white left-0 right-0 rounded-b-[5px] text-[#131313] text-[13px] md:text-[14px] font-[Raleway] font-extralight md:font-light leading-4">
+            <Blurrable v-if="!isCollapsed" @blurred="() => toggle(true)" class="absolute shadow bg-white left-0 right-0 rounded-b-[5px] text-[#131313] text-[13px] md:text-[14px] font-[Raleway] font-extralight md:font-light leading-4">
                 <!-- prettier-ignore -->
                 <button
                     v-for="{ label, value } in options"
@@ -29,7 +29,7 @@ const _set = (v: string) => {
                 >
                     {{ label }}
                 </button>
-            </Blurable>
+            </Blurrable>
         </Transition>
     </div>
 </template>

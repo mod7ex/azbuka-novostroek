@@ -52,7 +52,7 @@ const handelInput = (e: Event, el: "from" | "to") => {
     <!-- prettier-ignore -->
     <filter-wrapper
         :is-collapsed="isCollapsed"
-        @blured="handelBlur"
+        @blurred="handelBlur"
         class="text-xs divide-x absolute top-7 -left-16 z-50 bg-white app-shadow rounded py-[6px] min-w-[300px] flex"
     >
         <div class="px-3 py-[6px]">

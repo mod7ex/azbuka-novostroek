@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { SECTIONS } from "~/constants";
-import Logo from "~/assets/svg/logo.svg";
 
 defineEmits(["close"]);
 </script>
@@ -9,7 +8,7 @@ defineEmits(["close"]);
     <app-width tag="nav">
         <div class="flex justify-between items-center mb-[73px]">
             <NuxtLink @click="() => $emit('close')" :to="{ name: 'index' }" class="uppercase text-sm font-bold">
-                <app-img :src="Logo" alt="" width="83" height="41" />
+                <app-logo :width="83" :height="41" />
             </NuxtLink>
 
             <button @click="() => $emit('close')" class="cursor-pointer">

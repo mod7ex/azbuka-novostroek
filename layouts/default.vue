@@ -24,9 +24,9 @@ const isMatch = useMediaQuery("(min-width: 768px)");
                 <the-default-header @toggle="() => toggle()" />
 
                 <Transition name="slide-fade">
-                    <Blurable @blured="() => toggle(true)" v-if="!isCollapsed" class="mobile-nav absolute z-50 top-0 left-0 right-0 bg-white app-shadow pt-5 pb-[58px]">
+                    <Blurrable @blurred="() => toggle(true)" v-if="!isCollapsed" class="mobile-nav absolute z-50 top-0 left-0 right-0 bg-white app-shadow pt-5 pb-[58px]">
                         <LazyMobileMenu v-if="!isCollapsed" @close="() => toggle()" />
-                    </Blurable>
+                    </Blurrable>
                 </Transition>
 
                 <show-case v-if="!inner" />

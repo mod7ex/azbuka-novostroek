@@ -6,11 +6,16 @@ declare global {
         year_end?: Numberish;
     }
 
+    interface ICountHomes {
+        total?: number;
+        finished?: number;
+    }
+
+    type SelectOptions<T = Numberish, L = Numberish> = { value: T; label: L };
+
     type TFunc = (...args: any[]) => any;
 
     type Numberish = number | string;
-
-    type SelectOptions<T = Numberish> = { value: T; label: Numberish };
 }
 
 export {};

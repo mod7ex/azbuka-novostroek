@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { client } from "process";
 import RawMobileFilter from "~/components/Partials/filter/RawMobileFilter.vue";
 
 const { apartments, deadlines, count_rooms, ready, load } = useFilterData();
@@ -8,7 +9,16 @@ onMounted(load);
 const [isCollapsed, toggle] = useToggle();
 const [isFilterCollapsed, toggleFilter] = useToggle();
 
-const { filter, reset, ping } = useFilter();
+const { filter, reset, ping, dirty } = useFilter();
+
+const check = () => {
+    if (process.client) {
+        // @ts-ignore
+        return document.activeElement.tagName !== "INPUT" || document.activeElement.type !== "search";
+    }
+
+    return true;
+};
 </script>
 
 <template>
@@ -31,9 +41,10 @@ const { filter, reset, ping } = useFilter();
                 :handel-blur="() => toggleFilter(true)"
                 :is-collapsed="isFilterCollapsed"
                 class="shadow absolute bg-white left-0 right-0 p-1 rounded-b border border-gray-200 border-t-0"
+                :condition="check"
             >
                 <!-- prettier-ignore -->
-                <div class="shadow border border-[#3478f624] rounded mb-4" >
+                <div :class="['shadow border border-[#3478f624] rounded']" >
                     <raw-mobile-filter
                         v-if="ready"
                         class="z-50 px-[18px] pb-2"
@@ -62,7 +73,8 @@ const { filter, reset, ping } = useFilter();
                     :is-collapsed="isCollapsed"
                     :class="[
                         `hg-${16}`,
-                        'app-shadow border border-[#3478f624] rounded mb-6 p-[18px]',
+                        'app-shadow border border-[#3478f624] rounded p-[18px]',
+                        ready ? 'mt-4' : ''
                     ]"
                 >
                     <div class="mb-[18px] text-[#4F4F4F]">
@@ -103,8 +115,8 @@ const { filter, reset, ping } = useFilter();
                     </div>
                 </filter-wrapper>
 
-                <div>
-                    <button class="mx-auto flex items-center justify-center gap-x-[14px] mb-6" @click="reset">
+                <div v-if="dirty" >
+                    <button class="my-6  mx-auto flex items-center justify-center gap-x-[14px]" @click="reset">
                         <app-i class="w-5 h-5 text-[#1DA958]" name="material-symbols:close" />
                         <p class="text-[13px] leading-[13px] font-bold font-[Inter] text-[#131313]">Сбросить фильтры</p>
                     </button>

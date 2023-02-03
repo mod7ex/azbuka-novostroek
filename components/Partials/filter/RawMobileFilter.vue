@@ -159,28 +159,28 @@ const resetArea = () => {
         <ul v-if="rooms_bullets.length || price_bullet || area_bullet || deadline_bullet" class="flex items-center flex-wrap gap-2 mb-3">
             <li v-for="{ label, value } in rooms_bullets" :key="value" class="bg-[#3478F6] rounded-md py-[3px] px-2">
                 <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ label }}</span>
-                <button @click="() => unpickRoomCOunt(value)">
+                <button @click.stop="() => unpickRoomCOunt(value)">
                     <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
                 </button>
             </li>
 
             <li v-if="price_bullet" class="bg-[#3478F6] rounded-md py-[3px] px-2">
                 <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ price_bullet }}</span>
-                <button @click="resetPrice">
+                <button @click.stop="resetPrice">
                     <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
                 </button>
             </li>
 
             <li v-if="area_bullet" class="bg-[#3478F6] rounded-md py-[3px] px-2">
                 <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ area_bullet }}</span>
-                <button @click="resetArea">
+                <button @click.stop="resetArea">
                     <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
                 </button>
             </li>
 
             <li v-if="deadline_bullet" class="bg-[#3478F6] rounded-md py-[3px] px-2">
                 <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ deadline_bullet }}</span>
-                <button @click="resetDeadline">
+                <button @click.stop="resetDeadline">
                     <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
                 </button>
             </li>
