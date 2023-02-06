@@ -21,12 +21,19 @@ const percents_options = [
     { value: "percents-1", label: "Материнский капитал" },
 ];
 
-const { state: mortgageForm, pay_per_month } = useMortgageForm();
+const { state: mortgageForm, pay_per_month, reset } = useMortgageForm();
 
-onMounted(() => {
-    mortgageForm.value.selected_percents = "percents";
-    mortgageForm.value.advance = props.minPrice * 0.15;
+const ignite = () => {
+    reset();
+
     mortgageForm.value.price = props.minPrice;
+    mortgageForm.value.advance = props.minPrice * 0.15;
+};
+
+onMounted(ignite);
+
+watch(current, (v) => {
+    v === 1 && ignite();
 });
 
 watch(
@@ -76,7 +83,7 @@ watch(
                 <div class="form-section mb-[23px] md:col-span-1 md:mb-0">
                     <labled-range-input label="Первый взнос" v-model:last_range="mortgageForm.advance" :max="mortgageForm.price" :min="mortgageForm.price * 0.15" bg>
                         <template #thums>
-                            <range-input class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :max="mortgageForm.price" :min="mortgageForm.price * 0.15" v-model:last_range="mortgageForm.advance" />
+                            <range-input :key="mortgageForm.price" class="absolute bottom-0 w-11/12 left-0 right-0 mx-auto md:w-full" uni :max="mortgageForm.price" :min="mortgageForm.price * 0.15" v-model:last_range="mortgageForm.advance" />
                         </template>
 
                         <template #max-label>

@@ -3,7 +3,7 @@ import ApartmentPlan from "~/components/Partials/catalog/ApartmentPlan.vue";
 import { apartments as getApartments, type Filter } from "~/services/gql/apartments";
 import { debounce } from "~/utils";
 
-defineProps<{ countHomes: ICountHomes; complexName?: string; rooms?: SelectOptions<Numberish, string>[] }>();
+defineProps<{ countHomes: ICountHomes; complexName?: string; rooms?: SelectOptions<Numberish, string>[]; optimalBank?: any }>();
 
 const current = shallowRef(-1);
 
@@ -13,13 +13,13 @@ const { result, loading, refetch, load, fetchMore } = getApartments({ page: 1, f
 
 const apartments = computed(() => result.value?.apartments?.data ?? []);
 
-let count = 0;
+let isLoaded = false;
 
 watch(
     [currentHome, current],
     debounce(([home_id, count_rooms] /* , [old_home_id, old_count_rooms] */) => {
-        if (!count) {
-            count++;
+        if (!isLoaded) {
+            isLoaded = true;
             return load();
         }
 
@@ -63,6 +63,8 @@ useIntersectionObserver(elementRef, loadMore, {
 });
 
 const { scroll, targetRef } = useScroll();
+
+const { optimal_pay_per_month } = useMortgageForm();
 </script>
 
 <template>
@@ -88,6 +90,8 @@ const { scroll, targetRef } = useScroll();
                             <template #stage>
                                 <complex-stage :count-homes="countHomes" class="hidden md:flex" />
                             </template>
+
+                            <template #mortgage> от {{ optimal_pay_per_month(optimalBank, item?.price) }}/мес </template>
 
                             <!--
                                 <template #pre-cta>

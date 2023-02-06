@@ -60,13 +60,19 @@ const { prepare } = useMortgageForm();
                     <span class="font-normal text-[#878787]">Кухня</span>
                     <span class="font-medium">{{ areaLabel(apartment?.area_kitchen) }}</span>
                 </li>
-                <!-- <li class="font-[Inter] text-[14px] leading-[17px] flex justify-between items-center mb-3">
-                    <span class="font-normal text-[#878787]">Отделка</span>
-                    <span class="font-medium">{{ "Чистовая" }}</span>
-                </li> -->
+                <!--
+                    <li class="font-[Inter] text-[14px] leading-[17px] flex justify-between items-center mb-3">
+                        <span class="font-normal text-[#878787]">Отделка</span>
+                        <span class="font-medium">{{ "Чистовая" }}</span>
+                    </li>
+                -->
                 <li class="font-[Inter] text-[14px] leading-[17px] flex justify-between items-center">
                     <span class="font-normal text-[#878787]">Ипотека</span>
-                    <span class="font-medium underline text-[#3478F6]">от {{ format_thousands(64335) }} ₽/мес</span>
+                    <span class="font-medium underline text-[#3478F6]">
+                        <NuxtLink @click="() => prepare({ home, rooms: apartment?.count_rooms, price: apartment?.price })" :to="{ hash: `#${SECTIONS.MORTGAGE}` }">
+                            <slot name="mortgage"> от {{ format_thousands(64335) }} ₽/мес </slot>
+                        </NuxtLink>
+                    </span>
                 </li>
             </ul>
         </div>

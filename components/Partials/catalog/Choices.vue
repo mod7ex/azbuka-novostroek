@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import Doc from "~/assets/svg/doc.svg";
-const props = defineProps<{ city?: any; home?: any; id?: string; deadlines?: any[]; loading?: boolean }>();
+const props = defineProps<{ city?: any; home?: any; id?: string; deadlines?: SelectOptions[]; loading?: boolean }>();
 
 const { scroll, targetRef } = useScroll();
 
 const currentHome = useCurrentHome();
 
 const deadline = computed(() => props.deadlines?.find(({ value }) => value == props.home?.id)?.label);
-
-const options = ["Характеристики", "Документы", "Ход строительства"];
-const current = useCurrentChoicesOption();
 
 // -----------------------------------------------------------
 
@@ -22,6 +19,9 @@ const docs = computed(() => {
 });
 
 // -----------------------------------------------------------
+
+const options = ["Характеристики", "Документы", "Ход строительства"];
+const current = useCurrentChoicesOption();
 
 onMounted(() => {
     const _default = props.deadlines[0]?.value;

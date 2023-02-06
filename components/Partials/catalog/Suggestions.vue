@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Building from "~/components/Partials/Building.vue";
+import Complex from "~~/components/Partials/Complex.vue";
 import { similarComplexes } from "~/services/gql/complexes";
 
 const props = defineProps<{ complex_id?: Numberish }>();
@@ -21,7 +21,7 @@ const { scroll, targetRef } = useScroll();
                     <scroll-button left v-if="complexes.length" class="shadow-lg top-0 bottom-0 my-auto absolute left-[-25px]" :on-scroll="() => scroll({ left: -300 })" />
 
                     <div ref="targetRef" class="pl-[10px] pr-[20px] overflow-x-scroll no-scroll-thum py-14 flex gap-3 md:gap-[30px]">
-                        <Building v-for="complex in complexes" :key="complex.id" :complex="complex" under-construction shadow class="md:min-w-[300px]" />
+                        <Complex v-for="complex in complexes" :key="complex.id" :complex="complex" under-construction shadow class="md:min-w-[300px]" />
                     </div>
                 </div>
 
@@ -33,7 +33,7 @@ const { scroll, targetRef } = useScroll();
             <p class="text-center text-[26px] leading-[36px] font-bold text-[#131313] font-[Raleway] mb-7">Вам подойдет</p>
 
             <div class="grid grid-cols-12 gap-3 md:gap-[30px] mb-[28px] md:mb-[61px] px-5">
-                <Building v-for="complex in complexes" :key="complex.id" :complex="complex" under-construction shadow class="" />
+                <Complex v-for="complex in complexes" :key="complex.id" :complex="complex" under-construction shadow class="" />
             </div>
         </div>
     </div>

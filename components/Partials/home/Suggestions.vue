@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Building from "~/components/Partials/Building.vue";
+import Complex from "~~/components/Partials/Complex.vue";
 import { complexes as getComplexes, GQL_FOR_LIST } from "~/services/gql/complexes";
 import { debounce } from "~/utils";
 
@@ -60,7 +60,7 @@ watch(
             <div>
                 <div class="grid grid-cols-12 gap-3 md:gap-[30px] mb-[28px] md:mb-[61px]">
                     <!-- 26 + 2 = 28 -->
-                    <Building v-for="complex in complexes" :key="complex.id" :complex="complex" under-construction shadow />
+                    <Complex v-for="complex in complexes" :key="complex.id" :complex="complex" under-construction shadow />
                 </div>
             </div>
 

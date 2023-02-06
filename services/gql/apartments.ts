@@ -105,6 +105,9 @@ export const APARTMENT_DETAILS = `
   layout_url
   difference_last_price
   is_grow_last_price
+  status {
+    id
+  }
   
   # status {
   #   id
@@ -172,6 +175,7 @@ export function apartments(filter: Filter, data = APARTMENT_DETAILS, options = {
           apartments(
             page: $page
             first: $first
+            status_id: [1, 2]
             ${APARTMENTS_FILTER_AS_QUERY}
           ) {
             data {

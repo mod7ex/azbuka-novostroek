@@ -9,8 +9,6 @@ const LazyMobileMenu = defineAsyncComponent(() => import("~/components/Partials/
 defineProps<{ inner?: true }>();
 
 const [isCollapsed, toggle] = useToggle();
-
-const isMatch = useMediaQuery("(min-width: 768px)");
 </script>
 
 <template>
@@ -33,7 +31,7 @@ const isMatch = useMediaQuery("(min-width: 768px)");
             </div>
         </div>
 
-        <Search v-if="!inner || isMatch" class="z-[100]" />
+        <Search :class="['z-[100] hidden md:block']" />
 
         <main>
             <slot />
@@ -78,7 +76,7 @@ main {
 .inner {
     .show-case-container {
         background: transparent;
-        background: linear-gradient(179.92deg, rgba(229, 240, 252, 0.1) 14.39%, rgba(255, 255, 255, 0) 99.93%), rgba(229, 240, 252, 0.3);
+        /* background: linear-gradient(179.92deg, rgba(229, 240, 252, 0.1) 14.39%, rgba(255, 255, 255, 0) 99.93%), rgba(229, 240, 252, 0.3); */
 
         @include break_point(761px) {
             padding-bottom: 183px;

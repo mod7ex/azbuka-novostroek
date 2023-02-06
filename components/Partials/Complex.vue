@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import { format_thousands } from "~/utils";
+import { isArray } from "~/utils/types";
 
-withDefaults(
+const props = withDefaults(
     defineProps<{
-        complex: any;
+        complex?: any;
         actions?: boolean;
         shadow?: true;
         whiteCta?: true;
@@ -16,21 +17,28 @@ withDefaults(
 const startingPrice = (payload) => {
     let _items = payload?.apartments_summary;
 
-    if (!(typeof _items === "object")) return 0;
+    if (typeof _items === "object") {
+        // object but not an array
+        if (!isArray(_items)) _items = Object.values(_items);
 
-    if (!Array.isArray(_items)) {
-        _items = Object.values(_items);
+        if (_items.length) {
+            return _items?.reduce((prev, curr) => {
+                if (prev?.min_price > curr?.min_price) return curr;
+                return prev;
+            })?.min_price;
+        }
     }
 
-    return _items?.reduce((prev, curr) => {
-        if (prev?.min_price > curr?.min_price) return curr;
-        return prev;
-    })?.min_price;
+    return 0;
+};
+
+const navigate = () => {
+    navigateTo({ name: "catalog-id", params: { id: props.complex?.id }, hash: "#main-content" });
 };
 </script>
 
 <template>
-    <NuxtLink :to="{ name: 'catalog-id', params: { id: complex?.id }, hash: '#main-content' }" :class="['wrapper cursor-pointer', $attrs.class]">
+    <div @click="navigate" :class="['wrapper cursor-pointer', $attrs.class]">
         <div :class="['building transition-all duration-300 md:rounded-[3px] h-full flex flex-col', shadow ? 'building-shadow' : '']">
             <div class="relative img rounded-[5px] md:rounded-none md:rounded-t w-full">
                 <div :class="['h-[120px] sm:h-44', whiteCta ? 'md:h-[163px]' : 'md:h-[200px]']">
@@ -38,9 +46,7 @@ const startingPrice = (payload) => {
                 </div>
 
                 <span class="absolute top-0 right-0 left-0 flex justify-between p-[9px] md:p-[13px]" v-if="actions">
-                    <client-only>
-                        <call-us @click.stop="() => {}" class="z-[49]" />
-                    </client-only>
+                    <call-us @click.stop="() => {}" class="z-[49]" />
                 </span>
             </div>
 
@@ -70,7 +76,6 @@ const startingPrice = (payload) => {
                     <span class="tex-[#131313] font-normal leading-5 text-[14px]">
                         <slot name="location">
                             <p>{{ complex.city?.name }}, {{ complex.district?.name }}, {{ complex.address }}</p>
-                            <!-- <p class="inline-block"></p> -->
                         </slot>
                     </span>
                 </p>
@@ -106,7 +111,7 @@ const startingPrice = (payload) => {
                 </button>
             </div>
         </div>
-    </NuxtLink>
+    </div>
 </template>
 
 <style lang="scss">

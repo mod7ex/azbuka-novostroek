@@ -13,7 +13,7 @@ withDefaults(
 </script>
 
 <template>
-    <component :id="id" :is="tag" :class="['some-random', 'max-w-[1441px] w-full mx-auto', padding ? 'px-5 md:px-[60px]' : '', $attrs.class]">
+    <component :id="id" :is="tag" :class="['max-w-[1441px] w-full mx-auto', padding ? 'px-5 md:px-[60px]' : '', $attrs.class]">
         <slot />
     </component>
 </template>

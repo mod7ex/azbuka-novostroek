@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Building from "~/components/Partials/Building.vue";
+import Complex from "~~/components/Partials/Complex.vue";
 import BuildingImg from "~/assets/img/catalog-promotion-building.png";
 
 const isMatch = useMediaQuery("(min-width: 768px)");
@@ -15,7 +15,7 @@ const isMatch = useMediaQuery("(min-width: 768px)");
             <div class="buildings grid grid-cols-12 gap-3 md:gap-[25px] mb-[28px] md:mb-[40px] mt-10">
                 <!-- 26 + 2 = 28 -->
                 <client-only>
-                    <Building v-for="i in isMatch ? 3 : 4" :key="i" :img="BuildingImg" :actions="false" white-cta class="col-span-4-md-force">
+                    <Complex v-for="i in isMatch ? 3 : 4" :key="i" :img="BuildingImg" :actions="false" white-cta class="col-span-4-md-force">
                         <template #description-up>
                             <p class="flex items-center justify-center gap-[5px] md:hidden">
                                 <app-i class="text-[#1DA958] w-3 h-3" name="heroicons-outline:location-marker" />
@@ -44,7 +44,7 @@ const isMatch = useMediaQuery("(min-width: 768px)");
                             <span class="text-[14px] font-normal leading-4">Апартаменты</span>
                             <span class="text-[14px] font-bold leading-4">от 9 млн ₽</span>
                         </template>
-                    </Building>
+                    </Complex>
                 </client-only>
             </div>
 

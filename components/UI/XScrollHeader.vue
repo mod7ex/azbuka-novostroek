@@ -2,7 +2,7 @@
 import { isObject, isPlainObject } from "~/utils/types";
 
 interface Props {
-    choices: string[] | { label: string; value: Numberish }[];
+    choices: string[] | SelectOptions[];
     modelValue: Numberish;
     buttons?: true;
     padding?: boolean;

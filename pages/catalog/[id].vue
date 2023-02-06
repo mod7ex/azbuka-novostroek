@@ -22,6 +22,19 @@ const route = useRoute();
 // complex
 const { result, loading, error } = getComplex(route.params.id as string, GQL_FOR_DETAIL);
 const complex = computed(() => result.value?.complex ?? null);
+const banks = computed(() => complex.value?.banks ?? []);
+
+const optimalBank = computed(() => {
+    return banks.value?.reduce((prev, curr) => {
+        const previous_percents = prev?.percents;
+        const current_percents = curr?.percents;
+
+        if (!previous_percents) return curr;
+
+        if (previous_percents > current_percents) return curr;
+        return prev;
+    }, {});
+});
 
 // Homes rather (:
 const deadlines = computed(() => {
@@ -39,30 +52,33 @@ const deadlines = computed(() => {
 // Home
 const currentHome = useCurrentHome();
 const currentHomeID = reactive({ id: currentHome }); // [FIX] : just to fix @vue/apollo issue of using old values
-const { result: homeResult, loading: homeLoading, error: homeError, refetch: homeRefetch, load } = getHome(currentHomeID, GQL_HOME_FOR_DETAIL);
+const { result: homeResult, loading: homeLoading, refetch: homeRefetch, load } = getHome(currentHomeID, GQL_HOME_FOR_DETAIL);
 const home = computed(() => homeResult.value?.home ?? null);
 
 const discounts = computed(() => home.value?.discounts ?? []);
 
 // [FIX] studio won't appear
 const rooms = computed(() => {
-    return (
-        home.value?.summary?.map(({ rooms: value }) => {
-            let label = "";
+    const summary = homeResult.value?.home?.summary;
 
-            if (value === 0) label = "Студия";
-            else label = `${value}-комнатные `;
+    if (!summary) return [];
 
-            return { label, value };
-        }) ?? []
-    );
+    return summary.map(({ rooms: value }) => {
+        let label = "";
+
+        if (value === 0) label = "Студия";
+        else label = `${value}-комнатные `;
+
+        return { label, value };
+    });
 });
 
 watch(
     currentHome,
-    debounce((id, oldID) => {
-        if (oldID == null) return load();
-        return homeRefetch({ id });
+    debounce(async (id, oldID) => {
+        if (homeResult.value) await homeRefetch({ id });
+        else load();
+        /* rooms.effect.fn(); */
     })
 );
 
@@ -93,8 +109,25 @@ watch(
                         <building-location v-if="complex" :complex="complex" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md" />
 
                         <div :id="SECTIONS.CHARACTERISTICS_AND_APARTMENTS" class="mount-animation anm-hidden catalog-section-p mb-[25px] md:mb-[30px] md:bg-white md:rounded-[3px] shadow-inner-md md:pt-[40px]">
-                            <building-choices v-if="complex" :loading="homeLoading" :city="complex?.city" :home="home" :deadlines="deadlines" class="border border-transparent mb-[25px]" />
-                            <building-plan v-if="rooms.length" :count-homes="complex.count_homes" :complex-name="complex?.name" :rooms="rooms" class="mb-[25px]" />
+                            <!-- prettier-ignore -->
+                            <building-choices
+                                v-if="complex"
+                                :loading="homeLoading"
+                                :city="complex?.city"
+                                :home="home"
+                                :deadlines="deadlines"
+                                class="border border-transparent mb-[25px]"
+                            />
+
+                            <!-- prettier-ignore -->
+                            <building-plan
+                                v-if="home && rooms.length"
+                                :count-homes="complex.count_homes"
+                                :complex-name="complex?.name"
+                                :rooms="rooms"
+                                :optimal-bank="optimalBank"
+                                class="mb-[25px]"
+                            />
                         </div>
 
                         <building-mortgage
@@ -102,7 +135,7 @@ watch(
                             :complex-name="complex.name"
                             :min-price="complex.min_price"
                             :max-price="complex.max_price"
-                            :banks="complex?.banks"
+                            :banks="banks"
                             :deadlines="deadlines"
                             :rooms="rooms"
                             :id="SECTIONS.MORTGAGE"

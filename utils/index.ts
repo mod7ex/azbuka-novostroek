@@ -110,10 +110,10 @@ export const rawFilter = () => ({
 });
 
 export const RawMortgageData = () => ({
-    selected_percents: "",
+    selected_percents: "percents",
     price: 0,
     advance: 0,
-    credit_period: 20,
+    credit_period: 15,
     home: undefined,
     room_count: undefined,
 });
