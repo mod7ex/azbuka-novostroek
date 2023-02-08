@@ -22,8 +22,8 @@ const [isCollapsed, toggle] = useToggle();
                 <the-default-header @toggle="() => toggle()" />
 
                 <Transition name="slide-fade">
-                    <Blurrable @blurred="() => toggle(true)" v-if="!isCollapsed" class="mobile-nav absolute z-50 top-0 left-0 right-0 bg-white app-shadow pt-5 pb-[58px]">
-                        <LazyMobileMenu v-if="!isCollapsed" @close="() => toggle()" />
+                    <Blurrable @blurred="() => toggle(true)" v-if="!isCollapsed" class="mobile-nav absolute z-[1000] top-0 left-0 right-0 bg-white app-shadow pt-5 pb-[58px]">
+                        <LazyMobileMenu @close="() => toggle()" />
                     </Blurrable>
                 </Transition>
 
@@ -42,14 +42,6 @@ const [isCollapsed, toggle] = useToggle();
 </template>
 
 <style lang="scss" scoped>
-.search {
-    margin-top: -25px;
-
-    @include break_point(768px) {
-        margin-top: -95px;
-    }
-}
-
 main {
     @include break_point(965px) {
         @include bg-img("about-cloud.png") {

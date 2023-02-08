@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Complex from "~~/components/Partials/Complex.vue";
 import { complexes as getComplexes, GQL_FOR_LIST } from "~/services/gql/complexes";
-import { debounce } from "~/utils";
+import { createDebounce, loadSummary } from "~/utils";
 
 const props = withDefaults(defineProps<{ id: string; sort?: true; count?: number }>(), {
     count: 8,
@@ -32,18 +32,30 @@ const loadMore = () => {
     });
 };
 
-const debounceLoad = debounce(() => refetch({ page: 1, first: props.count, ...prepare(filter.value) }));
+const load = () => refetch({ page: 1, first: props.count, ...prepare(filter.value) });
 
-watch(pingRef, debounceLoad, { deep: true });
+const { clear, debounce } = createDebounce(load);
+
+watch(pingRef, () => {
+    clear();
+    /* load(); */
+});
 
 watch(
     () => filter.value.name,
-    (v) => {
-        if (v) return;
-        debounceLoad();
+    () => {
+        /* debounce(); */
     },
     { deep: true }
 );
+
+/* watch(
+    filter,
+    async (v) => {
+        const data = await loadSummary(prepare(v));
+    },
+    { deep: true }
+); */
 </script>
 
 <template>

@@ -1,19 +1,29 @@
 <script setup lang="ts">
-withDefaults(defineProps<{ isCollapsed?: boolean; options?: { label: string; value: Numberish }[]; handelBlur?: () => void; modelValue?: number[] }>(), {});
+const props = withDefaults(defineProps<{ isCollapsed?: boolean; options?: SelectOptions<Numberish, string>[]; handelBlur?: () => void; modelValue?: number[] }>(), {});
 
-const payload = reactive({});
+const payload = ref({});
 
 const emit = defineEmits(["update:modelValue"]);
 
-watch(payload, (v) => {
-    const _payload = Object.entries(v)
-        .filter(([key, val]) => {
-            return !!val;
-        })
-        .map(([key, val]) => key);
+watch(
+    () => props.modelValue,
+    (v) => {
+        payload.value = v.reduce((prev, curr) => ({ ...prev, [curr]: true }), {});
+    },
+    { immediate: true }
+);
 
-    emit("update:modelValue", _payload);
-});
+watch(
+    payload,
+    (v) => {
+        const _payload = Object.entries(v)
+            .filter(([_, val]) => !!val)
+            .map(([key]) => parseInt(key));
+
+        emit("update:modelValue", _payload);
+    },
+    { deep: true }
+);
 </script>
 
 <template>

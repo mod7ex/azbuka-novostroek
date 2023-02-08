@@ -23,9 +23,24 @@ const isPriceCollapsed = computed(() => state.value !== CURRENT.Price);
 const isAreaCollapsed = computed(() => state.value !== CURRENT.Area);
 const isDeadlineCollapsed = computed(() => state.value !== CURRENT.Deadline);
 
-const { filter, ping } = useFilter();
-
-const { apartments, deadlines, count_rooms, load } = useFilterData();
+// prettier-ignore
+const {
+    reset,
+    filter,
+    rooms_bullets,
+    unpickRoomCount,
+    price_bullet,
+    resetPrice,
+    deadline_bullet,
+    resetDeadline,
+    area_bullet,
+    resetArea,
+    apartments,
+    count_rooms,
+    deadlines,
+    ping,
+    load,
+} = useFilter();
 
 onMounted(load);
 </script>
@@ -109,6 +124,50 @@ onMounted(load);
             </ul>
         </div>
 
+        <div class="flex justify-between items-start px-5 my-3">
+            <ul v-if="rooms_bullets.length || price_bullet || area_bullet || deadline_bullet" class="flex items-center flex-wrap gap-2">
+                <li v-for="{ label, value } in rooms_bullets" :key="value" class="bg-[#3478F6] rounded-md py-[3px] px-2">
+                    <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ label }}</span>
+                    <button @click="() => unpickRoomCount(value)">
+                        <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
+                    </button>
+                </li>
+
+                <li v-if="price_bullet" class="bg-[#3478F6] rounded-md py-[3px] px-2">
+                    <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ price_bullet }}</span>
+                    <button @click="resetPrice">
+                        <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
+                    </button>
+                </li>
+
+                <li v-if="area_bullet" class="bg-[#3478F6] rounded-md py-[3px] px-2">
+                    <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ area_bullet }}</span>
+                    <button @click="resetArea">
+                        <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
+                    </button>
+                </li>
+
+                <li v-if="deadline_bullet" class="bg-[#3478F6] rounded-md py-[3px] px-2">
+                    <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ deadline_bullet }}</span>
+                    <button @click="resetDeadline">
+                        <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
+                    </button>
+                </li>
+
+                <li class="bg-[#3478F6] rounded-md py-[3px] px-2">
+                    <button @click="() => reset()">
+                        <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">Сбросить фильтр</span>
+                    </button>
+                </li>
+            </ul>
+
+            <span></span>
+
+            <div>
+                <button @click="() => ping()" class="bg-[#3478F6] text-white w-full whitespace-nowrap py-2 px-3 rounded">Показать 852 предложения</button>
+            </div>
+        </div>
+
         <!-- prettier-ignore -->
         <!--
             <filter-wrapper
@@ -158,60 +217,63 @@ onMounted(load);
 <style lang="scss" scoped>
 $w: 1160px;
 
-.filter {
-    max-width: $w;
-    box-shadow: $md-box-shadow;
-}
+.search {
+    margin-top: -25px;
 
-.search-container {
-    max-width: $w;
-    box-shadow: $box-shadow;
-
-    .search-area {
-        justify-content: center;
+    @include break_point(768px) {
+        margin-top: -38px;
     }
 
-    .search-options {
-        display: none;
-    }
+    .search-container {
+        max-width: $w;
+        box-shadow: $box-shadow;
 
-    @include break_point(828px) {
-        box-shadow: $md-box-shadow;
-        height: auto;
-
-        .search-input {
-            flex-grow: 0;
-            width: 37ch;
+        .search-area {
+            justify-content: center;
         }
 
         .search-options {
-            display: block;
-        }
-    }
-
-    @include break_point(1154px) {
-        padding-left: 32px;
-        padding-right: 32px;
-
-        padding-top: 12px;
-        padding-bottom: 12px;
-        .search-options,
-        .search-input {
-            padding: 0;
+            display: none;
         }
 
-        .search-area {
-            & > :not([hidden]) ~ :not([hidden]) {
-                --tw-divide-x-reverse: 0;
-                border-right-width: calc(1px * var(--tw-divide-x-reverse));
-                border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
-            }
-
-            flex-wrap: nowrap;
-            justify-content: space-between;
+        @include break_point(828px) {
+            box-shadow: $md-box-shadow;
+            height: auto;
 
             .search-input {
-                flex-grow: 1;
+                flex-grow: 0;
+                width: 37ch;
+            }
+
+            .search-options {
+                display: block;
+            }
+        }
+
+        @include break_point(1154px) {
+            padding-left: 32px;
+            padding-right: 32px;
+
+            padding-top: 12px;
+            padding-bottom: 12px;
+            .search-options,
+            .search-input {
+                padding: 0;
+            }
+
+            .search-area {
+                & > :not([hidden]) ~ :not([hidden]) {
+                    --tw-divide-x-reverse: 0;
+                    border-right-width: calc(1px * var(--tw-divide-x-reverse));
+                    border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
+                }
+
+                flex-wrap: nowrap;
+                justify-content: space-between;
+
+                .search-input {
+                    flex-grow: 1;
+                }
             }
         }
     }

@@ -22,7 +22,8 @@ defineEmits(["update:modelValue", "search", "filter"]);
 
         <!-- prettier-ignore -->
         <input
-            @input.lazy="(e) => $emit('update:modelValue', (e.target as HTMLInputElement).value)"
+            @keyup.enter="() => $emit('search')"
+            @input="(e) => $emit('update:modelValue', (e.target as HTMLInputElement).value)"
             :value="modelValue"
             :placeholder="placeholder"
             :type="type"

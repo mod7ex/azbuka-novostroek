@@ -91,7 +91,7 @@ watch(
 
 <template>
     <div class="relative">
-        <meta-items />
+        <meta-items :title="complex?.name" :description="complex?.description" />
 
         <NuxtLayout name="inner">
             <div id="main-content" class="border border-transparent"></div>

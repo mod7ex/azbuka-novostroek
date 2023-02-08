@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { client } from "process";
 import RawMobileFilter from "~/components/Partials/filter/RawMobileFilter.vue";
 
-const { apartments, deadlines, count_rooms, ready, load } = useFilterData();
-
-onMounted(load);
-
 const [isCollapsed, toggle] = useToggle();
+
 const [isFilterCollapsed, toggleFilter] = useToggle();
 
-const { filter, reset, ping, dirty } = useFilter();
+const { filter, reset, ping, dirty, ready, load } = useFilter();
+
+onMounted(load);
 
 const check = () => {
     if (process.client) {
@@ -45,13 +43,7 @@ const check = () => {
             >
                 <!-- prettier-ignore -->
                 <div :class="['shadow border border-[#3478f624] rounded']" >
-                    <raw-mobile-filter
-                        v-if="ready"
-                        class="z-50 px-[18px] pb-2"
-                        :count_rooms="count_rooms"
-                        :deadlines="deadlines"
-                        :apartments="apartments"
-                    >
+                    <raw-mobile-filter v-if="ready" class="z-50 px-[18px] pb-2" >
                         <template #all-filters>
                             <button class="mt-1 flex items-center gap-3" @click="() => toggle()" >
                                 <app-i v-if="!isCollapsed" name="material-symbols:close" class="w-5 h-5 text-[#3478F6]" />

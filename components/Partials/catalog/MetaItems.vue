@@ -1,4 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const props = defineProps<{ description?: string; title?: string }>();
+
+useHead({
+    title: `ЖК ${props.title}`,
+    meta: [{ name: "description", content: props.description }],
+});
+</script>
 
 <template>
     <Head>

@@ -1,70 +1,26 @@
 <script setup lang="ts">
 import RangeInput from "~/components/UI/TowThumbsRangeInput.vue";
 import { DONE_DEADLINE } from "~/constants";
-import { deadlineToLabel } from "~/utils";
-
-const props = defineProps<{ count_rooms: SelectOptions[]; deadlines: SelectOptions<IDeadline>[]; apartments: any }>();
-
-const apartments = computed(() => props.apartments);
 
 const [isAreaCollapsed, toggleArea] = useToggle();
 
 const [isPriceCollapsed, togglePrice] = useToggle();
 
-const { filter } = useFilter();
-
-// Rooms Count
-const rooms_bullets = computed(() => filter.value.count_rooms.map((value) => ({ value, label: `${value} комн.` })));
-const unpickRoomCOunt = (v: Numberish) => {
-    filter.value.count_rooms = filter.value.count_rooms.filter((_v) => _v != v);
-};
-
-// Price
-const price_bullet = computed(() => {
-    const { price_from, price_to } = filter.value;
-
-    if (!price_from && !price_to) return undefined;
-
-    const _from = Math.floor((price_from ?? apartments.value?.min_price) / 100000) / 10;
-    const _to = Math.floor((price_to ?? apartments.value?.max_price) / 100000) / 10;
-
-    return `Цена от ${_from} до ${_to}`;
-});
-const resetPrice = () => {
-    filter.value.price_from = undefined;
-    filter.value.price_to = undefined;
-};
-
-// Deadline
-
-const deadline_bullet = computed(() => {
-    const { deadline } = filter.value;
-
-    if (!deadline) return undefined;
-
-    if (deadline.quarter_end == DONE_DEADLINE.quarter_end && deadline.year_end == DONE_DEADLINE.year_end) return "Сдан";
-
-    return deadlineToLabel(deadline);
-});
-const resetDeadline = () => {
-    filter.value.deadline = undefined;
-};
-
-// Area
-const area_bullet = computed(() => {
-    const { area_total_to, area_total_from } = filter.value;
-
-    if (!area_total_to && !area_total_from) return undefined;
-
-    const _from = Math.floor(area_total_from ?? apartments.value?.min_area_total);
-    const _to = Math.floor(area_total_to ?? apartments.value?.max_area_total);
-
-    return `Площадь от ${_from} до ${_to}`;
-});
-const resetArea = () => {
-    filter.value.area_total_to = undefined;
-    filter.value.area_total_from = undefined;
-};
+// prettier-ignore
+const {
+    filter,
+    rooms_bullets,
+    unpickRoomCount,
+    price_bullet,
+    resetPrice,
+    deadline_bullet,
+    resetDeadline,
+    area_bullet,
+    resetArea,
+    apartments,
+    count_rooms,
+    deadlines,
+} = useFilter();
 </script>
 
 <template>
@@ -159,7 +115,7 @@ const resetArea = () => {
         <ul v-if="rooms_bullets.length || price_bullet || area_bullet || deadline_bullet" class="flex items-center flex-wrap gap-2 mb-3">
             <li v-for="{ label, value } in rooms_bullets" :key="value" class="bg-[#3478F6] rounded-md py-[3px] px-2">
                 <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ label }}</span>
-                <button @click.stop="() => unpickRoomCOunt(value)">
+                <button @click.stop="() => unpickRoomCount(value)">
                     <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
                 </button>
             </li>

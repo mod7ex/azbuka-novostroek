@@ -1,4 +1,27 @@
-import { isPlainObject } from "~/utils/types";
+import { isArray, isPlainObject } from "~/utils/types";
+
+export const createDebounce = <T extends (...args: any[]) => any>(fn: T, duration: number = 1000) => {
+    let timer: NodeJS.Timeout | undefined;
+
+    const clear = () => {
+        timer && clearTimeout(timer);
+    };
+
+    const debounce = function (...args: Parameters<T>) {
+        clear();
+
+        const ctx = this;
+
+        timer = setTimeout(() => {
+            fn.apply(ctx, args);
+        }, duration);
+    };
+
+    return {
+        debounce,
+        clear,
+    };
+};
 
 export const debounce = <T extends (...args: any[]) => any>(fn: T, duration: number = 1000) => {
     let timer: NodeJS.Timeout | undefined;
@@ -127,6 +150,42 @@ export const deadlineToLabel = (e: IDeadline) => `до ${e?.quarter_end} кв. $
 export const computeDeadline = ({ stage, quarter_end, year_end }) => {
     if (stage?.name.toLocaleLowerCase() === "сдан") return "Сдан";
     else if (quarter_end && year_end) return `${quarter_end} квартал ${year_end}`;
+};
+
+const filterToQuery = (params: ReturnType<typeof rawFilter>, prefix = "filter") => {
+    const _key = (k: string) => {
+        if (isArray(params)) return `${prefix}[]`;
+        else if (isPlainObject(params)) return prefix ? `${prefix}[${k}]` : k;
+    };
+
+    const query = Object.entries(params)
+        .filter(([_, val]) => {
+            if (val === null) return false;
+            if (isArray(val)) return !!val.length;
+            if (isPlainObject(val)) return !!Object.keys(val).length;
+            return true;
+        })
+        .map(([key, value]) => {
+            // @ts-ignore
+            if (isPlainObject(value)) return filterToQuery(value, _key(key));
+
+            return `${_key(key)}=${encodeURIComponent(value)}`;
+        });
+
+    return [].concat.apply([], query).join("&");
+};
+
+export const loadSummary = async (f: ReturnType<typeof rawFilter>) => {
+    const query = filterToQuery(f);
+
+    /* const response = await fetch(`${import.meta.env.END_POINT}/api/catalog?${query}&needSummary=1`); */
+    try {
+        const response = await fetch(`https://demo.azbuka-novostroek.com/api/catalog?${query}&needSummary=1`);
+        const data = await response.json();
+        return data;
+    } catch (e) {
+        console.log(e);
+    }
 };
 
 export * from "~/utils/filter";

@@ -165,7 +165,7 @@ export type Filter = Partial<{
 }>;
 
 export function apartments(filter: Filter, data = APARTMENT_DETAILS, options = { notifyOnNetworkStatusChange: true }) {
-    return useLazyQuery(
+    return useQuery(
         gql`
         query apartments(
           $page: Int
