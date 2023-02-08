@@ -38,13 +38,13 @@ const { clear, debounce } = createDebounce(load);
 
 watch(pingRef, () => {
     clear();
-    /* load(); */
+    load();
 });
 
 watch(
     () => filter.value.name,
     () => {
-        /* debounce(); */
+        debounce();
     },
     { deep: true }
 );
