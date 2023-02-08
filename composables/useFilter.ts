@@ -53,8 +53,12 @@ const useFilter = () => {
 
     // Rooms Count
     const rooms_bullets = computed(() => {
-        const _rooms_bullets = filter.value.count_rooms.map((value) => ({ value, label: `${value} комн.` }));
-        if (filter.value.is_studio) _rooms_bullets.push({ value: -1, label: "Студии" });
+        const { is_studio, count_rooms } = filter.value;
+        const _rooms_bullets = count_rooms.map((value) => ({ value, label: `${value} комн.` }));
+        if (is_studio) {
+            console.count(is_studio);
+            _rooms_bullets.push({ value: -1, label: "Студии" });
+        }
         return _rooms_bullets;
     });
     const unpickRoomCount = (v: Numberish) => {

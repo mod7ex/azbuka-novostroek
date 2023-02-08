@@ -1,29 +1,14 @@
 <script setup lang="ts">
-const props = withDefaults(defineProps<{ isCollapsed?: boolean; options?: SelectOptions<Numberish, string>[]; handelBlur?: () => void; modelValue?: number[] }>(), {});
-
-const payload = ref({});
+const props = withDefaults(defineProps<{ isCollapsed?: boolean; options?: SelectOptions<number, string>[]; handelBlur?: () => void; modelValue?: number[] }>(), {});
 
 const emit = defineEmits(["update:modelValue"]);
 
-watch(
-    () => props.modelValue,
-    (v) => {
-        payload.value = v.reduce((prev, curr) => ({ ...prev, [curr]: true }), {});
-    },
-    { immediate: true }
-);
-
-watch(
-    payload,
-    (v) => {
-        const _payload = Object.entries(v)
-            .filter(([_, val]) => !!val)
-            .map(([key]) => parseInt(key));
-
-        emit("update:modelValue", _payload);
-    },
-    { deep: true }
-);
+const handel = (e: number) => {
+    const v = new Set(props.modelValue);
+    if (v.has(e)) v.delete(e);
+    else v.add(e);
+    emit("update:modelValue", Array.from(v.values()));
+};
 </script>
 
 <template>
@@ -35,9 +20,15 @@ watch(
     >
         <slot name="before" />
 
-        <label v-for="item in options" :key="item.value" :for="`room-count_${item.label}-${item.value}`" class="flex gap-3 px-3 py-[6px] cursor-pointer hover:bg-gray-100">
-            <input type="checkbox" :id="`room-count_${item.label}-${item.value}`" v-model="payload[item.value]" />
-            <p class="text-xs">{{ item.label }}</p>
+        <label v-for="{ label, value } in options" :key="value" :for="`room-count-${value}`" class="flex gap-3 px-3 py-[6px] cursor-pointer hover:bg-gray-100">
+            <!-- prettier-ignore -->
+            <input
+                type="checkbox"
+                :id="`room-count-${value}`"
+                @input="() => handel(value)"
+                :checked="modelValue.includes(value)"
+            />
+            <p class="text-xs">{{ label }}</p>
         </label>
     </filter-wrapper>
 </template>

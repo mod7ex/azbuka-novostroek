@@ -1,4 +1,5 @@
 import { Ref, ShallowRef } from "nuxt/dist/app/compat/capi";
+import { queuedLast } from "~/utils";
 
 /*
  *
@@ -46,8 +47,10 @@ export default function useClickOutside<T extends HTMLElement>(ref: ShallowRef<T
             cb(e);
         };
 
-        console.log("listener registered"); /* this will happen once ;) */
-        document.addEventListener("click", handler);
+        queuedLast(() => {
+            console.log("listener registered"); /* this will happen once ;) */
+            document.addEventListener("click", handler);
+        });
 
         onScopeDispose(() => {
             console.log("event cleared");
@@ -64,8 +67,10 @@ export default function useClickOutside<T extends HTMLElement>(ref: ShallowRef<T
                 cb(e);
             };
 
-            console.log("listener registered"); /* this will happen many times ;) */
-            document.addEventListener("click", handler);
+            queuedLast(() => {
+                console.log("listener registered"); /* this will happen many times ;) */
+                document.addEventListener("click", handler);
+            });
 
             cleanUp(() => {
                 console.log("event cleared");

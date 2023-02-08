@@ -126,7 +126,7 @@ onMounted(load);
 
         <div class="flex justify-between items-start px-5 my-3">
             <ul v-if="rooms_bullets.length || price_bullet || area_bullet || deadline_bullet" class="flex items-center flex-wrap gap-2">
-                <li v-for="{ label, value } in rooms_bullets" :key="value" class="bg-[#3478F6] rounded-md py-[3px] px-2">
+                <li v-for="{ label, value } in rooms_bullets" :key="`${filter.is_studio}-${value}`" class="bg-[#3478F6] rounded-md py-[3px] px-2">
                     <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ label }}</span>
                     <button @click="() => unpickRoomCount(value)">
                         <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
