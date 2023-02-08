@@ -5,15 +5,11 @@ const [isCollapsed, toggle] = useToggle();
 
 const [isFilterCollapsed, toggleFilter] = useToggle();
 
-const { filter, reset, ping, dirty, ready, load } = useFilter();
-
-onMounted(load);
+const { filter, reset, ping, dirty, ready } = useFilter();
 
 const check = () => {
-    if (process.client) {
-        // @ts-ignore
-        return document.activeElement.tagName !== "INPUT" || document.activeElement.type !== "search";
-    }
+    // @ts-ignore
+    if (process.client) return document.activeElement.tagName !== "INPUT" || document.activeElement.type !== "search";
 
     return true;
 };

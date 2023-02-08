@@ -8,16 +8,6 @@ import { deadlineToLabel } from "~/utils";
 const prepare = (f: ReturnType<typeof rawFilter>) => {
     const shallow_copy = { ...f, ...f.deadline };
 
-    /*
-    let payload = JSON.parse(JSON.stringify(f)); // deep copy
-
-    if (isPlainObject(f.deadline)) payload = { ...payload, ...f.deadline };
-
-    delete payload.deadline;
-
-    return payload;
-    */
-
     delete shallow_copy.deadline;
 
     return shallow_copy;

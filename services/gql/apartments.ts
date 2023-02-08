@@ -71,7 +71,7 @@ status {
 `;
 
 export function apartmentsData(options = { notifyOnNetworkStatusChange: true }) {
-    return useLazyQuery(
+    return useQuery(
         gql`
             query apartmentsData {
                 apartmentsData {

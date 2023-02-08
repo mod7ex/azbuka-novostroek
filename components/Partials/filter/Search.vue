@@ -39,10 +39,7 @@ const {
     count_rooms,
     deadlines,
     ping,
-    load,
 } = useFilter();
-
-onMounted(load);
 </script>
 
 <template>

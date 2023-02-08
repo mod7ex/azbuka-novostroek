@@ -7,3 +7,4 @@ export const useCurrentPreviewedImg = () => useState<string | undefined>("curren
 export const useComplexOrderValue = () => useState<string | undefined>("complex-order", () => undefined);
 export const useMortgageData = () => useState("mortgage-form", RawMortgageData);
 export const useFilterPing = () => useState("filter-ping", () => 0);
+export const useFilterRawData = () => useState("filter-data", () => ({ apartments: null, homes: null }));

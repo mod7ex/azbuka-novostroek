@@ -357,7 +357,7 @@ export const GQL_FOR_PARSED_HOME = `
 */
 
 export function homesData(options = { notifyOnNetworkStatusChange: true }) {
-    return useLazyQuery(
+    return useQuery(
         gql`
             query homesData {
                 homesData {
