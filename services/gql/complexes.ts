@@ -185,6 +185,21 @@ export const GQL_PAGINATION_PART = `
     }
 `;
 
+export function complexesData(filter, options = { notifyOnNetworkStatusChange: true }) {
+    return useQuery(
+        gql`
+            query complexesData {
+                complexesData {
+                    count_complexes
+                    count_free_apartments
+                }
+            }
+        `,
+        () => filter,
+        options
+    );
+}
+
 export function complexes(data = GQL_FOR_LIST, filter = { page: 1, first: 12 }, options = { notifyOnNetworkStatusChange: true }) {
     return useQuery(
         gql`

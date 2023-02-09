@@ -1,4 +1,4 @@
-import { isFunction } from "~/utils";
+import { isFunction } from "~/utils/types";
 
 /**
  * @_init is by default true

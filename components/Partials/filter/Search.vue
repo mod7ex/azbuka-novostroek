@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import ComplexesSummary from "~/components/Partials/filter/ComplexesSummary.vue";
+const LazyFullFilter = defineAsyncComponent(() => import("~/components/Partials/filter/FullFilter.vue"));
+
 enum CURRENT {
     All,
     Type,
@@ -17,7 +20,7 @@ const clearState = () => {
     state.value = undefined;
 };
 
-// const isCollapsed = computed(() => state.value !== CURRENT.All);
+const isCollapsed = computed(() => state.value !== CURRENT.All);
 const isTypeCollapsed = computed(() => state.value !== CURRENT.Type);
 const isPriceCollapsed = computed(() => state.value !== CURRENT.Price);
 const isAreaCollapsed = computed(() => state.value !== CURRENT.Area);
@@ -39,6 +42,7 @@ const {
     count_rooms,
     deadlines,
     ping,
+    homes
 } = useFilter();
 </script>
 
@@ -55,20 +59,23 @@ const {
                         <li class="px-[27px] flex items-center relative">
                             <button @click="() => setState(CURRENT.Type)" class="whitespace-nowrap font-bold text-[14px] leading-5 cursor-pointer text-[#50535A]">Тип квартиры</button>
                             <!-- prettier-ignore -->
-                            <filter-by-rooms
-                                :is-collapsed="isTypeCollapsed"
-                                :handel-blur="clearState"
-                                :options="count_rooms"
-                                v-model="filter.count_rooms"
+                            <filter-wrapper 
+                                :is-collapsed="isTypeCollapsed" 
+                                @blurred="clearState"
+                                class="absolute -left-5 top-7 z-50 bg-white app-shadow rounded py-[6px] min-w-[200px]"
                             >
-                                <template #before>
-                                    <label :for="`room-count_studio-0`" class="flex gap-3 px-3 py-[6px] cursor-pointer hover:bg-gray-100">
-                                        <input type="checkbox" :id="`room-count_studio-0`" v-model="filter.is_studio" />
-                                        <p class="text-xs">Студии</p>
-                                    </label>
-                                    <hr />
-                                </template>
-                            </filter-by-rooms>
+                                <multi-select :options="count_rooms" v-model="filter.count_rooms" >
+                                    <template #before>
+                                        <li>
+                                            <label :for="`room-count_studio-0`" class="flex gap-3 px-3 py-[6px] cursor-pointer hover:bg-gray-100">
+                                                <input type="checkbox" :id="`room-count_studio-0`" v-model="filter.is_studio" />
+                                                <p class="text-xs">Студии</p>
+                                            </label>
+                                            <hr />
+                                        </li>
+                                    </template>
+                                </multi-select>
+                            </filter-wrapper>
                         </li>
 
                         <li class="px-[27px] flex items-center relative">
@@ -121,6 +128,10 @@ const {
             </ul>
         </div>
 
+        <filter-wrapper :is-collapsed="isCollapsed" :handel-blur="clearState" class="absolute left-0 right-0 px-5">
+            <lazy-full-filter />
+        </filter-wrapper>
+
         <div class="flex justify-between items-start px-5 my-3">
             <ul v-if="rooms_bullets.length || price_bullet || area_bullet || deadline_bullet" class="flex items-center flex-wrap gap-2">
                 <li v-for="{ label, value } in rooms_bullets" :key="`${filter.is_studio}-${value}`" class="bg-[#3478F6] rounded-md py-[3px] px-2">
@@ -161,53 +172,11 @@ const {
             <span></span>
 
             <div>
-                <button @click="() => ping()" class="bg-[#3478F6] text-white w-full whitespace-nowrap py-2 px-3 rounded">Показать 852 предложения</button>
+                <button @click="() => ping()" class="bg-[#3478F6] text-white w-full whitespace-nowrap py-2 px-3 rounded">
+                    <complexes-summary />
+                </button>
             </div>
         </div>
-
-        <!-- prettier-ignore -->
-        <!--
-            <filter-wrapper
-                tag="ul"
-                :is-collapsed="!isCollapsed"
-                :handel-blur="clearState"
-                class="filter mx-auto grid gap-4 grid-cols-12 py-4 pb-8 rounded-[5px] px-5 bg-white overflow-hidden hg-6 top-0"
-            >
-                <li class="col-span-4">
-                    <h4 class="mb-4 text-[#50535A] text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">расположение</h4>
-                    <div>
-                        <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Регион</button>
-                        <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Город</button>
-                        <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Адм. район</button>
-                        <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Народный район</button>
-                    </div>
-                </li>
-    
-                <li class="col-span-4">
-                    <h4 class="mb-4 text-[#50535A] text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">Дом</h4>
-                    <div>
-                        <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Класс недвижимости</button>
-                        <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Материал стен</button>
-                        <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Этажей в доме</button>
-                        <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Паркинг</button>
-                        <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Лифт</button>
-                        <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Коммерция</button>
-                    </div>
-                </li>
-    
-                <li class="col-span-4">
-                    <h4 class="mb-4 text-[#50535A] text-[14px] leading-4 font-extrabold font-[Raleway] h-12 uppercase flex items-center">КВАРТИРА</h4>
-                    <div>
-                        <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Этаж</button>
-                        <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Отделка</button>
-                        <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Общая площадь</button>
-                        <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Плозадь жилья</button>
-                        <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Площадь кухни</button>
-                        <button class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">Санузел</button>
-                    </div>
-                </li>
-            </filter-wrapper>
-        -->
     </app-width>
 </template>
 

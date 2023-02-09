@@ -37,18 +37,19 @@ export const debounce = <T extends (...args: any[]) => any>(fn: T, duration: num
     };
 };
 
-export const isFunction = (v: unknown): v is TFunc => typeof v === "function";
-
 export const uuidGen = (() => {
     let rootState = 0;
 
     return (payload = "some-random-string") => {
         let state = 0;
 
+        rootState++;
+
         return (inner_payload?: string) => {
             state++;
-            rootState++;
-            return `uid-${Date.now()}-${state}-${rootState}-${inner_payload ?? payload}`;
+
+            /* return `uid-${Date.now()}-${state}-${rootState}-${inner_payload ?? payload}`; */
+            return `uid-${state}-${rootState}-${inner_payload ?? payload}`;
         };
     };
 })();
@@ -150,42 +151,6 @@ export const deadlineToLabel = (e: IDeadline) => `до ${e?.quarter_end} кв. $
 export const computeDeadline = ({ stage, quarter_end, year_end }) => {
     if (stage?.name.toLocaleLowerCase() === "сдан") return "Сдан";
     else if (quarter_end && year_end) return `${quarter_end} квартал ${year_end}`;
-};
-
-const filterToQuery = (params: ReturnType<typeof rawFilter>, prefix = "filter") => {
-    const _key = (k: string) => {
-        if (isArray(params)) return `${prefix}[]`;
-        else if (isPlainObject(params)) return prefix ? `${prefix}[${k}]` : k;
-    };
-
-    const query = Object.entries(params)
-        .filter(([_, val]) => {
-            if (val === null) return false;
-            if (isArray(val)) return !!val.length;
-            if (isPlainObject(val)) return !!Object.keys(val).length;
-            return true;
-        })
-        .map(([key, value]) => {
-            // @ts-ignore
-            if (isPlainObject(value)) return filterToQuery(value, _key(key));
-
-            return `${_key(key)}=${encodeURIComponent(value)}`;
-        });
-
-    return [].concat.apply([], query).join("&");
-};
-
-export const loadSummary = async (f: ReturnType<typeof rawFilter>) => {
-    const query = filterToQuery(f);
-
-    /* const response = await fetch(`${import.meta.env.END_POINT}/api/catalog?${query}&needSummary=1`); */
-    try {
-        const response = await fetch(`https://demo.azbuka-novostroek.com/api/catalog?${query}&needSummary=1`);
-        const data = await response.json();
-        return data;
-    } catch (e) {
-        console.log(e);
-    }
 };
 
 export * from "~/utils/filter";

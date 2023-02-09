@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ComplexesSummary from "~/components/Partials/filter/ComplexesSummary.vue";
 import RawMobileFilter from "~/components/Partials/filter/RawMobileFilter.vue";
 
 const [isCollapsed, toggle] = useToggle();
@@ -109,7 +110,9 @@ const check = () => {
                         <p class="text-[13px] leading-[13px] font-bold font-[Inter] text-[#131313]">Сбросить фильтры</p>
                     </button>
 
-                    <Button @click="() => $emit('search')" label="Показать 852 предложения" class="bg-[#E71F61] text-white w-full" />
+                    <Button @click="() => $emit('search')" class="bg-[#E71F61] text-white w-full" >
+                        <complexes-summary />
+                    </Button>
                 </div>
             </filter-wrapper>
         </div>

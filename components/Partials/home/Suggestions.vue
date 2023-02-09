@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Complex from "~~/components/Partials/Complex.vue";
 import { complexes as getComplexes, GQL_FOR_LIST } from "~/services/gql/complexes";
-import { createDebounce, loadSummary } from "~/utils";
+import { createDebounce } from "~/utils";
 
 const props = withDefaults(defineProps<{ id: string; sort?: true; count?: number }>(), {
     count: 8,
@@ -48,14 +48,6 @@ watch(
     },
     { deep: true }
 );
-
-/* watch(
-    filter,
-    async (v) => {
-        const data = await loadSummary(prepare(v));
-    },
-    { deep: true }
-); */
 </script>
 
 <template>

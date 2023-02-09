@@ -48,12 +48,12 @@ export default function useClickOutside<T extends HTMLElement>(ref: ShallowRef<T
         };
 
         queuedLast(() => {
-            console.log("listener registered"); /* this will happen once ;) */
+            // console.log("listener registered"); /* this will happen once ;) */
             document.addEventListener("click", handler);
         });
 
         onScopeDispose(() => {
-            console.log("event cleared");
+            // console.log("event cleared");
             /* this will happen once ;) */ document.removeEventListener("click", handler);
         });
     } else {
@@ -68,12 +68,12 @@ export default function useClickOutside<T extends HTMLElement>(ref: ShallowRef<T
             };
 
             queuedLast(() => {
-                console.log("listener registered"); /* this will happen many times ;) */
+                // console.log("listener registered"); /* this will happen many times ;) */
                 document.addEventListener("click", handler);
             });
 
             cleanUp(() => {
-                console.log("event cleared");
+                // console.log("event cleared");
                 /* this will happen many times ;) */ document.removeEventListener("click", handler);
             });
         });

@@ -8,3 +8,4 @@ export const useComplexOrderValue = () => useState<string | undefined>("complex-
 export const useMortgageData = () => useState("mortgage-form", RawMortgageData);
 export const useFilterPing = () => useState("filter-ping", () => 0);
 export const useFilterRawData = () => useState("filter-data", () => ({ apartments: null, homes: null }));
+export const useFilterSummaryState = () => useState("filter-summary", () => ({ summary: null, loading: false, listener: null }));

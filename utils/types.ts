@@ -29,4 +29,4 @@ export const isArray = Array.isArray;
 
 export const isObject = (value: unknown): value is Record<any, any> => value !== null && typeof value === "object"; // all kinds of objects, even maps ...
 
-// export const isFunction = (value: unknown): value is Tfunction => typeof value === "function";
+export const isFunction = (value: unknown): value is TFunc => typeof value === "function";

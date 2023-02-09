@@ -25,11 +25,13 @@ export default () => {
 
         const { result: homesResult } = homesData();
 
-        watch([apartmentsResult, homesResult], ([_apartments, _homes]) => {
+        const unSub = watch([apartmentsResult, homesResult], ([_apartments, _homes]) => {
             data.value = {
                 apartments: _apartments?.apartmentsData,
                 homes: _homes?.homesData,
             };
+
+            unSub();
         });
     }
 
