@@ -363,10 +363,14 @@ export function homesData(options = { notifyOnNetworkStatusChange: true }) {
                 homesData {
                     deadlines
                     home_type
-                    home_type
                     home_class
                     count_floors
-                    keys
+
+                    # ceilingHeights
+                    # parking
+                    # lifts
+                    # commerce
+                    # keys
                 }
             }
         `,
