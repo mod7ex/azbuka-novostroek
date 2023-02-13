@@ -25,8 +25,8 @@ const extract = (e: Event) => parseInt((e.target as HTMLInputElement).value);
         <input
             :value="from"
             type="number"
-            :from="from"
-            :to="to"
+            :max="max"
+            :min="min"
             :step="step"
             @input="(e) => $emit('update:from', extract(e))"
             class="p-2 shadow-md w-1/2 rounded border"
@@ -36,8 +36,8 @@ const extract = (e: Event) => parseInt((e.target as HTMLInputElement).value);
         <input
             :value="to"
             type="number"
-            :from="from"
-            :to="to"
+            :max="max"
+            :min="min"
             :step="step"
             @input="(e) => $emit('update:to', extract(e))"
             class="p-2 shadow-md w-1/2 rounded border"

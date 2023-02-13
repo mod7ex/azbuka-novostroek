@@ -80,7 +80,7 @@ export function apartmentsData(options = { notifyOnNetworkStatusChange: true }) 
                     max_price
                     min_area_total
                     max_area_total
-                    # decors
+                    decors
                     # balcony_types
                     # bathrooms
                 }

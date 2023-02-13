@@ -13,21 +13,30 @@ const zoom = props.coordinates ? MAP_ZOOM.FOCUS : MAP_ZOOM.DEFAULT;
 
 // https://yandex.com/dev/maps/jsapi/doc/2.1/quick-start/index.html?from=techmapsmain
 
-// @ts-ignore
-ymaps?.ready(function init() {
-    // @ts-ignore
-    var myMap = new ymaps.Map("map", {
-        center: coords,
+const retry = () => {
+    console.log("retry");
+    if ("ymaps" in window) {
+        // @ts-ignore
+        ymaps?.ready(function init() {
+            // @ts-ignore
+            var myMap = new ymaps.Map("map", {
+                center: coords,
 
-        // Zoom level. Acceptable values: from 0 (the entire world) to 19.
-        zoom,
+                // Zoom level. Acceptable values: from 0 (the entire world) to 19.
+                zoom,
 
-        controls,
-    });
+                controls,
+            });
 
-    // @ts-ignore
-    myMap.geoObjects.add(new ymaps.Placemark(coords, { balloonContent: props.label }));
-});
+            // @ts-ignore
+            myMap.geoObjects.add(new ymaps.Placemark(coords, { balloonContent: props.label }));
+        });
+    } else {
+        setTimeout(retry, 1000);
+    }
+};
+
+if (process.client) retry();
 </script>
 
 <template>

@@ -28,7 +28,7 @@ const ID = uuidGen()();
                     @input="() => handel(value)"
                     :checked="modelValue.includes(value)"
                 />
-                <p class="text-xs">{{ label }}</p>
+                <p>{{ label }}</p>
             </label>
         </li>
     </ul>
