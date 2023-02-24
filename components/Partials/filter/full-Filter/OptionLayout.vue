@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-withDefaults(defineProps<{ label: string; tag?: string }>(), {
+const props = withDefaults(defineProps<{ label: string; tag?: string; disabled?: boolean }>(), {
     tag: "div",
 });
 
@@ -8,7 +8,14 @@ const [isCollapsed, toggle] = useToggle();
 
 <template>
     <component :is="tag" class="relative">
-        <button @click="() => toggle()" class="border border-transparent focus:border-[#1DA958] w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] focus:bg-white rounded-[3px]">
+        <button
+            @click="
+                () => {
+                    !disabled && toggle();
+                }
+            "
+            :class="['border border-transparent w-full px-[14px] h-12 flex items-center mb-4 text-[14px] font-normal leading-5 font-[Inter] text-[#50535A] bg-[#f4f4f4] rounded-[3px]', disabled ? 'cursor-auto' : 'focus:border-[#1DA958] focus:bg-white']"
+        >
             {{ label }}
         </button>
 

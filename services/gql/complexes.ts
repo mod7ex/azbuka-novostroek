@@ -1,3 +1,5 @@
+import { GQL_PAGINATION_PART } from "~/services/gql/utils";
+
 export const GQL_FOR_DETAIL = `
 id
 name
@@ -170,19 +172,6 @@ const FILTER_AS_QUERY = `
     has_parking: $has_parking
     has_offices: $has_offices
     balcony_types: $balcony_types
-`;
-
-export const GQL_PAGINATION_PART = `
-    paginatorInfo {
-      count
-      currentPage
-      firstItem
-      hasMorePages
-      lastItem
-      lastPage
-      perPage
-      total
-    }
 `;
 
 export function complexesData(filter, options = { notifyOnNetworkStatusChange: true }) {

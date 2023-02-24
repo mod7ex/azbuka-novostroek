@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-// import { GQL_PAGINATION_PART } from "~/paginationUtilites.js";
+// import { GQL_PAGINATION_PART } from "~/services/gql/utils";
 
 export const GQL_FOR_DETAIL = `
   id

@@ -1,3 +1,4 @@
+import { GQL_PAGINATION_PART } from "~/services/gql/utils";
 import gql from "graphql-tag";
 
 export const GQL_FOR_DETAIL = `
@@ -82,7 +83,7 @@ export function apartmentsData(options = { notifyOnNetworkStatusChange: true }) 
                     max_area_total
                     decors
                     # balcony_types
-                    # bathrooms
+                    bathrooms
                 }
             }
         `,
@@ -141,19 +142,6 @@ const APARTMENTS_FILTER_AS_QUERY = `
   home_id: $home_id,
   count_rooms: $count_rooms,
   is_studio: $is_studio,
-`;
-
-export const GQL_PAGINATION_PART = `
-    paginatorInfo {
-      count
-      currentPage
-      firstItem
-      hasMorePages
-      lastItem
-      lastPage
-      perPage
-      total
-    }
 `;
 
 export type Filter = Partial<{
