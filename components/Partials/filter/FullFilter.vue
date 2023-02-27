@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 import { OptionLayout, RangeValue } from "~/components/Partials/filter/full-Filter";
-import { regions } from "~/services/gql/regions";
-import { cities, city } from "~/services/gql/cities";
-import { districts } from "~/services/gql/disctricts";
-import { peoplesDistricts } from "~/services/gql/people-disctricts";
+
+defineProps<{
+    region_options: SelectOptions<number, string>[];
+    city_options: SelectOptions<number, string>[];
+    people_district_options: SelectOptions<number, string>[];
+    district_options: SelectOptions<number, string>[];
+}>();
 
 const { apartments, homes, filter } = useFilter();
 
@@ -11,42 +14,6 @@ const home_class_options = computed(() => homes.value?.home_class?.map(({ id, na
 const home_type_options = computed(() => homes.value?.home_type?.map(({ id, name }) => ({ value: id, label: name })));
 const apartment_decor_options = computed(() => apartments.value?.decors?.map(({ id, name }) => ({ value: id, label: name })));
 const bathrooms_options = computed(() => apartments.value?.bathrooms?.map(({ id, name }) => ({ value: id, label: name })));
-
-// regions
-const { result: regionResult } = regions();
-const region_options = computed(() => regionResult.value?.regions?.data?.map(({ id, name }) => ({ value: id, label: name })));
-
-// cities
-const { result: citiesResult, refetch: refetchCities, load: loadCities } = cities();
-const city_options = computed(() => citiesResult.value?.cities?.data?.map(({ id, name }) => ({ value: id, label: name })) ?? []);
-
-const onRegionChange = async (region_id: number | undefined) => {
-    if (region_id != null) {
-        if (citiesResult.value) await refetchCities({ region_id });
-        else loadCities();
-        filter.value.city_id = null;
-    }
-};
-
-// district
-const { result: districtsResult, refetch: refetchDistricts } = districts();
-const district_options = computed(() => districtsResult.value?.districts?.data?.map(({ id, name }) => ({ value: id, label: name })) ?? []);
-
-// peoplesDistrict
-const { result: peoplesDistrictResult, refetch: refetchPeoplesDistricts } = peoplesDistricts();
-const people_district_options = computed(() => peoplesDistrictResult.value?.peoplesDistricts?.data?.map(({ id, name }) => ({ value: id, label: name })) ?? []);
-
-const onCityChange = (city_id: number | undefined) => {
-    if (city_id != null) {
-        filter.value.district_id = null;
-        filter.value.peoples_district_id = null;
-        refetchDistricts({ city_id });
-        refetchPeoplesDistricts({ city_id });
-    }
-};
-
-watch(() => filter.value.region_id, onRegionChange, { immediate: true });
-watch(() => filter.value.city_id, onCityChange, { immediate: true });
 </script>
 
 <template>

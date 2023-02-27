@@ -25,24 +25,26 @@ const ID = uuidGen()();
 </script>
 
 <template>
-    <!-- prettier-ignore -->
-    <ul :class="[$attrs.class]" >
-        <slot name="before" />
+    <div>
+        <!-- prettier-ignore -->
+        <ul  :class="[$attrs.class, 'max-h-96 overflow-y-scroll no-scroll-thum ']">
+            <slot name="before" />
 
-        <li v-for="{ label, value } in options" :key="value" :for="`${ID}-${value}`">
-            <label class="flex gap-3 px-3 py-[6px] cursor-pointer hover:bg-gray-200">
-                <input
-                    type="checkbox"
-                    :id="`${ID}-${value}`"
-                    @input="() => handel(value)"
-                    :checked="(props.single === true) ? value === modelValue : (modelValue as number[]).includes(value)"
-                />
-                <p>{{ label }}</p>
-            </label>
-        </li>
+            <li v-for="{ label, value } in options" :key="value" :for="`${ID}-${value}`">
+                <label class="flex gap-3 px-3 py-[6px] cursor-pointer hover:bg-gray-200">
+                    <input
+                        type="checkbox"
+                        :id="`${ID}-${value}`"
+                        @input="() => handel(value)"
+                        :checked="(props.single === true) ? value === modelValue : (modelValue as number[]).includes(value)"
+                    />
+                    <p>{{ label }}</p>
+                </label>
+            </li>
+        </ul>
 
-        <li v-if="reset" class="border-t">
-            <button @click="() => emit('update:modelValue', (props.single === true) ? undefined :  [])" class="px-3 py-[6px] cursor-pointer hover:bg-gray-200 w-full">Не выбрано</button>
-        </li>
-    </ul>
+        <div v-if="reset" class="border-t">
+            <button @click="() => emit('update:modelValue', props.single === true ? undefined : [])" class="px-3 py-[6px] cursor-pointer hover:bg-gray-200 w-full">Не выбрано</button>
+        </div>
+    </div>
 </template>

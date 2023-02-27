@@ -9,7 +9,7 @@ export const GQL_PEOPLES_DISTRICTS = `
 type Props = Partial<Record<"page" | "first" | "city_id", number>>;
 
 export function peoplesDistricts(data = GQL_PEOPLES_DISTRICTS, filter: Props = { page: 1, first: 500 }, options = { notifyOnNetworkStatusChange: true }) {
-    return useLazyQuery(
+    return useQuery(
         gql`
         query peoplesDistricts(
             $page: Int

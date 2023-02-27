@@ -16,7 +16,7 @@ export const GQL_CITIES = `
 type Props = Partial<Record<"page" | "first" | "region_id", number>>;
 
 export function cities(data = GQL_CITIES, filter: Props = { page: 1, first: 500 }, options = { notifyOnNetworkStatusChange: true }) {
-    return useLazyQuery(
+    return useQuery(
         gql`
         query cities(
             $page: Int

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ComplexesSummary from "~/components/Partials/filter/ComplexesSummary.vue";
+import { FilterState } from "~/components/Partials/filter/full-Filter";
 const LazyFullFilter = defineAsyncComponent(() => import("~/components/Partials/filter/FullFilter.vue"));
 
 enum CURRENT {
@@ -129,7 +130,15 @@ const {
         </div>
 
         <filter-wrapper :is-collapsed="isCollapsed" :handel-blur="clearState" class="absolute left-0 right-0 px-5">
-            <lazy-full-filter />
+            <filter-state v-slot="{ city_options, district_options, people_district_options, region_options }">
+                <!-- prettier-ignore -->
+                <lazy-full-filter 
+                    :city_options="city_options"
+                    :district_options="district_options"
+                    :people_district_options="people_district_options"
+                    :region_options="region_options"
+                />
+            </filter-state>
         </filter-wrapper>
 
         <div class="flex justify-between items-start px-5 my-3">
