@@ -27,7 +27,7 @@ const ID = uuidGen()();
 <template>
     <div>
         <!-- prettier-ignore -->
-        <ul  :class="[$attrs.class, 'max-h-96 overflow-y-scroll no-scroll-thum ']">
+        <ul  :class="[$attrs.class, 'max-h-96 overflow-y-scroll no-scroll-thum']">
             <slot name="before" />
 
             <li v-for="{ label, value } in options" :key="value" :for="`${ID}-${value}`">
