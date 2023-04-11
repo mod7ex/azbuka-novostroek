@@ -43,7 +43,8 @@ const {
     count_rooms,
     deadlines,
     ping,
-    homes
+    homes,
+    dirty
 } = useFilter();
 </script>
 
@@ -142,41 +143,40 @@ const {
         </filter-wrapper>
 
         <div class="flex justify-between items-start px-5 my-3">
-            <ul v-if="rooms_bullets.length || price_bullet || area_bullet || deadline_bullet" class="flex items-center flex-wrap gap-2">
-                <li v-for="{ label, value } in rooms_bullets" :key="`${filter.is_studio}-${value}`" class="bg-[#3478F6] rounded-md py-[3px] px-2">
-                    <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ label }}</span>
-                    <button @click="() => unpickRoomCount(value)">
-                        <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
-                    </button>
-                </li>
+            <div class="flex items-center flex-wrap gap-2">
+                <ul v-if="rooms_bullets.length || price_bullet || area_bullet || deadline_bullet" class="flex items-center flex-wrap gap-2">
+                    <li v-for="{ label, value } in rooms_bullets" :key="`${filter.is_studio}-${value}`" class="bg-[#3478F6] rounded-md py-[3px] px-2">
+                        <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ label }}</span>
+                        <button @click="() => unpickRoomCount(value)">
+                            <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
+                        </button>
+                    </li>
 
-                <li v-if="price_bullet" class="bg-[#3478F6] rounded-md py-[3px] px-2">
-                    <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ price_bullet }}</span>
-                    <button @click="resetPrice">
-                        <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
-                    </button>
-                </li>
+                    <li v-if="price_bullet" class="bg-[#3478F6] rounded-md py-[3px] px-2">
+                        <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ price_bullet }}</span>
+                        <button @click="resetPrice">
+                            <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
+                        </button>
+                    </li>
 
-                <li v-if="area_bullet" class="bg-[#3478F6] rounded-md py-[3px] px-2">
-                    <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ area_bullet }}</span>
-                    <button @click="resetArea">
-                        <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
-                    </button>
-                </li>
+                    <li v-if="area_bullet" class="bg-[#3478F6] rounded-md py-[3px] px-2">
+                        <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ area_bullet }}</span>
+                        <button @click="resetArea">
+                            <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
+                        </button>
+                    </li>
 
-                <li v-if="deadline_bullet" class="bg-[#3478F6] rounded-md py-[3px] px-2">
-                    <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ deadline_bullet }}</span>
-                    <button @click="resetDeadline">
-                        <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
-                    </button>
-                </li>
-
-                <li class="bg-[#3478F6] rounded-md py-[3px] px-2">
-                    <button @click="() => reset()">
-                        <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">Сбросить фильтр</span>
-                    </button>
-                </li>
-            </ul>
+                    <li v-if="deadline_bullet" class="bg-[#3478F6] rounded-md py-[3px] px-2">
+                        <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">{{ deadline_bullet }}</span>
+                        <button @click="resetDeadline">
+                            <app-i class="w-4 h-4 text-white" name="material-symbols:close" />
+                        </button>
+                    </li>
+                </ul>
+                <button class="bg-[#3478F6] rounded-md py-[3px] px-2 justify-self-start" v-if="dirty" @click="() => reset()">
+                    <span class="text-white mr-2 text-[13px] font-semibold leading-[14px] font-[Inter]">Сбросить фильтр</span>
+                </button>
+            </div>
 
             <span></span>
 
